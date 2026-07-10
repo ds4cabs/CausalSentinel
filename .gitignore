@@ -1,0 +1,23 @@
+# ===== Secrets — 绝不提交 =====
+.env
+.env.*
+!.env.example
+*.key
+secrets/
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+.ipynb_checkpoints/
+
+# ===== 大数据文件(预计算的 MR 库等，太大不入 git；要分享再单独去掉这行)=====
+*.duckdb
+*.parquet
+
+# ===== OS / 编辑器 =====
+.DS_Store
+Thumbs.db
