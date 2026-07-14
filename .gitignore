@@ -1,4 +1,4 @@
-# ===== Secrets — 绝不提交 =====
+# ===== Secrets - never commit =====
 .env
 .env.*
 !.env.example
@@ -14,10 +14,10 @@ env/
 *.egg-info/
 .ipynb_checkpoints/
 
-# ===== 大数据文件(预计算的 MR 库等，太大不入 git；要分享再单独去掉这行)=====
+# ===== Large data files (pre-computed MR DB etc. - too big for git; remove this line to share) =====
 *.duckdb
 *.parquet
 
-# ===== OS / 编辑器 =====
+# ===== OS / editor =====
 .DS_Store
 Thumbs.db
