@@ -1,0 +1,23 @@
+# ===== Secrets - never commit =====
+.env
+.env.*
+!.env.example
+*.key
+secrets/
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+.ipynb_checkpoints/
+
+# ===== Large data files (pre-computed MR DB etc. - too big for git; remove this line to share) =====
+*.duckdb
+*.parquet
+
+# ===== OS / editor =====
+.DS_Store
+Thumbs.db

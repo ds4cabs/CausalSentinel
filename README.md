@@ -29,7 +29,39 @@ CausalSentinel is a causal evidence engine that builds target-disease causal car
 - PharmGKB
 
 ## Tech Stack
-Python, `google-generativeai`, DuckDB, requests, pandas, matplotlib
+Python, **`google-genai`** (Gemini SDK; the older `google-generativeai` is deprecated),
+requests, python-dotenv, DuckDB (Round 3), matplotlib (Round 3).
+
+## Getting Started (Round 1)
+
+**Prerequisites:** Python 3.10+, and a free Gemini API key in `../.env` as `GEMINI_API_KEY`
+(see `.env.example`). The `.env` file lives one level up and is never committed.
+
+```bash
+# 1) create and activate an isolated environment
+python -m venv .venv
+.venv\Scripts\activate            # Windows  (macOS/Linux: source .venv/bin/activate)
+
+# 2) install dependencies
+pip install -r requirements.txt
+
+# 3) test a single tool on its own (no Gemini key needed)
+python tools\uniprot.py
+
+# 4) run the full agent -> writes a card to cards/
+python agent.py --protein PNPLA3 --disease MASLD
+```
+
+Output: `cards/PNPLA3_MASLD_causal_card.md` (+ `.json`).
+
+**Architecture.** `agent.py` reads `system_prompt.md`, registers the tools in `tools/`
+with Gemini, and runs automatic function calling: the model decides which tools to call,
+the SDK executes them, and the model synthesizes one cited causal card.
+
+**Tools (Round 1):** `get_uniprot_dossier` (UniProt), `get_target_disease_evidence`
+(Open Targets), `get_chembl_modulators` (ChEMBL), and a stubbed `get_mr_result`
+(real Mendelian randomization from R -> DuckDB lands in Round 3).
 
 ## Notes
-This project is the cohort’s causal evidence reference implementation with strong variant-level rigor.
+This project is the cohort's causal evidence reference implementation with strong
+variant-level rigor. Built in rounds (each ships); Round 1 = a 3-tool card end to end.
