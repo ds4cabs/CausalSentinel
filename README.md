@@ -7,7 +7,7 @@
 ![type: Dossier Generator](https://img.shields.io/badge/type-Dossier_Generator-1f6feb)
 ![domain: Causal Inference](https://img.shields.io/badge/domain-Causal_Inference-0aa)
 
-**Intern:** Shucheng Cao
+**Interns:** Shucheng Cao (CausalSentinel core), Natalie Huang (OpenSentinel sub-project)
 **Project Type:** Dossier Generator
 
 ## Overview
@@ -61,6 +61,16 @@ the SDK executes them, and the model synthesizes one cited causal card.
 **Tools (Round 1):** `get_uniprot_dossier` (UniProt), `get_target_disease_evidence`
 (Open Targets), `get_chembl_modulators` (ChEMBL), and a stubbed `get_mr_result`
 (real Mendelian randomization from R -> DuckDB lands in Round 3).
+
+## OpenSentinel (Natalie Huang)
+
+A companion, beginner-scoped sub-project in this repo: a **drug-comparison agent**.
+Given two drug names, it pulls molecular properties (PubChem) and adverse-event data
+(openFDA FAERS), then uses Gemini to summarize the key differences in a Streamlit UI —
+a fast, sourced answer to "how do these two drugs actually differ?"
+
+Full scope, timeline, and stretch goals: [`MVP_Natalie.md`](MVP_Natalie.md).
+Tracking issue: [#10](https://github.com/ds4cabs/CausalSentinel/issues/10).
 
 ## Notes
 This project is the cohort's causal evidence reference implementation with strong
