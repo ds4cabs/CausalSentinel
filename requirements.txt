@@ -1,0 +1,9 @@
+# CausalSentinel - Round 1 dependencies
+google-genai>=1.0.0        # Gemini SDK (current package; google-generativeai is deprecated)
+requests>=2.31.0           # calling the public database REST/GraphQL APIs
+python-dotenv>=1.0.0       # load API keys from ../.env (never hard-code keys)
+
+# Added in later rounds:
+# duckdb>=1.0.0            # Round 3: read pre-computed MR/coloc results
+# matplotlib>=3.8          # Round 3: MR forest / gnomAD constraint plots
+# pandas>=2.0             # Round 3: tidy tables
