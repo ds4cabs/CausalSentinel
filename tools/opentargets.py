@@ -25,10 +25,25 @@ query($efo: String!) {
 """
 
 
-def _gql(query: str, variables: dict) -> dict:
-    r = requests.post(OT_URL, json={"query": query, "variables": variables}, timeout=30)
+_META = "query { meta { dataVersion { year month iteration } apiVersion { x y z } } }"
+
+
+def _gql(query: str, variables: dict = None) -> dict:
+    r = requests.post(OT_URL, json={"query": query, "variables": variables or {}}, timeout=30)
     r.raise_for_status()
     return r.json()
+
+
+def _release() -> str:
+    """Open Targets publishes its data release; record it so the card is reproducible."""
+    try:
+        m = _gql(_META)["data"]["meta"]
+        dv = m.get("dataVersion") or {}
+        parts = [str(dv.get(k)) for k in ("year", "month", "iteration") if dv.get(k) is not None]
+        return "Open Targets data release " + ".".join(parts) if parts else \
+               "Open Targets (release not reported)"
+    except Exception:
+        return "Open Targets (release not reported)"
 
 
 def get_target_disease_evidence(gene_symbol: str, disease: str) -> dict:
@@ -50,6 +65,16 @@ def get_target_disease_evidence(gene_symbol: str, disease: str) -> dict:
 
     ensembl_id = tgt_hits[0]["id"]
     efo_id = dis_hits[0]["id"]
+    tgt_name = tgt_hits[0].get("name")
+    dis_name = dis_hits[0].get("name")
+
+    # The free-text disease string is silently resolved to ONE ontology term. If the caller
+    # asked about "high cholesterol" and this resolved to an HPO phenotype rather than the
+    # disease they meant, every downstream score is about a different question. Say so.
+    resolution_note = (f"Free-text inputs were resolved to ontology terms: "
+                       f"'{gene_symbol}' -> {ensembl_id} ({tgt_name}); "
+                       f"'{disease}' -> {efo_id} ({dis_name}). "
+                       f"Scores below describe THAT term, not the free-text phrase.")
 
     try:
         rows = _gql(_ASSOC, {"efo": efo_id})["data"]["disease"]["associatedTargets"]["rows"]
@@ -59,16 +84,25 @@ def get_target_disease_evidence(gene_symbol: str, disease: str) -> dict:
 
     match = next((row for row in rows if row["target"]["id"] == ensembl_id), None)
     if not match:
-        return {"found": False, "resolved": {"ensembl_id": ensembl_id, "efo_id": efo_id},
-                "note": "Target not among this disease's top associations."}
+        return {"found": False,
+                "resolved": {"ensembl_id": ensembl_id, "efo_id": efo_id,
+                             "target_name": tgt_name, "disease_name": dis_name},
+                "note": (f"{gene_symbol} is not among the top 500 associated targets for "
+                         f"{efo_id} ({dis_name}). This is a TRUNCATED LOOKUP, not proof of no "
+                         f"association. " + resolution_note),
+                "source_release": _release()}
 
     return {
         "found": True,
         "ensembl_id": ensembl_id,
         "efo_id": efo_id,
+        "resolved_target_name": tgt_name,
+        "resolved_disease_name": dis_name,
         "overall_score": round(match["score"], 4),
         "datatype_scores": {d["id"]: round(d["score"], 4) for d in match.get("datatypeScores", [])},
+        "note": resolution_note,
         "url": f"https://platform.opentargets.org/evidence/{ensembl_id}/{efo_id}",
+        "source_release": _release(),
     }
 
 

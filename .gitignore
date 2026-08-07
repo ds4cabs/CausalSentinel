@@ -5,6 +5,12 @@
 *.key
 secrets/
 
+# ===== Private working notes - never commit to this shared org repo =====
+# CLAUDE.md is local agent guidance and names unpublished, coauthored PhD work
+# (specific proteins and sample sizes). It must not reach a public repository.
+CLAUDE.md
+AGENTS.md
+
 # ===== Python =====
 __pycache__/
 *.py[cod]

@@ -36,9 +36,14 @@ def get_clinvar_variants(gene_symbol: str) -> dict:
     except requests.RequestException as e:
         return {"error": f"ClinVar esummary failed: {e}", "total_records": total}
 
-    examples, pathogenic = [], 0
+    # NOTE: `pathogenic` is counted over every record we actually retrieved, so the
+    # denominator reported below must be that same set — not the length of `examples`,
+    # which is capped at 5 purely for display. Reporting "0 of 5" when the count was taken
+    # over 30 records is a silently wrong fraction.
+    examples, pathogenic, n_scored = [], 0, 0
     for uid in summ.get("uids", []):
         rec = summ.get(uid, {})
+        n_scored += 1
         # the clinical-significance field name has changed over time; try the common ones
         sig = ""
         for key in ("germline_classification", "clinical_significance"):
@@ -52,14 +57,28 @@ def get_clinvar_variants(gene_symbol: str) -> dict:
         if len(examples) < 5:
             examples.append({"title": rec.get("title", ""), "significance": sig or "N/A"})
 
+    # ClinVar's build id makes the card reproducible; a retrieval date alone does not.
+    build = ""
+    try:
+        info = requests.get(f"{EUTILS}/einfo.fcgi",
+                            params={"db": "clinvar", "retmode": "json"}, timeout=20).json()
+        dbinfo = info.get("einforesult", {}).get("dbinfo", [])
+        if dbinfo:
+            build = dbinfo[0].get("dbbuild", "")
+    except (requests.RequestException, ValueError):
+        build = ""
+
     return {
         "found": True,
         "gene_symbol": gene_symbol,
         "total_records": total,
         "pathogenic_in_sample": pathogenic,
-        "sample_size": len(examples),
+        "sample_size": n_scored,
         "examples": examples,
+        "note": (f"Pathogenic count is over the {n_scored} record(s) retrieved, NOT over all "
+                 f"{total} ClinVar records for this gene; it is a sample, not a rate."),
         "url": f"https://www.ncbi.nlm.nih.gov/clinvar/?term={gene_symbol}%5Bgene%5D",
+        "source_release": f"ClinVar build {build}" if build else "ClinVar (build not reported)",
     }
 
 

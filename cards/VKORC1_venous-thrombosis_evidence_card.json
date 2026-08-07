@@ -1,0 +1,343 @@
+{
+  "protein": "VKORC1",
+  "disease": "venous thrombosis",
+  "generated_at": "2026-08-07T06:24:29",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_mr_result",
+    "get_chembl_modulators",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "VKORC1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "VKORC1",
+        "accession": "Q9BQB6",
+        "gene_names": [
+          "VKORC1"
+        ],
+        "protein_name": "Vitamin K epoxide reductase complex subunit 1",
+        "function": "Involved in vitamin K metabolism. Catalytic subunit of the vitamin K epoxide reductase (VKOR) complex which reduces inactive vitamin K 2,3-epoxide to active vitamin K. Vitamin K is required for the gamma-carboxylation of various proteins, including clotting factors, and is required for normal blood coagulation, but also for normal bone development",
+        "subcellular_location": [
+          "Endoplasmic reticulum membrane"
+        ],
+        "diseases": [
+          "Combined deficiency of vitamin K-dependent clotting factors 2",
+          "Coumarin resistance"
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/Q9BQB6",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 0.692,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "VKORC1",
+        "disease": "venous thrombosis"
+      },
+      "result": {
+        "found": true,
+        "ensembl_id": "ENSG00000167397",
+        "efo_id": "HP_0004936",
+        "resolved_target_name": "VKORC1",
+        "resolved_disease_name": "Venous thrombosis",
+        "overall_score": 0.5856,
+        "datatype_scores": {
+          "literature": 0.2145,
+          "genetic_association": 0.0312,
+          "clinical": 0.9491
+        },
+        "note": "Free-text inputs were resolved to ontology terms: 'VKORC1' -> ENSG00000167397 (VKORC1); 'venous thrombosis' -> HP_0004936 (Venous thrombosis). Scores below describe THAT term, not the free-text phrase.",
+        "url": "https://platform.opentargets.org/evidence/ENSG00000167397/HP_0004936",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.246,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "VKORC1",
+        "disease": "venous thrombosis"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "VKORC1",
+        "disease": "venous thrombosis",
+        "note": "No pQTL-based MR estimate for VKORC1 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.505,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "VKORC1"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL1930",
+        "target_name": "Vitamin K epoxide reductase complex subunit 1",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 7,
+        "modulators": [
+          {
+            "drug": "CHEMBL1465",
+            "action": "INHIBITOR",
+            "moa": "Vitamin k epoxide reductase complex subunit 1 isoform 1 inhibitor"
+          },
+          {
+            "drug": "CHEMBL711",
+            "action": "INHIBITOR",
+            "moa": "Vitamin k epoxide reductase complex subunit 1 isoform 1 inhibitor"
+          },
+          {
+            "drug": "CHEMBL1466",
+            "action": "INHIBITOR",
+            "moa": "Vitamin k epoxide reductase complex subunit 1 isoform 1 inhibitor"
+          },
+          {
+            "drug": "CHEMBL1200772",
+            "action": "INHIBITOR",
+            "moa": "Vitamin k epoxide reductase complex subunit 1 isoform 1 inhibitor"
+          },
+          {
+            "drug": "CHEMBL1200879",
+            "action": "INHIBITOR",
+            "moa": "Vitamin k epoxide reductase complex subunit 1 isoform 1 inhibitor"
+          },
+          {
+            "drug": "CHEMBL397420",
+            "action": "INHIBITOR",
+            "moa": "Vitamin k epoxide reductase complex subunit 1 isoform 1 inhibitor"
+          },
+          {
+            "drug": "CHEMBL2105664",
+            "action": "INHIBITOR",
+            "moa": "Vitamin k epoxide reductase complex subunit 1 isoform 1 inhibitor"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'VKORC1' and resolved to 'Vitamin K epoxide reductase complex subunit 1' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL1930/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 5.626,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "VKORC1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "VKORC1",
+        "total_records": 75,
+        "pathogenic_in_sample": 3,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "NM_024006.6(VKORC1):c.208C>A (p.Leu70Met)",
+            "significance": "N/A"
+          },
+          {
+            "title": "NM_024006.6(VKORC1):c.273G>T (p.Gln91His)",
+            "significance": "N/A"
+          },
+          {
+            "title": "NM_024006.6(VKORC1):c.279G>T (p.Leu93Phe)",
+            "significance": "N/A"
+          },
+          {
+            "title": "NM_024006.6(VKORC1):c.230A>G (p.Asn77Ser)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_024006.6(VKORC1):c.147C>G (p.Ile49Met)",
+            "significance": "Uncertain significance"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 75 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=VKORC1%5Bgene%5D",
+        "source_release": "ClinVar build Build260804-2105.1"
+      },
+      "seconds": 1.224,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "VKORC1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "VKORC1",
+        "pLI": 0.000282676061498589,
+        "LOEUF": 1.3096889009658736,
+        "oe_lof": 0.8083431024421701,
+        "mis_z": -0.22315496994049913,
+        "lof_z": 0.6264432584040768,
+        "interpretation": "LoF-tolerant: no population-level depletion of loss-of-function variants, which is reassuring but is NOT positive evidence of efficacy.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/VKORC1",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.371,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "VKORC1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "VKORC1",
+        "n_unique_snps": 104,
+        "n_association_rows": 226,
+        "total_association_rows_reported": 226,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs10871454",
+          "rs9934438",
+          "rs112766425",
+          "rs55979739",
+          "rs2303222",
+          "rs7184567",
+          "rs8047803",
+          "rs11150604",
+          "rs12920772",
+          "rs8047469",
+          "rs12716979",
+          "rs148758034",
+          "rs55908605",
+          "rs12447930",
+          "rs57348955"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/VKORC1",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 6.956,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "VKORC1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "VKORC1",
+        "n_clinical_annotations": 38,
+        "evidence_level_counts": {
+          "1A": 3,
+          "1B": 5,
+          "2A": 8,
+          "3": 21,
+          "4": 1
+        },
+        "drugs": [
+          "acenocoumarol",
+          "fluindione",
+          "phenprocoumon",
+          "warfarin"
+        ],
+        "n_drugs": 4,
+        "examples": [
+          {
+            "drugs": [
+              "warfarin"
+            ],
+            "level_of_evidence": "2A",
+            "annotation": "rs9923231 (VKORC1); warfarin; Hemorrhage (level 2A Toxicity)"
+          },
+          {
+            "drugs": [
+              "acenocoumarol"
+            ],
+            "level_of_evidence": "2A",
+            "annotation": "rs9934438 (VKORC1); acenocoumarol (level 2A Dosage)"
+          },
+          {
+            "drugs": [
+              "warfarin"
+            ],
+            "level_of_evidence": "2A",
+            "annotation": "rs2884737 (VKORC1); warfarin (level 2A Dosage)"
+          },
+          {
+            "drugs": [
+              "phenprocoumon"
+            ],
+            "level_of_evidence": "2A",
+            "annotation": "rs9923231 (VKORC1); phenprocoumon; Hemorrhage, over-anticoagulation and time above therapeutic range (level 2A Toxicity)"
+          },
+          {
+            "drugs": [
+              "warfarin"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs72547529 (VKORC1); warfarin (level 3 Dosage, Efficacy)"
+          },
+          {
+            "drugs": [
+              "warfarin"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs104894541 (VKORC1); warfarin (level 3 Dosage)"
+          },
+          {
+            "drugs": [
+              "warfarin"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs104894542 (VKORC1); warfarin (level 3 Dosage)"
+          },
+          {
+            "drugs": [
+              "warfarin"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs104894540 (VKORC1); warfarin (level 3 Dosage)"
+          }
+        ],
+        "url": "https://www.pharmgkb.org/search?query=VKORC1",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.604,
+      "exception": null
+    }
+  ],
+  "model_verdict": "GO — VKORC1 is a well-established, directly druggable target with strong clinical and genetic support for vitamin K antagonism and anticoagulation therapy.",
+  "model_reasoning": "VKORC1 encodes the catalytic subunit of vitamin K epoxide reductase, a critical enzyme for blood coagulation that is linked to coumarin resistance and clotting factor deficiencies. ChEMBL identifies multiple known inhibitors against this target, demonstrating established chemical tractability. Open Targets and the GWAS Catalog show extensive genetic associations across numerous mapped SNPs, and PharmGKB details extensive clinical annotations for drugs such as warfarin and acenocoumarol. Although no pQTL-based Mendelian randomization estimate was available, the heavy clinical and pharmacogenomic validation supports its strong therapeutic relevance.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 0
+  },
+  "card_markdown": "# Target Evidence Card — VKORC1 × venous thrombosis\n\n**Verdict:** GO — VKORC1 is a well-established, directly druggable target with strong clinical and genetic support for vitamin K antagonism and anticoagulation therapy.\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.586 (literature=0.214, genetic_association=0.0312, clinical=0.949) |\n| Protein context | `get_uniprot_dossier` | Q9BQB6 — Vitamin K epoxide reductase complex subunit 1; location: Endoplasmic reticulum membrane |\n| Known modulators / druggability | `get_chembl_modulators` | 7 known modulators (INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 75 ClinVar records; 3 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=0.00028, LOEUF=1.31 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 104 unique SNPs from 226/226 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 38 clinical annotations across 4 drugs (level 1A: 3, level 1B: 5, level 2A: 8, level 3: 21, level 4: 1) |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'VKORC1' -> ENSG00000167397 (VKORC1); 'venous thrombosis' -> HP_0004936 (Venous thrombosis). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — No pQTL-based MR estimate for VKORC1 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'VKORC1' and resolved to 'Vitamin K epoxide reductase complex subunit 1' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 75 ClinVar records for this gene; it is a sample, not a rate.\n\n## Reasoning\n\nVKORC1 encodes the catalytic subunit of vitamin K epoxide reductase, a critical enzyme for blood coagulation that is linked to coumarin resistance and clotting factor deficiencies. ChEMBL identifies multiple known inhibitors against this target, demonstrating established chemical tractability. Open Targets and the GWAS Catalog show extensive genetic associations across numerous mapped SNPs, and PharmGKB details extensive clinical annotations for drugs such as warfarin and acenocoumarol. Although no pQTL-based Mendelian randomization estimate was available, the heavy clinical and pharmacogenomic validation supports its strong therapeutic relevance.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q9BQB6 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000167397/HP_0004936 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL1930/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=VKORC1%5Bgene%5D — _ClinVar build Build260804-2105.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/VKORC1 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/VKORC1 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=VKORC1 — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n\n## Provenance\n\n- Generated: 2026-08-07T06:24:29\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (8 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

@@ -50,13 +50,26 @@ def get_chembl_modulators(gene_symbol: str) -> dict:
         }
         for m in mechanisms
     ]
+    # ChEMBL publishes its database version; record it so the card is reproducible.
+    release = "ChEMBL (version not reported)"
+    try:
+        st = requests.get(f"{CHEMBL}/status", params={"format": "json"}, timeout=20).json()
+        if st.get("chembl_db_version"):
+            release = f"{st['chembl_db_version']} (released {st.get('chembl_release_date', 'n/a')})"
+    except (requests.RequestException, ValueError):
+        pass
+
     return {
         "found": True,
         "target_chembl_id": tid,
         "target_name": target.get("pref_name"),
+        "matched_target_organism": target.get("organism"),
         "n_modulators": len(modulators),
         "modulators": modulators[:10],
+        "note": (f"ChEMBL target matched by text search on '{gene_symbol}' and resolved to "
+                 f"'{target.get('pref_name')}' — confirm this is the intended target."),
         "url": f"https://www.ebi.ac.uk/chembl/target_report_card/{tid}/",
+        "source_release": release,
     }
 
 

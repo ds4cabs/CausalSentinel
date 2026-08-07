@@ -2,6 +2,8 @@
 import requests
 
 GWAS_API = "https://www.ebi.ac.uk/gwas/rest/api"
+PAGE_SIZE = 200
+MAX_PAGES = 25          # hard stop so a pathological gene can never hang the agent
 
 
 def get_gwas_catalog(gene_symbol: str) -> dict:
@@ -12,36 +14,86 @@ def get_gwas_catalog(gene_symbol: str) -> dict:
     should be a gene symbol such as PNPLA3. Returns the number of mapped SNPs and a
     few example rsIDs.
     """
-    try:
-        r = requests.get(
-            f"{GWAS_API}/singleNucleotidePolymorphisms/search/findByGene",
-            params={"geneName": gene_symbol, "size": 100},
-            headers={"Accept": "application/json"},
-            timeout=30,
+    seen, unique, rows_read = set(), [], 0
+    total_reported = None
+    total_pages = None
+    page = 0
+
+    while page < MAX_PAGES:
+        try:
+            r = requests.get(
+                f"{GWAS_API}/singleNucleotidePolymorphisms/search/findByGene",
+                params={"geneName": gene_symbol, "size": PAGE_SIZE, "page": page},
+                headers={"Accept": "application/json"},
+                timeout=30,
+            )
+            data = r.json()
+        except requests.RequestException as e:
+            if page == 0:
+                return {"error": f"GWAS Catalog request failed: {e}"}
+            # partial data: stop here but say so
+            break
+        except ValueError as e:
+            if page == 0:
+                return {"error": f"GWAS Catalog returned non-JSON: {e}"}
+            break
+
+        snps = data.get("_embedded", {}).get("singleNucleotidePolymorphisms", [])
+        page_meta = data.get("page", {}) or {}
+        if page == 0:
+            total_reported = page_meta.get("totalElements")
+            total_pages = page_meta.get("totalPages")
+
+        if not snps:
+            break
+
+        rows_read += len(snps)
+        for s in snps:
+            rs = s.get("rsId")
+            if rs and rs not in seen:
+                seen.add(rs)
+                unique.append(rs)
+
+        page += 1
+        if total_pages is not None and page >= total_pages:
+            break
+
+    if not unique:
+        return {
+            "found": False,
+            "gene_symbol": gene_symbol,
+            "note": "No GWAS Catalog SNPs mapped to this gene.",
+            "source_release": "GWAS Catalog REST (live)",
+        }
+
+    # Was the sweep complete? Only claim a complete count when it actually is one.
+    complete = (
+        total_pages is not None
+        and page >= total_pages
+    ) or (
+        total_reported is not None and rows_read >= total_reported
+    )
+
+    if complete:
+        note = None
+    else:
+        note = (
+            f"INCOMPLETE SWEEP: read {rows_read} of {total_reported} association rows "
+            f"({page} of {total_pages} pages) before the page cap; the unique-SNP count "
+            f"is a LOWER BOUND."
         )
-        data = r.json()
-    except requests.RequestException as e:
-        return {"error": f"GWAS Catalog request failed: {e}"}
 
-    snps = data.get("_embedded", {}).get("singleNucleotidePolymorphisms", [])
-    if not snps:
-        return {"found": False, "gene_symbol": gene_symbol, "note": "No GWAS Catalog SNPs mapped."}
-
-    # de-duplicate rsIDs (the endpoint returns one row per SNP-association mapping)
-    seen, unique = set(), []
-    for s in snps:
-        rs = s.get("rsId")
-        if rs and rs not in seen:
-            seen.add(rs)
-            unique.append(rs)
-    capped = len(snps) >= 100
     return {
         "found": True,
         "gene_symbol": gene_symbol,
         "n_unique_snps": len(unique),
-        "note": "SNP count capped at 100; may be higher." if capped else None,
+        "n_association_rows": rows_read,
+        "total_association_rows_reported": total_reported,
+        "sweep_complete": bool(complete),
+        "note": note,
         "example_rsids": unique[:15],
         "url": f"https://www.ebi.ac.uk/gwas/genes/{gene_symbol}",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)",
     }
 
 
