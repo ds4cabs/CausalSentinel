@@ -145,6 +145,97 @@ CAUSAL_NEGATED = re.compile(
 )
 
 
+# No tool in this panel returns a development phase, an approval status, or an indication.
+# ChEMBL modulator objects carry {drug, action, moa} and nothing else. So ANY sentence about
+# clinical status is unearned by construction — no proximity heuristic can rescue it, and a
+# hand-written phrase list was walked around every time.
+CLINICAL_STATUS = re.compile(
+    r"\b(?:approved?|approval|licen[cs]ed|marketed|registrational|standard of care|"
+    r"in clinical (?:practice|use)|in the clinic|clinical[- ]stage|late[- ]stage|"
+    r"phase\s*(?:i{1,3}v?|[1-4])\b|clinical trials?|efficacy|proven|definitive proof|"
+    r"clinically (?:validated|established|proven)|therapeutic legacy|legacy of)\b",
+    re.I,
+)
+# Modality words are allowed only when a ChEMBL action/moa actually says so.
+MODALITY = {
+    "monoclonal": r"antibod|mab\b", "antibody": r"antibod|mab\b", "biologic": r"antibod|biologic|protein therap",
+    "small-molecule": r"small.?molecule|INHIBITOR", "small molecule": r"small.?molecule|INHIBITOR",
+    "antisense": r"antisense|ASO", "siRNA": r"rnai|sirna", "RNAi": r"rnai|sirna",
+    "gene therapy": r"gene therap", "PROTAC": r"protac", "peptide": r"peptide",
+}
+# Words that assert a pharmacological ACTION ON THE TARGET.
+#
+# Deliberately excludes higher/lower/increase/decrease/elevate: in these cards those almost
+# always describe the OUTCOME ("higher protein is associated with lower disease risk"), not
+# an intervention. An earlier version included them and failed that correct sentence — a
+# rule that punishes an accurate description teaches the writer to be vaguer, which is the
+# opposite of what this project wants.
+DIRECTION_WORDS = re.compile(
+    r"\b(inhibit\w*|blockade|blocking|antagoni\w*|suppress\w*|knockdown|silenc\w*|"
+    r"agonis\w*|activat\w*|augment\w*|potentiat\w*|stimulat\w*)\b", re.I)
+_LOWERING = re.compile(r"^(inhibit|block|antagoni|suppress|knockdown|silenc)", re.I)
+
+
+def check_direction(model_text: str, ledger) -> list:
+    """The sign of beta licenses exactly one direction of pharmacological claim.
+
+    The card that motivated this rule quoted beta = -0.0442 correctly and then recommended
+    the opposite intervention, because the model was reciting a remembered conclusion. The
+    numbers all checked out; only the biology was backwards.
+    """
+    mr = (ledger.results_by_tool() or {}).get("get_mr_result") or {}
+    ms = mr.get("matched_disease_estimates") or []
+    if not ms:
+        return []
+    beta = ms[0].get("beta")
+    if beta is None:
+        return []
+    protein = str(mr.get("protein") or "")
+    problems = []
+    for sent in re.split(r"(?<=[.;])\s+", model_text):
+        # Only judge sentences that tie an intervention to a benefit claim about THIS target.
+        if not re.search(r"\bMR\b|mendelian|causal|protectiv|therapeutic|benefit", sent, re.I):
+            continue
+        if protein and protein.lower() not in sent.lower():
+            continue
+        for m in DIRECTION_WORDS.finditer(sent):
+            word = m.group(0)
+            says_lower = bool(_LOWERING.match(word))
+            # beta<0: higher protein -> less disease, so a BENEFIT claim needs RAISING it.
+            # beta>0: higher protein -> more disease, so a benefit claim needs LOWERING it.
+            licensed_lower = beta > 0
+            if says_lower != licensed_lower:
+                problems.append({
+                    "kind": "direction-contradicts-beta",
+                    "token": word,
+                    "detail": (f"beta={beta:+.4g} means higher {mr.get('protein')} goes with "
+                               f"{'more' if beta > 0 else 'less'} disease, so a therapeutic "
+                               f"claim of '{word}' is the opposite of what the ledger licenses"),
+                })
+                break
+        if problems:
+            break
+    return problems
+
+
+def check_unearned_attributes(model_text: str, ledger) -> list:
+    """Clinical status is never retrievable here; modality only if ChEMBL said so."""
+    hay = _haystack(ledger)
+    out = []
+    m = CLINICAL_STATUS.search(model_text)
+    if m:
+        out.append({"kind": "clinical-status-not-retrievable", "token": m.group(0),
+                    "detail": "no tool in this panel returns phase, approval or indication"})
+    chembl = json.dumps((ledger.results_by_tool() or {}).get("get_chembl_modulators", {}),
+                        default=str)
+    for word, evidence in MODALITY.items():
+        if re.search(r"\b" + re.escape(word) + r"\b", model_text, re.I) and \
+                not re.search(evidence, chembl, re.I):
+            out.append({"kind": "modality-not-in-chembl", "token": word,
+                        "detail": "no ChEMBL action/moa in this run supports that modality"})
+    return out
+
+
 def check_evidence_consistency(model_text: str, ledger) -> list:
     """Rules where the model's WORDS must not contradict the tool TABLE.
 
@@ -180,6 +271,8 @@ def validate(model_text: str, ledger) -> dict:
     """Return {'ok': bool, 'unsupported': [...], 'checked': int} for model-written text."""
     hay = _haystack(ledger)
     unsupported = list(check_evidence_consistency(model_text, ledger))
+    unsupported += check_direction(model_text, ledger)
+    unsupported += check_unearned_attributes(model_text, ledger)
 
     for claim_re, evidence_re in QUALITATIVE_CLAIMS:
         m = re.search(claim_re, model_text, re.I)

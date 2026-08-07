@@ -1,6 +1,9 @@
 # Target Evidence Card — IL6R × Alzheimer disease
 
-**Verdict:** INSUFFICIENT EVIDENCE — there is no available Mendelian randomization estimate connecting IL6R to Alzheimer disease, and current genetic and clinical evidence does not support a clear causal role.
+**Verdict:** INSUFFICIENT EVIDENCE — although IL6R is a druggable target with extensive genetic and pharmacogenomic annotation, there is no Mendelian randomization estimate connecting it causally to Alzheimer disease.
+
+> **Question actually answered:** the free-text disease was resolved to **MONDO_0004975 (Alzheimer disease)**. If that is not what you meant, every score below answers a different question.
+> **ChEMBL target resolved by text search** to **"Interleukin-6 receptor subunit alpha"** (CHEMBL2364155). If that is not the intended molecular target, the druggability row is about something else.
 
 ## Evidence
 
@@ -12,7 +15,7 @@
 | Known modulators / druggability | `get_chembl_modulators` | 4 known modulators (ANTAGONIST, INHIBITOR) |
 | Clinical variants | `get_clinvar_variants` | 366 ClinVar records; 1 pathogenic in a sample of 30 |
 | Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=7.9e-11, LOEUF=1.03 → LoF-tolerant |
-| Extra genetic evidence | `get_gwas_catalog` | 145 unique SNPs from 368/368 association rows |
+| Extra genetic evidence | `get_gwas_catalog` | 152 unique SNPs from 368/368 association rows |
 | Pharmacogenomics | `get_pharmgkb_drug_gene` | 3 clinical annotations across 1 drugs (level 3: 2, level 4: 1) |
 
 ## Caveats declared by the tools
@@ -24,7 +27,7 @@
 
 ## Reasoning
 
-Open Targets shows modest genetic and literature evidence for IL6R in Alzheimer disease, and multiple genetic association records and modulators exist for the target. However, no Mendelian randomization estimates were retrieved for this specific disease outcome to support a causal relationship. Furthermore, the gene displays loss-of-function tolerance in gnomAD and limited pharmacogenomic annotations primarily related to rheumatoid arthritis rather than neurodegeneration.
+Open Targets shows a modest genetic and literature association between IL6R and Alzheimer disease, and the GWAS Catalog maps over 150 unique SNPs to the locus. ChEMBL lists known modulators targeting the protein, and PharmGKB documents pharmacogenomic relationships with drugs like tocilizumab. However, the retrieved EpiGraphDB resource contains no Mendelian randomization estimates for this protein matching Alzheimer disease. Furthermore, gnomAD constraint metrics indicate that IL6R is tolerant to loss-of-function variation.
 
 ## Sources
 
@@ -39,7 +42,7 @@ Open Targets shows modest genetic and literature evidence for IL6R in Alzheimer 
 
 ## Provenance
 
-- Generated: 2026-08-07T06:24:57
+- Generated: 2026-08-07T06:44:46
 - Model (reasoning text only): `gemini-flash-lite-latest`
 - Tools invoked (8 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`
 - Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.

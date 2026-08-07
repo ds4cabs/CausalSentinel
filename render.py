@@ -110,6 +110,76 @@ def _cell_generic(tool: str, r: dict) -> str:
     return str(r)[:160]
 
 
+def _direction_block(protein: str, results: dict) -> list:
+    """State the MR direction MECHANICALLY, from the sign of beta.
+
+    This block exists because of a real failure. For IL6R x coronary heart disease the
+    ledger holds beta = -0.0442 with the plasma IL6R protein as the exposure, i.e. higher
+    protein -> lower disease. The model nonetheless wrote that the evidence supported
+    IL6R *inhibition* — the opposite intervention — because that is the conclusion in the
+    literature it had memorised. The number it quoted was correct; the direction was not,
+    and no token-level check can see that.
+
+    So the direction sentence is no longer the model's to write.
+    """
+    mr = results.get("get_mr_result") or {}
+    ms = (mr.get("matched_disease_estimates") or []) if isinstance(mr, dict) else []
+    if not ms:
+        return []
+    out = ["## MR direction — rendered from the ledger, not written by the model", ""]
+    for m in ms[:3]:
+        beta = m.get("beta")
+        if beta is None:
+            continue
+        way = "HIGHER" if beta > 0 else "LOWER"
+        out.append(
+            f"- Genetically-predicted **higher plasma {protein}** is associated with "
+            f"**{way} {m.get('outcome')}** "
+            f"(beta {beta:+.4g}, se {_num(m.get('se'))}, {_fmt_p(m.get('p_value'))}; "
+            f"{m.get('method')}, n_snp {m.get('n_snp')}, instrument "
+            f"{m.get('instrument_rsid')}, {m.get('cis_or_trans')})."
+        )
+        weak = [k for k, v in (("Steiger direction", m.get("steiger_direction_ok")),
+                               ("colocalization", m.get("coloc_prob")),
+                               ("LD check", m.get("ld_check")))
+                if v in (None, "NA", "")]
+        if weak:
+            out.append(f"  - Not available for this estimate: {', '.join(weak)}.")
+        if m.get("n_snp") == 1:
+            out.append("  - Single-instrument Wald ratio: no heterogeneity or pleiotropy "
+                       "test is possible.")
+    out += [
+        "",
+        f"> **The exposure is {protein} protein abundance, not a drug.** This run retrieved "
+        f"no evidence about what pharmacological inhibition or activation of {protein} does. "
+        f"Turning the direction above into a drug direction needs a mechanism this run did "
+        f"not retrieve.",
+        "",
+    ]
+    return out
+
+
+def _banner_block(results: dict) -> list:
+    """Promote silent resolution steps to the top of the card, where they are visible."""
+    out = []
+    ot = results.get("get_target_disease_evidence") or {}
+    if isinstance(ot, dict):
+        res = ot.get("resolved") or {}
+        efo = ot.get("efo_id") or res.get("efo_id")
+        dname = ot.get("resolved_disease_name") or res.get("disease_name")
+        if efo:
+            out.append(f"> **Question actually answered:** the free-text disease was resolved "
+                       f"to **{efo} ({dname})**. If that is not what you meant, every score "
+                       f"below answers a different question.")
+    ch = results.get("get_chembl_modulators") or {}
+    if isinstance(ch, dict) and ch.get("found") and ch.get("target_name"):
+        out.append(f"> **ChEMBL target resolved by text search** to "
+                   f"**\"{ch.get('target_name')}\"** ({ch.get('target_chembl_id')}). If that is "
+                   f"not the intended molecular target, the druggability row is about "
+                   f"something else.")
+    return (out + [""]) if out else []
+
+
 def render_card(protein: str, disease: str, ledger, reasoning_md: str,
                 verdict_line: str, model: str) -> str:
     results = ledger.results_by_tool()
@@ -117,6 +187,8 @@ def render_card(protein: str, disease: str, ledger, reasoning_md: str,
 
     lines = [f"# Target Evidence Card — {protein} × {disease}", ""]
     lines += [f"**Verdict:** {verdict_line.strip()}", ""]
+    lines += _banner_block(results)
+    lines += _direction_block(protein, results)
 
     # ---- evidence table (mechanical) ----
     lines += ["## Evidence", "", "| Evidence | Tool | Result |", "|---|---|---|"]

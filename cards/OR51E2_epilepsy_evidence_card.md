@@ -1,6 +1,9 @@
 # Target Evidence Card — OR51E2 × epilepsy
 
-**Verdict:** NO-GO — insufficient genetic, causal, and pharmacological evidence supporting OR51E2 as a target for epilepsy.
+**Verdict:** NO-GO — OR51E2 is an olfactory receptor with no known disease association, causal evidence, or known modulators for epilepsy.
+
+> **Question actually answered:** the free-text disease was resolved to **MONDO_0005027 (epilepsy)**. If that is not what you meant, every score below answers a different question.
+> **ChEMBL target resolved by text search** to **"Olfactory receptor 51E2"** (CHEMBL4523454). If that is not the intended molecular target, the druggability row is about something else.
 
 ## Evidence
 
@@ -25,7 +28,7 @@
 
 ## Reasoning
 
-OR51E2 is an olfactory receptor without established causal or direct links to epilepsy, and Open Targets confirms it is not among the top associated targets for the disease. There are no known chemical modulators or drugs targeting OR51E2 in ChEMBL, and no pharmacogenomic annotations are available in PharmGKB. Furthermore, no Mendelian randomization estimates were found for this protein-disease pair.
+Open Targets indicates that OR51E2 is not among the top associated targets for epilepsy, and no causal Mendelian randomization estimate is available for this protein-disease pair. ChEMBL returns no known modulators or active compounds for this target. Furthermore, ClinVar records lack pathogenic variants, and PharmGKB contains no clinical annotations.
 ```
 
 ## Sources
@@ -39,7 +42,7 @@ OR51E2 is an olfactory receptor without established causal or direct links to ep
 
 ## Provenance
 
-- Generated: 2026-08-07T06:24:08
+- Generated: 2026-08-07T06:44:06
 - Model (reasoning text only): `gemini-flash-lite-latest`
 - Tools invoked (8 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`
 - Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.

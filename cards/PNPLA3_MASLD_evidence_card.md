@@ -2,6 +2,8 @@
 
 **Verdict:** GO — Strong genetic and literature evidence supports PNPLA3 as a key target for metabolic dysfunction-associated steatotic liver disease (MASLD).
 
+> **Question actually answered:** the free-text disease was resolved to **MONDO_0013209 (metabolic dysfunction-associated steatotic liver disease)**. If that is not what you meant, every score below answers a different question.
+
 ## Evidence
 
 | Evidence | Tool | Result |
@@ -12,19 +14,19 @@
 | Known modulators / druggability | `get_chembl_modulators` | **not available** — No ChEMBL target for 'PNPLA3'. |
 | Clinical variants | `get_clinvar_variants` | 216 ClinVar records; 0 pathogenic in a sample of 30 |
 | Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1.6e-14, LOEUF=1.26 → LoF-tolerant |
-| Extra genetic evidence | `get_gwas_catalog` | 111 unique SNPs from 256/256 association rows |
+| Extra genetic evidence | `get_gwas_catalog` | 108 unique SNPs from 256/256 association rows |
 | Pharmacogenomics | `get_pharmgkb_drug_gene` | 2 clinical annotations across 6 drugs (level 3: 2) |
 
 ## Caveats declared by the tools
 
 - **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'PNPLA3' -> ENSG00000100344 (PNPLA3); 'MASLD' -> MONDO_0013209 (metabolic dysfunction-associated steatotic liver disease). Scores below describe THAT term, not the free-text phrase.
-- **`get_chembl_modulators`** — No ChEMBL target for 'PNPLA3'.
 - **`get_mr_result`** — No pQTL-based MR estimate for PNPLA3 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.
+- **`get_chembl_modulators`** — No ChEMBL target for 'PNPLA3'.
 - **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 216 ClinVar records for this gene; it is a sample, not a rate.
 
 ## Reasoning
 
-Open Targets shows a high overall association score between PNPLA3 and metabolic dysfunction-associated steatotic liver disease, backed by strong genetic association and literature evidence. Numerous GWAS associations map to the locus, and UniProt notes the protein's localization to lipid droplets and its role in lipid metabolism linked to non-alcoholic fatty liver disease. Constraint metrics indicate that PNPLA3 is tolerant to loss-of-function variation. Although ChEMBL currently lists no modulators for this target, the robust genetic validation makes it a compelling candidate for therapeutic intervention.
+Open Targets records a high overall genetic and experimental association score for PNPLA3 with metabolic dysfunction-associated steatotic liver disease. The GWAS Catalog shows extensive genetic mapping across multiple SNPs including rs738409 at the locus. UniProt confirms that PNPLA3 localizes to lipid droplets and functions in lipid metabolism, and gnomAD constraint data indicate the gene is tolerant to loss-of-function variants. While no causal Mendelian randomization estimate or ChEMBL modulators were available in the queried resources, the robust genetic association and biological role support pursuing PNPLA3 as a target.
 
 ## Sources
 
@@ -38,8 +40,8 @@ Open Targets shows a high overall association score between PNPLA3 and metabolic
 
 ## Provenance
 
-- Generated: 2026-08-07T06:22:50
+- Generated: 2026-08-07T06:42:33
 - Model (reasoning text only): `gemini-flash-lite-latest`
-- Tools invoked (8 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`
+- Tools invoked (8 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`
 - Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.
 - No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.

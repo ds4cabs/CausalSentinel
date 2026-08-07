@@ -1,222 +1,251 @@
-[
-  {
-    "protein": "PCSK9",
-    "disease": "high cholesterol",
-    "validation": {
-      "ok": true,
-      "unsupported": [],
-      "checked": 1
+{
+  "cards": [
+    {
+      "protein": "PCSK9",
+      "disease": "high cholesterol",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "GO — PCSK9 demonstrates robust genetic and causal support for high cholesterol, backed by high Open Targets association scores and published Mendelian randomization estimates.",
+      "written": "cards/PCSK9_high-cholesterol_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 77,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_chembl_modulators",
+        "get_mr_result",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene"
+      ]
     },
-    "verdict": "GO — PCSK9 shows extremely robust genetic, causal, and clinical evidence for a role in high cholesterol.",
-    "written": "cards/PCSK9_high-cholesterol_evidence_card.md",
-    "n_tool_calls": 8,
-    "tools_called": [
-      "get_uniprot_dossier",
-      "get_target_disease_evidence",
-      "get_mr_result",
-      "get_chembl_modulators",
-      "get_clinvar_variants",
-      "get_gnomad_constraint",
-      "get_gwas_catalog",
-      "get_pharmgkb_drug_gene"
-    ]
-  },
-  {
-    "protein": "IL6R",
-    "disease": "coronary heart disease",
-    "validation": {
-      "ok": true,
-      "unsupported": [],
-      "checked": 0
+    {
+      "protein": "IL6R",
+      "disease": "coronary heart disease",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 1
+      },
+      "verdict": "GO — genetic and causal evidence support IL6R as a promising target for coronary heart disease.",
+      "written": "cards/IL6R_coronary-heart-disease_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 82,
+      "tools_called": [
+        "get_mr_result",
+        "get_target_disease_evidence",
+        "get_uniprot_dossier",
+        "get_chembl_modulators",
+        "get_gnomad_constraint",
+        "get_clinvar_variants",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene"
+      ]
     },
-    "verdict": "GO — IL6R shows strong genetic and causal Mendelian randomization support for a protective effect in coronary artery disease, alongside established pharmacological tractability.",
-    "written": "cards/IL6R_coronary-heart-disease_evidence_card.md",
-    "n_tool_calls": 8,
-    "tools_called": [
-      "get_uniprot_dossier",
-      "get_target_disease_evidence",
-      "get_mr_result",
-      "get_chembl_modulators",
-      "get_clinvar_variants",
-      "get_gnomad_constraint",
-      "get_gwas_catalog",
-      "get_pharmgkb_drug_gene"
-    ]
-  },
-  {
-    "protein": "LPA",
-    "disease": "coronary heart disease",
-    "validation": {
-      "ok": true,
-      "unsupported": [],
-      "checked": 1
+    {
+      "protein": "LPA",
+      "disease": "coronary heart disease",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "GO — genetic, causal, and clinical evidence strongly support LPA as a therapeutic target for coronary heart disease.",
+      "written": "cards/LPA_coronary-heart-disease_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 86,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_chembl_modulators",
+        "get_mr_result",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene"
+      ]
     },
-    "verdict": "GO — genetic evidence and causal Mendelian randomization support LPA as a strong therapeutic target for coronary heart disease.",
-    "written": "cards/LPA_coronary-heart-disease_evidence_card.md",
-    "n_tool_calls": 8,
-    "tools_called": [
-      "get_uniprot_dossier",
-      "get_target_disease_evidence",
-      "get_chembl_modulators",
-      "get_mr_result",
-      "get_clinvar_variants",
-      "get_gnomad_constraint",
-      "get_gwas_catalog",
-      "get_pharmgkb_drug_gene"
-    ]
-  },
-  {
-    "protein": "PNPLA3",
-    "disease": "MASLD",
-    "validation": {
-      "ok": true,
-      "unsupported": [],
-      "checked": 0
+    {
+      "protein": "PNPLA3",
+      "disease": "MASLD",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 1
+      },
+      "verdict": "GO — Strong genetic and literature evidence supports PNPLA3 as a key target for metabolic dysfunction-associated steatotic liver disease (MASLD).",
+      "written": "cards/PNPLA3_MASLD_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 107,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene"
+      ]
     },
-    "verdict": "GO — Strong genetic and literature evidence supports PNPLA3 as a key target for metabolic dysfunction-associated steatotic liver disease (MASLD).",
-    "written": "cards/PNPLA3_MASLD_evidence_card.md",
-    "n_tool_calls": 8,
-    "tools_called": [
-      "get_uniprot_dossier",
-      "get_target_disease_evidence",
-      "get_chembl_modulators",
-      "get_mr_result",
-      "get_clinvar_variants",
-      "get_gnomad_constraint",
-      "get_gwas_catalog",
-      "get_pharmgkb_drug_gene"
-    ]
-  },
-  {
-    "protein": "HMGCR",
-    "disease": "high cholesterol",
-    "validation": {
-      "ok": true,
-      "unsupported": [],
-      "checked": 1
+    {
+      "protein": "HMGCR",
+      "disease": "high cholesterol",
+      "validation": {
+        "ok": false,
+        "unsupported": [
+          {
+            "kind": "clinical-status-not-retrievable",
+            "token": "clinically proven",
+            "detail": "no tool in this panel returns phase, approval or indication"
+          }
+        ],
+        "checked": 0
+      },
+      "verdict": "GO — HMGCR is a heavily validated, clinically targeted enzyme for hypercholesterolemia with extensive genetic, pharmacological, and clinical evidence.",
+      "written": "cards/HMGCR_high-cholesterol_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 108,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene"
+      ]
     },
-    "verdict": "GO — HMGCR is robustly linked genetically and clinically to hypercholesterolemia, with extensive validation as the established therapeutic target of statins.",
-    "written": "cards/HMGCR_high-cholesterol_evidence_card.md",
-    "n_tool_calls": 8,
-    "tools_called": [
-      "get_uniprot_dossier",
-      "get_target_disease_evidence",
-      "get_mr_result",
-      "get_chembl_modulators",
-      "get_clinvar_variants",
-      "get_gnomad_constraint",
-      "get_gwas_catalog",
-      "get_pharmgkb_drug_gene"
-    ]
-  },
-  {
-    "protein": "SCN2A",
-    "disease": "epilepsy",
-    "validation": {
-      "ok": true,
-      "unsupported": [],
-      "checked": 0
+    {
+      "protein": "SCN2A",
+      "disease": "epilepsy",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "GO — SCN2A has exceptionally strong genetic and clinical association with epilepsy, backed by extensive clinical variant data and pharmacogenomic annotations.",
+      "written": "cards/SCN2A_epilepsy_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 90,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene"
+      ]
     },
-    "verdict": "GO — SCN2A has exceptionally strong genetic, clinical, and literature support for epilepsy, backed by robust target-disease evidence.",
-    "written": "cards/SCN2A_epilepsy_evidence_card.md",
-    "n_tool_calls": 8,
-    "tools_called": [
-      "get_uniprot_dossier",
-      "get_target_disease_evidence",
-      "get_chembl_modulators",
-      "get_mr_result",
-      "get_clinvar_variants",
-      "get_gnomad_constraint",
-      "get_gwas_catalog",
-      "get_pharmgkb_drug_gene"
-    ]
-  },
-  {
-    "protein": "TREM2",
-    "disease": "Alzheimer disease",
-    "validation": {
-      "ok": true,
-      "unsupported": [],
-      "checked": 0
+    {
+      "protein": "TREM2",
+      "disease": "Alzheimer disease",
+      "validation": {
+        "ok": false,
+        "unsupported": [
+          {
+            "kind": "clinical-status-not-retrievable",
+            "token": "approved",
+            "detail": "no tool in this panel returns phase, approval or indication"
+          }
+        ],
+        "checked": 0
+      },
+      "verdict": "GO — Strong genetic and biological evidence supports TREM2 as a target for Alzheimer disease, driven by microglial function and robust genetic associations.",
+      "written": "cards/TREM2_Alzheimer-disease_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 109,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene"
+      ]
     },
-    "verdict": "GO — TREM2 has robust genetic and functional evidence supporting its role in Alzheimer disease pathogenesis, despite the current lack of dedicated Mendelian randomization or chemical modulator records.",
-    "written": "cards/TREM2_Alzheimer-disease_evidence_card.md",
-    "n_tool_calls": 8,
-    "tools_called": [
-      "get_uniprot_dossier",
-      "get_target_disease_evidence",
-      "get_chembl_modulators",
-      "get_mr_result",
-      "get_clinvar_variants",
-      "get_gnomad_constraint",
-      "get_gwas_catalog",
-      "get_pharmgkb_drug_gene"
-    ]
-  },
-  {
-    "protein": "OR51E2",
-    "disease": "epilepsy",
-    "validation": {
-      "ok": true,
-      "unsupported": [],
-      "checked": 0
+    {
+      "protein": "OR51E2",
+      "disease": "epilepsy",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "NO-GO — OR51E2 is an olfactory receptor with no known disease association, causal evidence, or known modulators for epilepsy.",
+      "written": "cards/OR51E2_epilepsy_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 69,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_chembl_modulators",
+        "get_mr_result",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene"
+      ]
     },
-    "verdict": "NO-GO — insufficient genetic, causal, and pharmacological evidence supporting OR51E2 as a target for epilepsy.",
-    "written": "cards/OR51E2_epilepsy_evidence_card.md",
-    "n_tool_calls": 8,
-    "tools_called": [
-      "get_uniprot_dossier",
-      "get_target_disease_evidence",
-      "get_chembl_modulators",
-      "get_mr_result",
-      "get_clinvar_variants",
-      "get_gnomad_constraint",
-      "get_gwas_catalog",
-      "get_pharmgkb_drug_gene"
-    ]
-  },
-  {
-    "protein": "VKORC1",
-    "disease": "venous thrombosis",
-    "validation": {
-      "ok": true,
-      "unsupported": [],
-      "checked": 0
+    {
+      "protein": "VKORC1",
+      "disease": "venous thrombosis",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "GO — VKORC1 is the established pharmacological target of coumarin anticoagulants (such as warfarin) used to prevent and treat venous thrombosis, with extensive clinical and pharmacogenomic evidence.",
+      "written": "cards/VKORC1_venous-thrombosis_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 90,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_gwas_catalog",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_chembl_modulators",
+        "get_pharmgkb_drug_gene"
+      ]
     },
-    "verdict": "GO — VKORC1 is a well-established, directly druggable target with strong clinical and genetic support for vitamin K antagonism and anticoagulation therapy.",
-    "written": "cards/VKORC1_venous-thrombosis_evidence_card.md",
-    "n_tool_calls": 8,
-    "tools_called": [
-      "get_uniprot_dossier",
-      "get_target_disease_evidence",
-      "get_mr_result",
-      "get_chembl_modulators",
-      "get_clinvar_variants",
-      "get_gnomad_constraint",
-      "get_gwas_catalog",
-      "get_pharmgkb_drug_gene"
-    ]
-  },
-  {
-    "protein": "IL6R",
-    "disease": "Alzheimer disease",
-    "validation": {
-      "ok": true,
-      "unsupported": [],
-      "checked": 0
-    },
-    "verdict": "INSUFFICIENT EVIDENCE — there is no available Mendelian randomization estimate connecting IL6R to Alzheimer disease, and current genetic and clinical evidence does not support a clear causal role.",
-    "written": "cards/IL6R_Alzheimer-disease_evidence_card.md",
-    "n_tool_calls": 8,
-    "tools_called": [
-      "get_uniprot_dossier",
-      "get_target_disease_evidence",
-      "get_chembl_modulators",
-      "get_mr_result",
-      "get_clinvar_variants",
-      "get_gnomad_constraint",
-      "get_gwas_catalog",
-      "get_pharmgkb_drug_gene"
-    ]
-  }
-]
+    {
+      "protein": "IL6R",
+      "disease": "Alzheimer disease",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 1
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — although IL6R is a druggable target with extensive genetic and pharmacogenomic annotation, there is no Mendelian randomization estimate connecting it causally to Alzheimer disease.",
+      "written": "cards/IL6R_Alzheimer-disease_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 97,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_chembl_modulators",
+        "get_mr_result",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene"
+      ]
+    }
+  ],
+  "passed": 8,
+  "total": 10,
+  "claim_tokens_checked": 3,
+  "reasoning_words": 915,
+  "claim_density_per_100_words": 0.33
+}

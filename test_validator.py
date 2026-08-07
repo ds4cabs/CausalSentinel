@@ -35,6 +35,26 @@ MR_ABSENT = FakeLedger({
     "get_gwas_catalog": {"n_unique_snps": 108, "n_association_rows": 256},
 })
 
+# Negative beta: higher protein goes with LESS disease, so a benefit claim must be about
+# RAISING the target. Taken from the real IL6R x coronary heart disease row.
+MR_NEG = FakeLedger({
+    "get_mr_result": {"found": True, "protein": "IL6R",
+                      "matched_disease_estimates": [
+                          {"beta": -0.0441899892357374, "se": 0.00853, "p_value": 2.21e-07,
+                           "instrument_rsid": "rs4129267", "cis_or_trans": "cis", "n_snp": 1}]},
+    "get_chembl_modulators": {"found": True, "modulators": [{"action": "RNAI INHIBITOR"}]},
+})
+
+# Positive beta: higher protein goes with MORE disease — the LPA x CHD row, same outcome,
+# opposite sign. Both conventions must be handled by one rule.
+MR_POS = FakeLedger({
+    "get_mr_result": {"found": True, "protein": "LPA",
+                      "matched_disease_estimates": [
+                          {"beta": 0.252303585657371, "se": 0.0181, "p_value": 1e-40,
+                           "instrument_rsid": "rs10455872", "cis_or_trans": "cis", "n_snp": 1}]},
+    "get_chembl_modulators": {"found": True, "modulators": [{"action": "RNAI INHIBITOR"}]},
+})
+
 # (name, ledger, text, expect_ok)
 CASES = [
     # --- numbers -------------------------------------------------------------
@@ -60,6 +80,20 @@ CASES = [
     ("MR unavailable phrasing",       MR_ABSENT,  "No Mendelian randomization estimates are available.", True),
     ("causal WITH MR is fine",        MR_PRESENT, "MR supports a causal role for this target.", True),
     ("claims the agent ran MR",       MR_PRESENT, "We performed Mendelian randomization for this target.", False),
+    # --- clinical status: never retrievable from this tool panel --------------
+    ("approval claim",                MR_PRESENT, "Approved therapies already exist for this target.", False),
+    ("clinical trial claim",          MR_PRESENT, "Clinical trials have validated this mechanism.", False),
+    ("proof-of-efficacy claim",       MR_PRESENT, "The clinical legacy provides definitive proof of efficacy.", False),
+    ("modality absent from ChEMBL",   MR_PRESENT, "Biologic modulators of this target exist.", False),
+    ("modality present in ChEMBL",    MR_PRESENT, "RNAi modulators of this target are listed.", True),
+    # --- direction: the sign of beta licenses exactly one intervention --------
+    # Motivating failure: a card quoted beta = -0.0442 correctly and then recommended the
+    # opposite intervention, because the model was reciting a remembered conclusion.
+    ("beta<0: inhibition is backwards", MR_NEG,   "MR supports a protective effect of IL6R inhibition in disease.", False),
+    ("beta<0: activation is licensed",  MR_NEG,   "Causal evidence suggests IL6R activation could be therapeutic.", True),
+    ("beta<0: outcome wording is fine", MR_NEG,   "Higher IL6R protein is associated with lower disease risk.", True),
+    ("beta>0: inhibition is licensed",  MR_POS,   "MR supports that LPA inhibition would be therapeutic.", True),
+    ("beta>0: activation is backwards", MR_POS,   "MR supports that LPA activation would be therapeutic.", False),
 ]
 
 

@@ -1,6 +1,17 @@
 # Target Evidence Card — LPA × coronary heart disease
 
-**Verdict:** GO — genetic evidence and causal Mendelian randomization support LPA as a strong therapeutic target for coronary heart disease.
+**Verdict:** GO — genetic, causal, and clinical evidence strongly support LPA as a therapeutic target for coronary heart disease.
+
+> **Question actually answered:** the free-text disease was resolved to **MONDO_0005010 (coronary artery disorder)**. If that is not what you meant, every score below answers a different question.
+> **ChEMBL target resolved by text search** to **"LPA mRNA"** (CHEMBL4662965). If that is not the intended molecular target, the druggability row is about something else.
+
+## MR direction — rendered from the ledger, not written by the model
+
+- Genetically-predicted **higher plasma LPA** is associated with **HIGHER Coronary heart disease** (beta +0.2523, se 0.0193, p=5.39e-39; Wald ratio, n_snp 1, instrument rs55730499, cis).
+  - Not available for this estimate: colocalization.
+  - Single-instrument Wald ratio: no heterogeneity or pleiotropy test is possible.
+
+> **The exposure is LPA protein abundance, not a drug.** This run retrieved no evidence about what pharmacological inhibition or activation of LPA does. Turning the direction above into a drug direction needs a mechanism this run did not retrieve.
 
 ## Evidence
 
@@ -13,7 +24,7 @@ _retrieved from published MR; not computed here_ |
 | Known modulators / druggability | `get_chembl_modulators` | 2 known modulators (ANTISENSE INHIBITOR, RNAI INHIBITOR) |
 | Clinical variants | `get_clinvar_variants` | 365 ClinVar records; 2 pathogenic in a sample of 30 |
 | Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=2.1e-68, LOEUF=1.13 → LoF-tolerant |
-| Extra genetic evidence | `get_gwas_catalog` | 243 unique SNPs from 690/690 association rows |
+| Extra genetic evidence | `get_gwas_catalog` | 267 unique SNPs from 690/690 association rows |
 | Pharmacogenomics | `get_pharmgkb_drug_gene` | 3 clinical annotations across 2 drugs (level 3: 3) |
 
 ## Caveats declared by the tools
@@ -25,7 +36,7 @@ _retrieved from published MR; not computed here_ |
 
 ## Reasoning
 
-Open Targets shows a high genetic association score with coronary artery disorder, and the GWAS Catalog maps hundreds of associated variants to the LPA locus. Published Mendelian randomization estimates provide causal support linking LPA to coronary heart disease using instrument rs55730499. Furthermore, ChEMBL identifies active modulators including antisense and RNAi inhibitors against LPA mRNA. gnomAD constraint metrics indicate the gene is loss-of-function tolerant, supporting safety for targeted inhibition.
+Open Targets and GWAS catalog queries reveal strong genetic association between LPA and coronary artery disease. Published Mendelian randomization estimates retrieved from pQTL resources demonstrate a significant causal relationship with coronary heart disease outcomes using cis-instruments. Furthermore, the protein is targetable, with active small interfering RNA and antisense modulators present in ChEMBL. Constraint metrics indicate that LPA is tolerant to loss-of-function variations, suggesting safety for inhibitory therapeutic approaches.
 
 ## Sources
 
@@ -40,7 +51,7 @@ Open Targets shows a high genetic association score with coronary artery disorde
 
 ## Provenance
 
-- Generated: 2026-08-07T06:22:37
+- Generated: 2026-08-07T06:42:18
 - Model (reasoning text only): `gemini-flash-lite-latest`
 - Tools invoked (8 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`
 - Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.
