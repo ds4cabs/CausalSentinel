@@ -103,6 +103,30 @@ never sees what came back and the card is whatever the model remembers. `ledger.
 each tool so the return values survive — which is what makes deterministic rendering and
 validation possible at all.
 
+### Proteome sweep — the whole searchable universe, no LLM, no key
+
+`proteome_sweep.py` turns the same tool layer into a lookup resource: one **MR-feasibility
+dossier per protein**, generated mechanically (no language model anywhere in this path).
+
+```bash
+python proteome_sweep.py --pilot        # 8 proteins covering all three tiers
+python proteome_sweep.py --all         # the full Tier-A universe (989 proteins)
+```
+
+Each dossier answers, in order: **(1)** which published MR estimates exist (retrieved);
+**(2)** whether pQTL instruments exist even where no MR was run — *Tier B: the un-run
+analyses*; **(3)** the actual GWAS Catalog results at the locus (trait, best p, lead SNP,
+study); **(4)** a phenome map of genetically-associated diseases, each overlaid with its
+MR status — rows with genetic signal and no MR estimate are labelled `candidate analysis`,
+which is the research-opportunity / comorbidity-hypothesis space; **(5)** druggability and
+safety annotation. `dossiers/master_index.csv` is the cross-check table over all proteins.
+
+| Tier | Meaning |
+|---|---|
+| A | published pQTL-MR estimates exist (Zheng et al. 2020, via EpiGraphDB) — shown |
+| B | a pQTL GWAS exists but no MR estimate here — instruments derivable, analysis un-run |
+| C | no plasma pQTL found — gene-level genetic evidence only, as an honest preview |
+
 ### What the validator catches
 
 Fabricated numbers (compared **numerically**, tolerant of honest rounding and of "over N" /
