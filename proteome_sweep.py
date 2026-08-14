@@ -233,18 +233,36 @@ def render_dossier(res: dict) -> str:
     grows = [r for r in rows if r.get("genetic_association")]
     if grows:
         L += [f"_Top diseases by Open Targets association "
-              f"(of {phen.get('n_associated_diseases_total')} total); genetic_association "
-              f"aggregates GWAS common-variant AND rare-variant evidence. "
-              f"**Associations are loci, not causal claims.**_", "",
-              "| Disease | genetic assoc. | overall | MR status |", "|---|---|---|---|"]
+              f"(of {phen.get('n_associated_diseases_total')} total). "
+              f"**Associations are loci, not causal claims.** The causal-status column is a "
+              f"four-state triage per pair: **established (curated)** = a curated clinical "
+              f"assertion exists (ClinGen/G2P/GEL/Orphanet/ClinVar — any validity level, MR "
+              f"adds little); **exploratory rare-variant signal** = ExWAS burden evidence "
+              f"without curation — a candidate NEW gene-disease relationship; "
+              f"**common-variant locus** = GWAS signal, classic pQTL-MR territory; "
+              f"**multi-layer** = burden+GWAS together, an allelic-series candidate (the "
+              f"strongest causal setup). Burden estimand is carrier-vs-noncarrier, not "
+              f"per-SD MR._",
+              "",
+              "| Disease | genetic assoc. | burden (ExWAS) | causal status | MR status |",
+              "|---|---|---|---|---|"]
         for r in grows[:15]:
-            L.append(f"| {r['disease']} | {r['genetic_association']} | {r['overall_score']} | "
+            gb = r.get("gene_burden_exwas")
+            L.append(f"| {r['disease']} | {r['genetic_association']} | "
+                     f"{gb if gb is not None else '—'} | "
+                     f"{r.get('causal_status', '?')} | "
                      f"{mr_status_for(r['disease'], outs)} |")
         n_opp = sum(1 for r in grows[:15]
                     if mr_status_for(r["disease"], outs).startswith("no MR"))
-        L += ["", f"> **{n_opp} of the {min(len(grows),15)} genetically-supported diseases "
-              f"above have no MR estimate in this resource** — that gap is the candidate-"
-              f"analysis / comorbidity-hypothesis space."]
+        n_expl = sum(1 for r in grows
+                     if str(r.get("causal_status", "")).startswith("exploratory"))
+        n_multi = sum(1 for r in grows
+                      if str(r.get("causal_status", "")).startswith("multi-layer"))
+        L += ["", f"> Of the {min(len(grows),15)} rows above, **{n_opp} have no MR "
+              f"estimate in this resource**. Across all retrieved diseases for this gene: "
+              f"{n_expl} exploratory rare-variant signal(s), {n_multi} multi-layer "
+              f"(allelic-series candidate) pair(s). Final triage still belongs to a "
+              f"statistical geneticist."]
     else:
         L.append("_No genetically-associated diseases retrieved from Open Targets._")
     L.append("")
@@ -294,6 +312,8 @@ def render_dossier(res: dict) -> str:
 CSV_COLS = ["protein", "tier", "accession", "n_mr_outcomes", "top_mr_outcome", "top_mr_beta",
             "top_mr_p", "n_pqtl_datasets", "pqtl_ids", "n_genetic_diseases",
             "top_genetic_disease", "top_genetic_score", "n_opportunity_rows",
+            "n_burden_diseases", "top_burden_disease",
+            "n_established", "n_exploratory_burden", "n_multilayer",
             "chembl_target", "n_modulators", "pLI", "LOEUF", "gwas_unique_snps",
             "n_gwas_traits", "n_gw_significant", "top_gwas_trait", "top_gwas_p",
             "clinvar_records", "pgx_annotations", "errors", "generated_at"]
@@ -319,6 +339,15 @@ def index_row(res: dict) -> dict:
         "top_genetic_disease": grows[0]["disease"] if grows else None,
         "top_genetic_score": grows[0]["genetic_association"] if grows else None,
         "n_opportunity_rows": n_opp,
+        "n_burden_diseases": sum(1 for r in grows if r.get("gene_burden_exwas")),
+        "top_burden_disease": next((r["disease"] for r in grows
+                                    if r.get("gene_burden_exwas")), None),
+        "n_established": sum(1 for r in grows
+                             if str(r.get("causal_status", "")).startswith("established")),
+        "n_exploratory_burden": sum(1 for r in grows
+                                    if str(r.get("causal_status", "")).startswith("exploratory")),
+        "n_multilayer": sum(1 for r in grows
+                            if str(r.get("causal_status", "")).startswith("multi-layer")),
         "chembl_target": ch.get("target_chembl_id"), "n_modulators": ch.get("n_modulators"),
         "pLI": gn.get("pLI"), "LOEUF": gn.get("LOEUF"),
         "gwas_unique_snps": res.get("gwas", {}).get("n_unique_snps"),

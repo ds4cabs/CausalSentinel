@@ -36,25 +36,25 @@ _855 association rows across 463 traits (831 genome-wide significant rows). **As
 
 ## 4. Phenome map — where this gene is a genetic locus, vs. where MR exists
 
-_Top diseases by Open Targets association (of 1080 total); genetic_association aggregates GWAS common-variant AND rare-variant evidence. **Associations are loci, not causal claims.**_
+_Top diseases by Open Targets association (of 1080 total). **Associations are loci, not causal claims.** The causal-status column is a four-state triage per pair: **established (curated)** = a curated clinical assertion exists (ClinGen/G2P/GEL/Orphanet/ClinVar — any validity level, MR adds little); **exploratory rare-variant signal** = ExWAS burden evidence without curation — a candidate NEW gene-disease relationship; **common-variant locus** = GWAS signal, classic pQTL-MR territory; **multi-layer** = burden+GWAS together, an allelic-series candidate (the strongest causal setup). Burden estimand is carrier-vs-noncarrier, not per-SD MR._
 
-| Disease | genetic assoc. | overall | MR status |
-|---|---|---|---|
-| Hypercholesterolemia | 0.857 | 0.74 | no MR -> candidate analysis |
-| hyperlipidemia | 0.822 | 0.735 | no MR -> candidate analysis |
-| coronary artery disorder | 0.687 | 0.721 | no MR -> candidate analysis |
-| familial hypercholesterolemia | 0.616 | 0.702 | no MR -> candidate analysis |
-| stroke disorder | 0.481 | 0.683 | no MR -> candidate analysis |
-| cardiovascular disorder | 0.462 | 0.668 | no MR -> candidate analysis |
-| muscular dystrophy, limb-girdle, autosomal recessive 28 | 0.795 | 0.656 | no MR -> candidate analysis |
-| type 2 diabetes mellitus | 0.44 | 0.635 | no MR -> candidate analysis |
-| familial hyperlipidemia | 0.674 | 0.584 | no MR -> candidate analysis |
-| metabolic disease | 0.855 | 0.522 | no MR -> candidate analysis |
-| metabolic syndrome | 0.69 | 0.514 | no MR -> candidate analysis |
-| Disorder of lipid metabolism | 0.605 | 0.504 | no MR -> candidate analysis |
-| diabetes mellitus | 0.516 | 0.485 | no MR -> candidate analysis |
+| Disease | genetic assoc. | burden (ExWAS) | causal status | MR status |
+|---|---|---|---|---|
+| Hypercholesterolemia | 0.857 | — | common-variant locus | no MR -> candidate analysis |
+| hyperlipidemia | 0.822 | — | common-variant locus | no MR -> candidate analysis |
+| coronary artery disorder | 0.687 | — | common-variant locus | no MR -> candidate analysis |
+| familial hypercholesterolemia | 0.616 | — | common-variant locus | no MR -> candidate analysis |
+| stroke disorder | 0.481 | — | common-variant locus | no MR -> candidate analysis |
+| cardiovascular disorder | 0.462 | — | common-variant locus | no MR -> candidate analysis |
+| muscular dystrophy, limb-girdle, autosomal recessive 28 | 0.795 | — | established (curated) | no MR -> candidate analysis |
+| type 2 diabetes mellitus | 0.44 | — | common-variant locus | no MR -> candidate analysis |
+| familial hyperlipidemia | 0.674 | — | common-variant locus | no MR -> candidate analysis |
+| metabolic disease | 0.855 | — | common-variant locus | no MR -> candidate analysis |
+| metabolic syndrome | 0.69 | — | common-variant locus | no MR -> candidate analysis |
+| Disorder of lipid metabolism | 0.605 | — | common-variant locus | no MR -> candidate analysis |
+| diabetes mellitus | 0.516 | — | common-variant locus | no MR -> candidate analysis |
 
-> **13 of the 13 genetically-supported diseases above have no MR estimate in this resource** — that gap is the candidate-analysis / comorbidity-hypothesis space.
+> Of the 13 rows above, **13 have no MR estimate in this resource**. Across all retrieved diseases for this gene: 0 exploratory rare-variant signal(s), 0 multi-layer (allelic-series candidate) pair(s). Final triage still belongs to a statistical geneticist.
 
 ## 5. Downstream annotation (druggability & safety preview)
 

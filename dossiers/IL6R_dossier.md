@@ -48,27 +48,27 @@ _311 association rows across 163 traits (282 genome-wide significant rows). **As
 
 ## 4. Phenome map — where this gene is a genetic locus, vs. where MR exists
 
-_Top diseases by Open Targets association (of 1042 total); genetic_association aggregates GWAS common-variant AND rare-variant evidence. **Associations are loci, not causal claims.**_
+_Top diseases by Open Targets association (of 1042 total). **Associations are loci, not causal claims.** The causal-status column is a four-state triage per pair: **established (curated)** = a curated clinical assertion exists (ClinGen/G2P/GEL/Orphanet/ClinVar — any validity level, MR adds little); **exploratory rare-variant signal** = ExWAS burden evidence without curation — a candidate NEW gene-disease relationship; **common-variant locus** = GWAS signal, classic pQTL-MR territory; **multi-layer** = burden+GWAS together, an allelic-series candidate (the strongest causal setup). Burden estimand is carrier-vs-noncarrier, not per-SD MR._
 
-| Disease | genetic assoc. | overall | MR status |
-|---|---|---|---|
-| rheumatoid arthritis | 0.824 | 0.74 | MR: beta=-0.0748, p=1.49e-09 (cis) |
-| Eczematoid dermatitis | 0.862 | 0.642 | no MR -> candidate analysis |
-| COVID-19 | 0.435 | 0.631 | no MR -> candidate analysis |
-| juvenile idiopathic arthritis | 0.128 | 0.598 | MR: beta=-0.128, p=0.0105 (cis) |
-| coronary artery disorder | 0.907 | 0.578 | no MR -> candidate analysis |
-| hyper-IgE recurrent infection syndrome 5, autosomal recessive | 0.663 | 0.575 | no MR -> candidate analysis |
-| asthma | 0.882 | 0.557 | MR: beta=0.022, p=2.44e-04 (cis) |
-| atopic eczema | 0.903 | 0.552 | no MR -> candidate analysis |
-| dermatitis | 0.823 | 0.551 | no MR -> candidate analysis |
-| abdominal aortic aneurysm | 0.867 | 0.53 | no MR -> candidate analysis |
-| ankylosing spondylitis | 0.724 | 0.52 | MR: beta=-0.103, p=0.0257 (cis) |
-| allergic rhinitis | 0.833 | 0.507 | no MR -> candidate analysis |
-| myocardial infarction | 0.779 | 0.496 | MR: beta=-0.0377, p=8.01e-05 (cis) |
-| coronary atherosclerosis | 0.79 | 0.484 | no MR -> candidate analysis |
-| gout | 0.773 | 0.475 | MR: beta=0.0383, p=0.0304 (cis) |
+| Disease | genetic assoc. | burden (ExWAS) | causal status | MR status |
+|---|---|---|---|---|
+| rheumatoid arthritis | 0.824 | — | common-variant locus | MR: beta=-0.0748, p=1.49e-09 (cis) |
+| Eczematoid dermatitis | 0.862 | — | established (curated) | no MR -> candidate analysis |
+| COVID-19 | 0.435 | — | common-variant locus | no MR -> candidate analysis |
+| juvenile idiopathic arthritis | 0.128 | — | common-variant locus | MR: beta=-0.128, p=0.0105 (cis) |
+| coronary artery disorder | 0.907 | — | common-variant locus | no MR -> candidate analysis |
+| hyper-IgE recurrent infection syndrome 5, autosomal recessive | 0.663 | — | established (curated) | no MR -> candidate analysis |
+| asthma | 0.882 | — | common-variant locus | MR: beta=0.022, p=2.44e-04 (cis) |
+| atopic eczema | 0.903 | — | common-variant locus | no MR -> candidate analysis |
+| dermatitis | 0.823 | — | common-variant locus | no MR -> candidate analysis |
+| abdominal aortic aneurysm | 0.867 | — | common-variant locus | no MR -> candidate analysis |
+| ankylosing spondylitis | 0.724 | — | common-variant locus | MR: beta=-0.103, p=0.0257 (cis) |
+| allergic rhinitis | 0.833 | — | common-variant locus | no MR -> candidate analysis |
+| myocardial infarction | 0.779 | — | common-variant locus | MR: beta=-0.0377, p=8.01e-05 (cis) |
+| coronary atherosclerosis | 0.79 | — | common-variant locus | no MR -> candidate analysis |
+| gout | 0.773 | — | common-variant locus | MR: beta=0.0383, p=0.0304 (cis) |
 
-> **9 of the 15 genetically-supported diseases above have no MR estimate in this resource** — that gap is the candidate-analysis / comorbidity-hypothesis space.
+> Of the 15 rows above, **9 have no MR estimate in this resource**. Across all retrieved diseases for this gene: 0 exploratory rare-variant signal(s), 0 multi-layer (allelic-series candidate) pair(s). Final triage still belongs to a statistical geneticist.
 
 ## 5. Downstream annotation (druggability & safety preview)
 

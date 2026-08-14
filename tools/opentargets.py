@@ -112,7 +112,9 @@ query($e: String!, $size: Int!) {
     approvedSymbol
     associatedDiseases(page: {index: 0, size: $size}) {
       count
-      rows { disease { id name } score datatypeScores { id score } }
+      rows { disease { id name } score
+             datatypeScores { id score }
+             datasourceScores { id score } }
     }
   }
 }
@@ -142,15 +144,48 @@ def get_gene_phenome(gene_symbol: str, size: int = 30) -> dict:
         return {"error": f"Open Targets phenome query failed: {ex}",
                 "resolved": {"ensembl_id": ensembl_id}}
 
+    # Curated clinical/Mendelian assertion sources. Presence means SOMEONE has curated a
+    # gene-disease claim (any validity level) — it does NOT mean ClinGen "Definitive".
+    CURATED = {"clingen", "gene2phenotype", "genomics_england", "orphanet", "eva",
+               "uniprot_variants"}
+
     rows = []
     for row in ad.get("rows", []):
         ga = next((x["score"] for x in row.get("datatypeScores", [])
                    if x["id"] == "genetic_association"), None)
+        ds = {x["id"]: x["score"] for x in row.get("datasourceScores", [])}
+        # gene_burden = ExWAS burden evidence (Genebass / AZ PheWAS via Open Targets):
+        # rare-variant carrier contrasts — a "nature's knockout" design (cf. PCSK9,
+        # Cohen 2006). Estimand differs from two-sample MR: carrier-vs-noncarrier,
+        # not per-SD of protein.
+        gb = ds.get("gene_burden")
+        gwas = ds.get("gwas_credible_sets")            # renamed from ot_genetics_portal
+        curated = sorted(k for k in ds if k in CURATED)
+
+        # Four-state causal triage per gene-disease pair. The owner's insight: "no MR"
+        # rows are not one thing — an established Mendelian relationship needs no MR,
+        # while a burden signal WITHOUT curation is a candidate new gene-disease
+        # relationship that ExWAS/MR exploration could establish.
+        if curated:
+            status = "established (curated)"
+        elif gb is not None and gwas is not None:
+            status = "multi-layer: burden+GWAS (allelic-series candidate)"
+        elif gb is not None:
+            status = "exploratory rare-variant signal"
+        elif gwas is not None:
+            status = "common-variant locus"
+        else:
+            status = "other evidence only"
+
         rows.append({
             "disease": row["disease"]["name"],
             "disease_id": row["disease"]["id"],
             "overall_score": round(row["score"], 3),
             "genetic_association": None if ga is None else round(ga, 3),
+            "gene_burden_exwas": None if gb is None else round(gb, 3),
+            "gwas_common": None if gwas is None else round(gwas, 3),
+            "curated_sources": ";".join(curated) if curated else None,
+            "causal_status": status,
         })
 
     return {

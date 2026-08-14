@@ -32,27 +32,27 @@ _1236 association rows across 660 traits (1195 genome-wide significant rows). **
 
 ## 4. Phenome map — where this gene is a genetic locus, vs. where MR exists
 
-_Top diseases by Open Targets association (of 308 total); genetic_association aggregates GWAS common-variant AND rare-variant evidence. **Associations are loci, not causal claims.**_
+_Top diseases by Open Targets association (of 308 total). **Associations are loci, not causal claims.** The causal-status column is a four-state triage per pair: **established (curated)** = a curated clinical assertion exists (ClinGen/G2P/GEL/Orphanet/ClinVar — any validity level, MR adds little); **exploratory rare-variant signal** = ExWAS burden evidence without curation — a candidate NEW gene-disease relationship; **common-variant locus** = GWAS signal, classic pQTL-MR territory; **multi-layer** = burden+GWAS together, an allelic-series candidate (the strongest causal setup). Burden estimand is carrier-vs-noncarrier, not per-SD MR._
 
-| Disease | genetic assoc. | overall | MR status |
-|---|---|---|---|
-| metabolic dysfunction-associated steatotic liver disease | 0.869 | 0.712 | no MR -> candidate analysis |
-| liver disorder | 0.901 | 0.565 | no MR -> candidate analysis |
-| gout | 0.883 | 0.555 | no MR -> candidate analysis |
-| cirrhosis of liver | 0.874 | 0.545 | no MR -> candidate analysis |
-| type 2 diabetes mellitus | 0.845 | 0.532 | no MR -> candidate analysis |
-| hepatocellular carcinoma | 0.65 | 0.523 | no MR -> candidate analysis |
-| diabetes mellitus | 0.826 | 0.518 | no MR -> candidate analysis |
-| alcoholic liver diseases | 0.832 | 0.513 | no MR -> candidate analysis |
-| esophageal varices | 0.837 | 0.509 | no MR -> candidate analysis |
-| liver cancer | 0.786 | 0.486 | no MR -> candidate analysis |
-| coronary artery disorder | 0.758 | 0.482 | no MR -> candidate analysis |
-| Abnormality of the liver | 0.79 | 0.48 | no MR -> candidate analysis |
-| portal hypertension | 0.773 | 0.48 | no MR -> candidate analysis |
-| Hypercholesterolemia | 0.774 | 0.472 | no MR -> candidate analysis |
-| intrahepatic bile duct cancer | 0.751 | 0.457 | no MR -> candidate analysis |
+| Disease | genetic assoc. | burden (ExWAS) | causal status | MR status |
+|---|---|---|---|---|
+| metabolic dysfunction-associated steatotic liver disease | 0.869 | — | established (curated) | no MR -> candidate analysis |
+| liver disorder | 0.901 | — | common-variant locus | no MR -> candidate analysis |
+| gout | 0.883 | — | common-variant locus | no MR -> candidate analysis |
+| cirrhosis of liver | 0.874 | — | common-variant locus | no MR -> candidate analysis |
+| type 2 diabetes mellitus | 0.845 | — | common-variant locus | no MR -> candidate analysis |
+| hepatocellular carcinoma | 0.65 | — | established (curated) | no MR -> candidate analysis |
+| diabetes mellitus | 0.826 | — | common-variant locus | no MR -> candidate analysis |
+| alcoholic liver diseases | 0.832 | — | common-variant locus | no MR -> candidate analysis |
+| esophageal varices | 0.837 | — | common-variant locus | no MR -> candidate analysis |
+| liver cancer | 0.786 | — | common-variant locus | no MR -> candidate analysis |
+| coronary artery disorder | 0.758 | — | common-variant locus | no MR -> candidate analysis |
+| Abnormality of the liver | 0.79 | — | common-variant locus | no MR -> candidate analysis |
+| portal hypertension | 0.773 | — | common-variant locus | no MR -> candidate analysis |
+| Hypercholesterolemia | 0.774 | — | common-variant locus | no MR -> candidate analysis |
+| intrahepatic bile duct cancer | 0.751 | — | common-variant locus | no MR -> candidate analysis |
 
-> **15 of the 15 genetically-supported diseases above have no MR estimate in this resource** — that gap is the candidate-analysis / comorbidity-hypothesis space.
+> Of the 15 rows above, **15 have no MR estimate in this resource**. Across all retrieved diseases for this gene: 0 exploratory rare-variant signal(s), 0 multi-layer (allelic-series candidate) pair(s). Final triage still belongs to a statistical geneticist.
 
 ## 5. Downstream annotation (druggability & safety preview)
 
