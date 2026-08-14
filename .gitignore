@@ -24,6 +24,15 @@ env/
 *.duckdb
 *.parquet
 
+# ===== Proteome sweep output: keep the index + 4 sample dossiers in git; the other 987
+# dossiers and the raw cache (~80 MB of JSON) stay local. Regenerate with proteome_sweep.py.
+dossiers/*
+!dossiers/master_index.csv
+!dossiers/HMGCR_dossier.md
+!dossiers/PNPLA3_dossier.md
+!dossiers/IL6R_dossier.md
+!dossiers/PCSK9_dossier.md
+
 # ===== OS / editor =====
 .DS_Store
 Thumbs.db
