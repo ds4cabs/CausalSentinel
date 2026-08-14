@@ -174,6 +174,44 @@ def get_mr_result(protein: str, disease: str) -> dict:
     return out
 
 
+def get_mr_outcomes(protein: str) -> dict:
+    """Retrieve ALL published pQTL-MR outcomes for a protein (no disease filter).
+
+    Library entry point for proteome-wide sweeps: returns every outcome with an estimate,
+    sorted by p-value. Same source and same honesty rules as get_mr_result — retrieved,
+    never computed here.
+    """
+    try:
+        r = requests.get(
+            PQTL_API,
+            params={"query": protein, "rtype": "simple",
+                    "pvalue": PVALUE_CEILING, "searchflag": "proteins"},
+            headers={"Accept": "application/json"},
+            timeout=45,
+        )
+        r.raise_for_status()
+        rows = r.json().get("results", []) or []
+    except requests.RequestException as e:
+        return {"error": f"EpiGraphDB pQTL request failed: {e}", "computed_here": False}
+    except ValueError as e:
+        return {"error": f"EpiGraphDB pQTL returned non-JSON: {e}", "computed_here": False}
+
+    slim = sorted((_slim(x) for x in rows),
+                  key=lambda d: d["p_value"] if d["p_value"] is not None else 1.0)
+    return {
+        "found": bool(slim),
+        "computed_here": False,
+        "protein": protein,
+        "n_outcomes": len(slim),
+        "outcomes": slim,
+        "note": (None if slim else
+                 f"No pQTL MR estimates for {protein} in this resource. "
+                 f"ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT."),
+        "source_release": _source_release(),
+        "url": "https://epigraphdb.org/pqtl/",
+    }
+
+
 if __name__ == "__main__":
     import json
     for prot, dis in [("PCSK9", "high cholesterol"), ("IL6R", "coronary heart disease"),

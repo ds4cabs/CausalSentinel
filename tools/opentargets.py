@@ -106,6 +106,67 @@ def get_target_disease_evidence(gene_symbol: str, disease: str) -> dict:
     }
 
 
+_PHENOME = """
+query($e: String!, $size: Int!) {
+  target(ensemblId: $e) {
+    approvedSymbol
+    associatedDiseases(page: {index: 0, size: $size}) {
+      count
+      rows { disease { id name } score datatypeScores { id score } }
+    }
+  }
+}
+"""
+
+
+def get_gene_phenome(gene_symbol: str, size: int = 30) -> dict:
+    """List the phenotypes/diseases this gene is genetically associated with (Open Targets).
+
+    Use this to see WHERE this gene is a genetic locus across the phenome — the disease
+    table a researcher scans to spot comorbidity structure and un-run MR analyses. The
+    genetic_association score aggregates common-variant (GWAS) and rare-variant evidence.
+    ASSOCIATION IS NOT CAUSATION: rows here are loci, not causal claims.
+    """
+    try:
+        hits = _gql(_SEARCH, {"q": gene_symbol, "e": ["target"]})["data"]["search"]["hits"]
+    except Exception as ex:
+        return {"error": f"Open Targets search failed: {ex}"}
+    if not hits:
+        return {"found": False, "note": f"Could not resolve target '{gene_symbol}'."}
+    ensembl_id = hits[0]["id"]
+
+    try:
+        t = _gql(_PHENOME, {"e": ensembl_id, "size": size})["data"]["target"]
+        ad = t["associatedDiseases"]
+    except Exception as ex:
+        return {"error": f"Open Targets phenome query failed: {ex}",
+                "resolved": {"ensembl_id": ensembl_id}}
+
+    rows = []
+    for row in ad.get("rows", []):
+        ga = next((x["score"] for x in row.get("datatypeScores", [])
+                   if x["id"] == "genetic_association"), None)
+        rows.append({
+            "disease": row["disease"]["name"],
+            "disease_id": row["disease"]["id"],
+            "overall_score": round(row["score"], 3),
+            "genetic_association": None if ga is None else round(ga, 3),
+        })
+
+    return {
+        "found": True,
+        "gene_symbol": gene_symbol,
+        "ensembl_id": ensembl_id,
+        "n_associated_diseases_total": ad.get("count"),
+        "top_diseases": rows,
+        "note": (f"Top {len(rows)} of {ad.get('count')} associated diseases by overall score. "
+                 f"genetic_association aggregates GWAS common-variant AND rare-variant "
+                 f"evidence. These are ASSOCIATIONS (loci), not causal claims."),
+        "url": f"https://platform.opentargets.org/target/{ensembl_id}/associations",
+        "source_release": _release(),
+    }
+
+
 if __name__ == "__main__":
     import json
     print(json.dumps(get_target_disease_evidence("PNPLA3", "fatty liver disease"), indent=2))
