@@ -1,0 +1,245 @@
+"""Deterministic card rendering — every number and every caveat comes from tool output.
+
+The division of labour this file enforces:
+
+    tool JSON  ->  evidence table, caveats, sources, provenance    (THIS FILE, mechanical)
+    model      ->  the Reasoning paragraph only                    (prose, then validated)
+
+Nothing the model writes can change a number in the table, and no tool-declared `note`
+can be dropped, because the model is never in that path.
+"""
+import datetime
+
+# One row per tool, in the order a target is actually reasoned about.
+ROWS = [
+    ("get_mr_result", "Causal effect (MR) — retrieved, not computed"),
+    ("get_target_disease_evidence", "Target–disease association"),
+    ("get_uniprot_dossier", "Protein context"),
+    ("get_chembl_modulators", "Known modulators / druggability"),
+    ("get_clinvar_variants", "Clinical variants"),
+    ("get_gnomad_constraint", "Population constraint / LoF tolerance"),
+    ("get_gwas_catalog", "Extra genetic evidence"),
+    ("get_pharmgkb_drug_gene", "Pharmacogenomics"),
+]
+
+
+def _fmt_p(p):
+    if p is None:
+        return "p=NA"
+    try:
+        return f"p={p:.2e}" if p < 0.001 else f"p={p:.3g}"
+    except (TypeError, ValueError):
+        return f"p={p}"
+
+
+def _num(x, nd=3):
+    if x is None:
+        return "NA"
+    if isinstance(x, (int, float)):
+        return f"{x:.{nd}g}"
+    return str(x)
+
+
+def _cell_mr(r: dict) -> str:
+    if r.get("error"):
+        return f"**tool error** — {r['error'][:120]}"
+    if not r.get("found"):
+        return ("**not available** — no pQTL MR estimate for this protein in the resource "
+                "(absence of an estimate is not evidence of no effect)")
+    ms = r.get("matched_disease_estimates") or []
+    if not ms:
+        return (f"**no estimate for this disease** — protein has "
+                f"{r.get('n_outcomes_available')} outcomes in the resource, none matching")
+    m = ms[0]
+    bits = [
+        f"beta={_num(m.get('beta'))}",
+        f"se={_num(m.get('se'))}",
+        _fmt_p(m.get("p_value")),
+        f"{m.get('method')}",
+        f"n_snp={m.get('n_snp')}",
+        f"{m.get('cis_or_trans')} instrument",
+    ]
+    coloc = m.get("coloc_prob")
+    bits.append(f"coloc={_num(coloc)}" if coloc is not None else "coloc=not available")
+    extra = f" (+{len(ms)-1} more matched)" if len(ms) > 1 else ""
+    return f"outcome: {m.get('outcome')} — " + ", ".join(bits) + extra + \
+           "  \n_retrieved from published MR; not computed here_"
+
+
+def _cell_generic(tool: str, r: dict) -> str:
+    if not isinstance(r, dict):
+        return f"unexpected result type: {type(r).__name__}"
+    if r.get("error"):
+        return f"**tool error** — {str(r['error'])[:140]}"
+    if r.get("found") is False:
+        return "**not available** — " + (r.get("note") or "no record returned")
+
+    if tool == "get_target_disease_evidence":
+        ds = r.get("datatype_scores") or {}
+        top = ", ".join(f"{k}={_num(v)}" for k, v in list(ds.items())[:4])
+        return f"overall score={_num(r.get('overall_score'))} ({top})"
+    if tool == "get_uniprot_dossier":
+        loc = ", ".join(r.get("subcellular_location") or [])[:60]
+        return f"{r.get('accession')} — {str(r.get('protein_name'))[:70]}" + (f"; location: {loc}" if loc else "")
+    if tool == "get_chembl_modulators":
+        n = r.get("n_modulators", 0)
+        if not n:
+            return f"target {r.get('target_chembl_id')} — **0 known modulators in ChEMBL**"
+        acts = {m.get("action") for m in (r.get("modulators") or []) if m.get("action")}
+        return f"{n} known modulators ({', '.join(sorted(a for a in acts if a))[:70]})"
+    if tool == "get_clinvar_variants":
+        return (f"{r.get('total_records')} ClinVar records; "
+                f"{r.get('pathogenic_in_sample')} pathogenic in a sample of {r.get('sample_size')}")
+    if tool == "get_gnomad_constraint":
+        pli, loeuf = r.get("pLI"), r.get("LOEUF")
+        verdict = "LoF-INTOLERANT (handle with care)" if (
+            (pli is not None and pli > 0.9) or (loeuf is not None and loeuf < 0.35)
+        ) else "LoF-tolerant"
+        return f"pLI={_num(pli, 2)}, LOEUF={_num(loeuf, 3)} → {verdict}"
+    if tool == "get_gwas_catalog":
+        tot = r.get("total_association_rows_reported")
+        done = r.get("sweep_complete")
+        return (f"{r.get('n_unique_snps')} unique SNPs from {r.get('n_association_rows')}"
+                f"/{tot} association rows"
+                + ("" if done else " — **incomplete sweep, lower bound**"))
+    if tool == "get_pharmgkb_drug_gene":
+        lv = r.get("evidence_level_counts") or {}
+        lvs = ", ".join(f"level {k}: {v}" for k, v in lv.items())
+        return (f"{r.get('n_clinical_annotations')} clinical annotations across "
+                f"{r.get('n_drugs')} drugs" + (f" ({lvs})" if lvs else ""))
+    return str(r)[:160]
+
+
+def _direction_block(protein: str, results: dict) -> list:
+    """State the MR direction MECHANICALLY, from the sign of beta.
+
+    This block exists because of a real failure. For IL6R x coronary heart disease the
+    ledger holds beta = -0.0442 with the plasma IL6R protein as the exposure, i.e. higher
+    protein -> lower disease. The model nonetheless wrote that the evidence supported
+    IL6R *inhibition* — the opposite intervention — because that is the conclusion in the
+    literature it had memorised. The number it quoted was correct; the direction was not,
+    and no token-level check can see that.
+
+    So the direction sentence is no longer the model's to write.
+    """
+    mr = results.get("get_mr_result") or {}
+    ms = (mr.get("matched_disease_estimates") or []) if isinstance(mr, dict) else []
+    if not ms:
+        return []
+    out = ["## MR direction — rendered from the ledger, not written by the model", ""]
+    for m in ms[:3]:
+        beta = m.get("beta")
+        if beta is None:
+            continue
+        way = "HIGHER" if beta > 0 else "LOWER"
+        out.append(
+            f"- Genetically-predicted **higher plasma {protein}** is associated with "
+            f"**{way} {m.get('outcome')}** "
+            f"(beta {beta:+.4g}, se {_num(m.get('se'))}, {_fmt_p(m.get('p_value'))}; "
+            f"{m.get('method')}, n_snp {m.get('n_snp')}, instrument "
+            f"{m.get('instrument_rsid')}, {m.get('cis_or_trans')})."
+        )
+        weak = [k for k, v in (("Steiger direction", m.get("steiger_direction_ok")),
+                               ("colocalization", m.get("coloc_prob")),
+                               ("LD check", m.get("ld_check")))
+                if v in (None, "NA", "")]
+        if weak:
+            out.append(f"  - Not available for this estimate: {', '.join(weak)}.")
+        if m.get("n_snp") == 1:
+            out.append("  - Single-instrument Wald ratio: no heterogeneity or pleiotropy "
+                       "test is possible.")
+    out += [
+        "",
+        f"> **The exposure is {protein} protein abundance, not a drug.** This run retrieved "
+        f"no evidence about what pharmacological inhibition or activation of {protein} does. "
+        f"Turning the direction above into a drug direction needs a mechanism this run did "
+        f"not retrieve.",
+        "",
+    ]
+    return out
+
+
+def _banner_block(results: dict) -> list:
+    """Promote silent resolution steps to the top of the card, where they are visible."""
+    out = []
+    ot = results.get("get_target_disease_evidence") or {}
+    if isinstance(ot, dict):
+        res = ot.get("resolved") or {}
+        efo = ot.get("efo_id") or res.get("efo_id")
+        dname = ot.get("resolved_disease_name") or res.get("disease_name")
+        if efo:
+            out.append(f"> **Question actually answered:** the free-text disease was resolved "
+                       f"to **{efo} ({dname})**. If that is not what you meant, every score "
+                       f"below answers a different question.")
+    ch = results.get("get_chembl_modulators") or {}
+    if isinstance(ch, dict) and ch.get("found") and ch.get("target_name"):
+        out.append(f"> **ChEMBL target resolved by text search** to "
+                   f"**\"{ch.get('target_name')}\"** ({ch.get('target_chembl_id')}). If that is "
+                   f"not the intended molecular target, the druggability row is about "
+                   f"something else.")
+    return (out + [""]) if out else []
+
+
+def render_card(protein: str, disease: str, ledger, reasoning_md: str,
+                verdict_line: str, model: str) -> str:
+    results = ledger.results_by_tool()
+    now = datetime.datetime.now().isoformat(timespec="seconds")
+
+    lines = [f"# Target Evidence Card — {protein} × {disease}", ""]
+    lines += [f"**Verdict:** {verdict_line.strip()}", ""]
+    lines += _banner_block(results)
+    lines += _direction_block(protein, results)
+
+    # ---- evidence table (mechanical) ----
+    lines += ["## Evidence", "", "| Evidence | Tool | Result |", "|---|---|---|"]
+    for tool, label in ROWS:
+        r = results.get(tool)
+        if r is None:
+            cell = "_tool not called by the agent in this run_"
+        elif tool == "get_mr_result":
+            cell = _cell_mr(r)
+        else:
+            cell = _cell_generic(tool, r)
+        lines.append(f"| {label} | `{tool}` | {cell} |")
+    lines.append("")
+
+    # ---- caveats (mechanical: every tool-declared note, verbatim) ----
+    notes = ledger.notes()
+    lines += ["## Caveats declared by the tools", ""]
+    if notes:
+        for tool, note in notes:
+            lines.append(f"- **`{tool}`** — {note}")
+    else:
+        lines.append("- _No tool declared a caveat in this run._")
+    lines.append("")
+
+    # ---- reasoning (the model's only writing surface) ----
+    lines += ["## Reasoning", "", reasoning_md.strip(), ""]
+
+    # ---- sources (mechanical) ----
+    lines += ["## Sources", ""]
+    srcs = ledger.sources()
+    if srcs:
+        for tool, url, release in srcs:
+            rel = f" — _{release}_" if release else ""
+            lines.append(f"- `{tool}`: {url}{rel}")
+    else:
+        lines.append("- _No tool returned a source URL._")
+    lines.append("")
+
+    # ---- provenance (mechanical) ----
+    called = ledger.called()
+    lines += [
+        "## Provenance",
+        "",
+        f"- Generated: {now}",
+        f"- Model (reasoning text only): `{model}`",
+        f"- Tools invoked ({len(called)} calls): {', '.join(f'`{c}`' for c in called) or 'none'}",
+        "- Evidence table, caveats, sources and this block are rendered mechanically from "
+        "tool return values. The model wrote only the Verdict sentence and the Reasoning "
+        "paragraph, both checked against tool output by `validate_card.py`.",
+        "- No Mendelian randomization or colocalization is computed by this agent; MR "
+        "estimates, where present, are retrieved from published work.",
+        "",
+    ]
+    return "\n".join(lines)

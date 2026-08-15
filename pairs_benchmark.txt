@@ -1,0 +1,30 @@
+# Benchmark pairs — chosen so the batch tests distinct behaviours, not just volume.
+# Format: PROTEIN<TAB>DISEASE
+#
+# 1-3  POSITIVE CONTROLS: textbook drug-target MR that the tool should find and support.
+PCSK9	high cholesterol
+IL6R	coronary heart disease
+LPA	coronary heart disease
+#
+# 4-5  NO-MR-AVAILABLE: protein absent from the pQTL resource. The card must print
+#      "not available" and must NOT treat absence as evidence of no effect.
+PNPLA3	MASLD
+HMGCR	high cholesterol
+#
+# 6    LoF-INTOLERANT SAFETY CASE: constraint should flag this as a target to handle
+#      with care rather than as a point in its favour.
+SCN2A	epilepsy
+#
+# 7    ORPHAN / UNDRUGGED: expect few or no ChEMBL modulators.
+TREM2	Alzheimer disease
+#
+# 8    NEGATIVE CONTROL: no plausible causal link. A well-behaved agent should return
+#      NO-GO or INSUFFICIENT EVIDENCE, not manufacture a story.
+OR51E2	epilepsy
+#
+# 9    PHARMACOGENE: should light up the pharmacogenomics row specifically.
+VKORC1	venous thrombosis
+#
+# 10   MR EXISTS BUT FOR OTHER OUTCOMES: tests the "protein has estimates, none match
+#      this disease" branch — the most common way a tool quietly misleads.
+IL6R	Alzheimer disease

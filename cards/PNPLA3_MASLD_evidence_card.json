@@ -1,0 +1,261 @@
+{
+  "protein": "PNPLA3",
+  "disease": "MASLD",
+  "generated_at": "2026-08-07T06:42:33",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_mr_result",
+    "get_chembl_modulators",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PNPLA3"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PNPLA3",
+        "accession": "Q9NST1",
+        "gene_names": [
+          "PNPLA3"
+        ],
+        "protein_name": "1-acylglycerol-3-phosphate O-acyltransferase PNPLA3",
+        "function": "Specifically catalyzes coenzyme A (CoA)-dependent acylation of 1-acyl-sn-glycerol 3-phosphate (2-lysophosphatidic acid/LPA) to generate phosphatidic acid (PA), an important metabolic intermediate and precursor for both triglycerides and glycerophospholipids. Does not esterify other lysophospholipids. Acyl donors are long chain (at least C16) fatty acyl-CoAs: arachidonoyl-CoA, linoleoyl-CoA, oleoyl-CoA and at a lesser extent palmitoyl-CoA (PubMed:22560221). Additionally possesses low triacylglycerol lipase and CoA-independent acylglycerol transacylase activities and thus may play a role in acyl-chain remodeling of triglycerides (PubMed:15364929, PubMed:20034933, PubMed:22560221). In vitro may express hydrolytic activity against glycerolipids triacylglycerol, diacylglycerol and monoacylglycerol, with a strong preference for oleic acid as the acyl moiety (PubMed:21878620). However, the triacylglycerol hydrolase activity is controversial and may be very low (PubMed:22560221). Possesses phospholipase A2 activity (PubMed:15364929)",
+        "subcellular_location": [
+          "Membrane",
+          "Lipid droplet"
+        ],
+        "diseases": [
+          "Non-alcoholic fatty liver disease 1"
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/Q9NST1",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 0.719,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PNPLA3",
+        "disease": "MASLD"
+      },
+      "result": {
+        "found": true,
+        "ensembl_id": "ENSG00000100344",
+        "efo_id": "MONDO_0013209",
+        "resolved_target_name": "PNPLA3",
+        "resolved_disease_name": "metabolic dysfunction-associated steatotic liver disease",
+        "overall_score": 0.7135,
+        "datatype_scores": {
+          "literature": 0.988,
+          "animal_model": 0.6463,
+          "genetic_association": 0.8709,
+          "genetic_literature": 0.6079
+        },
+        "note": "Free-text inputs were resolved to ontology terms: 'PNPLA3' -> ENSG00000100344 (PNPLA3); 'MASLD' -> MONDO_0013209 (metabolic dysfunction-associated steatotic liver disease). Scores below describe THAT term, not the free-text phrase.",
+        "url": "https://platform.opentargets.org/evidence/ENSG00000100344/MONDO_0013209",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.352,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "PNPLA3",
+        "disease": "MASLD"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "PNPLA3",
+        "disease": "MASLD",
+        "note": "No pQTL-based MR estimate for PNPLA3 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.684,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PNPLA3"
+      },
+      "result": {
+        "found": false,
+        "note": "No ChEMBL target for 'PNPLA3'."
+      },
+      "seconds": 2.261,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PNPLA3"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PNPLA3",
+        "total_records": 216,
+        "pathogenic_in_sample": 0,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "NM_025225.3(PNPLA3):c.889G>A (p.Glu297Lys)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_025225.3(PNPLA3):c.1409C>T (p.Ser470Phe)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_025225.3(PNPLA3):c.937G>A (p.Asp313Asn)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_025225.3(PNPLA3):c.131T>G (p.Phe44Cys)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_025225.3(PNPLA3):c.719G>A (p.Arg240Gln)",
+            "significance": "Likely benign"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 216 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=PNPLA3%5Bgene%5D",
+        "source_release": "ClinVar build Build260804-2105.1"
+      },
+      "seconds": 1.303,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PNPLA3"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PNPLA3",
+        "pLI": 1.627590288931006e-14,
+        "LOEUF": 1.2607805130187772,
+        "oe_lof": 0.974759474805471,
+        "mis_z": -0.438369623742436,
+        "lof_z": 0.14055258303624962,
+        "interpretation": "LoF-tolerant: no population-level depletion of loss-of-function variants, which is reassuring but is NOT positive evidence of efficacy.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/PNPLA3",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.399,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PNPLA3"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PNPLA3",
+        "n_unique_snps": 108,
+        "n_association_rows": 256,
+        "total_association_rows_reported": 256,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs4823182",
+          "rs2073080",
+          "rs2281292",
+          "rs738409",
+          "rs2092501",
+          "rs12165526",
+          "rs470085",
+          "rs6519816",
+          "rs141923341",
+          "rs2294927",
+          "rs2401514",
+          "rs12483959",
+          "rs56373884",
+          "rs12485168",
+          "rs80634"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/PNPLA3",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 3.622,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PNPLA3"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PNPLA3",
+        "n_clinical_annotations": 2,
+        "evidence_level_counts": {
+          "3": 2
+        },
+        "drugs": [
+          "asparaginase",
+          "cyclophosphamide",
+          "daunorubicin",
+          "ethanol",
+          "prednisolone",
+          "vincristine"
+        ],
+        "n_drugs": 6,
+        "examples": [
+          {
+            "drugs": [
+              "ethanol"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs738409 (PNPLA3); ethanol; Alcoholism (level 3 Toxicity)"
+          },
+          {
+            "drugs": [
+              "asparaginase",
+              "cyclophosphamide",
+              "daunorubicin",
+              "prednisolone",
+              "vincristine"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs738409 (PNPLA3); asparaginase, cyclophosphamide, daunorubicin, prednisolone or vincristine; Precursor Cell Lymphoblastic Leukemia-Lymphoma (level 3 Toxicity)"
+          }
+        ],
+        "url": "https://www.pharmgkb.org/search?query=PNPLA3",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.451,
+      "exception": null
+    }
+  ],
+  "model_verdict": "GO — Strong genetic and literature evidence supports PNPLA3 as a key target for metabolic dysfunction-associated steatotic liver disease (MASLD).",
+  "model_reasoning": "Open Targets records a high overall genetic and experimental association score for PNPLA3 with metabolic dysfunction-associated steatotic liver disease. The GWAS Catalog shows extensive genetic mapping across multiple SNPs including rs738409 at the locus. UniProt confirms that PNPLA3 localizes to lipid droplets and functions in lipid metabolism, and gnomAD constraint data indicate the gene is tolerant to loss-of-function variants. While no causal Mendelian randomization estimate or ChEMBL modulators were available in the queried resources, the robust genetic association and biological role support pursuing PNPLA3 as a target.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 1
+  },
+  "card_markdown": "# Target Evidence Card — PNPLA3 × MASLD\n\n**Verdict:** GO — Strong genetic and literature evidence supports PNPLA3 as a key target for metabolic dysfunction-associated steatotic liver disease (MASLD).\n\n> **Question actually answered:** the free-text disease was resolved to **MONDO_0013209 (metabolic dysfunction-associated steatotic liver disease)**. If that is not what you meant, every score below answers a different question.\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.714 (literature=0.988, animal_model=0.646, genetic_association=0.871, genetic_literature=0.608) |\n| Protein context | `get_uniprot_dossier` | Q9NST1 — 1-acylglycerol-3-phosphate O-acyltransferase PNPLA3; location: Membrane, Lipid droplet |\n| Known modulators / druggability | `get_chembl_modulators` | **not available** — No ChEMBL target for 'PNPLA3'. |\n| Clinical variants | `get_clinvar_variants` | 216 ClinVar records; 0 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1.6e-14, LOEUF=1.26 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 108 unique SNPs from 256/256 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 2 clinical annotations across 6 drugs (level 3: 2) |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'PNPLA3' -> ENSG00000100344 (PNPLA3); 'MASLD' -> MONDO_0013209 (metabolic dysfunction-associated steatotic liver disease). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — No pQTL-based MR estimate for PNPLA3 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_chembl_modulators`** — No ChEMBL target for 'PNPLA3'.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 216 ClinVar records for this gene; it is a sample, not a rate.\n\n## Reasoning\n\nOpen Targets records a high overall genetic and experimental association score for PNPLA3 with metabolic dysfunction-associated steatotic liver disease. The GWAS Catalog shows extensive genetic mapping across multiple SNPs including rs738409 at the locus. UniProt confirms that PNPLA3 localizes to lipid droplets and functions in lipid metabolism, and gnomAD constraint data indicate the gene is tolerant to loss-of-function variants. While no causal Mendelian randomization estimate or ChEMBL modulators were available in the queried resources, the robust genetic association and biological role support pursuing PNPLA3 as a target.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q9NST1 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000100344/MONDO_0013209 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=PNPLA3%5Bgene%5D — _ClinVar build Build260804-2105.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/PNPLA3 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/PNPLA3 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=PNPLA3 — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n\n## Provenance\n\n- Generated: 2026-08-07T06:42:33\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (8 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}
