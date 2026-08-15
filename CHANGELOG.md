@@ -96,7 +96,10 @@ mechanical and a direction lock rejects contradicting runs.
 
 ### Comparing versions (the objective yardstick)
 
-Git keeps every prior version — old results need no manual archiving:
+Milestone exhibits are kept visible in `cards/archive/` (folder name = version + date,
+file names unchanged, contents byte-identical to git history) — currently the v0.1
+PNPLA3 card, the "before" in every comparison above. For everything else, git keeps
+every prior version and no manual copy is needed:
 
 ```bash
 git show main:tools/mr.py            # the v0.1 stub, verbatim
