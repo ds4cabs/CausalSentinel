@@ -70,9 +70,13 @@ ASSAY_BY_AUTHOR = {
     "folkersen": ("Folkersen et al. 2017 (PLoS Genet), IMPROVE / CVD-I panel",
                   ANTIBODY, "affinity_antibody"),
     "sun": ("Sun et al. 2018 (Nature), INTERVAL", APTAMER, "affinity_aptamer"),
-    "suhre": ("Suhre et al. 2017 (Nat Commun), QMDiab", APTAMER, "affinity_aptamer"),
+    # Suhre's discovery cohort is KORA F4 (n~1000), replicated in QMDiab (n=338). The
+    # sample size EpiGraphDB reports (~995) is KORA, not QMDiab — an earlier version of
+    # this table named the replication cohort as though it were the source.
+    "suhre": ("Suhre et al. 2017 (Nat Commun), KORA F4 (replicated in QMDiab)",
+              APTAMER, "affinity_aptamer"),
     "emilsson": ("Emilsson et al. 2018 (Science), AGES-Reykjavik", APTAMER, "affinity_aptamer"),
-    "yao": ("Yao et al. 2018 (Nat Commun), Framingham", APTAMER, "affinity_aptamer"),
+    "yao": ("Yao et al. 2018 (Nat Commun), Framingham Heart Study", APTAMER, "affinity_aptamer"),
 }
 _ASSAY_NOTE = ("Aptamer and antibody platforms both measure BINDING, not abundance. If the "
                "instrument is (or proxies) a missense variant in this same protein, the "
