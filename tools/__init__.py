@@ -17,6 +17,7 @@ from .pharmgkb import get_pharmgkb_drug_gene
 from .litcheck import get_published_mr
 from .eqtl import get_eqtl_instruments, instrument_availability
 from .gtex import get_gtex_eqtl, tissue_ids, scan_tissue_panel, list_panels
+from .mechanism import classify_exposure_mechanism
 
 ROUND1_TOOLS = [
     get_uniprot_dossier,
@@ -45,6 +46,7 @@ TOOLS = ROUND1_TOOLS + [
 LIBRARY_ONLY = [
     get_published_mr,
     get_instrument_provenance,
+    classify_exposure_mechanism,
     get_eqtl_instruments,
     instrument_availability,
     get_gtex_eqtl,
