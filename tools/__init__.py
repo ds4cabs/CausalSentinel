@@ -15,7 +15,8 @@ from .gwas import get_gwas_catalog, get_gwas_associations
 from .pharmgkb import get_pharmgkb_drug_gene
 # Round 3 - literature and instrument availability
 from .litcheck import get_published_mr
-from .eqtl import get_eqtl_instruments
+from .eqtl import get_eqtl_instruments, instrument_availability
+from .gtex import get_gtex_eqtl, tissue_ids
 
 ROUND1_TOOLS = [
     get_uniprot_dossier,
@@ -37,9 +38,16 @@ TOOLS = ROUND1_TOOLS + [
 # invocation. Putting it in the card loop would make every card slow and expensive for a
 # question most cards don't ask. It is a library entry point for the proteome sweep and
 # the evidence-gap work, called explicitly where it is worth the cost.
+# `get_gtex_eqtl` is kept out for a different reason: it costs two round trips (symbol ->
+# GENCODE id, then a paged association query) and its answer is only meaningful once you
+# have decided which TISSUE you mean. That decision belongs to the caller, not to a model
+# guessing mid-card.
 LIBRARY_ONLY = [
     get_published_mr,
     get_eqtl_instruments,
+    instrument_availability,
+    get_gtex_eqtl,
+    tissue_ids,
     get_mr_outcomes,
     get_gene_phenome,
     get_gwas_associations,
