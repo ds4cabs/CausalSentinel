@@ -62,6 +62,7 @@ import requests
 
 UNIPROT = "https://rest.uniprot.org/uniprotkb"
 VEP = "https://rest.ensembl.org/vep/human/id"
+GWASCAT = "https://www.ebi.ac.uk/gwas/rest/api"
 
 _SHED_RE = re.compile(r"\bshed\w*|soluble form|released from the membrane|"
                       r"ectodomain|ADAM\d*|sheddase", re.I)
@@ -148,6 +149,135 @@ def _variant_consequence(rsid: str, expected_gene: str = "") -> dict:
         "is_ptv": cons in _PTV,
         "annotated_to_a_different_gene": gene_mismatch,
         "url": f"https://www.ensembl.org/Homo_sapiens/Variation/Explore?v={rsid}",
+    }
+
+
+def _gc(url: str) -> dict:
+    try:
+        r = requests.get(url, headers={"Accept": "application/json"}, timeout=45)
+        r.raise_for_status()
+        return r.json()
+    except (requests.RequestException, ValueError):
+        return {}
+
+
+def instrument_effect_profile(rsid: str, gene_symbol: str = "", max_assoc: int = 40) -> dict:
+    """Everything one instrument is reported to affect, with every effect anchored to the
+    SAME allele so the signs can be compared.
+
+    This is the discriminator that was previously listed as unavailable. EpiGraphDB gives
+    the MR estimate but not the SNP -> protein beta; the GWAS Catalog gives the SNP's own
+    associations, free and without authentication, so the effect on the protein and the
+    effect on downstream readouts can be read off together.
+
+    Betas in the GWAS Catalog are reported against whichever allele each study called the
+    risk allele. Comparing them without re-anchoring is how sign errors get made, so every
+    row here is flipped onto a single reference allele and `flipped` records whether it was.
+
+    Worked example, retrieved live: for rs4129267, anchoring on T gives
+    interleukin-6 receptor alpha +1.21, C-reactive protein -0.079, fibrinogen -0.011. The
+    allele that RAISES soluble receptor LOWERS both downstream inflammatory readouts, which
+    is the shedding mechanism visible in summary data alone.
+    """
+    body = _gc(f"{GWASCAT}/singleNucleotidePolymorphisms/{rsid}/associations")
+    assoc = (body.get("_embedded") or {}).get("associations") or []
+    if not assoc:
+        return {"found": False, "rsid": rsid,
+                "note": f"No GWAS Catalog associations for {rsid}."}
+
+    rows, anchor = [], None
+    for a in assoc[:max_assoc]:
+        beta = a.get("betaNum")
+        if beta is None:
+            continue
+        allele_name = (((a.get("loci") or [{}])[0].get("strongestRiskAlleles") or [{}])[0]
+                       .get("riskAlleleName") or "")
+        allele = allele_name.split("-")[-1].strip().upper()
+        if allele in ("", "?"):
+            continue
+        # "increase"/"decrease" is the sign; the API stores magnitude unsigned.
+        signed = -abs(beta) if (a.get("betaDirection") or "").lower() == "decrease" else abs(beta)
+        links = a.get("_links") or {}
+        traits = [t.get("trait") for t in
+                  ((_gc((links.get("efoTraits") or {}).get("href", "")).get("_embedded") or {})
+                   .get("efoTraits") or [])]
+        study = _gc((links.get("study") or {}).get("href", ""))
+        author = ((study.get("publicationInfo") or {}).get("author") or {}).get("fullname")
+        if anchor is None:
+            anchor = allele
+        flipped = allele != anchor
+        rows.append({
+            "trait": "; ".join(t for t in traits if t) or None,
+            "beta_on_anchor_allele": -signed if flipped else signed,
+            "unit": a.get("betaUnit"),
+            "reported_allele": allele,
+            "flipped_to_anchor": flipped,
+            "p_value": a.get("pvalue"),
+            "study_author": author,
+        })
+
+    if not rows:
+        return {"found": False, "rsid": rsid,
+                "note": (f"{len(assoc)} associations for {rsid}, but none carried both a "
+                         f"signed beta and a named risk allele, so no sign comparison is "
+                         f"possible.")}
+
+    # The comparison that matters is protein-vs-downstream, so group rather than just
+    # sorting by magnitude — the downstream readouts are usually the SMALLEST effects
+    # (CRP moves 0.08 while the protein moves 1.2) and a magnitude sort buries exactly
+    # the rows the user came for.
+    # Built as an explicit alternation list. Writing this as
+    #   (escape(gene) + "|") if gene else "" + <rest>
+    # silently produced the pattern "IL6R|", whose empty right branch matches EVERY trait,
+    # so every row was classified as a protein measurement.
+    # KNOWN LIMITATION, stated rather than hidden: this matches the GWAS Catalog's trait
+    # STRING, and trait strings are not harmonised to the gene symbol. LPA's protein
+    # measurement is filed as "lipoprotein A", which no pattern built from the symbol "LPA"
+    # will catch, so LPA returns no protein row and therefore no concordance verdict. This
+    # is the same un-normalised-trait-layer problem seen in MR-KG and in EpiGraphDB's
+    # outcome side; a real fix needs ontology mapping, not a longer regex.
+    parts = [r"protein (?:amount|level|measurement)", r"subunit alpha measurement"]
+    if gene_symbol:
+        parts.insert(0, re.escape(gene_symbol))
+    prot_re = re.compile("|".join(parts), re.I)
+    on_protein = [r for r in rows if r["trait"] and prot_re.search(r["trait"])]
+    downstream = [r for r in rows if r not in on_protein]
+
+    verdict = None
+    if on_protein and downstream:
+        p_sign = 1 if on_protein[0]["beta_on_anchor_allele"] > 0 else -1
+        opp = [d for d in downstream if d["beta_on_anchor_allele"] * p_sign < 0]
+        same = [d for d in downstream if d["beta_on_anchor_allele"] * p_sign > 0]
+        verdict = (f"On the {anchor} allele the protein moves "
+                   f"{'UP' if p_sign > 0 else 'DOWN'}; of {len(downstream)} other traits "
+                   f"with a signed effect, {len(same)} move the same way and {len(opp)} "
+                   f"move the opposite way. Opposite-moving pathway readouts are the "
+                   f"fingerprint of a plasma pool that does not track pathway activity.")
+
+    return {
+        "found": True,
+        "computed_here": False,
+        "rsid": rsid,
+        "anchor_allele": anchor,
+        "n_associations_total": len(assoc),
+        "n_with_signed_effect": len(rows),
+        "effects_on_this_protein": sorted(on_protein,
+                                          key=lambda d: -abs(d["beta_on_anchor_allele"]))[:6],
+        "effects_on_other_traits": sorted(downstream,
+                                          key=lambda d: -abs(d["beta_on_anchor_allele"]))[:14],
+        "concordance_verdict": verdict,
+        "associations": sorted(rows, key=lambda d: -abs(d["beta_on_anchor_allele"]))[:20],
+        "note": (f"All effects are anchored to the {anchor} allele; rows marked "
+                 f"flipped_to_anchor had their sign reversed from the study's reported risk "
+                 f"allele. Compare the effect on the protein itself against the effects on "
+                 f"downstream readouts: if the allele that RAISES the protein LOWERS its "
+                 f"pathway markers, the plasma pool is not tracking pathway activity and an "
+                 f"MR sign will not match the pharmacological direction. "
+                 f"{len(on_protein)} row(s) look like protein or biomarker measurements. "
+                 f"Traits and units are as the source studies defined them and are NOT "
+                 f"harmonised, so magnitudes are not comparable across rows — only signs are."),
+        "source_release": "GWAS Catalog REST API, retrieved live; no authentication required",
+        "url": f"https://www.ebi.ac.uk/gwas/variants/{rsid}",
     }
 
 
@@ -253,11 +383,17 @@ def classify_exposure_mechanism(gene_symbol: str, accession: str,
         "uniprot": up,
         "instrument_consequence": vep or None,
         "tagged_variant_consequence": tagged or None,
-        "not_available": ("SNP->protein effect direction. EpiGraphDB exposes the MR "
-                          "estimate and the instrument alleles but not the pQTL beta, so "
-                          "eQTL/pQTL sign concordance — the direct test of whether the "
-                          "effect is transcriptional or post-transcriptional — cannot be "
-                          "computed here. It needs the original pQTL summary statistics."),
+        "next_check": ("Run instrument_effect_profile(instrument_rsid, gene_symbol) to see "
+                       "the SNP's own effects on the protein AND on downstream readouts, "
+                       "all anchored to one allele. If the allele that raises the protein "
+                       "lowers its pathway markers, the inversion is confirmed in summary "
+                       "data — no individual-level access and no bulk download needed."),
+        "still_not_available": ("eQTL/pQTL effect-size concordance in a MATCHED tissue. The "
+                                "GWAS Catalog route gives the SNP->protein effect, but "
+                                "pairing it with a tissue-specific transcript effect on the "
+                                "same allele still needs the original pQTL summary "
+                                "statistics or an OpenGWAS token (free, but registration "
+                                "required since May 2024)."),
         "source_release": "UniProt REST + Ensembl VEP REST, retrieved live",
     }
 
@@ -279,4 +415,18 @@ if __name__ == "__main__":
             print(f"   - {w}")
         if r["instrument_may_act_on_another_gene"]:
             print("   !! instrument annotated to a different gene")
+        prof = instrument_effect_profile(inst, sym)
+        if prof.get("found"):
+            print(f"   --- effects anchored to the {prof['anchor_allele']} allele "
+                  f"({prof['n_with_signed_effect']}/{prof['n_associations_total']} signed)")
+            print("   on the protein itself:")
+            for a in prof["effects_on_this_protein"][:3]:
+                print(f"     {a['beta_on_anchor_allele']:+9.4g}  {str(a['trait'])[:50]}")
+            print("   on other traits:")
+            for a in prof["effects_on_other_traits"][:6]:
+                print(f"     {a['beta_on_anchor_allele']:+9.4g}  {str(a['trait'])[:50]}")
+            if prof.get("concordance_verdict"):
+                print(f"   => {prof['concordance_verdict']}")
+        else:
+            print(f"   effect profile: {prof.get('note')}")
         print()
