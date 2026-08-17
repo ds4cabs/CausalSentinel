@@ -41,29 +41,47 @@ BUILDS_API = "https://api.epigraphdb.org/builds"
 # lets a reader tell those two apart. Surfacing the study and the platform is what
 # makes that judgement possible at all.
 #
+# MASS SPECTROMETRY IS THE MISSING ARBITER
+# ----------------------------------------
+# There are three ways to measure a plasma protein, and only two of them are here:
+#
+#   affinity_aptamer   SomaScan   — a SOMAmer binds the protein
+#   affinity_antibody  Olink PEA  — an antibody pair binds the protein
+#   mass_spectrometry             — peptides are identified and counted directly
+#
+# The first two measure BINDING. Mass spectrometry does not, which makes it the natural
+# referee for the epitope question: a cis-pQTL that replicates on MS is about abundance,
+# one that appears only on affinity platforms is suspect.
+#
+# Surveyed 2026-08-16 across 25 proteins, the EpiGraphDB pQTL resource draws on exactly
+# five exposure studies: Sun (n=3301), Yao (n=6861), Suhre (n~995), Emilsson (n=3200),
+# Folkersen (n=3394). Four SomaScan, one Olink. **No mass-spectrometry study is present.**
+# So within this resource the epitope question cannot be adjudicated at all — the tool
+# should say that rather than let a reader assume "protein level" means abundance.
+#
 # There are only a handful of European plasma-proteomics resources, so author -> platform
-# is a short lookup rather than a research project.
+# is a short lookup rather than a research project. (EpiGraphDB spells Folkersen without
+# the second "e"; both spellings are mapped.)
+APTAMER = "SomaScan — modified-aptamer (SOMAmer) affinity assay"
+ANTIBODY = "Olink PEA — antibody-based proximity extension assay"
 ASSAY_BY_AUTHOR = {
-    "folkerson": ("Folkersen et al. 2017 (PLoS Genet), CVD-I panel",
-                  "Olink PEA — antibody-based proximity extension assay"),
-    "folkersen": ("Folkersen et al. 2017 (PLoS Genet), CVD-I panel",
-                  "Olink PEA — antibody-based proximity extension assay"),
-    "sun": ("Sun et al. 2018 (Nature), INTERVAL",
-            "SomaScan — modified-aptamer (SOMAmer) affinity assay"),
-    "suhre": ("Suhre et al. 2017 (Nat Commun), QMDiab",
-              "SomaScan — modified-aptamer (SOMAmer) affinity assay"),
-    "emilsson": ("Emilsson et al. 2018 (Science), AGES-Reykjavik",
-                 "SomaScan — modified-aptamer (SOMAmer) affinity assay"),
-    "yao": ("Yao et al. 2018 (Nat Commun), Framingham",
-            "SomaScan — modified-aptamer (SOMAmer) affinity assay"),
-    "hillary": ("Hillary et al. (Generation Scotland / Lothian)",
-                "Olink PEA — antibody-based proximity extension assay"),
+    "folkerson": ("Folkersen et al. 2017 (PLoS Genet), IMPROVE / CVD-I panel",
+                  ANTIBODY, "affinity_antibody"),
+    "folkersen": ("Folkersen et al. 2017 (PLoS Genet), IMPROVE / CVD-I panel",
+                  ANTIBODY, "affinity_antibody"),
+    "sun": ("Sun et al. 2018 (Nature), INTERVAL", APTAMER, "affinity_aptamer"),
+    "suhre": ("Suhre et al. 2017 (Nat Commun), QMDiab", APTAMER, "affinity_aptamer"),
+    "emilsson": ("Emilsson et al. 2018 (Science), AGES-Reykjavik", APTAMER, "affinity_aptamer"),
+    "yao": ("Yao et al. 2018 (Nat Commun), Framingham", APTAMER, "affinity_aptamer"),
 }
-_ASSAY_NOTE = ("Both aptamer and antibody platforms measure BINDING, not abundance. If the "
+_ASSAY_NOTE = ("Aptamer and antibody platforms both measure BINDING, not abundance. If the "
                "instrument is (or proxies) a missense variant in this same protein, the "
                "pQTL may reflect altered reagent binding rather than a real change in "
-               "protein level. Check the instrument's consequence before treating the "
-               "exposure as 'protein abundance'.")
+               "protein level. Mass spectrometry would settle it because it counts peptides "
+               "instead of binding them — but NO mass-spectrometry study is in this "
+               "resource, so the question cannot be adjudicated here. Check the "
+               "instrument's consequence before treating the exposure as 'protein "
+               "abundance'.")
 _SOURCE_BASE = ("EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; "
                 "retrieved, not computed by this agent")
 
@@ -177,8 +195,8 @@ def get_instrument_provenance(protein: str) -> dict:
             continue
         seen.add(key)
         author = (x.get("author_exp") or "").strip()
-        study, assay = ASSAY_BY_AUTHOR.get(author.lower().split()[0] if author else "",
-                                           (author or None, None))
+        study, assay, pclass = ASSAY_BY_AUTHOR.get(
+            author.lower().split()[0] if author else "", (author or None, None, None))
         insts.append({
             "instrument_rsid": x.get("rsID"),
             "cis_or_trans": x.get("trans_cis"),
@@ -188,6 +206,11 @@ def get_instrument_provenance(protein: str) -> dict:
             "exposure_study_author": author or None,
             "exposure_study": study,
             "assay_platform": assay,
+            # affinity_aptamer | affinity_antibody | mass_spectrometry — the last never
+            # occurs in this resource, which is itself the finding.
+            "platform_class": pclass,
+            "measures": ("binding affinity, used as a proxy for abundance"
+                         if pclass and pclass.startswith("affinity") else None),
             "exposure_sample_size": x.get("sample_exp"),
         })
 
@@ -204,11 +227,15 @@ def get_instrument_provenance(protein: str) -> dict:
                  f"{sorted({int(i['exposure_sample_size']) for i in small})}. A pQTL GWAS of a "
                  f"few thousand people supports a strong cis signal but little else.")
 
+    classes = sorted({i["platform_class"] for i in insts if i["platform_class"]})
     return {
         "found": True,
         "computed_here": False,
         "protein": protein,
         "n_instruments": len(insts),
+        "platform_classes": classes,
+        # Stated explicitly rather than left to be inferred from an absence.
+        "mass_spectrometry_available": False,
         "instruments": insts[:10],
         "note": note,
         "source_release": _source_release(),
