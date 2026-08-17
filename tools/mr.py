@@ -21,6 +21,49 @@ import requests
 
 PQTL_API = "https://api.epigraphdb.org/pqtl/"
 BUILDS_API = "https://api.epigraphdb.org/builds"
+
+# ---------------------------------------------------------------------------------
+# WHICH STUDY, ON WHICH ASSAY — and why this is not a cosmetic detail
+# ---------------------------------------------------------------------------------
+# `rtype=simple` gives the estimate but never says WHERE the exposure GWAS came from.
+# `rtype=inst` does: it carries author_exp, sample_exp, effect allele and allele
+# frequency. That matters because affinity-based proteomics measures BINDING, and a
+# missense variant in the measured protein can change binding without changing
+# abundance — the "epitope effect". Published comparisons find a third of proteins
+# with cis-pQTLs on two platforms carry a missense variant, and dozens show OPPOSITE
+# effect directions between platforms for the same variant.
+#
+# IL6R is the worked example. Its instrument rs4129267 is a near-perfect proxy
+# (r2 ~ 0.96-0.99 in Europeans) for rs2228145 / Asp358Ala, a MISSENSE variant in the
+# assayed protein itself. There is independent wet-lab evidence that the 358Ala allele
+# genuinely raises soluble IL6R by accelerating ADAM-mediated shedding, so here the
+# signal is real biology rather than an artefact — but nothing in the retrieved fields
+# lets a reader tell those two apart. Surfacing the study and the platform is what
+# makes that judgement possible at all.
+#
+# There are only a handful of European plasma-proteomics resources, so author -> platform
+# is a short lookup rather than a research project.
+ASSAY_BY_AUTHOR = {
+    "folkerson": ("Folkersen et al. 2017 (PLoS Genet), CVD-I panel",
+                  "Olink PEA — antibody-based proximity extension assay"),
+    "folkersen": ("Folkersen et al. 2017 (PLoS Genet), CVD-I panel",
+                  "Olink PEA — antibody-based proximity extension assay"),
+    "sun": ("Sun et al. 2018 (Nature), INTERVAL",
+            "SomaScan — modified-aptamer (SOMAmer) affinity assay"),
+    "suhre": ("Suhre et al. 2017 (Nat Commun), QMDiab",
+              "SomaScan — modified-aptamer (SOMAmer) affinity assay"),
+    "emilsson": ("Emilsson et al. 2018 (Science), AGES-Reykjavik",
+                 "SomaScan — modified-aptamer (SOMAmer) affinity assay"),
+    "yao": ("Yao et al. 2018 (Nat Commun), Framingham",
+            "SomaScan — modified-aptamer (SOMAmer) affinity assay"),
+    "hillary": ("Hillary et al. (Generation Scotland / Lothian)",
+                "Olink PEA — antibody-based proximity extension assay"),
+}
+_ASSAY_NOTE = ("Both aptamer and antibody platforms measure BINDING, not abundance. If the "
+               "instrument is (or proxies) a missense variant in this same protein, the "
+               "pQTL may reflect altered reagent binding rather than a real change in "
+               "protein level. Check the instrument's consequence before treating the "
+               "exposure as 'protein abundance'.")
 _SOURCE_BASE = ("EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; "
                 "retrieved, not computed by this agent")
 
@@ -100,6 +143,76 @@ def _slim(row: dict) -> dict:
         "coloc_prob": row.get("coloc_prob"),
         "heterogeneity_q_p": row.get("q_pvalue"),
         "ld_check": row.get("ld_check"),
+    }
+
+
+def get_instrument_provenance(protein: str) -> dict:
+    """Which study measured the protein, on which assay, and with what sample size.
+
+    Uses EpiGraphDB's `rtype=inst` view, which `rtype=simple` does not expose. Returns the
+    exposure study author, its sample size, the effect/non-effect alleles and allele
+    frequency — the fields needed to judge whether a cis-pQTL could be an assay artefact
+    rather than a real difference in protein abundance.
+    """
+    try:
+        r = requests.get(PQTL_API,
+                         params={"query": protein, "rtype": "inst",
+                                 "pvalue": PVALUE_CEILING, "searchflag": "proteins"},
+                         headers={"Accept": "application/json"}, timeout=45)
+        r.raise_for_status()
+        rows = r.json().get("results", []) or []
+    except requests.RequestException as e:
+        return {"error": f"EpiGraphDB pQTL instrument request failed: {e}"}
+    except ValueError as e:
+        return {"error": f"EpiGraphDB pQTL instrument view returned non-JSON: {e}"}
+
+    if not rows:
+        return {"found": False, "protein": protein,
+                "note": f"No instrument provenance for {protein} in the EpiGraphDB pQTL view."}
+
+    seen, insts = set(), []
+    for x in rows:
+        key = (x.get("rsID"), x.get("author_exp"))
+        if key in seen:
+            continue
+        seen.add(key)
+        author = (x.get("author_exp") or "").strip()
+        study, assay = ASSAY_BY_AUTHOR.get(author.lower().split()[0] if author else "",
+                                           (author or None, None))
+        insts.append({
+            "instrument_rsid": x.get("rsID"),
+            "cis_or_trans": x.get("trans_cis"),
+            "effect_allele": x.get("ea"),
+            "other_allele": x.get("nea"),
+            "effect_allele_freq": x.get("eaf_exp"),
+            "exposure_study_author": author or None,
+            "exposure_study": study,
+            "assay_platform": assay,
+            "exposure_sample_size": x.get("sample_exp"),
+        })
+
+    unmapped = [i["exposure_study_author"] for i in insts if not i["assay_platform"]]
+    small = [i for i in insts if isinstance(i.get("exposure_sample_size"), (int, float))
+             and i["exposure_sample_size"] < 5000]
+
+    note = _ASSAY_NOTE
+    if unmapped:
+        note += (f" Assay platform NOT resolved for: {sorted(set(unmapped))} — treat the "
+                 f"platform as unknown rather than assuming one.")
+    if small:
+        note += (f" Note the exposure sample size: "
+                 f"{sorted({int(i['exposure_sample_size']) for i in small})}. A pQTL GWAS of a "
+                 f"few thousand people supports a strong cis signal but little else.")
+
+    return {
+        "found": True,
+        "computed_here": False,
+        "protein": protein,
+        "n_instruments": len(insts),
+        "instruments": insts[:10],
+        "note": note,
+        "source_release": _source_release(),
+        "url": "https://epigraphdb.org/pqtl/",
     }
 
 

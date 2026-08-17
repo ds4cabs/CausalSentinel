@@ -7,7 +7,7 @@ the type hints define the arguments. So: clear docstrings + type hints = better 
 from .uniprot import get_uniprot_dossier
 from .opentargets import get_target_disease_evidence, get_gene_phenome
 from .chembl import get_chembl_modulators
-from .mr import get_mr_result, get_mr_outcomes
+from .mr import get_mr_result, get_mr_outcomes, get_instrument_provenance
 # Round 2
 from .clinvar import get_clinvar_variants
 from .gnomad import get_gnomad_constraint
@@ -44,6 +44,7 @@ TOOLS = ROUND1_TOOLS + [
 # guessing mid-card.
 LIBRARY_ONLY = [
     get_published_mr,
+    get_instrument_provenance,
     get_eqtl_instruments,
     instrument_availability,
     get_gtex_eqtl,
