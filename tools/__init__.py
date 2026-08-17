@@ -16,7 +16,7 @@ from .pharmgkb import get_pharmgkb_drug_gene
 # Round 3 - literature and instrument availability
 from .litcheck import get_published_mr
 from .eqtl import get_eqtl_instruments, instrument_availability
-from .gtex import get_gtex_eqtl, tissue_ids
+from .gtex import get_gtex_eqtl, tissue_ids, scan_tissue_panel, list_panels
 
 ROUND1_TOOLS = [
     get_uniprot_dossier,
@@ -48,6 +48,8 @@ LIBRARY_ONLY = [
     get_eqtl_instruments,
     instrument_availability,
     get_gtex_eqtl,
+    scan_tissue_panel,
+    list_panels,
     tissue_ids,
     get_mr_outcomes,
     get_gene_phenome,

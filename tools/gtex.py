@@ -49,6 +49,89 @@ SOURCE = (f"GTEx Portal API v2, dataset {DATASET} (GENCODE v26 / GRCh38); "
 
 _TISSUE_CACHE: dict | None = None
 
+# ---------------------------------------------------------------------------------
+# TISSUE PANELS — the tissue belongs to the RESEARCH QUESTION, not to the gene
+# ---------------------------------------------------------------------------------
+# A fixed rule like "liver disease -> query liver" is wrong, because which tissue is
+# informative depends on the design, not on the outcome's organ:
+#
+#   * A plain plasma-protein -> disease MR needs no tissue at all; the exposure is the
+#     circulating protein. Whole blood is the closest TRANSCRIPT analogue of that
+#     measurement, not liver.
+#   * For MASLD, liver is the disease tissue, but fibrogenesis is mesenchymal, so
+#     cultured fibroblasts carry information liver bulk tissue dilutes.
+#   * For a design like "obesity-driven proteins associated with MASLD", the exposure
+#     originates in adipose, so subcutaneous and visceral adipose belong in the panel
+#     even though the outcome is hepatic.
+#
+# So panels are named by DESIGN, each tissue carries the reason it is in the panel, and
+# the caller can always pass their own list instead.
+#
+# THE DISCIPLINE THAT MAKES THIS HONEST
+# -------------------------------------
+# A panel is a PRE-SPECIFIED choice. Scanning all 54 tissues and reporting the one that
+# reached significance is not a tissue-matched instrument, it is a phenome scan with the
+# denominator hidden — the same error as reporting the top outcome out of 133 without
+# saying 133 were tested. scan_tissue_panel therefore always returns how many tissues
+# were tested and a multiplicity-corrected threshold, and says outright when a panel is
+# large enough that "pick the significant tissue" would be the real analysis.
+PANEL_PLASMA = [
+    ("Whole_Blood", "transcript analogue of a PLASMA protein measurement; the matched "
+                    "compartment for circulating and immune-derived proteins"),
+]
+TISSUE_PANELS = {
+    "plasma_protein": (
+        "Plain plasma-protein exposure. The pQTL already measures the exposure; this is "
+        "only the transcript-level companion.", PANEL_PLASMA),
+    "masld": (
+        "MASLD / fatty liver as the outcome.", [
+            ("Liver", "the disease tissue — but only n=208 donors, the weakest well-known "
+                      "tissue in GTEx; a null here is usually power"),
+            ("Adipose_Visceral_Omentum", "visceral adiposity drives hepatic fat delivery"),
+            ("Adipose_Subcutaneous", "the larger adipose depot, better powered"),
+            ("Whole_Blood", "matches a plasma-protein exposure"),
+        ]),
+    "obesity_driven_masld": (
+        "Design: obesity-driven proteins associated with MASLD. The exposure ORIGINATES "
+        "in adipose, so adipose leads the panel and liver is the outcome tissue.", [
+            ("Adipose_Visceral_Omentum", "the depot most tied to hepatic steatosis"),
+            ("Adipose_Subcutaneous", "better powered adipose depot"),
+            ("Muscle_Skeletal", "insulin-resistance axis; best-powered tissue in GTEx"),
+            ("Liver", "outcome tissue; underpowered at n=208"),
+        ]),
+    "fibrosis": (
+        "Fibrogenesis rather than parenchymal biology.", [
+            ("Cells_Cultured_fibroblasts",
+             "PROXY, not a tissue — cultured cells lose in-vivo context, but they are "
+             "the only mesenchymal/myofibroblast-like layer GTEx offers, and hepatic "
+             "stellate to myofibroblast transition is the fibrosis mechanism"),
+            ("Liver", "the organ, bulk tissue, fibroblast signal diluted"),
+        ]),
+    "cardiometabolic": (
+        "Vascular and cardiac outcomes.", [
+            ("Artery_Tibial", "best-powered artery, n=584"),
+            ("Artery_Aorta", "large-vessel wall"),
+            ("Artery_Coronary", "the disease vessel, but only n=213"),
+            ("Heart_Left_Ventricle", "myocardium"),
+            ("Liver", "lipid production; underpowered"),
+            ("Adipose_Subcutaneous", "metabolic contribution"),
+        ]),
+    "immune_inflammatory": (
+        "Inflammatory and autoimmune outcomes.", [
+            ("Whole_Blood", "circulating leukocytes, n=670"),
+            ("Spleen", "secondary lymphoid organ"),
+            ("Cells_EBV-transformed_lymphocytes", "PROXY — a transformed cell line, not "
+                                                  "primary lymphocytes"),
+        ]),
+    "neuro": (
+        "Brain outcomes. Every brain region in GTEx is small; treat nulls with care.", [
+            ("Brain_Cerebellum", "n=209"),
+            ("Brain_Cortex", "n=205"),
+            ("Brain_Frontal_Cortex_BA9", "n=175"),
+            ("Brain_Hypothalamus", "n=170, metabolic control"),
+        ]),
+}
+
 
 def _tissue_table() -> dict:
     """Tissue -> {donors, eGenes}. Fetched once; this is what turns a bare 0 into a
@@ -227,6 +310,104 @@ def get_gtex_eqtl(gene_symbol: str, tissue: str = "") -> dict:
                  f"{missing_note}"),
         "source_release": SOURCE,
         "url": human_url,
+    }
+
+
+def list_panels() -> dict:
+    """The named tissue panels, what design each is for, and how well powered each is.
+
+    Use this before scan_tissue_panel to pick — or to see what a panel contains so you can
+    pass your own tissue list instead. The tissue set is part of the research design.
+    """
+    tt = _tissue_table()
+    out = {}
+    for name, (why, tissues) in TISSUE_PANELS.items():
+        out[name] = {
+            "for": why,
+            "n_tissues": len(tissues),
+            "tissues": [{"tissue": t, "reason": r,
+                         "donors": tt.get(t, {}).get("donors"),
+                         "egenes": tt.get(t, {}).get("egenes")} for t, r in tissues],
+        }
+    return {"found": True, "panels": out,
+            "note": ("A panel is a PRE-SPECIFIED design choice. Choosing it after seeing "
+                     "which tissue was significant turns a tissue-matched analysis into an "
+                     "undeclared scan over 54 tissues."),
+            "source_release": SOURCE}
+
+
+def scan_tissue_panel(gene_symbol: str, panel: str = "", tissues: list | None = None) -> dict:
+    """Query GTEx eQTLs for a gene across a DECLARED set of tissues chosen by the design.
+
+    Pass either `panel` (a name from list_panels(), e.g. "obesity_driven_masld") or your
+    own `tissues` list of GTEx tissue ids. The result reports every tissue in the panel
+    including the empty ones, each with its donor count, plus how many tissues were tested
+    and a Bonferroni-style threshold for that count.
+
+    Use this instead of scanning all 54 tissues: reporting the one tissue that reached
+    significance out of an undeclared sweep is a phenome scan with the denominator hidden.
+    """
+    tt = _tissue_table()
+    if tissues:
+        pairs = [(t, "caller-specified") for t in tissues]
+        why = "caller-specified tissue list"
+    elif panel in TISSUE_PANELS:
+        why, pairs = TISSUE_PANELS[panel]
+    else:
+        return {"error": f"Unknown panel '{panel}'. Options: {sorted(TISSUE_PANELS)}. "
+                         f"Or pass tissues=[...] directly.",
+                "panels_available": sorted(TISSUE_PANELS)}
+
+    results, n_hit = [], 0
+    for t, reason in pairs:
+        r = get_gtex_eqtl(gene_symbol, tissue=t)
+        if r.get("error"):
+            results.append({"tissue": t, "reason_in_panel": reason, "error": r["error"]})
+            continue
+        hit = bool(r.get("found"))
+        n_hit += hit
+        top = (r.get("top_associations") or [{}])[0] if hit else {}
+        results.append({
+            "tissue": t,
+            "reason_in_panel": reason,
+            "donors": tt.get(t, {}).get("donors"),
+            "egenes": tt.get(t, {}).get("egenes"),
+            "n_significant_eqtls": r.get("n_significant_eqtls", 0),
+            "top_rsid": top.get("rsid"),
+            "top_p": top.get("p_value"),
+            "top_nes": top.get("nes"),
+        })
+
+    n = len(pairs)
+    weakest = sorted((x for x in results if x.get("donors")), key=lambda d: d["donors"])[:1]
+    note = (f"{n} tissues declared in this panel, so {n} tests were run. A Bonferroni-style "
+            f"threshold for the panel is 0.05/{n} = {0.05 / n:.2g}. GTEx's own eQTL "
+            f"significance is already gene-level FDR-corrected WITHIN each tissue — this "
+            f"threshold is about the extra multiplicity you added by testing several.")
+    if weakest:
+        w = weakest[0]
+        note += (f" Weakest tissue in the panel: {w['tissue']} (n={w['donors']} donors). "
+                 f"An empty result there is weak evidence of absence.")
+    if n_hit == 0:
+        note += (" No tissue in this panel had a significant eQTL. Check the unpinned "
+                 "result before concluding anything — the gene may be strongly "
+                 "instrumented in tissues this design did not ask about.")
+
+    return {
+        "found": n_hit > 0,
+        "computed_here": False,
+        "gene_symbol": gene_symbol,
+        "panel": panel or "custom",
+        "panel_rationale": why,
+        "n_tissues_tested": n,
+        "n_tissues_with_signal": n_hit,
+        "multiplicity_threshold": 0.05 / n,
+        "exposure_if_used": ("transcript abundance (cis-eQTL) in the tissue named — NOT "
+                             "plasma protein abundance"),
+        "tissues": results,
+        "note": note,
+        "source_release": SOURCE,
+        "url": f"https://gtexportal.org/home/gene/{gene_symbol}",
     }
 
 
