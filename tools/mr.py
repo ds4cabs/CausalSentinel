@@ -53,11 +53,23 @@ BUILDS_API = "https://api.epigraphdb.org/builds"
 # referee for the epitope question: a cis-pQTL that replicates on MS is about abundance,
 # one that appears only on affinity platforms is suspect.
 #
-# Surveyed 2026-08-16 across 25 proteins, the EpiGraphDB pQTL resource draws on exactly
-# five exposure studies: Sun (n=3301), Yao (n=6861), Suhre (n~995), Emilsson (n=3200),
-# Folkersen (n=3394). Four SomaScan, one Olink. **No mass-spectrometry study is present.**
-# So within this resource the epitope question cannot be adjudicated at all — the tool
-# should say that rather than let a reader assume "protein level" means abundance.
+# Censused 2026-08-16 over ALL 991 proteins in the sweep index (1 request failure), not a
+# sample. The EpiGraphDB pQTL resource draws on exactly five exposure studies:
+#
+#   Sun        60,754 rows   n=3301          SomaScan   INTERVAL
+#   Emilsson   22,370        n=3200          SomaScan   AGES-Reykjavik
+#   Suhre      10,836        n=984-997       SomaScan   KORA F4   (n varies per protein)
+#   Yao         6,031        n=6861          SomaScan   Framingham
+#   Folkersen   1,834        n=3394          Olink PEA  IMPROVE / CVD-I
+#
+# Four SomaScan, one Olink, and NO mass-spectrometry study at all. So within this resource
+# the epitope question cannot be adjudicated — the tool says so rather than letting a
+# reader assume "protein level" means abundance.
+#
+# MS is the right referee in principle but a limited one in practice: MS plasma proteomics
+# runs at smaller sample sizes and much shallower proteome depth than affinity panels, so
+# for most proteins there is simply no MS pQTL to compare against. "Use MS to adjudicate"
+# is a per-protein possibility, not a general fix.
 #
 # There are only a handful of European plasma-proteomics resources, so author -> platform
 # is a short lookup rather than a research project. (EpiGraphDB spells Folkersen without

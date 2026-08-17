@@ -208,9 +208,23 @@ def check_direction(model_text: str, ledger) -> list:
                 problems.append({
                     "kind": "direction-contradicts-beta",
                     "token": word,
-                    "detail": (f"beta={beta:+.4g} means higher {mr.get('protein')} goes with "
-                               f"{'more' if beta > 0 else 'less'} disease, so a therapeutic "
-                               f"claim of '{word}' is the opposite of what the ledger licenses"),
+                    # Worded as PROVENANCE, not biology. IL6R is the reason: its instrument
+                    # rs4129267 proxies the Asp358Ala missense variant, which raises shed
+                    # soluble receptor while IMPAIRING classical signalling — so "higher
+                    # plasma IL6R" and "IL-6R blockade" really are the same direction, and
+                    # the card's "inhibition is protective" was pharmacologically right.
+                    # It was still unearned: nothing in the retrieved fields carries the
+                    # shedding mechanism, so the model supplied it from memory and merely
+                    # happened to be correct. This rule must say "your retrieval does not
+                    # support this", never "your biology is backwards".
+                    "detail": (f"beta={beta:+.4g} describes {mr.get('protein')} PROTEIN "
+                               f"ABUNDANCE, and higher abundance goes with "
+                               f"{'more' if beta > 0 else 'less'} disease. A claim about "
+                               f"'{word}' is a claim about DRUG ACTION, which no retrieved "
+                               f"field covers — abundance and pathway activity can even run "
+                               f"opposite when the instrument alters shedding, cleavage or "
+                               f"receptor decoy behaviour. State the abundance-outcome "
+                               f"direction, not a therapeutic one."),
                 })
                 break
         if problems:
@@ -257,6 +271,41 @@ def check_evidence_consistency(model_text: str, ledger) -> list:
                 "detail": ("card asserts causation but get_mr_result returned no estimate "
                            "for this disease"),
             })
+
+    # An estimate EXISTING is not the same as an estimate being VALIDATED. The IL6R x CHD
+    # card asserted "supports a causal ... role" from a single-instrument Wald ratio whose
+    # Steiger direction test, LD check and colocalization were all absent — while the LPA
+    # card in the same batch, same outcome, same tool, carried steiger=TRUE and ld_check=1.0
+    # and got exactly the same strength of wording. The check above cannot see this: MR
+    # DID return an estimate, so causal language passed.
+    #
+    # A one-SNP Wald ratio with no Steiger, no LD check and no coloc cannot distinguish a
+    # causal effect from confounding by LD with a neighbouring gene, or from reverse
+    # causation. Causal wording on it is unearned, so the run fails and the card must fall
+    # back to associational language.
+    if mr_has_estimate:
+        est = (mr.get("matched_disease_estimates") or [{}])[0]
+        def _blank(v):
+            return v is None or (isinstance(v, str) and v.strip().upper() in {"", "NA", "NAN", "NULL"})
+        unvalidated = (_blank(est.get("steiger_direction_ok"))
+                       and _blank(est.get("coloc_prob"))
+                       and _blank(est.get("ld_check")))
+        single = est.get("n_snp") in (1, "1", 1.0)
+        if unvalidated and single:
+            hit = CAUSAL_LANGUAGE.search(model_text)
+            if hit and not CAUSAL_NEGATED.search(model_text):
+                problems.append({
+                    "kind": "causal-claim-on-unvalidated-estimate",
+                    "token": hit.group(0),
+                    "detail": (f"the retrieved estimate is a single-instrument Wald ratio "
+                               f"(n_snp={est.get('n_snp')}) with steiger="
+                               f"{est.get('steiger_direction_ok')}, coloc="
+                               f"{est.get('coloc_prob')}, ld_check={est.get('ld_check')} — "
+                               f"none of the three sanity checks that separate a causal "
+                               f"effect from LD confounding or reverse causation is "
+                               f"available, so causal wording is unearned. Say "
+                               f"'associated with' and state which checks are missing."),
+                })
 
     # Claiming this agent performed MR is a standing red line for the project.
     if re.search(r"\b(?:we|this (?:agent|tool)|the (?:agent|tool))\b[^.]{0,60}"
