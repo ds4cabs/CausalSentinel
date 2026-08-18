@@ -52,6 +52,47 @@ Each tool reports its `source_release` (UniProt release, ClinVar build, ChEMBL v
 Open Targets data release, EpiGraphDB build), so a card is reproducible rather than merely
 timestamped.
 
+## What a card actually looks like
+
+Not a description of one — the real thing, `cards/PNPLA3_MASLD_evidence_card.md`, trimmed:
+
+```markdown
+**Verdict:** GO — Strong genetic and literature association with MASLD supports its pursuit.
+
+> **You asked about "MASLD". This card scored MONDO_0013209 — metabolic dysfunction-
+> associated steatotic liver disease.** If those are not the same thing, every number
+> below answers a different question.
+
+| Evidence | Tool | Result |
+|---|---|---|
+| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR
+  estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |
+| Clinical variants | `get_clinvar_variants` | 216 ClinVar records; 0 pathogenic in a sample of 30 |
+| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1.6e-14, LOEUF=1.26 → LoF-tolerant |
+| Extra genetic evidence | `get_gwas_catalog` | 114 unique SNPs from 256/256 association rows |
+| Pharmacogenomics | `get_pharmgkb_drug_gene` | 2 clinical annotation(s) over 6 drug(s):
+  asparaginase, cyclophosphamide, daunorubicin, ethanol +2 more — ClinPGx evidence level 3
+  (scale 1A strongest to 4 weakest) — e.g. rs738409 (PNPLA3); ethanol; Alcoholism (level 3 Toxicity) |
+
+## Caveats declared by the tools
+- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over
+  all 216 ClinVar records for this gene; it is a sample, not a rate.
+```
+
+Four things to notice, because they are the design:
+
+1. **The substitution is shown on both sides.** You typed "MASLD"; the card says what it
+   actually scored. You cannot audit a resolution you cannot see.
+2. **"not available" is never "no effect."** An absent estimate is an absent estimate.
+3. **Denominators travel with counts.** `0 pathogenic in a sample of 30` out of 216, and the
+   caveat block says outright that this is a sample and not a rate.
+4. **Every row names the tool that produced it.** The `.json` beside the card carries the full
+   ledger — every call, its arguments, its verbatim return — so any card can be re-derived
+   and diffed.
+
+Older versions of this same card are frozen in [`cards/archive/`](cards/archive/), one folder
+per version, each with a README saying what that version got wrong and where it was fixed.
+
 ## Tech Stack
 Python, **`google-genai`** (Gemini SDK; the older `google-generativeai` is deprecated),
 requests, python-dotenv.
@@ -79,7 +120,7 @@ python agent.py --protein PCSK9 --disease "high cholesterol"
 # 5) or run the benchmark set (10 pairs chosen to exercise different branches)
 python agent.py --batch pairs_benchmark.txt
 
-# 6) validator regression tests (19 cases, no network, no key)
+# 6) validator regression tests (33 cases, no network, no key)
 python test_validator.py
 ```
 
@@ -134,7 +175,7 @@ Fabricated numbers (compared **numerically**, tolerant of honest rounding and of
 ("FDA-approved", "monoclonal antibody", "small-molecule"), **causal language when the MR
 tool returned no estimate**, and any claim that this agent performed MR itself.
 
-On the 10-pair benchmark it currently rejects 3 cards — each for a real defect, not a false
+On the 10-pair benchmark it currently rejects 2 cards — each for a real defect, not a false
 alarm. Run `test_validator.py` after any change to it.
 
 ## OpenSentinel (Natalie Huang)

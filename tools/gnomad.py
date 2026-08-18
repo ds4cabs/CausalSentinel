@@ -7,7 +7,10 @@ _QUERY = """
 query Constraint($symbol: String!) {
   gene(gene_symbol: $symbol, reference_genome: GRCh38) {
     symbol
-    gnomad_constraint { pli oe_lof oe_lof_upper mis_z lof_z syn_z }
+    gnomad_constraint {
+      pli oe_lof oe_lof_lower oe_lof_upper oe_lof_percentile
+      obs_lof exp_lof mis_z lof_z syn_z
+    }
   }
 }
 """
@@ -49,12 +52,31 @@ def get_gnomad_constraint(gene_symbol: str) -> dict:
         verdict = ("LoF-tolerant: no population-level depletion of loss-of-function variants, "
                    "which is reassuring but is NOT positive evidence of efficacy.")
 
+    obs, exp = c.get("obs_lof"), c.get("exp_lof")
+    # obs_lof and exp_lof are the ENTIRE constraint idea in two integers: how many
+    # loss-of-function variants gnomAD expected to see in this gene given its length and
+    # mutation rate, versus how many it actually saw. Everything else here (o/e, LOEUF,
+    # pLI) is a way of putting a confidence interval or a probability on that comparison.
+    # Reporting them makes the metric explainable to a non-geneticist instead of asking
+    # them to trust an unfamiliar score.
+    plain = None
+    if obs is not None and exp:
+        plain = (f"gnomAD expected about {exp:.0f} loss-of-function variants in this gene "
+                 f"and observed {obs}. LOEUF is the upper bound of the confidence interval "
+                 f"on that ratio, so it is deliberately conservative: it asks how tolerant "
+                 f"the gene could plausibly be, not how tolerant it looks.")
+
     return {
         "found": True,
         "gene_symbol": gene_symbol,
         "pLI": pli,
         "LOEUF": loeuf,
+        "LOEUF_percentile": c.get("oe_lof_percentile"),
         "oe_lof": c.get("oe_lof"),
+        "oe_lof_lower": c.get("oe_lof_lower"),
+        "obs_lof": obs,
+        "exp_lof": exp,
+        "plain_language": plain,
         "mis_z": c.get("mis_z"),
         "lof_z": c.get("lof_z"),
         "interpretation": verdict,

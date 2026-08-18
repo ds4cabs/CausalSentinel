@@ -41,7 +41,13 @@ MR_NEG = FakeLedger({
     "get_mr_result": {"found": True, "protein": "IL6R",
                       "matched_disease_estimates": [
                           {"beta": -0.0441899892357374, "se": 0.00853, "p_value": 2.21e-07,
-                           "instrument_rsid": "rs4129267", "cis_or_trans": "cis", "n_snp": 1}]},
+                           "instrument_rsid": "rs4129267", "cis_or_trans": "cis", "n_snp": 1,
+                           # Passing validation fields ON PURPOSE: these fixtures test the
+                           # DIRECTION rule, and leaving them empty would fire the
+                           # unvalidated-estimate rule too, so every direction case would
+                           # be testing two rules at once. The real IL6R row, whose Steiger
+                           # genuinely is NA, is MR_UNVALIDATED above.
+                           "steiger_direction_ok": "TRUE", "ld_check": 1.0}]},
     "get_chembl_modulators": {"found": True, "modulators": [{"action": "RNAI INHIBITOR"}]},
 })
 
@@ -51,12 +57,53 @@ MR_POS = FakeLedger({
     "get_mr_result": {"found": True, "protein": "LPA",
                       "matched_disease_estimates": [
                           {"beta": 0.252303585657371, "se": 0.0181, "p_value": 1e-40,
-                           "instrument_rsid": "rs10455872", "cis_or_trans": "cis", "n_snp": 1}]},
+                           "instrument_rsid": "rs10455872", "cis_or_trans": "cis", "n_snp": 1,
+                           "steiger_direction_ok": "TRUE", "ld_check": 1.0}]},
     "get_chembl_modulators": {"found": True, "modulators": [{"action": "RNAI INHIBITOR"}]},
+})
+
+# The real IL6R x CHD row: an estimate EXISTS, so the "no MR" rule does not fire, but
+# every check that would separate a causal effect from LD confounding or reverse causation
+# is missing. Causal wording on this is unearned.
+MR_UNVALIDATED = FakeLedger({
+    "get_mr_result": {"found": True, "protein": "IL6R",
+                      "matched_disease_estimates": [
+                          {"beta": -0.0441899892357374, "se": 0.00853005023322569,
+                           "p_value": 2.21283026387414e-07, "method": "Wald ratio", "n_snp": 1,
+                           "instrument_rsid": "rs4129267", "cis_or_trans": "cis",
+                           "steiger_direction_ok": "NA", "steiger_p": None,
+                           "coloc_prob": None, "ld_check": None}]},
+})
+
+# The LPA x CHD row from the same batch: same outcome, same tool, same single instrument —
+# but Steiger passed and the LD check is 1.0. Causal wording here IS earned, and the rule
+# must not fire, or it would punish the better-evidenced card equally.
+MR_VALIDATED = FakeLedger({
+    "get_mr_result": {"found": True, "protein": "LPA",
+                      "matched_disease_estimates": [
+                          {"beta": 0.252303585657371, "se": 0.0193149800796813,
+                           "p_value": 5.38664852468177e-39, "method": "Wald ratio", "n_snp": 1,
+                           "instrument_rsid": "rs55730499", "cis_or_trans": "cis",
+                           "steiger_direction_ok": "TRUE", "steiger_p": 0.0,
+                           "coloc_prob": None, "ld_check": 1.0}]},
 })
 
 # (name, ledger, text, expect_ok)
 CASES = [
+    # --- causal wording must be earned by the validation fields, not just by existence --
+    ("unvalidated single-SNP estimate cannot carry causal wording", MR_UNVALIDATED,
+     "Mendelian randomization evidence supports a causal role of IL6R in coronary heart "
+     "disease.", False),
+    ("same estimate is fine described as an association", MR_UNVALIDATED,
+     "Genetically-predicted higher plasma IL6R is associated with lower coronary heart "
+     "disease risk. Steiger direction, colocalization and the LD check are unavailable "
+     "for this estimate.", True),
+    ("stating the causal limitation is not a causal claim", MR_UNVALIDATED,
+     "A causal interpretation is not supported: this is a single-instrument Wald ratio "
+     "with no Steiger direction test and no colocalization.", True),
+    ("validated estimate may carry causal wording", MR_VALIDATED,
+     "Mendelian randomization evidence supports a causal effect of LPA on coronary heart "
+     "disease risk.", True),
     # --- numbers -------------------------------------------------------------
     ("qualitative only",              MR_PRESENT, "Strong cis-instrument support and RNAi modulators.", True),
     ("real numbers, rounded",         MR_PRESENT, "beta=0.277 (se=0.0294, p=3.74e-21) via rs191448950; LOEUF=1.14.", True),

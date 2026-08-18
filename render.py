@@ -103,10 +103,26 @@ def _cell_generic(tool: str, r: dict) -> str:
                 f"/{tot} association rows"
                 + ("" if done else " — **incomplete sweep, lower bound**"))
     if tool == "get_pharmgkb_drug_gene":
+        # Render the CONTENT, not just the counts. An earlier version printed
+        # "2 clinical annotations across 6 drugs (level 3: 2)", which is accurate and
+        # tells a reader nothing: it names no drug and never says what the level scale
+        # means. The tool returns the drug names and the full annotation strings — the
+        # renderer was discarding them. "Rendered mechanically" must not come to mean
+        # "rendered as counts"; it means the reader sees what the tool actually said.
+        n = r.get("n_clinical_annotations")
+        drugs = [d for d in (r.get("drugs") or []) if d]
+        shown = ", ".join(drugs[:4]) + (f" +{len(drugs) - 4} more" if len(drugs) > 4 else "")
         lv = r.get("evidence_level_counts") or {}
-        lvs = ", ".join(f"level {k}: {v}" for k, v in lv.items())
-        return (f"{r.get('n_clinical_annotations')} clinical annotations across "
-                f"{r.get('n_drugs')} drugs" + (f" ({lvs})" if lvs else ""))
+        # ClinPGx levels run 1A (strongest) to 4 (weakest); saying "level 3" without
+        # that anchor is jargon the reader cannot weigh.
+        lvs = "/".join(str(k) for k in lv) if lv else None
+        parts = [f"{n} clinical annotation(s) over {len(drugs)} drug(s): {shown}"] if drugs             else [f"{n} clinical annotation(s)"]
+        if lvs:
+            parts.append(f"ClinPGx evidence level {lvs} (scale 1A strongest to 4 weakest)")
+        ex = (r.get("examples") or [{}])[0].get("annotation")
+        if ex:
+            parts.append(f"e.g. {ex[:110]}")
+        return " — ".join(parts)
     return str(r)[:160]
 
 
@@ -159,8 +175,14 @@ def _direction_block(protein: str, results: dict) -> list:
     return out
 
 
-def _banner_block(results: dict) -> list:
-    """Promote silent resolution steps to the top of the card, where they are visible."""
+def _banner_block(results: dict, disease: str = "") -> list:
+    """Promote silent resolution steps to the top of the card, where they are visible.
+
+    Shows BOTH sides of every substitution. An earlier version printed only what the text
+    was resolved TO, which cannot be audited: a reader who does not already know what was
+    typed has no way to see that "high cholesterol" became an HPO phenotype term rather
+    than a disease term. Naming the input next to the output is the whole point.
+    """
     out = []
     ot = results.get("get_target_disease_evidence") or {}
     if isinstance(ot, dict):
@@ -168,15 +190,16 @@ def _banner_block(results: dict) -> list:
         efo = ot.get("efo_id") or res.get("efo_id")
         dname = ot.get("resolved_disease_name") or res.get("disease_name")
         if efo:
-            out.append(f"> **Question actually answered:** the free-text disease was resolved "
-                       f"to **{efo} ({dname})**. If that is not what you meant, every score "
-                       f"below answers a different question.")
+            asked = f'"{disease}"' if disease else "the disease you gave"
+            out.append(f"> **You asked about {asked}. This card scored {efo} — {dname}.** "
+                       f"If those are not the same thing, every number below answers a "
+                       f"different question.")
     ch = results.get("get_chembl_modulators") or {}
     if isinstance(ch, dict) and ch.get("found") and ch.get("target_name"):
-        out.append(f"> **ChEMBL target resolved by text search** to "
-                   f"**\"{ch.get('target_name')}\"** ({ch.get('target_chembl_id')}). If that is "
-                   f"not the intended molecular target, the druggability row is about "
-                   f"something else.")
+        out.append(f"> **The druggability row is about ChEMBL target "
+                   f"\"{ch.get('target_name')}\" ({ch.get('target_chembl_id')}),** matched by "
+                   f"text search. If that is not the molecular target you meant, that row is "
+                   f"about something else.")
     return (out + [""]) if out else []
 
 
@@ -187,7 +210,7 @@ def render_card(protein: str, disease: str, ledger, reasoning_md: str,
 
     lines = [f"# Target Evidence Card — {protein} × {disease}", ""]
     lines += [f"**Verdict:** {verdict_line.strip()}", ""]
-    lines += _banner_block(results)
+    lines += _banner_block(results, disease)
     lines += _direction_block(protein, results)
 
     # ---- evidence table (mechanical) ----

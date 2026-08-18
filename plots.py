@@ -102,55 +102,114 @@ def mr_forest(protein: str, outdir: Path, top_n: int = 15):
     return out
 
 
-# LOEUF deciles from gnomAD's constraint distribution, used only to place the gene in
-# context. Approximate bin edges; the gene's own value is exact and comes from the tool.
-_LOEUF_GRID = np.linspace(0, 2.0, 41)
-
-
 def constraint_plot(protein: str, outdir: Path):
-    """Where this gene sits on the LoF-constraint scale, with the intolerance line drawn.
+    """Constraint as the counting experiment it actually is, then where that lands.
 
-    The point of the figure is the threshold, not the number: LoF-intolerance is a SAFETY
-    WARNING about inhibiting a target, and it is routinely read backwards as a merit.
+    The previous version of this figure was a single dot on a bare 0-2 LOEUF axis. It was
+    unreadable for two reasons and wrong for a third:
+
+      1. It promised "where this gene sits in the distribution" and drew no distribution,
+         so a reader had no way to tell an ordinary LOEUF from an extreme one.
+      2. LOEUF is an unfamiliar scale. The thing underneath it — how many loss-of-function
+         variants were expected in this gene versus how many were seen — is immediately
+         understandable, and was not shown at all.
+      3. It recomputed the LoF verdict from LOEUF alone, while `get_gnomad_constraint`
+         decides it from `pLI > 0.9 OR LOEUF < 0.35`. For HMGCR (LOEUF 0.43, pLI 1.00) the
+         two disagreed: the card said LoF-INTOLERANT while the figure drew the statin
+         target in the green "tolerant" zone with a title to match. A figure that
+         contradicts its own card is worse than no figure.
+
+    So: panel A is the count comparison, panel B is the percentile, and the verdict is
+    taken from the tool rather than re-derived here.
     """
     g = get_gnomad_constraint(protein)
     if not g.get("found") or g.get("LOEUF") is None:
         print(f"[constraint] {protein}: no gnomAD constraint — nothing to plot")
         return None
+
     loeuf, pli = float(g["LOEUF"]), g.get("pLI")
+    obs, exp = g.get("obs_lof"), g.get("exp_lof")
+    pct = g.get("LOEUF_percentile")
+    # Single source of truth for the verdict: whatever the tool concluded.
+    intolerant = "INTOLERANT" in (g.get("interpretation") or "")
+    verdict = "LoF-INTOLERANT" if intolerant else "LoF-tolerant"
+    vcolor = WARN if intolerant else "#3d6b52"
 
-    fig, ax = plt.subplots(figsize=(9.0, 2.9))
-    # a light reference band for the scale, then the two things that matter
-    ax.axvspan(0, 0.35, color="#ffebe9", zorder=0)
-    ax.axvspan(0.35, 2.0, color="#f2f7f4", zorder=0)
-    ax.axvline(0.35, color=WARN, lw=1.6, ls="--", zorder=2)
-    ax.scatter([loeuf], [0.5], s=190, color=ACCENT, zorder=4, edgecolor="white", linewidth=1.6)
-    ax.annotate(f"{protein}\nLOEUF = {loeuf:.3g}",
-                xy=(loeuf, 0.5), xytext=(loeuf, 0.78), ha="center", fontsize=10,
-                color=INK, arrowprops=dict(arrowstyle="-", color="#888", lw=1))
-    ax.text(0.175, 0.13, "LoF-INTOLERANT\n(LOEUF < 0.35)\nsafety warning for inhibition",
-            ha="center", fontsize=8.5, color=WARN)
-    ax.text(1.15, 0.13, "LoF-tolerant — reassuring about inhibition,\n"
-                        "but NOT evidence of efficacy",
-            ha="center", fontsize=8.5, color="#3d6b52")
+    fig, (axA, axB) = plt.subplots(
+        1, 2, figsize=(10.6, 3.5), gridspec_kw={"width_ratios": [1, 2.15]})
 
-    verdict = "LoF-INTOLERANT" if loeuf < 0.35 else "LoF-tolerant"
-    pli_txt = f"pLI = {pli:.3g}" if isinstance(pli, (int, float)) else "pLI = NA"
-    ax.set_xlim(0, 2.0)
-    ax.set_ylim(0, 1.0)
-    ax.set_yticks([])
-    ax.set_xlabel("gnomAD LOEUF  (lower = more intolerant to loss of function)", fontsize=10)
-    ax.set_title(f"{protein} — population constraint: {verdict}   ·   {pli_txt}",
-                 fontsize=12, color=INK, loc="left", pad=10)
-    _style(ax)
-    fig.text(0.01, 0.02, f"Source: {g.get('source_release', 'gnomAD')} · "
-                         f"threshold used: {g.get('thresholds_used', 'LOEUF < 0.35')}",
-             fontsize=7.2, color="#57606a")
-    fig.tight_layout(rect=[0, 0.06, 1, 1])
+    # --- Panel A: the experiment nature already ran -------------------------------
+    if obs is not None and exp:
+        bars = axA.bar(["expected", "observed"], [exp, obs],
+                       color=["#c9d3dd", vcolor], width=0.6, zorder=3)
+        for b, v in zip(bars, [exp, obs]):
+            axA.text(b.get_x() + b.get_width() / 2, v, f"{v:.0f}", ha="center",
+                     va="bottom", fontsize=10, color=INK)
+        axA.set_ylim(0, max(exp, obs) * 1.28)
+        axA.set_ylabel("loss-of-function variants", fontsize=9.5)
+        axA.set_title("A · what the population already tested", fontsize=10,
+                      color=INK, loc="left", pad=8)
+        pctg = 100 * (1 - obs / exp) if exp else 0
+        axA.text(0.5, 0.94, f"{pctg:.0f}% fewer than expected",
+                 transform=axA.transAxes, ha="center", fontsize=9, color=vcolor)
+    else:
+        axA.text(0.5, 0.5, "obs/exp counts\nnot returned", ha="center", va="center",
+                 fontsize=9, color="#57606a", transform=axA.transAxes)
+        axA.set_xticks([])
+    _style(axA)
+
+    # --- Panel B: where that lands among all genes ---------------------------------
+    # A continuous gradient, NOT a red/green split at a drawn line. An earlier version put
+    # a boundary at the 35th percentile to represent the LOEUF < 0.35 rule; those are
+    # different quantities and the band was simply in the wrong place — HMGCR's LOEUF of
+    # 0.433 already sits at the 10th percentile, so LOEUF 0.35 is far below the 35th.
+    # Rather than guess the crossing point, the axis shows the continuum it really is and
+    # the threshold rule stays in the footer where it can be stated exactly.
+    grad = np.linspace(0, 1, 256).reshape(1, -1)
+    axB.imshow(grad, extent=(0, 100, 0, 1), aspect="auto", zorder=0, alpha=0.5,
+               cmap=matplotlib.colors.LinearSegmentedColormap.from_list(
+                   "c", ["#f7c9c4", "#fdf3e7", "#e8f1ea"]))
+
+    if pct is not None:
+        axB.scatter([pct], [0.52], s=210, color=vcolor, zorder=5,
+                    edgecolor="white", linewidth=1.7)
+        # Genes at the extremes are exactly the interesting ones, so keep their label
+        # inside the axes rather than letting it run off the edge.
+        lx = min(max(pct, 16), 84)
+        axB.annotate(f"{protein}\nLOEUF {loeuf:.3g} · {pct}th percentile",
+                     xy=(pct, 0.52), xytext=(lx, 0.82), ha="center", fontsize=10,
+                     color=INK, arrowprops=dict(arrowstyle="-", color="#888", lw=1))
+    else:
+        axB.text(0.5, 0.52, f"LOEUF {loeuf:.3g} (percentile not returned)",
+                 ha="center", transform=axB.transAxes, fontsize=10, color=INK)
+
+    axB.text(2, 0.10, "more constrained\nsafety warning for inhibition",
+             ha="left", fontsize=8.5, color=WARN)
+    axB.text(98, 0.10, "less constrained — reassuring about inhibition,\n"
+                       "but NOT evidence of efficacy",
+             ha="right", fontsize=8.5, color="#3d6b52")
+    axB.set_xlim(0, 100)
+    axB.set_ylim(0, 1.0)
+    axB.set_yticks([])
+    axB.set_xlabel("LOEUF percentile across all genes  (0 = most constrained)", fontsize=9.5)
+    axB.set_title("B · where this gene ranks", fontsize=10, color=INK, loc="left", pad=8)
+    _style(axB)
+
+    pli_txt = "pLI ~ 0" if isinstance(pli, (int, float)) and pli < 0.01 else \
+              (f"pLI = {pli:.2f}" if isinstance(pli, (int, float)) else "pLI = NA")
+    fig.suptitle(f"{protein} — population constraint: {verdict}   ·   {pli_txt}",
+                 fontsize=12.5, color=INK, x=0.012, ha="left", y=0.985)
+    fig.text(0.012, 0.055,
+             f"Verdict rule: {g.get('thresholds_used', '')}. Constraint is a SAFETY signal "
+             f"about inhibiting the target — never evidence that inhibiting it would work.",
+             fontsize=7.4, color="#57606a")
+    fig.text(0.012, 0.014, f"Source: {g.get('source_release', 'gnomAD')}",
+             fontsize=7.4, color="#57606a")
+    fig.tight_layout(rect=[0, 0.09, 1, 0.93])
     out = outdir / f"{protein}_constraint.png"
     fig.savefig(out, dpi=200)
     plt.close(fig)
-    print(f"[constraint] wrote {out.name}  (LOEUF={loeuf:.3g} -> {verdict})")
+    print(f"[constraint] wrote {out.name}  (LOEUF={loeuf:.3g}, pct={pct} -> {verdict})")
     return out
 
 
