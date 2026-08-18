@@ -1,7 +1,7 @@
 {
   "protein": "HMGCR",
   "disease": "high cholesterol",
-  "generated_at": "2026-08-07T06:42:52",
+  "generated_at": "2026-08-17T22:23:30",
   "model": "gemini-flash-lite-latest",
   "tools_called": [
     "get_uniprot_dossier",
@@ -39,7 +39,7 @@
         "url": "https://www.uniprot.org/uniprotkb/P04035",
         "source_release": "UniProt release 2026_02 (10-June-2026)"
       },
-      "seconds": 0.689,
+      "seconds": 0.841,
       "exception": null
     },
     {
@@ -65,7 +65,7 @@
         "url": "https://platform.opentargets.org/evidence/ENSG00000113161/HP_0003124",
         "source_release": "Open Targets data release 26.06"
       },
-      "seconds": 2.284,
+      "seconds": 2.297,
       "exception": null
     },
     {
@@ -84,7 +84,7 @@
         "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
         "url": "https://epigraphdb.org/pqtl/"
       },
-      "seconds": 1.552,
+      "seconds": 1.603,
       "exception": null
     },
     {
@@ -94,68 +94,9 @@
         "gene_symbol": "HMGCR"
       },
       "result": {
-        "found": true,
-        "target_chembl_id": "CHEMBL402",
-        "target_name": "3-hydroxy-3-methylglutaryl-coenzyme A reductase",
-        "matched_target_organism": "Homo sapiens",
-        "n_modulators": 10,
-        "modulators": [
-          {
-            "drug": "CHEMBL503",
-            "action": "INHIBITOR",
-            "moa": "HMG-CoA reductase inhibitor"
-          },
-          {
-            "drug": "CHEMBL1200563",
-            "action": "INHIBITOR",
-            "moa": "HMG-CoA reductase inhibitor"
-          },
-          {
-            "drug": "CHEMBL1237061",
-            "action": "INHIBITOR",
-            "moa": "HMG-CoA reductase inhibitor"
-          },
-          {
-            "drug": "CHEMBL2218894",
-            "action": "INHIBITOR",
-            "moa": "HMG-CoA reductase inhibitor"
-          },
-          {
-            "drug": "CHEMBL1744447",
-            "action": "INHIBITOR",
-            "moa": "HMG-CoA reductase inhibitor"
-          },
-          {
-            "drug": "CHEMBL690",
-            "action": "INHIBITOR",
-            "moa": "HMG-CoA reductase inhibitor"
-          },
-          {
-            "drug": "CHEMBL393220",
-            "action": "INHIBITOR",
-            "moa": "HMG-CoA reductase inhibitor"
-          },
-          {
-            "drug": "CHEMBL1064",
-            "action": "INHIBITOR",
-            "moa": "HMG-CoA reductase inhibitor"
-          },
-          {
-            "drug": "CHEMBL3989923",
-            "action": "INHIBITOR",
-            "moa": "HMG-CoA reductase inhibitor"
-          },
-          {
-            "drug": "CHEMBL3989920",
-            "action": "INHIBITOR",
-            "moa": "HMG-CoA reductase inhibitor"
-          }
-        ],
-        "note": "ChEMBL target matched by text search on 'HMGCR' and resolved to '3-hydroxy-3-methylglutaryl-coenzyme A reductase' — confirm this is the intended target.",
-        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL402/",
-        "source_release": "ChEMBL_37 (released 2026-05-01)"
+        "error": "ChEMBL HTTP 500"
       },
-      "seconds": 7.799,
+      "seconds": 5.242,
       "exception": null
     },
     {
@@ -194,9 +135,9 @@
         ],
         "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 112 ClinVar records for this gene; it is a sample, not a rate.",
         "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=HMGCR%5Bgene%5D",
-        "source_release": "ClinVar build Build260804-2105.1"
+        "source_release": "ClinVar build Build260809-1055.1"
       },
-      "seconds": 1.282,
+      "seconds": 1.267,
       "exception": null
     },
     {
@@ -210,7 +151,12 @@
         "gene_symbol": "HMGCR",
         "pLI": 0.9999335526421149,
         "LOEUF": 0.433003626760854,
+        "LOEUF_percentile": 10,
         "oe_lof": 0.3223667998670253,
+        "oe_lof_lower": 0.243313282832251,
+        "obs_lof": 32,
+        "exp_lof": 99.26580532858793,
+        "plain_language": "gnomAD expected about 99 loss-of-function variants in this gene and observed 32. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
         "mis_z": 5.011752898284163,
         "lof_z": 5.727420141384931,
         "interpretation": "LoF-INTOLERANT: this gene is depleted of loss-of-function variants in the population, so inhibiting it carries a safety warning.",
@@ -218,7 +164,7 @@
         "url": "https://gnomad.broadinstitute.org/gene/HMGCR",
         "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
       },
-      "seconds": 0.412,
+      "seconds": 0.42,
       "exception": null
     },
     {
@@ -236,26 +182,26 @@
         "sweep_complete": true,
         "note": null,
         "example_rsids": [
-          "rs142563098",
           "rs6895057",
           "rs10045497",
+          "rs3846662",
+          "rs4512110",
           "rs11443896",
-          "rs113537149",
-          "rs199699609",
-          "rs10067900",
-          "rs76475757",
           "rs10474433",
-          "rs17647994",
           "rs12916",
-          "rs17562686",
+          "rs1820164",
           "rs150454634",
-          "rs10066707",
-          "rs151000110"
+          "rs10055465",
+          "rs116070404",
+          "rs80324692",
+          "rs115664150",
+          "rs6453133",
+          "rs6873472"
         ],
         "url": "https://www.ebi.ac.uk/gwas/genes/HMGCR",
         "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
       },
-      "seconds": 2.447,
+      "seconds": 37.853,
       "exception": null
     },
     {
@@ -347,22 +293,16 @@
         "url": "https://www.pharmgkb.org/search?query=HMGCR",
         "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
       },
-      "seconds": 0.561,
+      "seconds": 0.574,
       "exception": null
     }
   ],
-  "model_verdict": "GO — HMGCR is a heavily validated, clinically targeted enzyme for hypercholesterolemia with extensive genetic, pharmacological, and clinical evidence.",
-  "model_reasoning": "Open Targets demonstrates a very high overall evidence score for HMGCR in hypercholesterolemia, driven by robust clinical and genetic associations. ChEMBL lists multiple known inhibitors targeting this protein, reflecting its established status as the primary pharmacological target for statin therapies. Although the gnomAD constraint score indicates loss-of-function intolerance, this aligns with its essential housekeeping and biosynthetic role and does not preclude therapeutic inhibition, as clinically proven by decades of safe statin use. Furthermore, GWAS catalog and PharmGKB annotations confirm substantial genetic mapping and pharmacogenomic interactions across several statin drugs.",
+  "model_verdict": "GO — HMGCR shows strong genetic association, extensive GWAS mapping, and extensive pharmacogenomic and clinical evidence linking it to high cholesterol.",
+  "model_reasoning": "Open Targets demonstrates a robust association score between HMGCR and hypercholesterolemia, reinforced by numerous GWAS associations. PharmGKB records multiple clinical annotations involving statins and HMG-CoA reductase inhibitors, reflecting established pharmacological modulation. Although gnomAD constraint metrics indicate loss-of-function intolerance and no MR estimate was retrieved, the vast genetic, clinical, and pharmacological evidence supports its target validity.\n```",
   "validation": {
-    "ok": false,
-    "unsupported": [
-      {
-        "kind": "clinical-status-not-retrievable",
-        "token": "clinically proven",
-        "detail": "no tool in this panel returns phase, approval or indication"
-      }
-    ],
+    "ok": true,
+    "unsupported": [],
     "checked": 0
   },
-  "card_markdown": "# Target Evidence Card — HMGCR × high cholesterol\n\n**Verdict:** GO — HMGCR is a heavily validated, clinically targeted enzyme for hypercholesterolemia with extensive genetic, pharmacological, and clinical evidence.\n\n> **Question actually answered:** the free-text disease was resolved to **HP_0003124 (Hypercholesterolemia)**. If that is not what you meant, every score below answers a different question.\n> **ChEMBL target resolved by text search** to **\"3-hydroxy-3-methylglutaryl-coenzyme A reductase\"** (CHEMBL402). If that is not the intended molecular target, the druggability row is about something else.\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.74 (literature=0.206, genetic_association=0.857, clinical=0.998) |\n| Protein context | `get_uniprot_dossier` | P04035 — 3-hydroxy-3-methylglutaryl-coenzyme A reductase; location: Endoplasmic reticulum membrane, Peroxisome membrane |\n| Known modulators / druggability | `get_chembl_modulators` | 10 known modulators (INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 112 ClinVar records; 1 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1, LOEUF=0.433 → LoF-INTOLERANT (handle with care) |\n| Extra genetic evidence | `get_gwas_catalog` | 92 unique SNPs from 177/177 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 10 clinical annotations across 6 drugs (level 3: 10) |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'HMGCR' -> ENSG00000113161 (HMGCR); 'high cholesterol' -> HP_0003124 (Hypercholesterolemia). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — No pQTL-based MR estimate for HMGCR in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'HMGCR' and resolved to '3-hydroxy-3-methylglutaryl-coenzyme A reductase' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 112 ClinVar records for this gene; it is a sample, not a rate.\n\n## Reasoning\n\nOpen Targets demonstrates a very high overall evidence score for HMGCR in hypercholesterolemia, driven by robust clinical and genetic associations. ChEMBL lists multiple known inhibitors targeting this protein, reflecting its established status as the primary pharmacological target for statin therapies. Although the gnomAD constraint score indicates loss-of-function intolerance, this aligns with its essential housekeeping and biosynthetic role and does not preclude therapeutic inhibition, as clinically proven by decades of safe statin use. Furthermore, GWAS catalog and PharmGKB annotations confirm substantial genetic mapping and pharmacogenomic interactions across several statin drugs.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P04035 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000113161/HP_0003124 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL402/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=HMGCR%5Bgene%5D — _ClinVar build Build260804-2105.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/HMGCR — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/HMGCR — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=HMGCR — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n\n## Provenance\n\n- Generated: 2026-08-07T06:42:52\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (8 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n\n> **VALIDATION FAILED** — the model wrote claim tokens with no support in tool output:\n> - [clinical-status-not-retrievable] `clinically proven`\n"
+  "card_markdown": "# Target Evidence Card — HMGCR × high cholesterol\n\n**Verdict:** GO — HMGCR shows strong genetic association, extensive GWAS mapping, and extensive pharmacogenomic and clinical evidence linking it to high cholesterol.\n\n> **Question actually answered:** the free-text disease was resolved to **HP_0003124 (Hypercholesterolemia)**. If that is not what you meant, every score below answers a different question.\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.74 (literature=0.206, genetic_association=0.857, clinical=0.998) |\n| Protein context | `get_uniprot_dossier` | P04035 — 3-hydroxy-3-methylglutaryl-coenzyme A reductase; location: Endoplasmic reticulum membrane, Peroxisome membrane |\n| Known modulators / druggability | `get_chembl_modulators` | **tool error** — ChEMBL HTTP 500 |\n| Clinical variants | `get_clinvar_variants` | 112 ClinVar records; 1 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1, LOEUF=0.433 → LoF-INTOLERANT (handle with care) |\n| Extra genetic evidence | `get_gwas_catalog` | 92 unique SNPs from 177/177 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 10 clinical annotations across 6 drugs (level 3: 10) |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'HMGCR' -> ENSG00000113161 (HMGCR); 'high cholesterol' -> HP_0003124 (Hypercholesterolemia). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — No pQTL-based MR estimate for HMGCR in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 112 ClinVar records for this gene; it is a sample, not a rate.\n\n## Reasoning\n\nOpen Targets demonstrates a robust association score between HMGCR and hypercholesterolemia, reinforced by numerous GWAS associations. PharmGKB records multiple clinical annotations involving statins and HMG-CoA reductase inhibitors, reflecting established pharmacological modulation. Although gnomAD constraint metrics indicate loss-of-function intolerance and no MR estimate was retrieved, the vast genetic, clinical, and pharmacological evidence supports its target validity.\n```\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P04035 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000113161/HP_0003124 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=HMGCR%5Bgene%5D — _ClinVar build Build260809-1055.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/HMGCR — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/HMGCR — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=HMGCR — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n\n## Provenance\n\n- Generated: 2026-08-17T22:23:30\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (8 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
 }

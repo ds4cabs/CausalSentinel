@@ -1,7 +1,7 @@
 {
   "protein": "TREM2",
   "disease": "Alzheimer disease",
-  "generated_at": "2026-08-07T06:43:47",
+  "generated_at": "2026-08-17T22:29:37",
   "model": "gemini-flash-lite-latest",
   "tools_called": [
     "get_uniprot_dossier",
@@ -41,7 +41,7 @@
         "url": "https://www.uniprot.org/uniprotkb/Q9NZC2",
         "source_release": "UniProt release 2026_02 (10-June-2026)"
       },
-      "seconds": 0.874,
+      "seconds": 0.752,
       "exception": null
     },
     {
@@ -67,7 +67,7 @@
         "url": "https://platform.opentargets.org/evidence/ENSG00000095970/MONDO_0004975",
         "source_release": "Open Targets data release 26.06"
       },
-      "seconds": 2.631,
+      "seconds": 1.886,
       "exception": null
     },
     {
@@ -218,7 +218,7 @@
         "url": "https://epigraphdb.org/pqtl/",
         "note": "TREM2 HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Alzheimer disease'. The other outcomes are listed for context only — do not present them as evidence about 'Alzheimer disease'."
       },
-      "seconds": 1.648,
+      "seconds": 2.031,
       "exception": null
     },
     {
@@ -228,17 +228,9 @@
         "gene_symbol": "TREM2"
       },
       "result": {
-        "found": true,
-        "target_chembl_id": "CHEMBL6196124",
-        "target_name": "Triggering receptor expressed on myeloid cells 2",
-        "matched_target_organism": "Homo sapiens",
-        "n_modulators": 0,
-        "modulators": [],
-        "note": "ChEMBL target matched by text search on 'TREM2' and resolved to 'Triggering receptor expressed on myeloid cells 2' — confirm this is the intended target.",
-        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL6196124/",
-        "source_release": "ChEMBL_37 (released 2026-05-01)"
+        "error": "ChEMBL HTTP 500"
       },
-      "seconds": 6.778,
+      "seconds": 5.565,
       "exception": null
     },
     {
@@ -277,9 +269,9 @@
         ],
         "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 202 ClinVar records for this gene; it is a sample, not a rate.",
         "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=TREM2%5Bgene%5D",
-        "source_release": "ClinVar build Build260804-2105.1"
+        "source_release": "ClinVar build Build260809-1055.1"
       },
-      "seconds": 1.313,
+      "seconds": 1.264,
       "exception": null
     },
     {
@@ -293,7 +285,12 @@
         "gene_symbol": "TREM2",
         "pLI": 7.945079372239093e-07,
         "LOEUF": 1.2679614023203196,
+        "LOEUF_percentile": 58,
         "oe_lof": 0.8725900353186774,
+        "oe_lof_lower": 0.6139554286080222,
+        "obs_lof": 20,
+        "exp_lof": 22.920270906710307,
+        "plain_language": "gnomAD expected about 23 loss-of-function variants in this gene and observed 20. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
         "mis_z": 0.5524041999112955,
         "lof_z": 0.5174612104443493,
         "interpretation": "LoF-tolerant: no population-level depletion of loss-of-function variants, which is reassuring but is NOT positive evidence of efficacy.",
@@ -301,7 +298,7 @@
         "url": "https://gnomad.broadinstitute.org/gene/TREM2",
         "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
       },
-      "seconds": 0.425,
+      "seconds": 0.413,
       "exception": null
     },
     {
@@ -320,25 +317,25 @@
         "note": null,
         "example_rsids": [
           "rs2234247",
-          "rs142232675",
-          "rs151084487",
-          "rs2395751",
+          "rs113052081",
+          "rs2101270",
           "rs1968871",
-          "rs73427289",
-          "rs7748513",
-          "rs6912013",
-          "rs7760860",
-          "rs9296355",
-          "rs74437864",
-          "rs10080924",
-          "rs61998254",
-          "rs7759295",
-          "rs73427293"
+          "rs9394764",
+          "rs71558736",
+          "rs56104198",
+          "rs9296359",
+          "rs1872245",
+          "rs9381040",
+          "rs9462674",
+          "rs60755019",
+          "rs7748777",
+          "rs72857505",
+          "rs2234256"
         ],
         "url": "https://www.ebi.ac.uk/gwas/genes/TREM2",
         "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
       },
-      "seconds": 2.033,
+      "seconds": 27.832,
       "exception": null
     },
     {
@@ -353,22 +350,22 @@
         "note": "No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).",
         "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
       },
-      "seconds": 0.469,
+      "seconds": 0.436,
       "exception": null
     }
   ],
-  "model_verdict": "GO — Strong genetic and biological evidence supports TREM2 as a target for Alzheimer disease, driven by microglial function and robust genetic associations.",
-  "model_reasoning": "Open Targets shows strong overall genetic and literature associations between TREM2 and Alzheimer disease. UniProt confirms TREM2 functions as a microglial receptor involved in amyloid-beta uptake, lipid binding, and phagocytosis, which are key processes in neurodegeneration. ClinVar lists multiple pathogenic variants in the gene, and the GWAS Catalog reports numerous associated SNPs. Although no direct Mendelian randomization estimate was available for this specific disease outcome, and ChEMBL lists no approved modulators, the compelling human genetic links and microglial biology justify pursuing TREM2 as a therapeutic target.",
+  "model_verdict": "GO — Strong genetic and biological evidence supports TREM2 as a target for Alzheimer disease, driven by robust genetic associations and its known microglial receptor role in amyloid-beta and lipoprotein clearance.",
+  "model_reasoning": "Open Targets demonstrates a strong overall association score between TREM2 and Alzheimer disease, with particularly high genetic association evidence. UniProt confirms that TREM2 acts as a receptor for amyloid-beta peptide 42 and apolipoproteins, mediating microglial activation, phagocytosis, and lipid metabolism. ClinVar records pathogenic variants in the gene, and gnomAD constraint metrics indicate that TREM2 is tolerant to loss-of-function variants. While no specific Mendelian randomization estimate was available for Alzheimer disease, the combination of strong genetic associations and microglial biology supports its pursuit.",
   "validation": {
     "ok": false,
     "unsupported": [
       {
-        "kind": "clinical-status-not-retrievable",
-        "token": "approved",
-        "detail": "no tool in this panel returns phase, approval or indication"
+        "kind": "modality-not-in-chembl",
+        "token": "peptide",
+        "detail": "no ChEMBL action/moa in this run supports that modality"
       }
     ],
-    "checked": 0
+    "checked": 1
   },
-  "card_markdown": "# Target Evidence Card — TREM2 × Alzheimer disease\n\n**Verdict:** GO — Strong genetic and biological evidence supports TREM2 as a target for Alzheimer disease, driven by microglial function and robust genetic associations.\n\n> **Question actually answered:** the free-text disease was resolved to **MONDO_0004975 (Alzheimer disease)**. If that is not what you meant, every score below answers a different question.\n> **ChEMBL target resolved by text search** to **\"Triggering receptor expressed on myeloid cells 2\"** (CHEMBL6196124). If that is not the intended molecular target, the druggability row is about something else.\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.558 (literature=0.994, animal_model=0.288, genetic_association=0.862) |\n| Protein context | `get_uniprot_dossier` | Q9NZC2 — Triggering receptor expressed on myeloid cells 2; location: Cell membrane, Secreted, Secreted |\n| Known modulators / druggability | `get_chembl_modulators` | target CHEMBL6196124 — **0 known modulators in ChEMBL** |\n| Clinical variants | `get_clinvar_variants` | 202 ClinVar records; 5 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=7.9e-07, LOEUF=1.27 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 70 unique SNPs from 140/140 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'TREM2' -> ENSG00000095970 (TREM2); 'Alzheimer disease' -> MONDO_0004975 (Alzheimer disease). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — TREM2 HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Alzheimer disease'. The other outcomes are listed for context only — do not present them as evidence about 'Alzheimer disease'.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'TREM2' and resolved to 'Triggering receptor expressed on myeloid cells 2' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 202 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n\n## Reasoning\n\nOpen Targets shows strong overall genetic and literature associations between TREM2 and Alzheimer disease. UniProt confirms TREM2 functions as a microglial receptor involved in amyloid-beta uptake, lipid binding, and phagocytosis, which are key processes in neurodegeneration. ClinVar lists multiple pathogenic variants in the gene, and the GWAS Catalog reports numerous associated SNPs. Although no direct Mendelian randomization estimate was available for this specific disease outcome, and ChEMBL lists no approved modulators, the compelling human genetic links and microglial biology justify pursuing TREM2 as a therapeutic target.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q9NZC2 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000095970/MONDO_0004975 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL6196124/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=TREM2%5Bgene%5D — _ClinVar build Build260804-2105.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/TREM2 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/TREM2 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n\n## Provenance\n\n- Generated: 2026-08-07T06:43:47\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (8 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n\n> **VALIDATION FAILED** — the model wrote claim tokens with no support in tool output:\n> - [clinical-status-not-retrievable] `approved`\n"
+  "card_markdown": "# Target Evidence Card — TREM2 × Alzheimer disease\n\n**Verdict:** GO — Strong genetic and biological evidence supports TREM2 as a target for Alzheimer disease, driven by robust genetic associations and its known microglial receptor role in amyloid-beta and lipoprotein clearance.\n\n> **Question actually answered:** the free-text disease was resolved to **MONDO_0004975 (Alzheimer disease)**. If that is not what you meant, every score below answers a different question.\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.558 (literature=0.994, animal_model=0.288, genetic_association=0.862) |\n| Protein context | `get_uniprot_dossier` | Q9NZC2 — Triggering receptor expressed on myeloid cells 2; location: Cell membrane, Secreted, Secreted |\n| Known modulators / druggability | `get_chembl_modulators` | **tool error** — ChEMBL HTTP 500 |\n| Clinical variants | `get_clinvar_variants` | 202 ClinVar records; 5 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=7.9e-07, LOEUF=1.27 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 70 unique SNPs from 140/140 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'TREM2' -> ENSG00000095970 (TREM2); 'Alzheimer disease' -> MONDO_0004975 (Alzheimer disease). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — TREM2 HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Alzheimer disease'. The other outcomes are listed for context only — do not present them as evidence about 'Alzheimer disease'.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 202 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n\n## Reasoning\n\nOpen Targets demonstrates a strong overall association score between TREM2 and Alzheimer disease, with particularly high genetic association evidence. UniProt confirms that TREM2 acts as a receptor for amyloid-beta peptide 42 and apolipoproteins, mediating microglial activation, phagocytosis, and lipid metabolism. ClinVar records pathogenic variants in the gene, and gnomAD constraint metrics indicate that TREM2 is tolerant to loss-of-function variants. While no specific Mendelian randomization estimate was available for Alzheimer disease, the combination of strong genetic associations and microglial biology supports its pursuit.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q9NZC2 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000095970/MONDO_0004975 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=TREM2%5Bgene%5D — _ClinVar build Build260809-1055.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/TREM2 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/TREM2 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n\n## Provenance\n\n- Generated: 2026-08-17T22:29:37\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (8 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n\n> **VALIDATION FAILED** — the model wrote claim tokens with no support in tool output:\n> - [modality-not-in-chembl] `peptide`\n"
 }
