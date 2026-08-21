@@ -23,6 +23,20 @@ reviewer can *falsify* — so the design puts the model where it can do least da
 | Evidence table, caveats, sources, provenance | **rendered mechanically from tool output** — the model never touches them |
 | Verdict line + reasoning paragraph | the model — then **checked against tool output**, and the run fails if a claim has no source |
 
+## Try it in ten seconds — no install, no key
+
+**[Browse the 991 pre-generated protein dossiers](dossiers/README.md)** — one page per
+protein: its published MR estimates (retrieved, never computed here), pQTL instruments,
+GWAS signal, and a phenome map. 101,543 protein-outcome estimates indexed in total.
+Pure static markdown, no language model anywhere in that path — also served on
+[GitHub Pages](https://ds4cabs.github.io/CausalSentinel/dossiers/).
+
+The figures are drawn from tool output too — nothing on these axes is typed in by hand:
+
+| ![IL6R retrieved MR estimates](figs/IL6R_mr_forest.png) | ![HMGCR population constraint](figs/HMGCR_constraint.png) |
+|---|---|
+| *retrieved MR estimates for IL6R — top 15 of 133 outcomes; the truncation is printed on the figure* | *where HMGCR sits on the knock-out-tolerance scale; the verdict comes from the tool, not the figure* |
+
 ## What it does and does not do
 
 - **It retrieves published Mendelian randomization estimates** (EpiGraphDB pQTL resource,
@@ -151,8 +165,10 @@ dossier per protein**, generated mechanically (no language model anywhere in thi
 
 ```bash
 python proteome_sweep.py --pilot        # 8 proteins covering all three tiers
-python proteome_sweep.py --all         # the full Tier-A universe (989 proteins)
+python proteome_sweep.py --all         # all 991 proteins (985 Tier A)
 ```
+
+The output ships in this repo: **[browse the dossier index](dossiers/README.md)**.
 
 Each dossier answers, in order: **(1)** which published MR estimates exist (retrieved);
 **(2)** whether pQTL instruments exist even where no MR was run — *Tier B: the un-run
@@ -191,3 +207,10 @@ Tracking issue: [#10](https://github.com/ds4cabs/CausalSentinel/issues/10).
 ## Notes
 This project is the cohort's causal evidence reference implementation with strong
 variant-level rigor. Built in rounds (each ships); Round 1 = a 3-tool card end to end.
+
+## Found a problem?
+
+That is exactly the feedback this project wants — a card that reads wrong, a dossier
+number that does not match its source, anything hard to use.
+**[Open an issue](https://github.com/ds4cabs/CausalSentinel/issues)** — a one-line
+complaint is enough.
