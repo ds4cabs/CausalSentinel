@@ -49,11 +49,12 @@ The figures are drawn from tool output too — nothing on these axes is typed in
 - **Where no GWAS was ever run, no agent can help.** That data still has to be generated
   by a human. This is the line between a tool and the science.
 
-## Core tools (8, all live)
+## Core tools (9, all live)
 
 | Tool | Source | Answers |
 |---|---|---|
 | `get_mr_result` | EpiGraphDB pQTL MR | is there a *published* causal estimate for this protein → disease? |
+| `get_clinical_evidence` | Open Targets (ChEMBL + trial registries) | has the clinic already tried this target — which drugs, what stage, why did trials stop? |
 | `get_target_disease_evidence` | Open Targets | how strongly is this target associated with this disease? |
 | `get_uniprot_dossier` | UniProt | what is this protein and where does it act? |
 | `get_chembl_modulators` | ChEMBL | is it already druggable, and by what? |

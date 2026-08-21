@@ -163,6 +163,11 @@ def _epmc_search(protein_syns: list, disease_syns: list) -> tuple:
                 "journal": (x.get("journalInfo") or {}).get("journal", {}).get("title"),
                 "year": x.get("pubYear"), "abstract": (x.get("abstractText") or "")[:2500],
                 "is_open_access": x.get("isOpenAccess"),
+                # Per-hit source attribution. An earlier version tagged only Semantic
+                # Scholar hits and then stripped the tag before returning, so no caller
+                # could ever say WHICH source produced a paper — which is exactly the
+                # question a coverage classification asks.
+                "_source": "europe_pmc",
             })
         nxt = d_.get("nextCursorMark")
         pages += 1
@@ -203,10 +208,15 @@ def _s2_search(protein: str, disease: str, seen_keys: set) -> list:
             return out
         for x in data:
             ext = x.get("externalIds") or {}
-            k = str(ext.get("PMID") or ext.get("DOI") or (x.get("title") or "")[:60]).lower()
-            if not k or k in seen_keys:
+            # Check EVERY id the record carries, not the first non-empty one. The old
+            # first-non-empty cascade let the same paper through twice whenever the
+            # Europe PMC record had a pmid but the Semantic Scholar record only a DOI —
+            # common for preprints indexed both ways.
+            keys = [str(v).lower() for v in
+                    (ext.get("PMID"), ext.get("DOI"), (x.get("title") or "")[:60]) if v]
+            if not keys or any(k in seen_keys for k in keys):
                 continue
-            seen_keys.add(k)
+            seen_keys.update(keys)
             out.append({
                 "pmid": ext.get("PMID"), "doi": ext.get("DOI"),
                 "title": x.get("title"), "journal": x.get("venue"), "year": x.get("year"),
@@ -294,8 +304,11 @@ def get_published_mr(protein: str, disease: str, use_llm: bool = True) -> dict:
     epmc_hits, epmc_total, epmc_query = _epmc_search(p_syns, d_syns)
 
     # --- source 3: Semantic Scholar (preprints / non-PubMed venues) ------
-    seen_keys = {str(h.get("pmid") or h.get("doi") or (h.get("title") or "")[:60]).lower()
-                 for h in epmc_hits}
+    # Seed the dedup set with EVERY id each EPMC hit carries (see _s2_search for why).
+    seen_keys = set()
+    for h in epmc_hits:
+        seen_keys.update(str(v).lower() for v in
+                         (h.get("pmid"), h.get("doi"), (h.get("title") or "")[:60]) if v)
     s2_hits = _s2_search(protein, disease, seen_keys)
     epmc_hits = epmc_hits + s2_hits          # judged together from here on
 
@@ -321,6 +334,7 @@ def get_published_mr(protein: str, disease: str, use_llm: bool = True) -> dict:
             v = _judge(client, model, protein, disease, h)
             if v and v["verdict"] != "unrelated":
                 judged.append({**{k: h[k] for k in ("pmid", "doi", "title", "journal", "year")},
+                               "source": h.get("_source", "europe_pmc"),
                                "verdict": v["verdict"], "reason": v.get("reason")})
             time.sleep(0.2)
         if len(epmc_hits) > MAX_ABSTRACTS_TO_JUDGE:
@@ -333,8 +347,22 @@ def get_published_mr(protein: str, disease: str, use_llm: bool = True) -> dict:
     # --- verdict ----------------------------------------------------------
     dedicated = [j for j in judged if j["verdict"] == "dedicated"] + \
                 [{"pmid": m["pmid"], "title": m["title"], "journal": m.get("journal"),
+                  "source": "mr_kg",
+                  # Keep MR-KG's structured extraction row. It is the ONLY literature-side
+                  # object in this pipeline that names the exposure and outcome in a
+                  # machine-readable way — an earlier version dropped it right here, which
+                  # made cross-source direction comparison unrecoverable by construction.
+                  "pair": m.get("pair"),
                   "verdict": "dedicated", "reason": "MR-KG extracted this exposure-outcome pair"}
                  for m in mrkg_matched]
+    # One paper, one row: the same pmid can arrive via the judged abstracts AND via MR-KG.
+    # Prefer the MR-KG row when both exist, because it carries the structured pair.
+    by_pmid = {}
+    for d in dedicated:
+        k = str(d.get("pmid") or d.get("doi") or d.get("title"))
+        if k not in by_pmid or (d.get("pair") and not by_pmid[k].get("pair")):
+            by_pmid[k] = d
+    dedicated = list(by_pmid.values())
     swept = [j for j in judged if j["verdict"] == "swept"]
 
     n_judged = min(len(epmc_hits), MAX_ABSTRACTS_TO_JUDGE) if client else 0

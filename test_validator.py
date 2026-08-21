@@ -88,8 +88,170 @@ MR_VALIDATED = FakeLedger({
                            "coloc_prob": None, "ld_check": 1.0}]},
 })
 
+# Two estimates for one pair, OPPOSITE signs, both validated (so only the direction rule
+# is under test). This shape exists in the resource: every multi-estimate protein draws
+# its rows from one study, often as different molecular forms (C3 fragments, PROC zymogen
+# vs activated), where sign conflicts are fragment biology before they are artefacts.
+MR_CONFLICTING = FakeLedger({
+    "get_mr_result": {"found": True, "protein": "C3",
+                      "matched_disease_estimates": [
+                          {"beta": 0.11, "se": 0.02, "p_value": 1e-8, "n_snp": 1,
+                           "outcome_gwas_id": "101", "instrument_rsid": "rs1000001",
+                           "steiger_direction_ok": "TRUE", "ld_check": 1.0},
+                          {"beta": -0.09, "se": 0.02, "p_value": 1e-6, "n_snp": 1,
+                           "outcome_gwas_id": "101", "instrument_rsid": "rs1000002",
+                           "steiger_direction_ok": "TRUE", "ld_check": 1.0}]},
+    "get_chembl_modulators": {"found": True, "modulators": [{"action": "RNAI INHIBITOR"}]},
+})
+
+# est[0] unvalidated, est[1] validated. The old causal rule read ONLY est[0] and failed
+# this ledger — a verdict decided by sort order. The fix judges the best estimate.
+MR_SECOND_VALIDATED = FakeLedger({
+    "get_mr_result": {"found": True, "protein": "LPA",
+                      "matched_disease_estimates": [
+                          {"beta": 0.21, "se": 0.03, "p_value": 1e-12, "n_snp": 1,
+                           "instrument_rsid": "rs10455872",
+                           "steiger_direction_ok": "NA", "coloc_prob": None, "ld_check": None},
+                          {"beta": 0.252303585657371, "se": 0.0193, "p_value": 5.39e-39,
+                           "n_snp": 1, "instrument_rsid": "rs55730499",
+                           "steiger_direction_ok": "TRUE", "steiger_p": 0.0,
+                           "ld_check": 1.0}]},
+})
+
+# Concordance classifier present: two estimates agree in sign but share one study — the
+# only kind of multiplicity this resource actually contains.
+CONC_AGREE_NONINDEP = FakeLedger({
+    "get_mr_result": {"found": True, "protein": "C5",
+                      "matched_disease_estimates": [
+                          {"beta": 0.12, "n_snp": 1, "steiger_direction_ok": "TRUE",
+                           "ld_check": 1.0},
+                          {"beta": 0.10, "n_snp": 1, "steiger_direction_ok": "TRUE",
+                           "ld_check": 1.0}]},
+    "classify_evidence_concordance": {
+        "estimate_concordance": {"n_estimates_compared": 2, "direction": "agree",
+                                 "independence": "non_independent",
+                                 "label": "sign_consistent_non_independent",
+                                 "cross_platform": False}},
+})
+
+CONC_CONFLICT = FakeLedger({
+    "get_mr_result": {"found": True, "protein": "C3", "matched_disease_estimates": [
+        {"beta": 0.11, "n_snp": 1, "steiger_direction_ok": "TRUE", "ld_check": 1.0},
+        {"beta": -0.09, "n_snp": 1, "steiger_direction_ok": "TRUE", "ld_check": 1.0}]},
+    "classify_evidence_concordance": {
+        "estimate_concordance": {"n_estimates_compared": 2, "direction": "conflict",
+                                 "independence": "non_independent",
+                                 "cross_platform": False}},
+})
+
+# Clinical record present: this is what LICENSES phase/approval wording (round 6). Shapes
+# taken from the live PCSK9 and tocilizumab responses.
+CLIN_APPROVED = FakeLedger({
+    "get_mr_result": {"found": False, "note": "no estimate"},
+    "get_clinical_evidence": {
+        "found": True, "max_stage_any_disease": "APPROVAL",
+        "max_stage_this_disease": "APPROVAL",
+        "drugs_for_this_disease": [
+            {"drug": "EVOLOCUMAB", "max_stage_this_disease": "APPROVAL",
+             "n_reports_this_disease": 39, "n_stop_this_disease": 11}]},
+})
+
+CLIN_PHASE2 = FakeLedger({
+    "get_mr_result": {"found": False, "note": "no estimate"},
+    "get_clinical_evidence": {
+        "found": True, "max_stage_any_disease": "PHASE_2",
+        "max_stage_this_disease": "PHASE_2",
+        "drugs_for_this_disease": [
+            {"drug": "SOMEDRUG", "max_stage_this_disease": "PHASE_2",
+             "n_reports_this_disease": 5, "n_stop_this_disease": 1}]},
+})
+
+# The tocilizumab shape: an APPROVAL exists — for ANOTHER disease. drugs_for_this_disease
+# is empty, so nothing licenses approval wording about THIS disease. This fixture exists
+# because a review caught the whole-record substring check re-importing the exact
+# misattribution the clinical tool was built to prevent.
+CLIN_OTHER_ONLY = FakeLedger({
+    "get_mr_result": {"found": False, "note": "no estimate"},
+    "get_clinical_evidence": {
+        "found": True, "max_stage_any_disease": "APPROVAL",
+        "max_stage_this_disease": None,
+        "drugs_for_this_disease": [],
+        "drugs_other_diseases_context_only": [
+            {"drug": "TOCILIZUMAB", "max_stage_any_disease": "APPROVAL"}]},
+})
+
+# The honest empty record (PNPLA3 x MASLD shape).
+CLIN_NONE = FakeLedger({
+    "get_mr_result": {"found": False, "note": "no estimate"},
+    "get_clinical_evidence": {"found": False,
+                              "note": "No drug or clinical candidate on record."},
+})
+
 # (name, ledger, text, expect_ok)
 CASES = [
+    # --- clinical status: earned by the clinical tool, and ONLY by it -------------
+    ("approval wording earned by an APPROVAL record", CLIN_APPROVED,
+     "Approved therapies already exist against this target.", True),
+    ("approval wording with only a phase-2 record", CLIN_PHASE2,
+     "Approved therapies already exist against this target.", False),
+    ("phase wording matching the record", CLIN_PHASE2,
+     "Phase 2 trials of a drug against this target have been run.", True),
+    ("phase wording beyond the record", CLIN_PHASE2,
+     "A phase 3 programme exists for this target.", False),
+    ("agency-specific approval is never earned", CLIN_APPROVED,
+     "FDA-approved therapies exist for this target.", False),
+    ("efficacy wording is never earned, even at APPROVAL", CLIN_APPROVED,
+     "The approved therapy provides definitive proof of efficacy.", False),
+    # --- honest denials must never fail (the CAUSAL_NEGATED lesson, recommitted) ---
+    ("denying clinical development on an empty record", CLIN_NONE,
+     "No clinical trials against this target are on record.", True),
+    ("denying approval on a phase-2-only record", CLIN_PHASE2,
+     "No approved therapy exists for this disease.", True),
+    ("denying efficacy is the honest card", CLIN_APPROVED,
+     "Efficacy has not been demonstrated in this disease.", True),
+    ("denied phase plus earned phase in one sentence pair", CLIN_PHASE2,
+     "No phase 3 trial was ever run; development stopped at phase 2.", True),
+    # --- stage attribution: another disease's approval licenses nothing here --------
+    ("other-disease approval does not license approval wording", CLIN_OTHER_ONLY,
+     "Approved therapies exist for this disease.", False),
+    ("other-disease approval MAY be stated as such", CLIN_OTHER_ONLY,
+     "The drug is approved for another indication.", True),
+    # --- suffixed phase designations are still phase claims -------------------------
+    ("phase IIb claim with no clinical retrieval", MR_PRESENT,
+     "A Phase IIb study supports this target.", False),
+    # --- conflicting estimates license NO intervention direction ------------------
+    ("conflicting signs forbid a drug-direction claim", MR_CONFLICTING,
+     "MR evidence suggests C3 inhibition would be therapeutic.", False),
+    ("conflicting signs described neutrally are fine", MR_CONFLICTING,
+     "The retrieved estimates for C3 disagree in sign; no direction is asserted.", True),
+    # --- the est[0] bug: causal wording judged on the BEST estimate, not the first --
+    ("causal wording earned by the second, validated estimate", MR_SECOND_VALIDATED,
+     "Mendelian randomization evidence supports a causal effect of LPA on coronary heart "
+     "disease risk.", True),
+    # --- replication wording must be earned by the concordance classifier -----------
+    ("replication claim with no classifier in the run", MR_VALIDATED,
+     "This causal effect of LPA has been replicated across studies.", False),
+    ("bare 'consistent with' is not a replication claim", MR_VALIDATED,
+     "The verdict is consistent with the retrieved causal estimate for LPA.", True),
+    ("denying replication is not claiming it", MR_VALIDATED,
+     "This causal LPA estimate has not been replicated across studies.", True),
+    ("hedging that replication is awaited is not claiming it", MR_VALIDATED,
+     "This causal LPA estimate awaits replication in an independent cohort.", True),
+    ("stating a lack of independent replication is honest", CONC_AGREE_NONINDEP,
+     "The association lacks independent replication.", True),
+    ("a later overclaim is not shielded by an earlier benign sentence", CONC_AGREE_NONINDEP,
+     "The two estimates are concordant across datasets in sign. The effect is "
+     "independently confirmed.", False),
+    ("'replicated' itself requires independence, not just agreement", CONC_AGREE_NONINDEP,
+     "This finding is replicated across datasets.", False),
+    ("sign consistency may be stated when classified", CONC_AGREE_NONINDEP,
+     "The two retrieved estimates are concordant across datasets in sign.", True),
+    ("but not sold as independent replication", CONC_AGREE_NONINDEP,
+     "The association is independently confirmed by two estimates.", False),
+    ("nor as cross-platform agreement", CONC_AGREE_NONINDEP,
+     "The association shows cross-platform agreement.", False),
+    ("agreement wording on conflicting estimates fails", CONC_CONFLICT,
+     "The estimates are concordant across datasets.", False),
     # --- causal wording must be earned by the validation fields, not just by existence --
     ("unvalidated single-SNP estimate cannot carry causal wording", MR_UNVALIDATED,
      "Mendelian randomization evidence supports a causal role of IL6R in coronary heart "

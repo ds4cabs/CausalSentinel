@@ -18,6 +18,10 @@ from .litcheck import get_published_mr
 from .eqtl import get_eqtl_instruments, instrument_availability
 from .gtex import get_gtex_eqtl, tissue_ids, scan_tissue_panel, list_panels
 from .mechanism import classify_exposure_mechanism
+# Round 6 - source-coverage and estimate-concordance classification
+from .concordance import classify_evidence_concordance
+# Round 6 - clinical development record (drugs, stages, why trials stopped)
+from .clinical import get_clinical_evidence
 
 ROUND1_TOOLS = [
     get_uniprot_dossier,
@@ -26,12 +30,16 @@ ROUND1_TOOLS = [
     get_mr_result,
 ]
 
-# Tools handed to the agent for a single card. All eight hit live public APIs.
+# Tools handed to the agent for a single card. All nine hit live public APIs.
 TOOLS = ROUND1_TOOLS + [
     get_clinvar_variants,
     get_gnomad_constraint,
     get_gwas_catalog,
     get_pharmgkb_drug_gene,
+    # The clinical record answers the question every card reader asks next: has anyone
+    # already TRIED this target, and how far did it get? One GraphQL call, and it is what
+    # licenses the model to mention approvals or phases at all (see validate_card.py).
+    get_clinical_evidence,
 ]
 
 # Deliberately NOT in TOOLS. `get_published_mr` searches three literature sources and
@@ -43,10 +51,15 @@ TOOLS = ROUND1_TOOLS + [
 # GENCODE id, then a paged association query) and its answer is only meaningful once you
 # have decided which TISSUE you mean. That decision belongs to the caller, not to a model
 # guessing mid-card.
+# `classify_evidence_concordance` stays out of TOOLS too, but for a third reason: the
+# agent loop calls it POST-HOC (agent.py, after the model finishes) on whatever the model
+# already retrieved, so handing it to the model as a callable would only invite redundant
+# API calls mid-card.
 LIBRARY_ONLY = [
     get_published_mr,
     get_instrument_provenance,
     classify_exposure_mechanism,
+    classify_evidence_concordance,
     get_eqtl_instruments,
     instrument_availability,
     get_gtex_eqtl,
