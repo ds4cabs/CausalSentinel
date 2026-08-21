@@ -1,0 +1,86 @@
+# Protein Dossier — RFESD (Rieske domain-containing protein)
+
+**MR feasibility tier: A** — Published pQTL-MR estimates exist for this protein (retrieved below - not computed here).
+
+## 1. Published MR estimates (retrieved, not computed)
+
+| Outcome | beta | se | p | method | nSNP | cis/trans | coloc |
+|---|---|---|---|---|---|---|---|
+| Diagnoses - main ICD10: D25 Leiomyoma of uterus | 0.196 | 0.0738 | 0.00786 | Wald ratio | 1 | cis | NA |
+| Cancer code  self-reported: basal cell carcinoma | 0.216 | 0.0858 | 0.0118 | Wald ratio | 1 | cis | NA |
+| Diagnoses - main ICD10: K29 Gastritis and duodenitis | 0.117 | 0.0585 | 0.0454 | Wald ratio | 1 | cis | NA |
+| Non-cancer illness code  self-reported: enlarged prostate | 0.147 | 0.0752 | 0.0511 | Wald ratio | 1 | cis | NA |
+| Myocardial infarction | 0.086 | 0.0446 | 0.0539 | Wald ratio | 1 | cis | NA |
+| High grade serous ovarian cancer | -0.135 | 0.071 | 0.057 | Wald ratio | 1 | cis | NA |
+| Happiness | -0.0234 | 0.0125 | 0.061 | Wald ratio | 1 | cis | NA |
+| Body mass index (BMI) | -0.0187 | 0.0101 | 0.0646 | Wald ratio | 1 | cis | NA |
+| Diagnoses - main ICD10: K44 Diaphragmatic hernia | 0.13 | 0.0715 | 0.069 | Wald ratio | 1 | cis | NA |
+| Eye problems or disorders: Glaucoma | 0.126 | 0.0748 | 0.0917 | Wald ratio | 1 | cis | NA |
+| Diagnoses - main ICD10: M23 Internal derangement of knee | -0.132 | 0.0782 | 0.0918 | Wald ratio | 1 | cis | NA |
+| Diagnoses - main ICD10: N20 Calculus of kidney and ureter | 0.173 | 0.103 | 0.0922 | Wald ratio | 1 | cis | NA |
+| _...and 57 more outcomes (see JSON)_ | | | | | | | |
+
+## 2. pQTL instrument availability (Tier-B probe)
+
+_No prot-* pQTL GWAS dataset found for this protein (matched by UniProt accession and symbol)._
+
+## 3. GWAS Catalog results — traits with signal at this locus
+
+_5 association rows across 5 traits (2 genome-wide significant rows). **Associations are loci, not causal claims**; the mapped gene at a locus is not necessarily the effector gene._
+
+| Trait | best p | lead SNP | n assoc | study | MR status |
+|---|---|---|---|---|---|
+| Rieske domain-containing protein levels (RFESD.13603.7.3) | 2e-25 | rs77881626 | 1 | GCST90242681 | no MR -> candidate analysis |
+| Alanine aminotransferase level after methotrexate initiation | 3e-8 | rs72783407 | 1 | GCST90244104 | no MR -> candidate analysis |
+| Pharmacokinetics of antiepileptic drugs in severe mental dis | 2e-7 | rs17790731 | 1 | GCST002887 | no MR -> candidate analysis |
+| Familial squamous cell lung carcinoma | 6e-6 | rs115593965 | 1 | GCST006088 | no MR -> candidate analysis |
+| Ischemic stroke (cardioembolic) | 7e-6 | rs72781498 | 1 | GCST90020242 | no MR -> candidate analysis |
+
+## 4. Phenome map — where this gene is a genetic locus, vs. where MR exists
+
+_Top diseases by Open Targets association (of 12 total). **Associations are loci, not causal claims.** The causal-status column is a four-state triage per pair: **established (curated)** = a curated clinical assertion exists (ClinGen/G2P/GEL/Orphanet/ClinVar — any validity level, MR adds little); **exploratory rare-variant signal** = ExWAS burden evidence without curation — a candidate NEW gene-disease relationship; **common-variant locus** = GWAS signal, classic pQTL-MR territory; **multi-layer** = burden+GWAS together, an allelic-series candidate (the strongest causal setup). Burden estimand is carrier-vs-noncarrier, not per-SD MR._
+
+| Disease | genetic assoc. | burden (ExWAS) | causal status | MR status |
+|---|---|---|---|---|
+| vitiligo | 0.46 | — | common-variant locus | MR: beta=0.504, p=0.28 (cis) |
+| alcohol drinking | 0.249 | — | common-variant locus | no MR -> candidate analysis |
+| seasonal allergic rhinitis | 0.249 | — | common-variant locus | no MR -> candidate analysis |
+| placental abruption | 0.042 | — | common-variant locus | no MR -> candidate analysis |
+| infectious disease | 0.036 | — | common-variant locus | no MR -> candidate analysis |
+
+> Of the 5 rows above, **4 have no MR estimate in this resource**. Across all retrieved diseases for this gene: 0 exploratory rare-variant signal(s), 0 multi-layer (allelic-series candidate) pair(s). Final triage still belongs to a statistical geneticist.
+
+## 5. Downstream annotation (druggability & safety preview)
+
+| Layer | Result |
+|---|---|
+| ChEMBL druggability | **not available** — no ChEMBL target (undrugged) |
+| gnomAD constraint | pLI=0.00028, LOEUF=0.997 — LoF-tolerant |
+| GWAS Catalog | 17 unique SNPs / 33 rows |
+| ClinVar | 59 records; 3 pathogenic in sample of 30 |
+| PharmGKB/ClinPGx | no annotations |
+
+## Caveats declared by the tools
+
+- **`phenome`** — Top 12 of 12 associated diseases by overall score. genetic_association aggregates GWAS common-variant AND rare-variant evidence. These are ASSOCIATIONS (loci), not causal claims.
+- **`chembl`** — No ChEMBL target for 'RFESD'.
+- **`clinvar`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 59 ClinVar records for this gene; it is a sample, not a rate.
+- **`pharmgkb`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).
+- **`gwas_traits`** — Top 5 of 5 traits by best p-value, aggregated from 5 association rows. These are GWAS ASSOCIATIONS (loci), not causal claims; mapped genes at a locus are not necessarily the effector gene.
+
+## Sources
+
+- `uniprot`: https://www.uniprot.org/uniprotkb/Q8TAC1 — _UniProt release 2026_02 (10-June-2026)_
+- `mr_outcomes`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_
+- `phenome`: https://platform.opentargets.org/target/ENSG00000175449/associations — _Open Targets data release 26.06_
+- `gnomad`: https://gnomad.broadinstitute.org/gene/RFESD — _gnomAD constraint via GraphQL API (reference genome GRCh38)_
+- `gwas`: https://www.ebi.ac.uk/gwas/genes/RFESD — _GWAS Catalog REST (live; release not exposed by this endpoint)_
+- `clinvar`: https://www.ncbi.nlm.nih.gov/clinvar/?term=RFESD%5Bgene%5D — _ClinVar build Build260809-1055.1_
+- `gwas_traits`: https://www.ebi.ac.uk/gwas/genes/RFESD — _GWAS Catalog search API (live; release not exposed)_
+
+## Provenance
+
+- Generated: 2026-08-14T04:48:34  ·  Tier: A
+- Fully mechanical: every cell above is rendered from tool return values. No language model wrote any part of this dossier.
+- MR estimates, where present, are retrieved from published work (EpiGraphDB pQTL, Zheng et al. Nat Genet 2020); nothing is computed here.
+- Tool errors this run: none
