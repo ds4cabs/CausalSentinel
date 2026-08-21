@@ -175,6 +175,51 @@ def _direction_block(protein: str, results: dict) -> list:
     return out
 
 
+def _concordance_block(results: dict) -> list:
+    """Summarize the source-coverage / concordance classification, mechanically.
+
+    Renders only when the classifier ran. Its job on the card is to stop two specific
+    misreadings before they start: "two estimates agree" being read as replication when
+    both come from one study, and a source that was never queried being read as a source
+    that came back empty.
+    """
+    conc = results.get("classify_evidence_concordance") or {}
+    if not isinstance(conc, dict) or not conc.get("retrieval_coverage"):
+        return []
+    cov = conc["retrieval_coverage"]
+    ec = conc.get("estimate_concordance") or {}
+    out = ["## Evidence concordance — classified by rule, not written by the model", ""]
+    pretty = {"pair_matched": "estimate found",
+              "instrument_exists_disease_unmatched":
+                  "protein present, no estimate for THIS disease",
+              "no_instrument": "no pQTL instrument", "error": "request failed",
+              "present": "returned records", "queried_empty": "queried, nothing found",
+              "not_checked": "NOT checked in this run"}
+    out.append("- Sources: " + " · ".join(
+        f"{name} — {pretty.get(state, state)}"
+        for name, state in (("EpiGraphDB", cov.get("epigraphdb")),
+                            ("Europe PMC", cov.get("europe_pmc")),
+                            ("Semantic Scholar", cov.get("semantic_scholar")),
+                            ("MR-KG", cov.get("mr_kg")))))
+    n = ec.get("n_estimates_compared", 0)
+    if n >= 2:
+        label = {"agree": "estimates AGREE in sign",
+                 "sign_consistent_non_independent":
+                     "estimates agree in sign but are NOT independent (shared study/outcome "
+                     "GWAS) — this is not replication",
+                 "conflict": "estimates CONFLICT in sign — check what each analyte "
+                             "actually measures before explaining why"}.get(
+            ec.get("label") or ec.get("direction"), ec.get("direction"))
+        out.append(f"- {n} matched estimates: {label}. Validation depth per estimate "
+                   f"(0-4): {ec.get('validation_depth_per_estimate')}.")
+    elif n == 1:
+        out.append(f"- Single matched estimate; validation depth "
+                   f"{ec.get('best_validation_depth', 0)} of 4 "
+                   f"(multi-SNP / Steiger / coloc / LD check).")
+    out.append("")
+    return out
+
+
 def _banner_block(results: dict, disease: str = "") -> list:
     """Promote silent resolution steps to the top of the card, where they are visible.
 
@@ -212,6 +257,7 @@ def render_card(protein: str, disease: str, ledger, reasoning_md: str,
     lines += [f"**Verdict:** {verdict_line.strip()}", ""]
     lines += _banner_block(results, disease)
     lines += _direction_block(protein, results)
+    lines += _concordance_block(results)
 
     # ---- evidence table (mechanical) ----
     lines += ["## Evidence", "", "| Evidence | Tool | Result |", "|---|---|---|"]

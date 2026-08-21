@@ -88,8 +88,88 @@ MR_VALIDATED = FakeLedger({
                            "coloc_prob": None, "ld_check": 1.0}]},
 })
 
+# Two estimates for one pair, OPPOSITE signs, both validated (so only the direction rule
+# is under test). This shape exists in the resource: every multi-estimate protein draws
+# its rows from one study, often as different molecular forms (C3 fragments, PROC zymogen
+# vs activated), where sign conflicts are fragment biology before they are artefacts.
+MR_CONFLICTING = FakeLedger({
+    "get_mr_result": {"found": True, "protein": "C3",
+                      "matched_disease_estimates": [
+                          {"beta": 0.11, "se": 0.02, "p_value": 1e-8, "n_snp": 1,
+                           "outcome_gwas_id": "101", "instrument_rsid": "rs1000001",
+                           "steiger_direction_ok": "TRUE", "ld_check": 1.0},
+                          {"beta": -0.09, "se": 0.02, "p_value": 1e-6, "n_snp": 1,
+                           "outcome_gwas_id": "101", "instrument_rsid": "rs1000002",
+                           "steiger_direction_ok": "TRUE", "ld_check": 1.0}]},
+    "get_chembl_modulators": {"found": True, "modulators": [{"action": "RNAI INHIBITOR"}]},
+})
+
+# est[0] unvalidated, est[1] validated. The old causal rule read ONLY est[0] and failed
+# this ledger — a verdict decided by sort order. The fix judges the best estimate.
+MR_SECOND_VALIDATED = FakeLedger({
+    "get_mr_result": {"found": True, "protein": "LPA",
+                      "matched_disease_estimates": [
+                          {"beta": 0.21, "se": 0.03, "p_value": 1e-12, "n_snp": 1,
+                           "instrument_rsid": "rs10455872",
+                           "steiger_direction_ok": "NA", "coloc_prob": None, "ld_check": None},
+                          {"beta": 0.252303585657371, "se": 0.0193, "p_value": 5.39e-39,
+                           "n_snp": 1, "instrument_rsid": "rs55730499",
+                           "steiger_direction_ok": "TRUE", "steiger_p": 0.0,
+                           "ld_check": 1.0}]},
+})
+
+# Concordance classifier present: two estimates agree in sign but share one study — the
+# only kind of multiplicity this resource actually contains.
+CONC_AGREE_NONINDEP = FakeLedger({
+    "get_mr_result": {"found": True, "protein": "C5",
+                      "matched_disease_estimates": [
+                          {"beta": 0.12, "n_snp": 1, "steiger_direction_ok": "TRUE",
+                           "ld_check": 1.0},
+                          {"beta": 0.10, "n_snp": 1, "steiger_direction_ok": "TRUE",
+                           "ld_check": 1.0}]},
+    "classify_evidence_concordance": {
+        "estimate_concordance": {"n_estimates_compared": 2, "direction": "agree",
+                                 "independence": "non_independent",
+                                 "label": "sign_consistent_non_independent",
+                                 "cross_platform": False}},
+})
+
+CONC_CONFLICT = FakeLedger({
+    "get_mr_result": {"found": True, "protein": "C3", "matched_disease_estimates": [
+        {"beta": 0.11, "n_snp": 1, "steiger_direction_ok": "TRUE", "ld_check": 1.0},
+        {"beta": -0.09, "n_snp": 1, "steiger_direction_ok": "TRUE", "ld_check": 1.0}]},
+    "classify_evidence_concordance": {
+        "estimate_concordance": {"n_estimates_compared": 2, "direction": "conflict",
+                                 "independence": "non_independent",
+                                 "cross_platform": False}},
+})
+
 # (name, ledger, text, expect_ok)
 CASES = [
+    # --- conflicting estimates license NO intervention direction ------------------
+    ("conflicting signs forbid a drug-direction claim", MR_CONFLICTING,
+     "MR evidence suggests C3 inhibition would be therapeutic.", False),
+    ("conflicting signs described neutrally are fine", MR_CONFLICTING,
+     "The retrieved estimates for C3 disagree in sign; no direction is asserted.", True),
+    # --- the est[0] bug: causal wording judged on the BEST estimate, not the first --
+    ("causal wording earned by the second, validated estimate", MR_SECOND_VALIDATED,
+     "Mendelian randomization evidence supports a causal effect of LPA on coronary heart "
+     "disease risk.", True),
+    # --- replication wording must be earned by the concordance classifier -----------
+    ("replication claim with no classifier in the run", MR_VALIDATED,
+     "This causal effect of LPA has been replicated across studies.", False),
+    ("bare 'consistent with' is not a replication claim", MR_VALIDATED,
+     "The verdict is consistent with the retrieved causal estimate for LPA.", True),
+    ("denying replication is not claiming it", MR_VALIDATED,
+     "This causal LPA estimate has not been replicated across studies.", True),
+    ("sign consistency may be stated when classified", CONC_AGREE_NONINDEP,
+     "The two retrieved estimates are concordant across datasets in sign.", True),
+    ("but not sold as independent replication", CONC_AGREE_NONINDEP,
+     "The association is independently confirmed by two estimates.", False),
+    ("nor as cross-platform agreement", CONC_AGREE_NONINDEP,
+     "The association shows cross-platform agreement.", False),
+    ("agreement wording on conflicting estimates fails", CONC_CONFLICT,
+     "The estimates are concordant across datasets.", False),
     # --- causal wording must be earned by the validation fields, not just by existence --
     ("unvalidated single-SNP estimate cannot carry causal wording", MR_UNVALIDATED,
      "Mendelian randomization evidence supports a causal role of IL6R in coronary heart "

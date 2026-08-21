@@ -30,6 +30,7 @@ from google import genai
 from google.genai import types
 
 from tools import TOOLS
+from tools.concordance import classify_evidence_concordance
 from ledger import ToolLedger
 from render import render_card
 from validate_card import validate, format_report
@@ -114,6 +115,15 @@ def generate_one(client, system_prompt, protein, disease, out_dir, allow_unvalid
     )
     model_text = response.text or ""
     verdict, reasoning = split_model_output(model_text)
+
+    # Post-hoc, rule-based classification of what the retrieval actually returned. Runs
+    # AFTER the model finishes, on the ledger's own copy of the MR result, so it adds at
+    # most one provenance request (and only when >=2 estimates matched). Routed through
+    # ledger._wrap so its output lands in the ledger like any tool call — which is what
+    # lets render show it and the validator hold the model's wording to it.
+    mr_res = ledger.results_by_tool().get("get_mr_result")
+    if isinstance(mr_res, dict) and not mr_res.get("error"):
+        ledger._wrap(classify_evidence_concordance)(protein, disease, mr_result=mr_res)
 
     result = validate(verdict + "\n" + reasoning, ledger)
     card_md = render_card(protein, disease, ledger, reasoning, verdict, MODEL)

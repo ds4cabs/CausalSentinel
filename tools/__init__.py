@@ -18,6 +18,8 @@ from .litcheck import get_published_mr
 from .eqtl import get_eqtl_instruments, instrument_availability
 from .gtex import get_gtex_eqtl, tissue_ids, scan_tissue_panel, list_panels
 from .mechanism import classify_exposure_mechanism
+# Round 6 - source-coverage and estimate-concordance classification
+from .concordance import classify_evidence_concordance
 
 ROUND1_TOOLS = [
     get_uniprot_dossier,
@@ -43,10 +45,15 @@ TOOLS = ROUND1_TOOLS + [
 # GENCODE id, then a paged association query) and its answer is only meaningful once you
 # have decided which TISSUE you mean. That decision belongs to the caller, not to a model
 # guessing mid-card.
+# `classify_evidence_concordance` stays out of TOOLS too, but for a third reason: the
+# agent loop calls it POST-HOC (agent.py, after the model finishes) on whatever the model
+# already retrieved, so handing it to the model as a callable would only invite redundant
+# API calls mid-card.
 LIBRARY_ONLY = [
     get_published_mr,
     get_instrument_provenance,
     classify_exposure_mechanism,
+    classify_evidence_concordance,
     get_eqtl_instruments,
     instrument_availability,
     get_gtex_eqtl,

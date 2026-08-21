@@ -187,10 +187,17 @@ def check_direction(model_text: str, ledger) -> list:
     ms = mr.get("matched_disease_estimates") or []
     if not ms:
         return []
-    beta = ms[0].get("beta")
-    if beta is None:
+    # ALL matched estimates, not ms[0]. The first version read only the first row, so when
+    # two estimates disagreed in sign the verdict depended on sort order — an arbitrary
+    # outcome dressed as a check. With conflicting signs NO drug direction is licensed.
+    signs = {(1 if b > 0 else -1) for b in
+             (e.get("beta") for e in ms) if isinstance(b, (int, float)) and b != 0}
+    if not signs:
         return []
     protein = str(mr.get("protein") or "")
+    conflicted = len(signs) > 1
+    beta = next(e.get("beta") for e in ms
+                if isinstance(e.get("beta"), (int, float)) and e.get("beta") != 0)
     problems = []
     for sent in re.split(r"(?<=[.;])\s+", model_text):
         # Only judge sentences that tie an intervention to a benefit claim about THIS target.
@@ -200,6 +207,17 @@ def check_direction(model_text: str, ledger) -> list:
             continue
         for m in DIRECTION_WORDS.finditer(sent):
             word = m.group(0)
+            if conflicted:
+                problems.append({
+                    "kind": "direction-claim-on-conflicting-estimates",
+                    "token": word,
+                    "detail": (f"the matched estimates for {mr.get('protein')} disagree in "
+                               f"sign, so NO intervention direction is licensed by this "
+                               f"retrieval. Report the conflict itself — and check whether "
+                               f"the estimates even measure the same molecular form before "
+                               f"explaining it."),
+                })
+                break
             says_lower = bool(_LOWERING.match(word))
             # beta<0: higher protein -> less disease, so a BENEFIT claim needs RAISING it.
             # beta>0: higher protein -> more disease, so a benefit claim needs LOWERING it.
@@ -229,6 +247,84 @@ def check_direction(model_text: str, ledger) -> list:
                 break
         if problems:
             break
+    return problems
+
+
+# Language that asserts REPLICATION or cross-study agreement. Bare "consistent with X" is
+# deliberately NOT here: "consistent with the retrieved estimate" is an honest sentence
+# about one estimate, and a rule that fires on it teaches the model to stop comparing its
+# words to the data — the CAUSAL_NEGATED lesson again. What needs earning is the claim
+# that MULTIPLE studies agree.
+REPLICATION_LANGUAGE = re.compile(
+    r"\breplicat\w*\b|"
+    r"\bindependent(?:ly)?\s+(?:confirm|support|validat|verif)\w*|"
+    r"\b(?:consistent|concordant|convergent|converging)\s+across\b|"
+    r"\bacross\s+(?:multiple\s+)?(?:studies|cohorts|platforms|datasets)\b|"
+    r"\bmultiple\s+(?:independent\s+)?studies\s+(?:agree|show|support|confirm)\w*",
+    re.I,
+)
+REPLICATION_NEGATED = re.compile(
+    r"\b(?:not|never|no|cannot|can't|un)\W{0,3}(?:\w+\W{1,3}){0,3}"
+    r"(?:replicat|independent|confirm|concordan)|"
+    r"\breplicat\w*[\w,\s/-]{0,30}?\b(?:not|cannot|unavailable|absent|missing|lacking|failed)\b",
+    re.I,
+)
+CROSS_PLATFORM_LANGUAGE = re.compile(
+    r"\bcross[- ]platform\b|\borthogonal\s+platform\w*|\b(?:both|two)\s+platforms\b", re.I)
+
+
+def check_concordance(model_text: str, ledger) -> list:
+    """Cross-study agreement wording must be earned by the concordance classifier.
+
+    Base rates make the temptation concrete: of 101,543 estimate rows in this resource,
+    well under 0.4% carry any of the three validation checks, and every multi-estimate
+    protein draws its estimates from ONE study (often as different molecular forms of the
+    same gene product). So "replicated across studies" is almost never true here — and a
+    model that says it anyway is reciting the literature, not the retrieval.
+    """
+    problems = []
+    hit = REPLICATION_LANGUAGE.search(model_text)
+    if hit and not REPLICATION_NEGATED.search(model_text):
+        conc = (ledger.results_by_tool() or {}).get("classify_evidence_concordance") or {}
+        ec = conc.get("estimate_concordance") or {}
+        if not conc:
+            problems.append({
+                "kind": "concordance-not-in-ledger", "token": hit.group(0),
+                "detail": ("the text claims cross-study agreement but no concordance "
+                           "classification is in this run — nothing retrieved here "
+                           "compares two studies"),
+            })
+        elif ec.get("direction") == "conflict":
+            problems.append({
+                "kind": "concordance-contradicts-ledger", "token": hit.group(0),
+                "detail": "the classified estimates DISAGREE in sign",
+            })
+        elif ec.get("direction") != "agree" or (ec.get("n_estimates_compared") or 0) < 2:
+            problems.append({
+                "kind": "concordance-not-in-ledger", "token": hit.group(0),
+                "detail": (f"the classifier found "
+                           f"{ec.get('n_estimates_compared', 0)} comparable estimate(s) "
+                           f"(direction={ec.get('direction')}) — there is no agreement "
+                           f"to report"),
+            })
+        elif re.search(r"\bindependent", hit.group(0), re.I) and \
+                ec.get("independence") != "independent":
+            problems.append({
+                "kind": "independence-claim-unsupported", "token": hit.group(0),
+                "detail": (f"the estimates agree in sign but share a study and/or outcome "
+                           f"GWAS (independence={ec.get('independence')}) — sign "
+                           f"consistency is not independent replication"),
+            })
+    m = CROSS_PLATFORM_LANGUAGE.search(model_text)
+    if m:
+        conc = (ledger.results_by_tool() or {}).get("classify_evidence_concordance") or {}
+        if not (conc.get("estimate_concordance") or {}).get("cross_platform"):
+            problems.append({
+                "kind": "cross-platform-claim-unsupported", "token": m.group(0),
+                "detail": ("no two platform classes among the matched estimates — this "
+                           "resource is four SomaScan studies and one Olink, so genuinely "
+                           "cross-platform agreement is almost never observable in it"),
+            })
     return problems
 
 
@@ -284,21 +380,26 @@ def check_evidence_consistency(model_text: str, ledger) -> list:
     # causation. Causal wording on it is unearned, so the run fails and the card must fall
     # back to associational language.
     if mr_has_estimate:
-        est = (mr.get("matched_disease_estimates") or [{}])[0]
         def _blank(v):
             return v is None or (isinstance(v, str) and v.strip().upper() in {"", "NA", "NAN", "NULL"})
-        unvalidated = (_blank(est.get("steiger_direction_ok"))
-                       and _blank(est.get("coloc_prob"))
-                       and _blank(est.get("ld_check")))
-        single = est.get("n_snp") in (1, "1", 1.0)
-        if unvalidated and single:
+        def _unvalidated(e):
+            return (_blank(e.get("steiger_direction_ok"))
+                    and _blank(e.get("coloc_prob"))
+                    and _blank(e.get("ld_check"))
+                    and e.get("n_snp") in (1, "1", 1.0))
+        ests = mr.get("matched_disease_estimates") or [{}]
+        # Judge the BEST estimate, not the first. The first version read only est[0], so a
+        # pair whose second estimate carried Steiger + an LD check was punished as if it
+        # had none — the rule fired on sort order, not on evidence.
+        if all(_unvalidated(e) for e in ests):
+            est = ests[0]
             hit = CAUSAL_LANGUAGE.search(model_text)
             if hit and not CAUSAL_NEGATED.search(model_text):
                 problems.append({
                     "kind": "causal-claim-on-unvalidated-estimate",
                     "token": hit.group(0),
-                    "detail": (f"the retrieved estimate is a single-instrument Wald ratio "
-                               f"(n_snp={est.get('n_snp')}) with steiger="
+                    "detail": (f"every retrieved estimate ({len(ests)}) is a "
+                               f"single-instrument Wald ratio with steiger="
                                f"{est.get('steiger_direction_ok')}, coloc="
                                f"{est.get('coloc_prob')}, ld_check={est.get('ld_check')} — "
                                f"none of the three sanity checks that separate a causal "
@@ -321,6 +422,7 @@ def validate(model_text: str, ledger) -> dict:
     hay = _haystack(ledger)
     unsupported = list(check_evidence_consistency(model_text, ledger))
     unsupported += check_direction(model_text, ledger)
+    unsupported += check_concordance(model_text, ledger)
     unsupported += check_unearned_attributes(model_text, ledger)
 
     for claim_re, evidence_re in QUALITATIVE_CLAIMS:
