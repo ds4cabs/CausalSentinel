@@ -147,6 +147,32 @@ CAUSAL_NEGATED = re.compile(
 )
 
 
+# Sentence-scoped negation guard, used by every "unearned claim" rule below. The review
+# that forced it found honest denials failing across four new rules at once — "No
+# clinical trials on record", "Efficacy has not been demonstrated", "awaits replication"
+# — the exact CAUSAL_NEGATED lesson, recommitted. Sentence scope (not document scope)
+# matters in the other direction too: one negated sentence must not disarm checks on an
+# overclaim three sentences later.
+_NEG = re.compile(
+    r"\b(?:no|not|none|never|without|lack\w*|absen\w*|await\w*|"
+    r"un(?:proven|approved|confirmed|tested|replicated)|has yet to|remains? to be|"
+    r"cannot|can't|deny\w*|denied)\b", re.I)
+
+
+def _sentence_negated(text: str, pos: int) -> bool:
+    start = max(text.rfind(c, 0, pos) for c in ".;!?") + 1
+    ends = [e for e in (text.find(c, pos) for c in ".;!?") if e != -1]
+    end = min(ends) if ends else len(text)
+    return bool(_NEG.search(text[start:end]))
+
+
+def _sentence_of(text: str, pos: int) -> str:
+    start = max(text.rfind(c, 0, pos) for c in ".;!?") + 1
+    ends = [e for e in (text.find(c, pos) for c in ".;!?") if e != -1]
+    end = min(ends) if ends else len(text)
+    return text[start:end]
+
+
 # Clinical-status language splits into two families with different fates.
 #
 # PHASE / APPROVAL / TRIAL words became retrievable in round 6: get_clinical_evidence
@@ -157,12 +183,22 @@ CAUSAL_NEGATED = re.compile(
 # not called or returned nothing.
 CLINICAL_STATUS = re.compile(
     r"\b(?:approved?|approval|licen[cs]ed|marketed|registrational|"
-    r"clinical[- ]stage|late[- ]stage|phase\s*(?:i{1,3}v?|[1-4])\b|clinical trials?)\b",
+    r"clinical[- ]stage|late[- ]stage|phase\s*(?:i{1,3}v?|[1-4])\s*[ab]?\b|clinical trials?)\b",
     re.I,
 )
 _APPROVAL_WORDS = re.compile(r"\b(?:approved?|approval|licen[cs]ed|marketed)\b", re.I)
-_PHASE_WORD = re.compile(r"\bphase\s*(i{1,3}v?|[1-4])\b", re.I)
+# "[ab]?" because "Phase IIb" / "Phase 2a" are how trial stages are actually written —
+# without it the suffix broke the word boundary and the whole claim escaped every check.
+_PHASE_WORD = re.compile(r"\bphase\s*(i{1,3}v?|[1-4])\s*[ab]?\b", re.I)
 _ROMAN = {"i": 1, "ii": 2, "iii": 3, "iv": 4}
+# Kept in sync with tools/clinical.py::_STAGE_ORDER (the live Open Targets enum).
+_VSTAGES = ["PRECLINICAL", "EARLY_PHASE_1", "PHASE_1", "PHASE_1_2", "PHASE_2",
+            "PHASE_2_3", "PHASE_3", "PREAPPROVAL", "PHASE_4", "APPROVAL"]
+_STAGE_TOKEN = re.compile(r"EARLY_PHASE_1|PHASE_\d(?:_\d)?|PREAPPROVAL|APPROVAL")
+# Wording that honestly attributes a stage to a DIFFERENT indication ("approved for
+# another indication") — the one legitimate way to mention an other-disease stage.
+_OTHER_INDICATION = re.compile(
+    r"\b(?:other|another|different|elsewhere|separate)\b|\bnot\s+(?:for\s+)?this\b", re.I)
 #
 # EFFICACY words stay unearned FOREVER with this tool panel: a stage or a status says a
 # trial EXISTS, never that it worked — ziltivekimab's phase-3 ZEUS completed and missed
@@ -281,12 +317,6 @@ REPLICATION_LANGUAGE = re.compile(
     r"\bmultiple\s+(?:independent\s+)?studies\s+(?:agree|show|support|confirm)\w*",
     re.I,
 )
-REPLICATION_NEGATED = re.compile(
-    r"\b(?:not|never|no|cannot|can't|un)\W{0,3}(?:\w+\W{1,3}){0,3}"
-    r"(?:replicat|independent|confirm|concordan)|"
-    r"\breplicat\w*[\w,\s/-]{0,30}?\b(?:not|cannot|unavailable|absent|missing|lacking|failed)\b",
-    re.I,
-)
 CROSS_PLATFORM_LANGUAGE = re.compile(
     r"\bcross[- ]platform\b|\borthogonal\s+platform\w*|\b(?:both|two)\s+platforms\b", re.I)
 
@@ -301,10 +331,16 @@ def check_concordance(model_text: str, ledger) -> list:
     model that says it anyway is reciting the literature, not the retrieval.
     """
     problems = []
-    hit = REPLICATION_LANGUAGE.search(model_text)
-    if hit and not REPLICATION_NEGATED.search(model_text):
-        conc = (ledger.results_by_tool() or {}).get("classify_evidence_concordance") or {}
-        ec = conc.get("estimate_concordance") or {}
+    conc = (ledger.results_by_tool() or {}).get("classify_evidence_concordance") or {}
+    ec = conc.get("estimate_concordance") or {}
+    # EVERY hit is checked with its own sentence context. The first version checked only
+    # the first hit against a document-wide negation scan, which failed both ways: a
+    # benign "concordant across datasets" up front shielded an "independently confirmed"
+    # overclaim later, and one negated sentence anywhere disarmed every check — including
+    # when the model quoted the classifier's own "NOT independent replication" note.
+    for hit in REPLICATION_LANGUAGE.finditer(model_text):
+        if _sentence_negated(model_text, hit.start()):
+            continue
         if not conc:
             problems.append({
                 "kind": "concordance-not-in-ledger", "token": hit.group(0),
@@ -312,12 +348,14 @@ def check_concordance(model_text: str, ledger) -> list:
                            "classification is in this run — nothing retrieved here "
                            "compares two studies"),
             })
-        elif ec.get("direction") == "conflict":
+            break
+        if ec.get("direction") == "conflict":
             problems.append({
                 "kind": "concordance-contradicts-ledger", "token": hit.group(0),
                 "detail": "the classified estimates DISAGREE in sign",
             })
-        elif ec.get("direction") != "agree" or (ec.get("n_estimates_compared") or 0) < 2:
+            break
+        if ec.get("direction") != "agree" or (ec.get("n_estimates_compared") or 0) < 2:
             problems.append({
                 "kind": "concordance-not-in-ledger", "token": hit.group(0),
                 "detail": (f"the classifier found "
@@ -325,7 +363,10 @@ def check_concordance(model_text: str, ledger) -> list:
                            f"(direction={ec.get('direction')}) — there is no agreement "
                            f"to report"),
             })
-        elif re.search(r"\bindependent", hit.group(0), re.I) and \
+            break
+        # "Replicated" and "independent(ly) confirmed" both assert INDEPENDENT
+        # repetition; sign-consistency within one study earns neither.
+        if re.search(r"\breplicat|\bindependent", hit.group(0), re.I) and \
                 ec.get("independence") != "independent":
             problems.append({
                 "kind": "independence-claim-unsupported", "token": hit.group(0),
@@ -333,9 +374,10 @@ def check_concordance(model_text: str, ledger) -> list:
                            f"GWAS (independence={ec.get('independence')}) — sign "
                            f"consistency is not independent replication"),
             })
-    m = CROSS_PLATFORM_LANGUAGE.search(model_text)
-    if m:
-        conc = (ledger.results_by_tool() or {}).get("classify_evidence_concordance") or {}
+            break
+    for m in CROSS_PLATFORM_LANGUAGE.finditer(model_text):
+        if _sentence_negated(model_text, m.start()):
+            continue
         if not (conc.get("estimate_concordance") or {}).get("cross_platform"):
             problems.append({
                 "kind": "cross-platform-claim-unsupported", "token": m.group(0),
@@ -343,6 +385,7 @@ def check_concordance(model_text: str, ledger) -> list:
                            "resource is four SomaScan studies and one Olink, so genuinely "
                            "cross-platform agreement is almost never observable in it"),
             })
+        break
     return problems
 
 
@@ -352,42 +395,81 @@ def check_unearned_attributes(model_text: str, ledger) -> list:
     hay = _haystack(ledger)
     out = []
 
-    m = EFFICACY_CLAIMS.search(model_text)
-    if m:
+    for m in EFFICACY_CLAIMS.finditer(model_text):
+        if _sentence_negated(model_text, m.start()):
+            continue          # "efficacy has not been demonstrated" is the honest card
         out.append({"kind": "efficacy-claim-not-retrievable", "token": m.group(0),
                     "detail": ("stages and statuses say trials EXIST, not that they "
                                "worked — no tool in this panel returns efficacy; report "
                                "the stage or the approval, never 'proven'")})
+        break
 
-    m = CLINICAL_STATUS.search(model_text)
-    if m:
+    status_hits = [m for m in CLINICAL_STATUS.finditer(model_text)
+                   if not _sentence_negated(model_text, m.start())]
+    if status_hits:
         clin = (ledger.results_by_tool() or {}).get("get_clinical_evidence") or {}
-        clin_hay = json.dumps(clin, default=str) if clin.get("found") else ""
-        if not clin_hay:
-            out.append({"kind": "clinical-status-not-retrievable", "token": m.group(0),
-                        "detail": ("no clinical-evidence retrieval in this run supports "
-                                   "it — get_clinical_evidence was not called or "
-                                   "returned nothing")})
+        if not clin.get("found"):
+            out.append({"kind": "clinical-status-not-retrievable",
+                        "token": status_hits[0].group(0),
+                        "detail": ("no clinical-evidence retrieval supports it — "
+                                   + ("get_clinical_evidence returned no record for "
+                                      "this target" if clin else
+                                      "get_clinical_evidence was not called in this run"))})
         else:
-            am = _APPROVAL_WORDS.search(model_text)
-            if am and "APPROVAL" not in clin_hay:
+            # Scope matters: a review showed the whole-record check re-imported the
+            # exact misattribution the clinical tool was built to prevent — an APPROVAL
+            # reached for ANOTHER disease licensed "approved" wording about THIS one.
+            # This-disease fields earn the claim outright; the whole record earns it
+            # only when the sentence itself attributes the stage to another indication.
+            this_hay = json.dumps({k: clin.get(k) for k in
+                                   ("max_stage_this_disease", "drugs_for_this_disease")},
+                                  default=str)
+            whole_hay = json.dumps(clin, default=str)
+            this_ranks = [_VSTAGES.index(s) for s in _STAGE_TOKEN.findall(this_hay)
+                          if s in _VSTAGES]
+            best_this = max(this_ranks, default=-1)
+
+            for am in _APPROVAL_WORDS.finditer(model_text):
+                if _sentence_negated(model_text, am.start()):
+                    continue
+                if "APPROVAL" in this_hay:
+                    break
+                if "APPROVAL" in whole_hay and \
+                        _OTHER_INDICATION.search(_sentence_of(model_text, am.start())):
+                    break
                 out.append({"kind": "approval-claim-contradicts-clinical-record",
                             "token": am.group(0),
-                            "detail": ("the retrieved clinical record contains no "
-                                       "APPROVAL-stage programme for this target")})
+                            "detail": ("no APPROVAL-stage programme for THIS disease in "
+                                       "the retrieved record" +
+                                       (" (an approval exists for another indication — "
+                                        "say so explicitly if that is what you mean)"
+                                        if "APPROVAL" in whole_hay else ""))})
+                break
             for pm in _PHASE_WORD.finditer(model_text):
+                if _sentence_negated(model_text, pm.start()):
+                    continue
                 raw = pm.group(1).lower()
-                n = _ROMAN.get(raw, None) if raw.isalpha() else int(raw)
-                if n and f"PHASE_{n}" not in clin_hay and "APPROVAL" not in clin_hay:
-                    out.append({"kind": "phase-claim-contradicts-clinical-record",
-                                "token": pm.group(0),
-                                "detail": (f"the retrieved clinical record contains no "
-                                           f"PHASE_{n} (or later) programme")})
-                    break
+                n = _ROMAN.get(raw) if raw.isalpha() else int(raw)
+                if not n:
+                    continue
+                need = _VSTAGES.index(f"PHASE_{n}")
+                if best_this >= need:
+                    continue
+                sent = _sentence_of(model_text, pm.start())
+                whole_ranks = [_VSTAGES.index(s) for s in _STAGE_TOKEN.findall(whole_hay)
+                               if s in _VSTAGES]
+                if max(whole_ranks, default=-1) >= need and _OTHER_INDICATION.search(sent):
+                    continue
+                out.append({"kind": "phase-claim-contradicts-clinical-record",
+                            "token": pm.group(0),
+                            "detail": (f"no PHASE_{n}-or-later programme for THIS "
+                                       f"disease in the retrieved record")})
+                break
     chembl = json.dumps((ledger.results_by_tool() or {}).get("get_chembl_modulators", {}),
                         default=str)
     for word, evidence in MODALITY.items():
-        if re.search(r"\b" + re.escape(word) + r"\b", model_text, re.I) and \
+        wm = re.search(r"\b" + re.escape(word) + r"\b", model_text, re.I)
+        if wm and not _sentence_negated(model_text, wm.start()) and \
                 not re.search(evidence, chembl, re.I):
             out.append({"kind": "modality-not-in-chembl", "token": word,
                         "detail": "no ChEMBL action/moa in this run supports that modality"})
@@ -475,7 +557,8 @@ def validate(model_text: str, ledger) -> dict:
 
     for claim_re, evidence_re in QUALITATIVE_CLAIMS:
         m = re.search(claim_re, model_text, re.I)
-        if m and not re.search(evidence_re, hay, re.I):
+        if m and not _sentence_negated(model_text, m.start()) and \
+                not re.search(evidence_re, hay, re.I):
             unsupported.append({"kind": "qualitative-claim", "token": m.group(0)})
 
     for tok in set(RSID_RE.findall(model_text)):

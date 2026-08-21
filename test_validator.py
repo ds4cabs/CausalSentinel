@@ -153,7 +153,7 @@ CLIN_APPROVED = FakeLedger({
         "max_stage_this_disease": "APPROVAL",
         "drugs_for_this_disease": [
             {"drug": "EVOLOCUMAB", "max_stage_this_disease": "APPROVAL",
-             "n_reports_this_disease": 39, "n_with_stop_reason": 11}]},
+             "n_reports_this_disease": 39, "n_stop_this_disease": 11}]},
 })
 
 CLIN_PHASE2 = FakeLedger({
@@ -163,7 +163,28 @@ CLIN_PHASE2 = FakeLedger({
         "max_stage_this_disease": "PHASE_2",
         "drugs_for_this_disease": [
             {"drug": "SOMEDRUG", "max_stage_this_disease": "PHASE_2",
-             "n_reports_this_disease": 5, "n_with_stop_reason": 1}]},
+             "n_reports_this_disease": 5, "n_stop_this_disease": 1}]},
+})
+
+# The tocilizumab shape: an APPROVAL exists — for ANOTHER disease. drugs_for_this_disease
+# is empty, so nothing licenses approval wording about THIS disease. This fixture exists
+# because a review caught the whole-record substring check re-importing the exact
+# misattribution the clinical tool was built to prevent.
+CLIN_OTHER_ONLY = FakeLedger({
+    "get_mr_result": {"found": False, "note": "no estimate"},
+    "get_clinical_evidence": {
+        "found": True, "max_stage_any_disease": "APPROVAL",
+        "max_stage_this_disease": None,
+        "drugs_for_this_disease": [],
+        "drugs_other_diseases_context_only": [
+            {"drug": "TOCILIZUMAB", "max_stage_any_disease": "APPROVAL"}]},
+})
+
+# The honest empty record (PNPLA3 x MASLD shape).
+CLIN_NONE = FakeLedger({
+    "get_mr_result": {"found": False, "note": "no estimate"},
+    "get_clinical_evidence": {"found": False,
+                              "note": "No drug or clinical candidate on record."},
 })
 
 # (name, ledger, text, expect_ok)
@@ -181,6 +202,23 @@ CASES = [
      "FDA-approved therapies exist for this target.", False),
     ("efficacy wording is never earned, even at APPROVAL", CLIN_APPROVED,
      "The approved therapy provides definitive proof of efficacy.", False),
+    # --- honest denials must never fail (the CAUSAL_NEGATED lesson, recommitted) ---
+    ("denying clinical development on an empty record", CLIN_NONE,
+     "No clinical trials against this target are on record.", True),
+    ("denying approval on a phase-2-only record", CLIN_PHASE2,
+     "No approved therapy exists for this disease.", True),
+    ("denying efficacy is the honest card", CLIN_APPROVED,
+     "Efficacy has not been demonstrated in this disease.", True),
+    ("denied phase plus earned phase in one sentence pair", CLIN_PHASE2,
+     "No phase 3 trial was ever run; development stopped at phase 2.", True),
+    # --- stage attribution: another disease's approval licenses nothing here --------
+    ("other-disease approval does not license approval wording", CLIN_OTHER_ONLY,
+     "Approved therapies exist for this disease.", False),
+    ("other-disease approval MAY be stated as such", CLIN_OTHER_ONLY,
+     "The drug is approved for another indication.", True),
+    # --- suffixed phase designations are still phase claims -------------------------
+    ("phase IIb claim with no clinical retrieval", MR_PRESENT,
+     "A Phase IIb study supports this target.", False),
     # --- conflicting estimates license NO intervention direction ------------------
     ("conflicting signs forbid a drug-direction claim", MR_CONFLICTING,
      "MR evidence suggests C3 inhibition would be therapeutic.", False),
@@ -197,6 +235,15 @@ CASES = [
      "The verdict is consistent with the retrieved causal estimate for LPA.", True),
     ("denying replication is not claiming it", MR_VALIDATED,
      "This causal LPA estimate has not been replicated across studies.", True),
+    ("hedging that replication is awaited is not claiming it", MR_VALIDATED,
+     "This causal LPA estimate awaits replication in an independent cohort.", True),
+    ("stating a lack of independent replication is honest", CONC_AGREE_NONINDEP,
+     "The association lacks independent replication.", True),
+    ("a later overclaim is not shielded by an earlier benign sentence", CONC_AGREE_NONINDEP,
+     "The two estimates are concordant across datasets in sign. The effect is "
+     "independently confirmed.", False),
+    ("'replicated' itself requires independence, not just agreement", CONC_AGREE_NONINDEP,
+     "This finding is replicated across datasets.", False),
     ("sign consistency may be stated when classified", CONC_AGREE_NONINDEP,
      "The two retrieved estimates are concordant across datasets in sign.", True),
     ("but not sold as independent replication", CONC_AGREE_NONINDEP,

@@ -44,13 +44,15 @@ def _blank(v) -> bool:
 
 
 def _sign(beta):
+    """+1 / -1, or None when no direction can be read — including beta == 0, which
+    carries no direction (matching check_direction, which also skips zero betas)."""
     if beta is None:
         return None
     try:
         b = float(beta)
     except (TypeError, ValueError):
         return None
-    return 0 if b == 0 else (1 if b > 0 else -1)
+    return None if b == 0 else (1 if b > 0 else -1)
 
 
 def _validation_depth(est: dict) -> dict:
@@ -124,7 +126,14 @@ def classify_evidence_concordance(protein: str,
         direction = "no_estimate"
     elif len(ests) == 1:
         direction = "single_estimate"
-    elif len(set(signs)) <= 1:
+    elif len(signs) < len(ests):
+        # A review found the empty-set trap: with every beta missing, set(signs) has
+        # <= 1 member and two direction-free estimates classified as "agree" — agreement
+        # earned from zero direction data. Agreement requires a sign from EVERY estimate.
+        direction = "not_assessable"
+        notes.append(f"{len(ests) - len(signs)} of {len(ests)} matched estimates carry "
+                     f"no usable beta, so direction agreement cannot be assessed.")
+    elif len(set(signs)) == 1:
         direction = "agree"
     else:
         direction = "conflict"

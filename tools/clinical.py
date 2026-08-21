@@ -44,17 +44,36 @@ _CLINICAL_PROBES = {
     "masld": ["nonalcoholic fatty liver", "steatohepatitis", "nash", "steatotic liver"],
     "nafld": ["steatohepatitis", "nash", "steatotic liver"],
 }
+# mr.py's ALIASES include bare tokens like "liver" — harmless against GWAS outcome
+# strings, but against registry disease names they match the wrong ETIOLOGY: a review
+# caught MASLD scoring 0.90 against "alcoholic liver disease", "liver cirrhosis" and
+# "liver neoplasm". These veto a match unless a specific positive probe also hit.
+_CLINICAL_EXCLUDES = {
+    "masld": ["alcoholic", "cirrhosis", "neoplasm", "carcinoma", "cancer",
+              "hepatitis b", "hepatitis c", "biliary"],
+    "nafld": ["alcoholic", "cirrhosis", "neoplasm", "carcinoma", "cancer",
+              "hepatitis b", "hepatitis c", "biliary"],
+}
 
 
 def _clinical_match(disease: str, name: str) -> float:
-    """Symmetric match plus registry-vocabulary probes."""
+    """Symmetric match plus registry-vocabulary probes, minus wrong-etiology vetoes."""
     if not name:
         return 0.0
     score = max(_disease_match(disease, name), _disease_match(name, disease))
     n = _norm(name)
-    for probe in _CLINICAL_PROBES.get(_norm(disease), []):
+    d = _norm(disease)
+    probe_hit = False
+    for probe in _CLINICAL_PROBES.get(d, []):
         if _norm(probe) in n:
             score = max(score, 0.85)
+            probe_hit = True
+    if not probe_hit:
+        for veto in _CLINICAL_EXCLUDES.get(d, []):
+            # "nonalcoholic fatty liver disease" contains "alcoholic"; the positive
+            # probe catches the nonalcoholic form first, so a veto here is genuine.
+            if _norm(veto) in n:
+                return min(score, 0.4)
     return score
 
 _CANDIDATES = """
@@ -77,9 +96,13 @@ query($ensemblId: String!) {
 }
 """
 
-# Order matters only for reporting a maximum; APPROVAL outranks everything.
-_STAGE_ORDER = ["PRECLINICAL", "PHASE_1", "PHASE_1_EARLY", "PHASE_2", "PHASE_3",
-                "PHASE_4", "APPROVAL"]
+# The LIVE Open Targets enum, verified against the API 2026-08-21 — an earlier draft
+# guessed "PHASE_1_EARLY" (real value: EARLY_PHASE_1) and omitted the combined stages,
+# so PHASE_1_2 / PHASE_2_3 / PREAPPROVAL all ranked below everything. Combined stages
+# rank between their components; APPROVAL outranks all. Keep in sync with the copy in
+# validate_card.py (_VSTAGES).
+_STAGE_ORDER = ["PRECLINICAL", "EARLY_PHASE_1", "PHASE_1", "PHASE_1_2", "PHASE_2",
+                "PHASE_2_3", "PHASE_3", "PREAPPROVAL", "PHASE_4", "APPROVAL"]
 
 
 def _stage_rank(stage) -> int:
@@ -114,15 +137,30 @@ def _summarise_reports(reports: list, disease: str) -> dict:
                >= 0.6 for d in (r.get("diseases") or []))
     ]
     stages_here = [r.get("clinicalStage") for r in this_disease if r.get("clinicalStage")]
+    stopped_here = [r for r in this_disease if r.get("trialWhyStopped") or
+                    r.get("trialStopReasonCategories")]
+    cats_here = {}
+    for r in stopped_here:
+        for c in (r.get("trialStopReasonCategories") or []):
+            cats_here[c] = cats_here.get(c, 0) + 1
+    example_here = next((r.get("trialWhyStopped") for r in stopped_here
+                         if r.get("trialWhyStopped")), None)
+    # Two denominators, named so they cannot be mixed: a review caught the card showing
+    # "5 trial reports, 52 with a stop reason" for tocilizumab x CHD — 5 was this-disease,
+    # 52 was all 427 all-indication reports. Every count says which universe it counts.
     return {
-        "n_trial_reports": len(reports),
         "n_reports_this_disease": len(this_disease),
         "max_stage_this_disease": (max(stages_here, key=_stage_rank)
                                    if stages_here else None),
-        "n_with_stop_reason": len(stopped),
-        "stop_reason_categories": cats or None,
-        "example_why_stopped": (str(example)[:160] if example else None),
-        "latest_report_year": max(years) if years else None,
+        "n_stop_this_disease": len(stopped_here),
+        "stop_reason_categories_this_disease": cats_here or None,
+        "example_why_stopped_this_disease": (str(example_here)[:160]
+                                             if example_here else None),
+        "n_reports_any_disease": len(reports),
+        "n_stop_any_disease": len(stopped),
+        "stop_reason_categories_any_disease": cats or None,
+        "example_why_stopped_any_disease": (str(example)[:160] if example else None),
+        "latest_report_year_any_disease": max(years) if years else None,
     }
 
 
@@ -246,7 +284,7 @@ if __name__ == "__main__":
                          "max_stage_any_disease", "max_stage_this_disease", "note")}
         slim["drugs_for_this_disease"] = [
             {kk: d[kk] for kk in ("drug", "max_stage_this_disease", "max_stage_any_disease",
-                                  "n_reports_this_disease", "n_with_stop_reason")}
+                                  "n_reports_this_disease", "n_stop_this_disease")}
             for d in (r.get("drugs_for_this_disease") or [])[:4]]
         print("=" * 70)
         print(json.dumps(slim, indent=2, ensure_ascii=False)[:1400])

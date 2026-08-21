@@ -107,10 +107,14 @@ def _cell_generic(tool: str, r: dict) -> str:
         m = r.get("drugs_for_this_disease") or []
         if m:
             top = m[0]
+            # Counts and denominators from the SAME universe: this-disease reports only.
+            # A drug's all-indication stop count next to a this-disease report count is
+            # exactly the mixed-denominator cell this project treats as a cardinal sin.
             head = (f"max stage for THIS disease: **{r.get('max_stage_this_disease') or 'none on record'}** "
                     f"— e.g. {top.get('drug')} ({top.get('max_stage_this_disease') or 'no stage on record'}, "
-                    f"{top.get('n_reports_this_disease')} trial report(s)"
-                    + (f", {top.get('n_with_stop_reason')} with a stop reason" if top.get("n_with_stop_reason") else "")
+                    f"{top.get('n_reports_this_disease')} trial report(s) for this disease"
+                    + (f", {top.get('n_stop_this_disease')} of them with a stop reason"
+                       if top.get("n_stop_this_disease") else "")
                     + ")")
             extra = f"; +{len(m) - 1} more drug(s) for this disease" if len(m) > 1 else ""
             return (head + extra +
@@ -225,7 +229,9 @@ def _concordance_block(results: dict) -> list:
                      "estimates agree in sign but are NOT independent (shared study/outcome "
                      "GWAS) — this is not replication",
                  "conflict": "estimates CONFLICT in sign — check what each analyte "
-                             "actually measures before explaining why"}.get(
+                             "actually measures before explaining why",
+                 "not_assessable": "direction agreement NOT assessable — at least one "
+                                   "estimate carries no usable beta"}.get(
             ec.get("label") or ec.get("direction"), ec.get("direction"))
         out.append(f"- {n} matched estimates: {label}. Validation depth per estimate "
                    f"(0-4): {ec.get('validation_depth_per_estimate')}.")
