@@ -1,0 +1,341 @@
+{
+  "protein": "NR3C1",
+  "disease": "Rhinitis, Allergic, Seasonal",
+  "generated_at": "2026-08-21T15:48:29",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_mr_result",
+    "get_chembl_modulators",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "NR3C1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "NR3C1",
+        "accession": "P04150",
+        "gene_names": [
+          "NR3C1"
+        ],
+        "protein_name": "Glucocorticoid receptor",
+        "function": "Receptor for glucocorticoids (GC) (PubMed:27120390, PubMed:37478846). Has a dual mode of action: as a transcription factor that binds to glucocorticoid response elements (GRE), both for nuclear and mitochondrial DNA, and as a modulator of other transcription factors (PubMed:28139699). Affects inflammatory responses, cellular proliferation and differentiation in target tissues. Involved in chromatin remodeling (PubMed:9590696). Plays a role in rapid mRNA degradation by binding to the 5' UTR of target mRNAs and interacting with PNRC2 in a ligand-dependent manner which recruits the RNA helicase UPF1 and the mRNA-decapping enzyme DCP1A, leading to RNA decay (PubMed:25775514). Could act as a coactivator for STAT5-dependent transcription upon growth hormone (GH) stimulation and could reveal an essential role of hepatic GR in the control of body growth (By similarity) Has transcriptional activation and repression activity (PubMed:11435610, PubMed:15769988, PubMed:15866175, PubMed:17635946, PubMed:19141540, PubMed:19248771, PubMed:20484466, PubMed:21664385, PubMed:23820903). Mediates glucocorticoid-induced apoptosis (PubMed:23303127). Promotes accurate chromosome segregation during mitosis (PubMed:25847991). May act as a tumor suppressor (PubMed:25847991). May play a negative role in adipogenesis through the regulation of lipolytic and antilipogenic gene expression (By similarity) Acts as a dominant negative inhibitor of isoform Alpha (PubMed:20484466, PubMed:7769088, PubMed:8621628). Has intrinsic transcriptional activity independent of isoform Alpha when both isoforms are coexpressed (PubMed:19248771, PubMed:26711253). Loses this transcription modulator function on its own (PubMed:20484466). Has no hormone-binding activity (PubMed:8621628). May play a role in controlling glucose metabolism by maintaining insulin sensitivity (By similarity). Reduces hepatic gluconeogenesis through down-regulation of PEPCK in an isoform Alpha-dependent manner (PubMed:26711253). Directly regulates STAT1 expression in isoform Alpha-independent manner (PubMed:26711253) Has lower transcriptional activation activity than isoform Alpha. Exerts a dominant negative effect on isoform Alpha trans-repression mechanism (PubMed:20484466) Increases activity of isoform Alpha More effective than isoform Alpha in transcriptional activation, but not repression activity Has transcriptional activation activity Has transcriptional activation activity Has transcriptional activation activity Has highest transcriptional activation activity of all isoforms created by alternative initiation (PubMed:15866175, PubMed:23820903). Has transcriptional repression activity (PubMed:23303127). Mediates glucocorticoid-induced apoptosis (PubMed:23303127, PubMed:23820903) Has transcriptional activation activity Has transcriptional activation activity Has lowest transcriptional activation activity of all isoforms created by alternative initiation (PubMed:15866175, PubMed:23820903). Has transcriptional repression activity (PubMed:23303127)",
+        "subcellular_location": [
+          "Cytoplasm",
+          "Nucleus",
+          "Mitochondrion",
+          "Cytoplasm, cytoskeleton, spindle",
+          "Cytoplasm, cytoskeleton, microtubule organizing center, centrosome",
+          "Chromosome",
+          "Nucleus, nucleoplasm",
+          "Nucleus",
+          "Cytoplasm",
+          "Nucleus",
+          "Cytoplasm"
+        ],
+        "diseases": [
+          "Glucocorticoid resistance, generalized"
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/P04150",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 6.044,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "NR3C1",
+        "disease": "Rhinitis, Allergic, Seasonal"
+      },
+      "result": {
+        "found": false,
+        "note": "Could not resolve target 'NR3C1' or disease 'Rhinitis, Allergic, Seasonal'."
+      },
+      "seconds": 1.128,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "NR3C1",
+        "disease": "Rhinitis, Allergic, Seasonal"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "NR3C1",
+        "disease": "Rhinitis, Allergic, Seasonal",
+        "note": "No pQTL-based MR estimate for NR3C1 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.562,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "NR3C1"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL2034",
+        "target_name": "Glucocorticoid receptor",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 20,
+        "modulators": [
+          {
+            "drug": "CHEMBL635",
+            "action": "AGONIST",
+            "moa": "Glucocorticoid receptor agonist"
+          },
+          {
+            "drug": "CHEMBL1200845",
+            "action": "AGONIST",
+            "moa": "Glucocorticoid receptor agonist"
+          },
+          {
+            "drug": "CHEMBL1201173",
+            "action": "AGONIST",
+            "moa": "Glucocorticoid receptor agonist"
+          },
+          {
+            "drug": "CHEMBL1201749",
+            "action": "AGONIST",
+            "moa": "Glucocorticoid receptor agonist"
+          },
+          {
+            "drug": "CHEMBL632",
+            "action": "AGONIST",
+            "moa": "Glucocorticoid receptor agonist"
+          },
+          {
+            "drug": "CHEMBL389621",
+            "action": "AGONIST",
+            "moa": "Glucocorticoid receptor agonist"
+          },
+          {
+            "drug": "CHEMBL1504",
+            "action": "AGONIST",
+            "moa": "Glucocorticoid receptor agonist"
+          },
+          {
+            "drug": "CHEMBL1549",
+            "action": "AGONIST",
+            "moa": "Glucocorticoid receptor agonist"
+          },
+          {
+            "drug": "CHEMBL1159650",
+            "action": "AGONIST",
+            "moa": "Glucocorticoid receptor agonist"
+          },
+          {
+            "drug": "CHEMBL1200495",
+            "action": "AGONIST",
+            "moa": "Glucocorticoid receptor agonist"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'NR3C1' and resolved to 'Glucocorticoid receptor' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL2034/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 14.031,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "NR3C1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "NR3C1",
+        "total_records": 354,
+        "pathogenic_in_sample": 0,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "NM_000176.3(NR3C1):c.1393A>G (p.Ile465Val)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_000176.3(NR3C1):c.1894C>A (p.Gln632Lys)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_000176.3(NR3C1):c.1633T>C (p.Tyr545His)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_000176.3(NR3C1):c.997C>G (p.His333Asp)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "GRCh38/hg38 5q31.3(chr5:143198972-143718158)x3",
+            "significance": "Uncertain significance"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 354 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=NR3C1%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.465,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "NR3C1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "NR3C1",
+        "pLI": 0.9999999950056521,
+        "LOEUF": 0.29560781190285434,
+        "LOEUF_percentile": 4,
+        "oe_lof": 0.1890897142243455,
+        "oe_lof_lower": 0.12488471358304587,
+        "obs_lof": 14,
+        "exp_lof": 74.0389293908906,
+        "plain_language": "gnomAD expected about 74 loss-of-function variants in this gene and observed 14. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 3.036958423110445,
+        "lof_z": 5.919259853327552,
+        "interpretation": "LoF-INTOLERANT: this gene is depleted of loss-of-function variants in the population, so inhibiting it carries a safety warning.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/NR3C1",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.463,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "NR3C1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "NR3C1",
+        "n_unique_snps": 85,
+        "n_association_rows": 170,
+        "total_association_rows_reported": 170,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs258796",
+          "rs12153243",
+          "rs852978",
+          "rs17100350",
+          "rs6877893",
+          "rs6860760",
+          "rs367680772",
+          "rs13361249",
+          "rs244468",
+          "rs10041520",
+          "rs258813",
+          "rs3776221",
+          "rs138133765",
+          "rs258755",
+          "rs10482633"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/NR3C1",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 1.936,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "NR3C1"
+      },
+      "result": {
+        "found": false,
+        "gene_symbol": "NR3C1",
+        "note": "No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.491,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "NR3C1",
+        "Rhinitis, Allergic, Seasonal"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "NR3C1",
+          "disease": "Rhinitis, Allergic, Seasonal",
+          "note": "No pQTL-based MR estimate for NR3C1 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "NR3C1",
+        "disease": "Rhinitis, Allergic, Seasonal",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "INSUFFICIENT EVIDENCE — no disease-specific genetic association or causal MR estimate was retrieved for NR3C1 in allergic seasonal rhinitis.",
+  "model_reasoning": "NR3C1 encodes the glucocorticoid receptor, a well-characterized target with multiple known small-molecule agonists in ChEMBL. However, no Mendelian randomization estimate or Open Targets disease association score was available for this target-disease pair. The gene exhibits strong loss-of-function intolerance in gnomAD, suggesting potential safety risks if inhibited, although current modulators are primarily agonists. GWAS catalog queries link numerous SNPs to the locus, but direct evidence connecting NR3C1 to seasonal allergic rhinitis remains unestablished in the provided datasets.",
+  "validation": {
+    "ok": false,
+    "unsupported": [
+      {
+        "kind": "modality-not-in-chembl",
+        "token": "small-molecule",
+        "detail": "no ChEMBL action/moa in this run supports that modality"
+      }
+    ],
+    "checked": 0
+  },
+  "card_markdown": "# Target Evidence Card — NR3C1 × Rhinitis, Allergic, Seasonal\n\n**Verdict:** INSUFFICIENT EVIDENCE — no disease-specific genetic association or causal MR estimate was retrieved for NR3C1 in allergic seasonal rhinitis.\n\n> **The druggability row is about ChEMBL target \"Glucocorticoid receptor\" (CHEMBL2034),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | **not available** — Could not resolve target 'NR3C1' or disease 'Rhinitis, Allergic, Seasonal'. |\n| Protein context | `get_uniprot_dossier` | P04150 — Glucocorticoid receptor; location: Cytoplasm, Nucleus, Mitochondrion, Cytoplasm, cytoskeleton,  |\n| Known modulators / druggability | `get_chembl_modulators` | 20 known modulators (AGONIST) |\n| Clinical variants | `get_clinvar_variants` | 354 ClinVar records; 0 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1, LOEUF=0.296 → LoF-INTOLERANT (handle with care) |\n| Extra genetic evidence | `get_gwas_catalog` | 85 unique SNPs from 170/170 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n| Clinical development record | `get_clinical_evidence` | _tool not called by the agent in this run_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Could not resolve target 'NR3C1' or disease 'Rhinitis, Allergic, Seasonal'.\n- **`get_mr_result`** — No pQTL-based MR estimate for NR3C1 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'NR3C1' and resolved to 'Glucocorticoid receptor' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 354 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nNR3C1 encodes the glucocorticoid receptor, a well-characterized target with multiple known small-molecule agonists in ChEMBL. However, no Mendelian randomization estimate or Open Targets disease association score was available for this target-disease pair. The gene exhibits strong loss-of-function intolerance in gnomAD, suggesting potential safety risks if inhibited, although current modulators are primarily agonists. GWAS catalog queries link numerous SNPs to the locus, but direct evidence connecting NR3C1 to seasonal allergic rhinitis remains unestablished in the provided datasets.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P04150 — _UniProt release 2026_02 (10-June-2026)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL2034/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=NR3C1%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/NR3C1 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/NR3C1 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:48:29\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (9 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n\n> **VALIDATION FAILED** — the model wrote claim tokens with no support in tool output:\n> - [modality-not-in-chembl] `small-molecule`\n"
+}

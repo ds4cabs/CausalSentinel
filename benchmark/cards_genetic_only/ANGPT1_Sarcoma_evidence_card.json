@@ -1,0 +1,292 @@
+{
+  "protein": "ANGPT1",
+  "disease": "Sarcoma",
+  "generated_at": "2026-08-21T15:52:02",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_mr_result",
+    "get_chembl_modulators",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ANGPT1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "ANGPT1",
+        "accession": "Q15389",
+        "gene_names": [
+          "ANGPT1"
+        ],
+        "protein_name": "Angiopoietin-1",
+        "function": "Binds and activates TEK/TIE2 receptor by inducing its dimerization and tyrosine phosphorylation. Plays an important role in the regulation of angiogenesis, endothelial cell survival, proliferation, migration, adhesion and cell spreading, reorganization of the actin cytoskeleton, but also maintenance of vascular quiescence. Required for normal angiogenesis and heart development during embryogenesis. After birth, activates or inhibits angiogenesis, depending on the context. Inhibits angiogenesis and promotes vascular stability in quiescent vessels, where endothelial cells have tight contacts. In quiescent vessels, ANGPT1 oligomers recruit TEK to cell-cell contacts, forming complexes with TEK molecules from adjoining cells, and this leads to preferential activation of phosphatidylinositol 3-kinase and the AKT1 signaling cascades. In migrating endothelial cells that lack cell-cell adhesions, ANGT1 recruits TEK to contacts with the extracellular matrix, leading to the formation of focal adhesion complexes, activation of PTK2/FAK and of the downstream kinases MAPK1/ERK2 and MAPK3/ERK1, and ultimately to the stimulation of sprouting angiogenesis. Mediates blood vessel maturation/stability. Implicated in endothelial developmental processes later and distinct from that of VEGF. Appears to play a crucial role in mediating reciprocal interactions between the endothelium and surrounding matrix and mesenchyme",
+        "subcellular_location": [
+          "Secreted"
+        ],
+        "diseases": [
+          "Angioedema, hereditary, 5"
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/Q15389",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 0.853,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ANGPT1",
+        "disease": "Sarcoma"
+      },
+      "result": {
+        "found": false,
+        "resolved": {
+          "ensembl_id": "ENSG00000154188",
+          "efo_id": "MONDO_0005089",
+          "target_name": "ANGPT1",
+          "disease_name": "sarcoma"
+        },
+        "note": "ANGPT1 is not among the top 500 associated targets for MONDO_0005089 (sarcoma). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'ANGPT1' -> ENSG00000154188 (ANGPT1); 'Sarcoma' -> MONDO_0005089 (sarcoma). Scores below describe THAT term, not the free-text phrase.",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 3.161,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "ANGPT1",
+        "disease": "Sarcoma"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "ANGPT1",
+        "disease": "Sarcoma",
+        "note": "No pQTL-based MR estimate for ANGPT1 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.974,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ANGPT1"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL3217395",
+        "target_name": "Angiopoietin-1",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 2,
+        "modulators": [
+          {
+            "drug": "CHEMBL2108568",
+            "action": "INHIBITOR",
+            "moa": "Angiopoietin-1 inhibitor"
+          },
+          {
+            "drug": "CHEMBL2109586",
+            "action": "INHIBITOR",
+            "moa": "Angiopoietin-1 inhibitor"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'ANGPT1' and resolved to 'Angiopoietin-1' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL3217395/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 4.866,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ANGPT1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "ANGPT1",
+        "total_records": 383,
+        "pathogenic_in_sample": 0,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "NM_001146.5(ANGPT1):c.1196A>G (p.Gln399Arg)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_001146.5(ANGPT1):c.710T>C (p.Leu237Ser)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_001146.5(ANGPT1):c.16T>C (p.Ser6Pro)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_001146.5(ANGPT1):c.654C>G (p.Asn218Lys)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_001146.5(ANGPT1):c.780C>T (p.Asn260=)",
+            "significance": "Likely benign"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 383 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=ANGPT1%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.842,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ANGPT1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "ANGPT1",
+        "pLI": 0.9999285973998482,
+        "LOEUF": 0.40968537670904903,
+        "LOEUF_percentile": 9,
+        "oe_lof": 0.27313183109542566,
+        "oe_lof_lower": 0.18692346436394097,
+        "obs_lof": 17,
+        "exp_lof": 62.24100622699157,
+        "plain_language": "gnomAD expected about 62 loss-of-function variants in this gene and observed 17. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 2.044311289091219,
+        "lof_z": 4.8647271258328075,
+        "interpretation": "LoF-INTOLERANT: this gene is depleted of loss-of-function variants in the population, so inhibiting it carries a safety warning.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/ANGPT1",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.664,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ANGPT1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "ANGPT1",
+        "n_unique_snps": 97,
+        "n_association_rows": 194,
+        "total_association_rows_reported": 194,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs10105844",
+          "rs11778352",
+          "rs2514868",
+          "rs41420946",
+          "rs1283687",
+          "rs13270051",
+          "rs10955448",
+          "rs5893855",
+          "rs4133395",
+          "rs4496939",
+          "rs56823108",
+          "rs1954735",
+          "rs13439823",
+          "rs150194324",
+          "rs12545727"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/ANGPT1",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 1.981,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ANGPT1"
+      },
+      "result": {
+        "found": false,
+        "gene_symbol": "ANGPT1",
+        "note": "No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.546,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "ANGPT1",
+        "Sarcoma"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "ANGPT1",
+          "disease": "Sarcoma",
+          "note": "No pQTL-based MR estimate for ANGPT1 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "ANGPT1",
+        "disease": "Sarcoma",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "INSUFFICIENT EVIDENCE — there is currently no direct genetic or Mendelian randomization evidence connecting ANGPT1 to sarcoma.",
+  "model_reasoning": "Open Targets does not list ANGPT1 among the top associated targets for sarcoma, and no causal Mendelian randomization estimate is available from the EpiGraphDB pQTL resource. Although the gene has multiple GWAS associations and ChEMBL lists known small-molecule modulators, gnomAD constraint metrics indicate that ANGPT1 is loss-of-function intolerant (pLI near 1, low LOEUF), raising potential safety concerns for target inhibition. Furthermore, ClinVar records contain no pathogenic variants in this sample, and PharmGKB shows no pharmacogenomic annotations.\n```",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 1
+  },
+  "card_markdown": "# Target Evidence Card — ANGPT1 × Sarcoma\n\n**Verdict:** INSUFFICIENT EVIDENCE — there is currently no direct genetic or Mendelian randomization evidence connecting ANGPT1 to sarcoma.\n\n> **You asked about \"Sarcoma\". This card scored MONDO_0005089 — sarcoma.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Angiopoietin-1\" (CHEMBL3217395),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | **not available** — ANGPT1 is not among the top 500 associated targets for MONDO_0005089 (sarcoma). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'ANGPT1' -> ENSG00000154188 (ANGPT1); 'Sarcoma' -> MONDO_0005089 (sarcoma). Scores below describe THAT term, not the free-text phrase. |\n| Protein context | `get_uniprot_dossier` | Q15389 — Angiopoietin-1; location: Secreted |\n| Known modulators / druggability | `get_chembl_modulators` | 2 known modulators (INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 383 ClinVar records; 0 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1, LOEUF=0.41 → LoF-INTOLERANT (handle with care) |\n| Extra genetic evidence | `get_gwas_catalog` | 97 unique SNPs from 194/194 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n| Clinical development record | `get_clinical_evidence` | _tool not called by the agent in this run_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — ANGPT1 is not among the top 500 associated targets for MONDO_0005089 (sarcoma). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'ANGPT1' -> ENSG00000154188 (ANGPT1); 'Sarcoma' -> MONDO_0005089 (sarcoma). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — No pQTL-based MR estimate for ANGPT1 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'ANGPT1' and resolved to 'Angiopoietin-1' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 383 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets does not list ANGPT1 among the top associated targets for sarcoma, and no causal Mendelian randomization estimate is available from the EpiGraphDB pQTL resource. Although the gene has multiple GWAS associations and ChEMBL lists known small-molecule modulators, gnomAD constraint metrics indicate that ANGPT1 is loss-of-function intolerant (pLI near 1, low LOEUF), raising potential safety concerns for target inhibition. Furthermore, ClinVar records contain no pathogenic variants in this sample, and PharmGKB shows no pharmacogenomic annotations.\n```\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q15389 — _UniProt release 2026_02 (10-June-2026)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL3217395/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=ANGPT1%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/ANGPT1 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/ANGPT1 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:52:02\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (9 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

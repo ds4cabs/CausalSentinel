@@ -1,0 +1,293 @@
+{
+  "protein": "HDAC2",
+  "disease": "Melanoma",
+  "generated_at": "2026-08-21T15:50:40",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_chembl_modulators",
+    "get_mr_result",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "HDAC2"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "HDAC2",
+        "accession": "Q92769",
+        "gene_names": [
+          "HDAC2"
+        ],
+        "protein_name": "Histone deacetylase 2",
+        "function": "Histone deacetylase that catalyzes the deacetylation of lysine residues on the N-terminal part of the core histones (H2A, H2B, H3 and H4) (PubMed:28497810). Histone deacetylation gives a tag for epigenetic repression and plays an important role in transcriptional regulation, cell cycle progression and developmental events (By similarity). Histone deacetylases act via the formation of large multiprotein complexes (By similarity). Forms transcriptional repressor complexes by associating with MAD, SIN3, YY1 and N-COR (PubMed:12724404). Component of a RCOR/GFI/KDM1A/HDAC complex that suppresses, via histone deacetylase (HDAC) recruitment, a number of genes implicated in multilineage blood cell development (By similarity). Acts as a component of the histone deacetylase NuRD complex which participates in the remodeling of chromatin (PubMed:16428440, PubMed:28977666). Component of the SIN3B complex that represses transcription and counteracts the histone acetyltransferase activity of EP300 through the recognition H3K27ac marks by PHF12 and the activity of the histone deacetylase HDAC2 (PubMed:37137925). Also deacetylates non-histone targets: deacetylates TSHZ3, thereby regulating its transcriptional repressor activity (PubMed:19343227). May be involved in the transcriptional repression of circadian target genes, such as PER1, mediated by CRY1 through histone deacetylation (By similarity). Involved in MTA1-mediated transcriptional corepression of TFF1 and CDKN1A (PubMed:21965678). In addition to protein deacetylase activity, also acts as a protein-lysine deacylase by recognizing other acyl groups: catalyzes removal of (2E)-butenoyl (crotonyl), lactoyl (lactyl) and 2-hydroxyisobutanoyl (2-hydroxyisobutyryl) acyl groups from lysine residues, leading to protein decrotonylation, delactylation and de-2-hydroxyisobutyrylation, respectively (PubMed:28497810, PubMed:29192674, PubMed:35044827)",
+        "subcellular_location": [
+          "Nucleus",
+          "Cytoplasm"
+        ],
+        "diseases": [
+          "None annotated."
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/Q92769",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 0.823,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "HDAC2",
+        "disease": "Melanoma"
+      },
+      "result": {
+        "found": false,
+        "resolved": {
+          "ensembl_id": "ENSG00000196591",
+          "efo_id": "MONDO_0005105",
+          "target_name": "HDAC2",
+          "disease_name": "melanoma"
+        },
+        "note": "HDAC2 is not among the top 500 associated targets for MONDO_0005105 (melanoma). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'HDAC2' -> ENSG00000196591 (HDAC2); 'Melanoma' -> MONDO_0005105 (melanoma). Scores below describe THAT term, not the free-text phrase.",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.858,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "HDAC2"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL1937",
+        "target_name": "Histone deacetylase 2",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 2,
+        "modulators": [
+          {
+            "drug": "CHEMBL98",
+            "action": "INHIBITOR",
+            "moa": "Histone deacetylase 2 inhibitor"
+          },
+          {
+            "drug": "CHEMBL272980",
+            "action": "INHIBITOR",
+            "moa": "Histone deacetylase 2 inhibitor"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'HDAC2' and resolved to 'Histone deacetylase 2' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL1937/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 7.053,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "HDAC2",
+        "disease": "Melanoma"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "HDAC2",
+        "disease": "Melanoma",
+        "note": "No pQTL-based MR estimate for HDAC2 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.843,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "HDAC2"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "HDAC2",
+        "total_records": 86,
+        "pathogenic_in_sample": 0,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "NM_001527.4(HDAC2):c.1334del (p.Ala445fs)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_001527.4(HDAC2):c.1364_1365del (p.Glu455fs)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_001527.4(HDAC2):c.1132C>T (p.Pro378Ser)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_001527.4(HDAC2):c.944A>G (p.Tyr315Cys)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_001527.4(HDAC2):c.400G>A (p.Val134Ile)",
+            "significance": "Uncertain significance"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 86 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=HDAC2%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.395,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "HDAC2"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "HDAC2",
+        "pLI": 0.9999999999987502,
+        "LOEUF": 0.1534079749545686,
+        "LOEUF_percentile": 0,
+        "oe_lof": 0.07296084160579105,
+        "oe_lof_lower": 0.03812955097298087,
+        "obs_lof": 5,
+        "exp_lof": 68.52991125040887,
+        "plain_language": "gnomAD expected about 69 loss-of-function variants in this gene and observed 5. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 5.390612133653819,
+        "lof_z": 6.510325390749946,
+        "interpretation": "LoF-INTOLERANT: this gene is depleted of loss-of-function variants in the population, so inhibiting it carries a safety warning.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/HDAC2",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.895,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "HDAC2"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "HDAC2",
+        "n_unique_snps": 17,
+        "n_association_rows": 34,
+        "total_association_rows_reported": 34,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs1016378028",
+          "rs17075682",
+          "rs2753884",
+          "rs17075678",
+          "rs547441777",
+          "rs717388",
+          "rs10499077",
+          "rs150239481",
+          "rs145064964",
+          "rs35869216",
+          "rs2615510",
+          "rs117005905",
+          "rs28558559",
+          "rs13217548",
+          "rs1334901"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/HDAC2",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 1.828,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "HDAC2"
+      },
+      "result": {
+        "found": false,
+        "gene_symbol": "HDAC2",
+        "note": "No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.458,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "HDAC2",
+        "Melanoma"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "HDAC2",
+          "disease": "Melanoma",
+          "note": "No pQTL-based MR estimate for HDAC2 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "HDAC2",
+        "disease": "Melanoma",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "INSUFFICIENT EVIDENCE — HDAC2 is not among the top associated targets for melanoma in Open Targets and lacks causal Mendelian randomization evidence.",
+  "model_reasoning": "HDAC2 encodes a nuclear histone deacetylase involved in epigenetic repression and transcriptional regulation. Although small-molecule inhibitors are documented in ChEMBL, the target has no available causal estimate for melanoma from the EpiGraphDB pQTL resource, and Open Targets does not rank it among the top associated targets for melanoma. Furthermore, gnomAD constraint metrics indicate that HDAC2 is extremely loss-of-function intolerant (pLI = 1.0, low LOEUF), raising notable safety considerations for its inhibition.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 1
+  },
+  "card_markdown": "# Target Evidence Card — HDAC2 × Melanoma\n\n**Verdict:** INSUFFICIENT EVIDENCE — HDAC2 is not among the top associated targets for melanoma in Open Targets and lacks causal Mendelian randomization evidence.\n\n> **You asked about \"Melanoma\". This card scored MONDO_0005105 — melanoma.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Histone deacetylase 2\" (CHEMBL1937),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | **not available** — HDAC2 is not among the top 500 associated targets for MONDO_0005105 (melanoma). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'HDAC2' -> ENSG00000196591 (HDAC2); 'Melanoma' -> MONDO_0005105 (melanoma). Scores below describe THAT term, not the free-text phrase. |\n| Protein context | `get_uniprot_dossier` | Q92769 — Histone deacetylase 2; location: Nucleus, Cytoplasm |\n| Known modulators / druggability | `get_chembl_modulators` | 2 known modulators (INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 86 ClinVar records; 0 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1, LOEUF=0.153 → LoF-INTOLERANT (handle with care) |\n| Extra genetic evidence | `get_gwas_catalog` | 17 unique SNPs from 34/34 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n| Clinical development record | `get_clinical_evidence` | _tool not called by the agent in this run_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — HDAC2 is not among the top 500 associated targets for MONDO_0005105 (melanoma). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'HDAC2' -> ENSG00000196591 (HDAC2); 'Melanoma' -> MONDO_0005105 (melanoma). Scores below describe THAT term, not the free-text phrase.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'HDAC2' and resolved to 'Histone deacetylase 2' — confirm this is the intended target.\n- **`get_mr_result`** — No pQTL-based MR estimate for HDAC2 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 86 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nHDAC2 encodes a nuclear histone deacetylase involved in epigenetic repression and transcriptional regulation. Although small-molecule inhibitors are documented in ChEMBL, the target has no available causal estimate for melanoma from the EpiGraphDB pQTL resource, and Open Targets does not rank it among the top associated targets for melanoma. Furthermore, gnomAD constraint metrics indicate that HDAC2 is extremely loss-of-function intolerant (pLI = 1.0, low LOEUF), raising notable safety considerations for its inhibition.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q92769 — _UniProt release 2026_02 (10-June-2026)_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL1937/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=HDAC2%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/HDAC2 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/HDAC2 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:50:40\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (9 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

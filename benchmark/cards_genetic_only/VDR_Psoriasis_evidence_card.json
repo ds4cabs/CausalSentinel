@@ -1,0 +1,418 @@
+{
+  "protein": "VDR",
+  "disease": "Psoriasis",
+  "generated_at": "2026-08-21T15:46:18",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_mr_result",
+    "get_chembl_modulators",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "VDR"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "VDR",
+        "accession": "P11473",
+        "gene_names": [
+          "VDR"
+        ],
+        "protein_name": "Vitamin D3 receptor",
+        "function": "Nuclear receptor for calcitriol, the active form of vitamin D3 which mediates the action of this vitamin on cells (PubMed:10678179, PubMed:15728261, PubMed:16913708, PubMed:28698609, PubMed:37478846). Enters the nucleus upon vitamin D3 binding where it forms heterodimers with the retinoid X receptor/RXR (PubMed:28698609). The VDR-RXR heterodimers bind to specific response elements on DNA and activate the transcription of vitamin D3-responsive target genes (PubMed:28698609). Plays a central role in calcium homeostasis (By similarity). Also functions as a receptor for the secondary bile acid lithocholic acid (LCA) and its metabolites (PubMed:12016314, PubMed:32354638)",
+        "subcellular_location": [
+          "Nucleus",
+          "Cytoplasm"
+        ],
+        "diseases": [
+          "Rickets vitamin D-dependent 2A"
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/P11473",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 8.921,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "VDR",
+        "disease": "Psoriasis"
+      },
+      "result": {
+        "found": true,
+        "ensembl_id": "ENSG00000111424",
+        "efo_id": "MONDO_0005083",
+        "resolved_target_name": "VDR",
+        "resolved_disease_name": "psoriasis",
+        "overall_score": 0.6366,
+        "datatype_scores": {
+          "literature": 0.8692,
+          "animal_model": 0.4676,
+          "clinical": 0.9932
+        },
+        "note": "Free-text inputs were resolved to ontology terms: 'VDR' -> ENSG00000111424 (VDR); 'Psoriasis' -> MONDO_0005083 (psoriasis). Scores below describe THAT term, not the free-text phrase.",
+        "url": "https://platform.opentargets.org/evidence/ENSG00000111424/MONDO_0005083",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.82,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "VDR",
+        "disease": "Psoriasis"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "VDR",
+        "disease": "Psoriasis",
+        "note": "No pQTL-based MR estimate for VDR in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.492,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "VDR"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL1977",
+        "target_name": "Vitamin D3 receptor",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 18,
+        "modulators": [
+          {
+            "drug": "CHEMBL1042",
+            "action": "AGONIST",
+            "moa": "Vitamin D receptor agonist"
+          },
+          {
+            "drug": "CHEMBL1536",
+            "action": "AGONIST",
+            "moa": "Vitamin D receptor agonist"
+          },
+          {
+            "drug": "CHEMBL1200666",
+            "action": "AGONIST",
+            "moa": "Vitamin D receptor agonist"
+          },
+          {
+            "drug": "CHEMBL1200622",
+            "action": "AGONIST",
+            "moa": "Vitamin D receptor agonist"
+          },
+          {
+            "drug": "CHEMBL846",
+            "action": "AGONIST",
+            "moa": "Vitamin D receptor agonist"
+          },
+          {
+            "drug": "CHEMBL3544909",
+            "action": "AGONIST",
+            "moa": "Vitamin D receptor agonist"
+          },
+          {
+            "drug": "CHEMBL1200810",
+            "action": "AGONIST",
+            "moa": "Vitamin D receptor agonist"
+          },
+          {
+            "drug": "CHEMBL284121",
+            "action": "AGONIST",
+            "moa": "Vitamin D receptor agonist"
+          },
+          {
+            "drug": "CHEMBL2105107",
+            "action": "AGONIST",
+            "moa": "Vitamin D receptor agonist"
+          },
+          {
+            "drug": "CHEMBL605525",
+            "action": "AGONIST",
+            "moa": "Vitamin D receptor agonist"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'VDR' and resolved to 'Vitamin D3 receptor' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL1977/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 5.053,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "VDR"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "VDR",
+        "total_records": 583,
+        "pathogenic_in_sample": 4,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "Single allele",
+            "significance": "Likely pathogenic"
+          },
+          {
+            "title": "NM_000376.3(VDR):c.49G>C (p.Asp17His)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_000376.3(VDR):c.345C>G (p.Ala115=)",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "GRCh38/hg38 12p13.33-q13.12(chr12:82453-49847230)x3",
+            "significance": "Pathogenic"
+          },
+          {
+            "title": "NM_000376.3(VDR):c.238C>T (p.Arg80Trp)",
+            "significance": "Likely pathogenic"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 583 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=VDR%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.527,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "VDR"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "VDR",
+        "pLI": 0.015655241000310325,
+        "LOEUF": 0.7017101914299548,
+        "LOEUF_percentile": 23,
+        "oe_lof": 0.4782230006842202,
+        "oe_lof_lower": 0.33361469791500964,
+        "obs_lof": 19,
+        "exp_lof": 39.73041859721437,
+        "plain_language": "gnomAD expected about 40 loss-of-function variants in this gene and observed 19. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 2.293707640552635,
+        "lof_z": 2.7900438744385396,
+        "interpretation": "LoF-tolerant: no population-level depletion of loss-of-function variants, which is reassuring but is NOT positive evidence of efficacy.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/VDR",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.51,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "VDR"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "VDR",
+        "n_unique_snps": 132,
+        "n_association_rows": 285,
+        "total_association_rows_reported": 285,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs2056448",
+          "rs10783221",
+          "rs1635554",
+          "rs11168228",
+          "rs536829424",
+          "rs2228570",
+          "rs1990028",
+          "rs992074156",
+          "rs78315508",
+          "rs2544029",
+          "rs11168236",
+          "rs2239181",
+          "rs73111983",
+          "rs34922454",
+          "rs733592"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/VDR",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 4.225,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "VDR"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "VDR",
+        "n_clinical_annotations": 18,
+        "evidence_level_counts": {
+          "3": 18
+        },
+        "drugs": [
+          "alendronate",
+          "calcium",
+          "clodronate",
+          "conjugated estrogens",
+          "deferasirox",
+          "irinotecan",
+          "medroxyprogesterone",
+          "midazolam",
+          "peginterferon alfa-2a",
+          "peginterferon alfa-2b",
+          "ribavirin",
+          "selective beta-2-adrenoreceptor agonists",
+          "warfarin"
+        ],
+        "n_drugs": 13,
+        "examples": [
+          {
+            "drugs": [
+              "alendronate"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs1544410 (VDR); alendronate; Osteoporosis (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "conjugated estrogens",
+              "medroxyprogesterone"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs1544410 (VDR); conjugated estrogens or medroxyprogesterone (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "selective beta-2-adrenoreceptor agonists"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs2239179 (VDR); selective beta-2-adrenoreceptor agonists; Asthma (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "selective beta-2-adrenoreceptor agonists"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs1540339 (VDR); selective beta-2-adrenoreceptor agonists; Asthma (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "peginterferon alfa-2a",
+              "ribavirin"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs1544410 (VDR); peginterferon alfa-2a or ribavirin; Hepatitis C (level 3 Toxicity)"
+          },
+          {
+            "drugs": [
+              "deferasirox"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs731236 (VDR); deferasirox; beta-Thalassemia (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "deferasirox"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs1544410 (VDR); deferasirox; beta-Thalassemia (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "clodronate"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs1544410 (VDR); clodronate (level 3 Efficacy)"
+          }
+        ],
+        "url": "https://www.pharmgkb.org/search?query=VDR",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.585,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "VDR",
+        "Psoriasis"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "VDR",
+          "disease": "Psoriasis",
+          "note": "No pQTL-based MR estimate for VDR in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "VDR",
+        "disease": "Psoriasis",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "GO — VDR demonstrates substantial genetic, clinical, and pharmacological support as a therapeutic target for psoriasis.",
+  "model_reasoning": "The vitamin D receptor (VDR) is well-validated in clinical contexts for psoriasis, supported by a strong overall target-disease association score and numerous known receptor agonists in ChEMBL. Although no pQTL Mendelian randomization estimate is available in the EpiGraphDB resource, the locus is backed by extensive GWAS catalog associations and favorable gnomAD constraint metrics indicating tolerance to loss-of-function variation.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 0
+  },
+  "card_markdown": "# Target Evidence Card — VDR × Psoriasis\n\n**Verdict:** GO — VDR demonstrates substantial genetic, clinical, and pharmacological support as a therapeutic target for psoriasis.\n\n> **You asked about \"Psoriasis\". This card scored MONDO_0005083 — psoriasis.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Vitamin D3 receptor\" (CHEMBL1977),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.637 (literature=0.869, animal_model=0.468, clinical=0.993) |\n| Protein context | `get_uniprot_dossier` | P11473 — Vitamin D3 receptor; location: Nucleus, Cytoplasm |\n| Known modulators / druggability | `get_chembl_modulators` | 18 known modulators (AGONIST) |\n| Clinical variants | `get_clinvar_variants` | 583 ClinVar records; 4 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=0.016, LOEUF=0.702 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 132 unique SNPs from 285/285 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 18 clinical annotation(s) over 13 drug(s): alendronate, calcium, clodronate, conjugated estrogens +9 more — ClinPGx evidence level 3 (scale 1A strongest to 4 weakest) — e.g. rs1544410 (VDR); alendronate; Osteoporosis (level 3 Efficacy) |\n| Clinical development record | `get_clinical_evidence` | _tool not called by the agent in this run_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'VDR' -> ENSG00000111424 (VDR); 'Psoriasis' -> MONDO_0005083 (psoriasis). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — No pQTL-based MR estimate for VDR in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'VDR' and resolved to 'Vitamin D3 receptor' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 583 ClinVar records for this gene; it is a sample, not a rate.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nThe vitamin D receptor (VDR) is well-validated in clinical contexts for psoriasis, supported by a strong overall target-disease association score and numerous known receptor agonists in ChEMBL. Although no pQTL Mendelian randomization estimate is available in the EpiGraphDB resource, the locus is backed by extensive GWAS catalog associations and favorable gnomAD constraint metrics indicating tolerance to loss-of-function variation.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P11473 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000111424/MONDO_0005083 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL1977/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=VDR%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/VDR — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/VDR — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=VDR — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n\n## Provenance\n\n- Generated: 2026-08-21T15:46:18\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (9 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}
