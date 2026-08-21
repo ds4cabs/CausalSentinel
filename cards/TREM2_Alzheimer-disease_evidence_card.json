@@ -1,17 +1,19 @@
 {
   "protein": "TREM2",
   "disease": "Alzheimer disease",
-  "generated_at": "2026-08-17T22:29:37",
+  "generated_at": "2026-08-21T15:34:04",
   "model": "gemini-flash-lite-latest",
   "tools_called": [
     "get_uniprot_dossier",
     "get_target_disease_evidence",
-    "get_mr_result",
     "get_chembl_modulators",
+    "get_mr_result",
     "get_clinvar_variants",
     "get_gnomad_constraint",
     "get_gwas_catalog",
-    "get_pharmgkb_drug_gene"
+    "get_pharmgkb_drug_gene",
+    "get_clinical_evidence",
+    "classify_evidence_concordance"
   ],
   "tool_ledger": [
     {
@@ -41,7 +43,7 @@
         "url": "https://www.uniprot.org/uniprotkb/Q9NZC2",
         "source_release": "UniProt release 2026_02 (10-June-2026)"
       },
-      "seconds": 0.752,
+      "seconds": 3.054,
       "exception": null
     },
     {
@@ -67,7 +69,27 @@
         "url": "https://platform.opentargets.org/evidence/ENSG00000095970/MONDO_0004975",
         "source_release": "Open Targets data release 26.06"
       },
-      "seconds": 1.886,
+      "seconds": 2.827,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "TREM2"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL6196124",
+        "target_name": "Triggering receptor expressed on myeloid cells 2",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 0,
+        "modulators": [],
+        "note": "ChEMBL target matched by text search on 'TREM2' and resolved to 'Triggering receptor expressed on myeloid cells 2' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL6196124/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 4.47,
       "exception": null
     },
     {
@@ -218,19 +240,7 @@
         "url": "https://epigraphdb.org/pqtl/",
         "note": "TREM2 HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Alzheimer disease'. The other outcomes are listed for context only — do not present them as evidence about 'Alzheimer disease'."
       },
-      "seconds": 2.031,
-      "exception": null
-    },
-    {
-      "tool": "get_chembl_modulators",
-      "args": [],
-      "kwargs": {
-        "gene_symbol": "TREM2"
-      },
-      "result": {
-        "error": "ChEMBL HTTP 500"
-      },
-      "seconds": 5.565,
+      "seconds": 1.549,
       "exception": null
     },
     {
@@ -269,9 +279,9 @@
         ],
         "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 202 ClinVar records for this gene; it is a sample, not a rate.",
         "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=TREM2%5Bgene%5D",
-        "source_release": "ClinVar build Build260809-1055.1"
+        "source_release": "ClinVar build Build260818-0035.1"
       },
-      "seconds": 1.264,
+      "seconds": 2.017,
       "exception": null
     },
     {
@@ -298,7 +308,7 @@
         "url": "https://gnomad.broadinstitute.org/gene/TREM2",
         "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
       },
-      "seconds": 0.413,
+      "seconds": 1.157,
       "exception": null
     },
     {
@@ -317,25 +327,25 @@
         "note": null,
         "example_rsids": [
           "rs2234247",
+          "rs142232675",
+          "rs13207171",
           "rs113052081",
-          "rs2101270",
-          "rs1968871",
-          "rs9394764",
-          "rs71558736",
-          "rs56104198",
+          "rs2234253",
           "rs9296359",
           "rs1872245",
-          "rs9381040",
-          "rs9462674",
-          "rs60755019",
+          "rs13216201",
+          "rs7748513",
+          "rs75932628",
+          "rs61998254",
+          "rs4711658",
           "rs7748777",
-          "rs72857505",
-          "rs2234256"
+          "rs60755019",
+          "rs6902672"
         ],
         "url": "https://www.ebi.ac.uk/gwas/genes/TREM2",
         "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
       },
-      "seconds": 27.832,
+      "seconds": 2.265,
       "exception": null
     },
     {
@@ -350,22 +360,215 @@
         "note": "No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).",
         "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
       },
-      "seconds": 0.436,
+      "seconds": 0.541,
+      "exception": null
+    },
+    {
+      "tool": "get_clinical_evidence",
+      "args": [],
+      "kwargs": {
+        "protein": "TREM2",
+        "disease": "Alzheimer disease"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "TREM2",
+        "disease": "Alzheimer disease",
+        "ensembl_id": "ENSG00000095970",
+        "note": "No drug or clinical candidate against TREM2 in Open Targets. An empty clinical record means the clinic has not filed results against this target — NOT that the target is bad, and not that nothing was ever tried outside registries.",
+        "url": "https://platform.opentargets.org/target/ENSG00000095970",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 1.604,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "TREM2",
+        "Alzheimer disease"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "TREM2",
+          "disease": "Alzheimer disease",
+          "n_outcomes_available": 51,
+          "matched_disease_estimates": [],
+          "other_outcomes_for_this_protein": [
+            {
+              "outcome": "Coronary heart disease",
+              "outcome_gwas_id": "7",
+              "beta": 0.082894444,
+              "se": 0.101859722,
+              "p_value": 0.415753896,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs114812713",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Non-cancer illness code  self-reported: chronic obstructive airways disease or copd",
+              "outcome_gwas_id": "UKB-a:67",
+              "beta": 0.245678922,
+              "se": 0.317556298,
+              "p_value": 0.439135016,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs114812713",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Eye problems or disorders: Cataract",
+              "outcome_gwas_id": "UKB-a:426",
+              "beta": -0.212468996,
+              "se": 0.144890027,
+              "p_value": 0.142535099,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs114812713",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Sleep duration",
+              "outcome_gwas_id": "UKB-a:9",
+              "beta": 0.020497611,
+              "se": 0.016446139,
+              "p_value": 0.21263669,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs114812713",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Pulse rate",
+              "outcome_gwas_id": "UKB-a:363",
+              "beta": 0.035625556,
+              "se": 0.037093333,
+              "p_value": 0.336838772,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs114812713",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Hearing difficulty or problems: Yes",
+              "outcome_gwas_id": "UKB-a:257",
+              "beta": -0.062043363,
+              "se": 0.038759955,
+              "p_value": 0.109441651,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs114812713",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Fractured bone site(s): Wrist",
+              "outcome_gwas_id": "UKB-a:439",
+              "beta": -0.233016175,
+              "se": 0.199234337,
+              "p_value": 0.242178762,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs114812713",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Vascular or heart problems diagnosed by doctor: Angina",
+              "outcome_gwas_id": "UKB-a:436",
+              "beta": -0.185627359,
+              "se": 0.146002657,
+              "p_value": 0.203587403,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs114812713",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            }
+          ],
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/",
+          "note": "TREM2 HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Alzheimer disease'. The other outcomes are listed for context only — do not present them as evidence about 'Alzheimer disease'."
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "TREM2",
+        "disease": "Alzheimer disease",
+        "retrieval_coverage": {
+          "epigraphdb": "instrument_exists_disease_unmatched",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
       "exception": null
     }
   ],
-  "model_verdict": "GO — Strong genetic and biological evidence supports TREM2 as a target for Alzheimer disease, driven by robust genetic associations and its known microglial receptor role in amyloid-beta and lipoprotein clearance.",
-  "model_reasoning": "Open Targets demonstrates a strong overall association score between TREM2 and Alzheimer disease, with particularly high genetic association evidence. UniProt confirms that TREM2 acts as a receptor for amyloid-beta peptide 42 and apolipoproteins, mediating microglial activation, phagocytosis, and lipid metabolism. ClinVar records pathogenic variants in the gene, and gnomAD constraint metrics indicate that TREM2 is tolerant to loss-of-function variants. While no specific Mendelian randomization estimate was available for Alzheimer disease, the combination of strong genetic associations and microglial biology supports its pursuit.",
+  "model_verdict": "GO — TREM2 shows strong genetic and literature associations with Alzheimer disease, supported by loss-of-function tolerance indicating safety for therapeutic modulation.",
+  "model_reasoning": "Open Targets data reveals a strong overall association score and high genetic and literature evidence for TREM2 in Alzheimer disease. The protein functions as a microglial receptor mediating amyloid-beta uptake and degradation, aligning directly with disease pathology. Although no pre-computed Mendelian randomization estimate matching Alzheimer disease was available from the EpiGraphDB resource and no clinical modulators are currently cataloged in ChEMBL or Open Targets clinical evidence, ClinVar records and gnomAD constraint metrics indicate the gene is loss-of-function tolerant. Furthermore, GWAS Catalog mapping identifies multiple associated SNPs, reinforcing the genetic link.",
   "validation": {
-    "ok": false,
-    "unsupported": [
-      {
-        "kind": "modality-not-in-chembl",
-        "token": "peptide",
-        "detail": "no ChEMBL action/moa in this run supports that modality"
-      }
-    ],
-    "checked": 1
+    "ok": true,
+    "unsupported": [],
+    "checked": 0
   },
-  "card_markdown": "# Target Evidence Card — TREM2 × Alzheimer disease\n\n**Verdict:** GO — Strong genetic and biological evidence supports TREM2 as a target for Alzheimer disease, driven by robust genetic associations and its known microglial receptor role in amyloid-beta and lipoprotein clearance.\n\n> **Question actually answered:** the free-text disease was resolved to **MONDO_0004975 (Alzheimer disease)**. If that is not what you meant, every score below answers a different question.\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.558 (literature=0.994, animal_model=0.288, genetic_association=0.862) |\n| Protein context | `get_uniprot_dossier` | Q9NZC2 — Triggering receptor expressed on myeloid cells 2; location: Cell membrane, Secreted, Secreted |\n| Known modulators / druggability | `get_chembl_modulators` | **tool error** — ChEMBL HTTP 500 |\n| Clinical variants | `get_clinvar_variants` | 202 ClinVar records; 5 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=7.9e-07, LOEUF=1.27 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 70 unique SNPs from 140/140 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'TREM2' -> ENSG00000095970 (TREM2); 'Alzheimer disease' -> MONDO_0004975 (Alzheimer disease). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — TREM2 HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Alzheimer disease'. The other outcomes are listed for context only — do not present them as evidence about 'Alzheimer disease'.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 202 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n\n## Reasoning\n\nOpen Targets demonstrates a strong overall association score between TREM2 and Alzheimer disease, with particularly high genetic association evidence. UniProt confirms that TREM2 acts as a receptor for amyloid-beta peptide 42 and apolipoproteins, mediating microglial activation, phagocytosis, and lipid metabolism. ClinVar records pathogenic variants in the gene, and gnomAD constraint metrics indicate that TREM2 is tolerant to loss-of-function variants. While no specific Mendelian randomization estimate was available for Alzheimer disease, the combination of strong genetic associations and microglial biology supports its pursuit.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q9NZC2 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000095970/MONDO_0004975 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=TREM2%5Bgene%5D — _ClinVar build Build260809-1055.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/TREM2 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/TREM2 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n\n## Provenance\n\n- Generated: 2026-08-17T22:29:37\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (8 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n\n> **VALIDATION FAILED** — the model wrote claim tokens with no support in tool output:\n> - [modality-not-in-chembl] `peptide`\n"
+  "card_markdown": "# Target Evidence Card — TREM2 × Alzheimer disease\n\n**Verdict:** GO — TREM2 shows strong genetic and literature associations with Alzheimer disease, supported by loss-of-function tolerance indicating safety for therapeutic modulation.\n\n> **You asked about \"Alzheimer disease\". This card scored MONDO_0004975 — Alzheimer disease.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Triggering receptor expressed on myeloid cells 2\" (CHEMBL6196124),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — protein present, no estimate for THIS disease · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.558 (literature=0.994, animal_model=0.288, genetic_association=0.862) |\n| Protein context | `get_uniprot_dossier` | Q9NZC2 — Triggering receptor expressed on myeloid cells 2; location: Cell membrane, Secreted, Secreted |\n| Known modulators / druggability | `get_chembl_modulators` | target CHEMBL6196124 — **0 known modulators in ChEMBL** |\n| Clinical variants | `get_clinvar_variants` | 202 ClinVar records; 5 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=7.9e-07, LOEUF=1.27 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 70 unique SNPs from 140/140 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n| Clinical development record | `get_clinical_evidence` | **not available** — No drug or clinical candidate against TREM2 in Open Targets. An empty clinical record means the clinic has not filed results against this target — NOT that the target is bad, and not that nothing was ever tried outside registries. |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'TREM2' -> ENSG00000095970 (TREM2); 'Alzheimer disease' -> MONDO_0004975 (Alzheimer disease). Scores below describe THAT term, not the free-text phrase.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'TREM2' and resolved to 'Triggering receptor expressed on myeloid cells 2' — confirm this is the intended target.\n- **`get_mr_result`** — TREM2 HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Alzheimer disease'. The other outcomes are listed for context only — do not present them as evidence about 'Alzheimer disease'.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 202 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n- **`get_clinical_evidence`** — No drug or clinical candidate against TREM2 in Open Targets. An empty clinical record means the clinic has not filed results against this target — NOT that the target is bad, and not that nothing was ever tried outside registries.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets data reveals a strong overall association score and high genetic and literature evidence for TREM2 in Alzheimer disease. The protein functions as a microglial receptor mediating amyloid-beta uptake and degradation, aligning directly with disease pathology. Although no pre-computed Mendelian randomization estimate matching Alzheimer disease was available from the EpiGraphDB resource and no clinical modulators are currently cataloged in ChEMBL or Open Targets clinical evidence, ClinVar records and gnomAD constraint metrics indicate the gene is loss-of-function tolerant. Furthermore, GWAS Catalog mapping identifies multiple associated SNPs, reinforcing the genetic link.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q9NZC2 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000095970/MONDO_0004975 — _Open Targets data release 26.06_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL6196124/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=TREM2%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/TREM2 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/TREM2 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_clinical_evidence`: https://platform.opentargets.org/target/ENSG00000095970 — _Open Targets data release 26.06_\n\n## Provenance\n\n- Generated: 2026-08-21T15:34:04\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
 }

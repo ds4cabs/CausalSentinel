@@ -1,17 +1,19 @@
 {
   "protein": "OR51E2",
   "disease": "epilepsy",
-  "generated_at": "2026-08-17T22:25:56",
+  "generated_at": "2026-08-21T15:34:30",
   "model": "gemini-flash-lite-latest",
   "tools_called": [
     "get_uniprot_dossier",
     "get_target_disease_evidence",
-    "get_chembl_modulators",
     "get_mr_result",
+    "get_chembl_modulators",
     "get_clinvar_variants",
     "get_gnomad_constraint",
     "get_gwas_catalog",
-    "get_pharmgkb_drug_gene"
+    "get_pharmgkb_drug_gene",
+    "get_clinical_evidence",
+    "classify_evidence_concordance"
   ],
   "tool_ledger": [
     {
@@ -39,7 +41,7 @@
         "url": "https://www.uniprot.org/uniprotkb/Q9H255",
         "source_release": "UniProt release 2026_02 (10-June-2026)"
       },
-      "seconds": 0.805,
+      "seconds": 7.445,
       "exception": null
     },
     {
@@ -60,19 +62,7 @@
         "note": "OR51E2 is not among the top 500 associated targets for MONDO_0005027 (epilepsy). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'OR51E2' -> ENSG00000167332 (OR51E2); 'epilepsy' -> MONDO_0005027 (epilepsy). Scores below describe THAT term, not the free-text phrase.",
         "source_release": "Open Targets data release 26.06"
       },
-      "seconds": 1.942,
-      "exception": null
-    },
-    {
-      "tool": "get_chembl_modulators",
-      "args": [],
-      "kwargs": {
-        "gene_symbol": "OR51E2"
-      },
-      "result": {
-        "error": "ChEMBL HTTP 500"
-      },
-      "seconds": 5.418,
+      "seconds": 2.856,
       "exception": null
     },
     {
@@ -91,7 +81,27 @@
         "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
         "url": "https://epigraphdb.org/pqtl/"
       },
-      "seconds": 1.687,
+      "seconds": 1.732,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "OR51E2"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL4523454",
+        "target_name": "Olfactory receptor 51E2",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 0,
+        "modulators": [],
+        "note": "ChEMBL target matched by text search on 'OR51E2' and resolved to 'Olfactory receptor 51E2' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4523454/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 4.692,
       "exception": null
     },
     {
@@ -130,9 +140,9 @@
         ],
         "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 96 ClinVar records for this gene; it is a sample, not a rate.",
         "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=OR51E2%5Bgene%5D",
-        "source_release": "ClinVar build Build260809-1055.1"
+        "source_release": "ClinVar build Build260818-0035.1"
       },
-      "seconds": 1.798,
+      "seconds": 1.251,
       "exception": null
     },
     {
@@ -159,7 +169,7 @@
         "url": "https://gnomad.broadinstitute.org/gene/OR51E2",
         "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
       },
-      "seconds": 0.428,
+      "seconds": 1.463,
       "exception": null
     },
     {
@@ -179,24 +189,24 @@
         "example_rsids": [
           "rs73388885",
           "rs1991887",
-          "rs7949117",
-          "rs376072857",
-          "rs2566255",
           "rs12788102",
-          "rs17227928",
-          "rs12365875",
           "rs10768168",
-          "rs1123991",
-          "rs5005421",
+          "rs17227928",
+          "rs535808923",
+          "rs4910522",
+          "rs931811",
+          "rs76344430",
+          "rs7939382",
           "rs78687573",
-          "rs7111199",
-          "rs1505210",
-          "rs4910511"
+          "rs58150027",
+          "rs7949117",
+          "rs905871",
+          "rs17224476"
         ],
         "url": "https://www.ebi.ac.uk/gwas/genes/OR51E2",
         "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
       },
-      "seconds": 23.037,
+      "seconds": 2.104,
       "exception": null
     },
     {
@@ -211,16 +221,83 @@
         "note": "No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).",
         "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
       },
-      "seconds": 0.423,
+      "seconds": 0.526,
+      "exception": null
+    },
+    {
+      "tool": "get_clinical_evidence",
+      "args": [],
+      "kwargs": {
+        "protein": "OR51E2",
+        "disease": "epilepsy"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "OR51E2",
+        "disease": "epilepsy",
+        "ensembl_id": "ENSG00000167332",
+        "note": "No drug or clinical candidate against OR51E2 in Open Targets. An empty clinical record means the clinic has not filed results against this target — NOT that the target is bad, and not that nothing was ever tried outside registries.",
+        "url": "https://platform.opentargets.org/target/ENSG00000167332",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 1.548,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "OR51E2",
+        "epilepsy"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "OR51E2",
+          "disease": "epilepsy",
+          "note": "No pQTL-based MR estimate for OR51E2 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "OR51E2",
+        "disease": "epilepsy",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
       "exception": null
     }
   ],
-  "model_verdict": "INSUFFICIENT EVIDENCE — there is currently no direct genetic association, causal estimate, or disease-specific evidence linking OR51E2 to epilepsy.",
-  "model_reasoning": "Open Targets indicates that OR51E2 is not among the top associated targets for epilepsy, and no Mendelian randomization estimate is available for this protein-disease pair. The gene demonstrates loss-of-function tolerance in gnomAD with a high LOEUF, suggesting safety from genetic inactivation, but ClinVar variants are primarily of uncertain significance. Although GWAS catalog records map multiple SNPs to the locus, none link the gene to epilepsy, and there are no pharmacogenomic annotations in PharmGKB.",
+  "model_verdict": "INSUFFICIENT EVIDENCE — there is no genetic association, causal estimate, or clinical trial record linking OR51E2 to epilepsy.",
+  "model_reasoning": "Open Targets shows no strong association between OR51E2 and epilepsy, and no Mendelian randomization estimate is available to support a causal effect. ChEMBL lists no known modulators for this olfactory receptor, and there is no clinical development record for epilepsy. Although gnomAD indicates loss-of-function tolerance, the complete absence of disease-specific genetic or clinical evidence leaves this target unvalidated for this indication.",
   "validation": {
     "ok": true,
     "unsupported": [],
     "checked": 0
   },
-  "card_markdown": "# Target Evidence Card — OR51E2 × epilepsy\n\n**Verdict:** INSUFFICIENT EVIDENCE — there is currently no direct genetic association, causal estimate, or disease-specific evidence linking OR51E2 to epilepsy.\n\n> **Question actually answered:** the free-text disease was resolved to **MONDO_0005027 (epilepsy)**. If that is not what you meant, every score below answers a different question.\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | **not available** — OR51E2 is not among the top 500 associated targets for MONDO_0005027 (epilepsy). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'OR51E2' -> ENSG00000167332 (OR51E2); 'epilepsy' -> MONDO_0005027 (epilepsy). Scores below describe THAT term, not the free-text phrase. |\n| Protein context | `get_uniprot_dossier` | Q9H255 — Olfactory receptor 51E2; location: Cell membrane, Early endosome membrane |\n| Known modulators / druggability | `get_chembl_modulators` | **tool error** — ChEMBL HTTP 500 |\n| Clinical variants | `get_clinvar_variants` | 96 ClinVar records; 0 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1e-05, LOEUF=1.6 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 34 unique SNPs from 68/68 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — OR51E2 is not among the top 500 associated targets for MONDO_0005027 (epilepsy). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'OR51E2' -> ENSG00000167332 (OR51E2); 'epilepsy' -> MONDO_0005027 (epilepsy). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — No pQTL-based MR estimate for OR51E2 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 96 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n\n## Reasoning\n\nOpen Targets indicates that OR51E2 is not among the top associated targets for epilepsy, and no Mendelian randomization estimate is available for this protein-disease pair. The gene demonstrates loss-of-function tolerance in gnomAD with a high LOEUF, suggesting safety from genetic inactivation, but ClinVar variants are primarily of uncertain significance. Although GWAS catalog records map multiple SNPs to the locus, none link the gene to epilepsy, and there are no pharmacogenomic annotations in PharmGKB.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q9H255 — _UniProt release 2026_02 (10-June-2026)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=OR51E2%5Bgene%5D — _ClinVar build Build260809-1055.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/OR51E2 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/OR51E2 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n\n## Provenance\n\n- Generated: 2026-08-17T22:25:56\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (8 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+  "card_markdown": "# Target Evidence Card — OR51E2 × epilepsy\n\n**Verdict:** INSUFFICIENT EVIDENCE — there is no genetic association, causal estimate, or clinical trial record linking OR51E2 to epilepsy.\n\n> **You asked about \"epilepsy\". This card scored MONDO_0005027 — epilepsy.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Olfactory receptor 51E2\" (CHEMBL4523454),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | **not available** — OR51E2 is not among the top 500 associated targets for MONDO_0005027 (epilepsy). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'OR51E2' -> ENSG00000167332 (OR51E2); 'epilepsy' -> MONDO_0005027 (epilepsy). Scores below describe THAT term, not the free-text phrase. |\n| Protein context | `get_uniprot_dossier` | Q9H255 — Olfactory receptor 51E2; location: Cell membrane, Early endosome membrane |\n| Known modulators / druggability | `get_chembl_modulators` | target CHEMBL4523454 — **0 known modulators in ChEMBL** |\n| Clinical variants | `get_clinvar_variants` | 96 ClinVar records; 0 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1e-05, LOEUF=1.6 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 34 unique SNPs from 68/68 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n| Clinical development record | `get_clinical_evidence` | **not available** — No drug or clinical candidate against OR51E2 in Open Targets. An empty clinical record means the clinic has not filed results against this target — NOT that the target is bad, and not that nothing was ever tried outside registries. |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — OR51E2 is not among the top 500 associated targets for MONDO_0005027 (epilepsy). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'OR51E2' -> ENSG00000167332 (OR51E2); 'epilepsy' -> MONDO_0005027 (epilepsy). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — No pQTL-based MR estimate for OR51E2 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'OR51E2' and resolved to 'Olfactory receptor 51E2' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 96 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n- **`get_clinical_evidence`** — No drug or clinical candidate against OR51E2 in Open Targets. An empty clinical record means the clinic has not filed results against this target — NOT that the target is bad, and not that nothing was ever tried outside registries.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets shows no strong association between OR51E2 and epilepsy, and no Mendelian randomization estimate is available to support a causal effect. ChEMBL lists no known modulators for this olfactory receptor, and there is no clinical development record for epilepsy. Although gnomAD indicates loss-of-function tolerance, the complete absence of disease-specific genetic or clinical evidence leaves this target unvalidated for this indication.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q9H255 — _UniProt release 2026_02 (10-June-2026)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4523454/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=OR51E2%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/OR51E2 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/OR51E2 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_clinical_evidence`: https://platform.opentargets.org/target/ENSG00000167332 — _Open Targets data release 26.06_\n\n## Provenance\n\n- Generated: 2026-08-21T15:34:30\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
 }
