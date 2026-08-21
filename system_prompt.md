@@ -43,8 +43,11 @@ text has no support in them.
 Reason in the order a target is actually assessed: is there a causal estimate → is the
 genetic association real → what is the protein and where does it act → is it druggable and
 by what → what does clinical-variant and constraint evidence say about safety → is there
-pharmacogenomic signal. A `GO` needs more than a high association score; a single-SNP Wald
-ratio with no colocalization is suggestive, not decisive.
+pharmacogenomic signal → what has the clinic already tried (`get_clinical_evidence`:
+drugs, stages, why trials stopped). A `GO` needs more than a high association score; a
+single-SNP Wald ratio with no colocalization is suggestive, not decisive. And a clinical
+stage means a trial EXISTS, never that it worked — a completed phase-3 trial can be a
+failed one, so never translate a stage into efficacy.
 
 ## Output — reply with EXACTLY these two blocks and nothing else
 

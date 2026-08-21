@@ -105,8 +105,10 @@ def _number_supported(tok: str, nums) -> bool:
 # present in tool output for it to stand).
 QUALITATIVE_CLAIMS = [
     (r"\bmonoclonal antibod\w*\b", r"antibod|mab\b"),
-    (r"\bapproved (?:drug|therap|treatment|medication)\w*\b", r"approved|max_phase\D*4|phase.{0,3}4"),
-    (r"\bFDA[- ]approved\b", r"approved|max_phase\D*4"),
+    (r"\bapproved (?:drug|therap|treatment|medication)\w*\b", r"approved|approval|max_phase\D*4|phase.{0,3}4"),
+    # Agency-specific approval can never be earned: Open Targets reports APPROVAL without
+    # saying WHICH regulator granted it, so "FDA-approved" is always the model's addition.
+    (r"\bFDA[- ]approved\b", r"\bFDA\b"),
     (r"\bclinical trial\w*\b", r"trial|phase"),
     (r"\bsmall[- ]molecule\b", r"small.?molecule|inhibitor|SMALL MOLECULE"),
     (r"\bgene therap\w*\b", r"gene therap"),
@@ -145,15 +147,31 @@ CAUSAL_NEGATED = re.compile(
 )
 
 
-# No tool in this panel returns a development phase, an approval status, or an indication.
-# ChEMBL modulator objects carry {drug, action, moa} and nothing else. So ANY sentence about
-# clinical status is unearned by construction — no proximity heuristic can rescue it, and a
-# hand-written phrase list was walked around every time.
+# Clinical-status language splits into two families with different fates.
+#
+# PHASE / APPROVAL / TRIAL words became retrievable in round 6: get_clinical_evidence
+# returns each drug's clinical stages and trial reports, so these claims are earned when
+# (and only when) that tool's output actually contains them. Before round 6 this whole
+# block was an unconditional prohibition — the comment read "no tool in this panel
+# returns a development phase" — and that remains the behaviour whenever the tool was
+# not called or returned nothing.
 CLINICAL_STATUS = re.compile(
-    r"\b(?:approved?|approval|licen[cs]ed|marketed|registrational|standard of care|"
-    r"in clinical (?:practice|use)|in the clinic|clinical[- ]stage|late[- ]stage|"
-    r"phase\s*(?:i{1,3}v?|[1-4])\b|clinical trials?|efficacy|proven|definitive proof|"
-    r"clinically (?:validated|established|proven)|therapeutic legacy|legacy of)\b",
+    r"\b(?:approved?|approval|licen[cs]ed|marketed|registrational|"
+    r"clinical[- ]stage|late[- ]stage|phase\s*(?:i{1,3}v?|[1-4])\b|clinical trials?)\b",
+    re.I,
+)
+_APPROVAL_WORDS = re.compile(r"\b(?:approved?|approval|licen[cs]ed|marketed)\b", re.I)
+_PHASE_WORD = re.compile(r"\bphase\s*(i{1,3}v?|[1-4])\b", re.I)
+_ROMAN = {"i": 1, "ii": 2, "iii": 3, "iv": 4}
+#
+# EFFICACY words stay unearned FOREVER with this tool panel: a stage or a status says a
+# trial EXISTS, never that it worked — ziltivekimab's phase-3 ZEUS completed and missed
+# its primary endpoint. Only a regulator's approval carries an efficacy judgement, and
+# the card may report the approval itself, not translate it into "proven".
+EFFICACY_CLAIMS = re.compile(
+    r"\b(?:efficacy|proven|definitive proof|clinically (?:validated|established|proven)|"
+    r"standard of care|in clinical (?:practice|use)|in the clinic|"
+    r"therapeutic legacy|legacy of)\b",
     re.I,
 )
 # Modality words are allowed only when a ChEMBL action/moa actually says so.
@@ -329,13 +347,43 @@ def check_concordance(model_text: str, ledger) -> list:
 
 
 def check_unearned_attributes(model_text: str, ledger) -> list:
-    """Clinical status is never retrievable here; modality only if ChEMBL said so."""
+    """Efficacy is never retrievable; status only if the clinical tool returned it;
+    modality only if ChEMBL said so."""
     hay = _haystack(ledger)
     out = []
+
+    m = EFFICACY_CLAIMS.search(model_text)
+    if m:
+        out.append({"kind": "efficacy-claim-not-retrievable", "token": m.group(0),
+                    "detail": ("stages and statuses say trials EXIST, not that they "
+                               "worked — no tool in this panel returns efficacy; report "
+                               "the stage or the approval, never 'proven'")})
+
     m = CLINICAL_STATUS.search(model_text)
     if m:
-        out.append({"kind": "clinical-status-not-retrievable", "token": m.group(0),
-                    "detail": "no tool in this panel returns phase, approval or indication"})
+        clin = (ledger.results_by_tool() or {}).get("get_clinical_evidence") or {}
+        clin_hay = json.dumps(clin, default=str) if clin.get("found") else ""
+        if not clin_hay:
+            out.append({"kind": "clinical-status-not-retrievable", "token": m.group(0),
+                        "detail": ("no clinical-evidence retrieval in this run supports "
+                                   "it — get_clinical_evidence was not called or "
+                                   "returned nothing")})
+        else:
+            am = _APPROVAL_WORDS.search(model_text)
+            if am and "APPROVAL" not in clin_hay:
+                out.append({"kind": "approval-claim-contradicts-clinical-record",
+                            "token": am.group(0),
+                            "detail": ("the retrieved clinical record contains no "
+                                       "APPROVAL-stage programme for this target")})
+            for pm in _PHASE_WORD.finditer(model_text):
+                raw = pm.group(1).lower()
+                n = _ROMAN.get(raw, None) if raw.isalpha() else int(raw)
+                if n and f"PHASE_{n}" not in clin_hay and "APPROVAL" not in clin_hay:
+                    out.append({"kind": "phase-claim-contradicts-clinical-record",
+                                "token": pm.group(0),
+                                "detail": (f"the retrieved clinical record contains no "
+                                           f"PHASE_{n} (or later) programme")})
+                    break
     chembl = json.dumps((ledger.results_by_tool() or {}).get("get_chembl_modulators", {}),
                         default=str)
     for word, evidence in MODALITY.items():

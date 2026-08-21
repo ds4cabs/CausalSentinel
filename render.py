@@ -20,6 +20,7 @@ ROWS = [
     ("get_gnomad_constraint", "Population constraint / LoF tolerance"),
     ("get_gwas_catalog", "Extra genetic evidence"),
     ("get_pharmgkb_drug_gene", "Pharmacogenomics"),
+    ("get_clinical_evidence", "Clinical development record"),
 ]
 
 
@@ -102,6 +103,22 @@ def _cell_generic(tool: str, r: dict) -> str:
         return (f"{r.get('n_unique_snps')} unique SNPs from {r.get('n_association_rows')}"
                 f"/{tot} association rows"
                 + ("" if done else " — **incomplete sweep, lower bound**"))
+    if tool == "get_clinical_evidence":
+        m = r.get("drugs_for_this_disease") or []
+        if m:
+            top = m[0]
+            head = (f"max stage for THIS disease: **{r.get('max_stage_this_disease') or 'none on record'}** "
+                    f"— e.g. {top.get('drug')} ({top.get('max_stage_this_disease') or 'no stage on record'}, "
+                    f"{top.get('n_reports_this_disease')} trial report(s)"
+                    + (f", {top.get('n_with_stop_reason')} with a stop reason" if top.get("n_with_stop_reason") else "")
+                    + ")")
+            extra = f"; +{len(m) - 1} more drug(s) for this disease" if len(m) > 1 else ""
+            return (head + extra +
+                    "  \n_stages mean trials exist, not that they worked_")
+        n = r.get("n_drug_programmes") or 0
+        return (f"**no programme for this disease on record** — {n} drug programme(s) "
+                f"against this target for other diseases (max stage "
+                f"{r.get('max_stage_any_disease')}); context, not evidence about this disease")
     if tool == "get_pharmgkb_drug_gene":
         # Render the CONTENT, not just the counts. An earlier version printed
         # "2 clinical annotations across 6 drugs (level 3: 2)", which is accurate and

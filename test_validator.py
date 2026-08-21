@@ -144,8 +144,43 @@ CONC_CONFLICT = FakeLedger({
                                  "cross_platform": False}},
 })
 
+# Clinical record present: this is what LICENSES phase/approval wording (round 6). Shapes
+# taken from the live PCSK9 and tocilizumab responses.
+CLIN_APPROVED = FakeLedger({
+    "get_mr_result": {"found": False, "note": "no estimate"},
+    "get_clinical_evidence": {
+        "found": True, "max_stage_any_disease": "APPROVAL",
+        "max_stage_this_disease": "APPROVAL",
+        "drugs_for_this_disease": [
+            {"drug": "EVOLOCUMAB", "max_stage_this_disease": "APPROVAL",
+             "n_reports_this_disease": 39, "n_with_stop_reason": 11}]},
+})
+
+CLIN_PHASE2 = FakeLedger({
+    "get_mr_result": {"found": False, "note": "no estimate"},
+    "get_clinical_evidence": {
+        "found": True, "max_stage_any_disease": "PHASE_2",
+        "max_stage_this_disease": "PHASE_2",
+        "drugs_for_this_disease": [
+            {"drug": "SOMEDRUG", "max_stage_this_disease": "PHASE_2",
+             "n_reports_this_disease": 5, "n_with_stop_reason": 1}]},
+})
+
 # (name, ledger, text, expect_ok)
 CASES = [
+    # --- clinical status: earned by the clinical tool, and ONLY by it -------------
+    ("approval wording earned by an APPROVAL record", CLIN_APPROVED,
+     "Approved therapies already exist against this target.", True),
+    ("approval wording with only a phase-2 record", CLIN_PHASE2,
+     "Approved therapies already exist against this target.", False),
+    ("phase wording matching the record", CLIN_PHASE2,
+     "Phase 2 trials of a drug against this target have been run.", True),
+    ("phase wording beyond the record", CLIN_PHASE2,
+     "A phase 3 programme exists for this target.", False),
+    ("agency-specific approval is never earned", CLIN_APPROVED,
+     "FDA-approved therapies exist for this target.", False),
+    ("efficacy wording is never earned, even at APPROVAL", CLIN_APPROVED,
+     "The approved therapy provides definitive proof of efficacy.", False),
     # --- conflicting estimates license NO intervention direction ------------------
     ("conflicting signs forbid a drug-direction claim", MR_CONFLICTING,
      "MR evidence suggests C3 inhibition would be therapeutic.", False),
