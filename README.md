@@ -135,7 +135,7 @@ python agent.py --protein PCSK9 --disease "high cholesterol"
 # 5) or run the benchmark set (10 pairs chosen to exercise different branches)
 python agent.py --batch pairs_benchmark.txt
 
-# 6) validator regression tests (33 cases, no network, no key)
+# 6) validator regression tests (60 cases, no network, no key)
 python test_validator.py
 ```
 

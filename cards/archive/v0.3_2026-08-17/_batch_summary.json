@@ -1,0 +1,227 @@
+{
+  "cards": [
+    {
+      "protein": "PCSK9",
+      "disease": "high cholesterol",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "GO — robust genetic, causal, and clinical evidence strongly supports PCSK9 as a target for high cholesterol.",
+      "written": "cards/PCSK9_high-cholesterol_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 77,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene"
+      ]
+    },
+    {
+      "protein": "IL6R",
+      "disease": "coronary heart disease",
+      "validation": {
+        "ok": false,
+        "unsupported": [
+          {
+            "kind": "causal-claim-on-unvalidated-estimate",
+            "token": "causal",
+            "detail": "the retrieved estimate is a single-instrument Wald ratio (n_snp=1) with steiger=NA, coloc=None, ld_check=None — none of the three sanity checks that separate a causal effect from LD confounding or reverse causation is available, so causal wording is unearned. Say 'associated with' and state which checks are missing."
+          }
+        ],
+        "checked": 0
+      },
+      "verdict": "GO — genetic association, robust Mendelian randomization support, and loss-of-function tolerance indicate a causal and safe target for coronary heart disease.",
+      "written": "cards/IL6R_coronary-heart-disease_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 104,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene"
+      ]
+    },
+    {
+      "protein": "LPA",
+      "disease": "coronary heart disease",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "GO — robust genetic, causal MR, and GWAS evidence strongly links LPA to coronary heart disease risk.",
+      "written": "cards/LPA_coronary-heart-disease_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 74,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_chembl_modulators",
+        "get_mr_result",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene"
+      ]
+    },
+    {
+      "protein": "PNPLA3",
+      "disease": "MASLD",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 2
+      },
+      "verdict": "GO — Strong genetic and literature evidence supports PNPLA3 as a key target for metabolic dysfunction-associated steatotic liver disease (MASLD).",
+      "written": "cards/PNPLA3_MASLD_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 106,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_chembl_modulators",
+        "get_mr_result",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene"
+      ]
+    },
+    {
+      "protein": "HMGCR",
+      "disease": "high cholesterol",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "GO — HMGCR shows strong genetic association, extensive GWAS mapping, and extensive pharmacogenomic and clinical evidence linking it to high cholesterol.",
+      "written": "cards/HMGCR_high-cholesterol_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 77,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene"
+      ]
+    },
+    {
+      "protein": "SCN2A",
+      "disease": "epilepsy",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "GO — SCN2A has exceptionally strong genetic, clinical, and literature support linking it to epilepsy, backed by numerous pathogenic variants and established pharmacogenetic annotations.",
+      "written": "cards/SCN2A_epilepsy_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 112,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_chembl_modulators",
+        "get_mr_result",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene"
+      ]
+    },
+    {
+      "protein": "TREM2",
+      "disease": "Alzheimer disease",
+      "error": "ServerError(\"503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The service is currently unavailable.', 'status': 'UNAVAILABLE'}}\")"
+    },
+    {
+      "protein": "OR51E2",
+      "disease": "epilepsy",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — there is currently no direct genetic association, causal estimate, or disease-specific evidence linking OR51E2 to epilepsy.",
+      "written": "cards/OR51E2_epilepsy_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 92,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_chembl_modulators",
+        "get_mr_result",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene"
+      ]
+    },
+    {
+      "protein": "VKORC1",
+      "disease": "venous thrombosis",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "GO — VKORC1 is a well-established biological and pharmacological target linked to vitamin K metabolism and clinical thrombosis management, supported by extensive genetic and pharmacogenomic evidence.",
+      "written": "cards/VKORC1_venous-thrombosis_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 105,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene"
+      ]
+    },
+    {
+      "protein": "IL6R",
+      "disease": "Alzheimer disease",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — while genetic and GWAS associations link IL6R to Alzheimer's disease, no specific causal Mendelian randomization estimate is available for this disease.",
+      "written": "cards/IL6R_Alzheimer-disease_evidence_card.md",
+      "n_tool_calls": 8,
+      "n_words": 95,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_chembl_modulators",
+        "get_mr_result",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene"
+      ]
+    }
+  ],
+  "passed": 8,
+  "total": 10,
+  "claim_tokens_checked": 2,
+  "reasoning_words": 842,
+  "claim_density_per_100_words": 0.24
+}

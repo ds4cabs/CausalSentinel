@@ -1,7 +1,7 @@
 {
   "protein": "VKORC1",
   "disease": "venous thrombosis",
-  "generated_at": "2026-08-17T22:26:23",
+  "generated_at": "2026-08-21T15:34:51",
   "model": "gemini-flash-lite-latest",
   "tools_called": [
     "get_uniprot_dossier",
@@ -11,7 +11,9 @@
     "get_clinvar_variants",
     "get_gnomad_constraint",
     "get_gwas_catalog",
-    "get_pharmgkb_drug_gene"
+    "get_pharmgkb_drug_gene",
+    "get_clinical_evidence",
+    "classify_evidence_concordance"
   ],
   "tool_ledger": [
     {
@@ -39,7 +41,7 @@
         "url": "https://www.uniprot.org/uniprotkb/Q9BQB6",
         "source_release": "UniProt release 2026_02 (10-June-2026)"
       },
-      "seconds": 0.805,
+      "seconds": 1.002,
       "exception": null
     },
     {
@@ -65,7 +67,7 @@
         "url": "https://platform.opentargets.org/evidence/ENSG00000167397/HP_0004936",
         "source_release": "Open Targets data release 26.06"
       },
-      "seconds": 2.388,
+      "seconds": 2.981,
       "exception": null
     },
     {
@@ -84,7 +86,7 @@
         "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
         "url": "https://epigraphdb.org/pqtl/"
       },
-      "seconds": 1.572,
+      "seconds": 1.587,
       "exception": null
     },
     {
@@ -94,9 +96,53 @@
         "gene_symbol": "VKORC1"
       },
       "result": {
-        "error": "ChEMBL HTTP 500"
+        "found": true,
+        "target_chembl_id": "CHEMBL1930",
+        "target_name": "Vitamin K epoxide reductase complex subunit 1",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 7,
+        "modulators": [
+          {
+            "drug": "CHEMBL1465",
+            "action": "INHIBITOR",
+            "moa": "Vitamin k epoxide reductase complex subunit 1 isoform 1 inhibitor"
+          },
+          {
+            "drug": "CHEMBL711",
+            "action": "INHIBITOR",
+            "moa": "Vitamin k epoxide reductase complex subunit 1 isoform 1 inhibitor"
+          },
+          {
+            "drug": "CHEMBL1466",
+            "action": "INHIBITOR",
+            "moa": "Vitamin k epoxide reductase complex subunit 1 isoform 1 inhibitor"
+          },
+          {
+            "drug": "CHEMBL1200772",
+            "action": "INHIBITOR",
+            "moa": "Vitamin k epoxide reductase complex subunit 1 isoform 1 inhibitor"
+          },
+          {
+            "drug": "CHEMBL1200879",
+            "action": "INHIBITOR",
+            "moa": "Vitamin k epoxide reductase complex subunit 1 isoform 1 inhibitor"
+          },
+          {
+            "drug": "CHEMBL397420",
+            "action": "INHIBITOR",
+            "moa": "Vitamin k epoxide reductase complex subunit 1 isoform 1 inhibitor"
+          },
+          {
+            "drug": "CHEMBL2105664",
+            "action": "INHIBITOR",
+            "moa": "Vitamin k epoxide reductase complex subunit 1 isoform 1 inhibitor"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'VKORC1' and resolved to 'Vitamin K epoxide reductase complex subunit 1' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL1930/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
       },
-      "seconds": 4.805,
+      "seconds": 4.555,
       "exception": null
     },
     {
@@ -108,10 +154,14 @@
       "result": {
         "found": true,
         "gene_symbol": "VKORC1",
-        "total_records": 75,
+        "total_records": 76,
         "pathogenic_in_sample": 3,
         "sample_size": 30,
         "examples": [
+          {
+            "title": "NM_024006.6(VKORC1):c.103C>G (p.Arg35Gly)",
+            "significance": "Uncertain significance"
+          },
           {
             "title": "NM_024006.6(VKORC1):c.208C>A (p.Leu70Met)",
             "significance": "N/A"
@@ -127,17 +177,13 @@
           {
             "title": "NM_024006.6(VKORC1):c.230A>G (p.Asn77Ser)",
             "significance": "Uncertain significance"
-          },
-          {
-            "title": "NM_024006.6(VKORC1):c.147C>G (p.Ile49Met)",
-            "significance": "Uncertain significance"
           }
         ],
-        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 75 ClinVar records for this gene; it is a sample, not a rate.",
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 76 ClinVar records for this gene; it is a sample, not a rate.",
         "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=VKORC1%5Bgene%5D",
-        "source_release": "ClinVar build Build260809-1055.1"
+        "source_release": "ClinVar build Build260818-0035.1"
       },
-      "seconds": 1.278,
+      "seconds": 1.524,
       "exception": null
     },
     {
@@ -164,7 +210,7 @@
         "url": "https://gnomad.broadinstitute.org/gene/VKORC1",
         "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
       },
-      "seconds": 0.743,
+      "seconds": 0.556,
       "exception": null
     },
     {
@@ -176,32 +222,32 @@
       "result": {
         "found": true,
         "gene_symbol": "VKORC1",
-        "n_unique_snps": 106,
+        "n_unique_snps": 103,
         "n_association_rows": 226,
         "total_association_rows_reported": 226,
         "sweep_complete": true,
         "note": null,
         "example_rsids": [
           "rs10871454",
-          "rs9934438",
-          "rs2303222",
-          "rs11865038",
-          "rs17839568",
+          "rs7184567",
+          "rs12920772",
+          "rs8047469",
           "rs12716979",
-          "rs148758034",
-          "rs55908605",
-          "rs12447930",
-          "rs4889526",
           "rs57348955",
-          "rs4889530",
-          "rs138259061",
-          "rs148753960",
-          "rs9939286"
+          "rs11649290",
+          "rs17708472",
+          "rs3751855",
+          "rs116872173",
+          "rs4889625",
+          "rs4889609",
+          "rs575041259",
+          "rs36004598",
+          "rs56813533"
         ],
         "url": "https://www.ebi.ac.uk/gwas/genes/VKORC1",
         "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
       },
-      "seconds": 12.178,
+      "seconds": 4.677,
       "exception": null
     },
     {
@@ -289,16 +335,254 @@
         "url": "https://www.pharmgkb.org/search?query=VKORC1",
         "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
       },
-      "seconds": 0.562,
+      "seconds": 0.761,
+      "exception": null
+    },
+    {
+      "tool": "get_clinical_evidence",
+      "args": [],
+      "kwargs": {
+        "protein": "VKORC1",
+        "disease": "venous thrombosis"
+      },
+      "result": {
+        "found": true,
+        "computed_here": false,
+        "protein": "VKORC1",
+        "disease": "venous thrombosis",
+        "ensembl_id": "ENSG00000167397",
+        "n_drug_programmes": 7,
+        "max_stage_any_disease": "APPROVAL",
+        "max_stage_this_disease": "APPROVAL",
+        "drugs_for_this_disease": [
+          {
+            "drug": "WARFARIN SODIUM",
+            "chembl_id": "CHEMBL1200879",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "atrial fibrillation",
+              "Thromboembolism",
+              "Venous thrombosis",
+              "stroke disorder",
+              "pulmonary embolism",
+              "myocardial infarction"
+            ],
+            "n_reports_this_disease": 2,
+            "max_stage_this_disease": "APPROVAL",
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 125,
+            "n_stop_any_disease": 0,
+            "stop_reason_categories_any_disease": null,
+            "example_why_stopped_any_disease": null,
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "WARFARIN",
+            "chembl_id": "CHEMBL1464",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "Recurrent thrombophlebitis",
+              "atrial fibrillation",
+              "thrombotic disease",
+              "atherosclerosis",
+              "intermittent vascular claudication",
+              "peripheral arterial disease"
+            ],
+            "n_reports_this_disease": 3,
+            "max_stage_this_disease": "PHASE_2_3",
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 185,
+            "n_stop_any_disease": 15,
+            "stop_reason_categories_any_disease": {
+              "Safety_Sideeffects": 1,
+              "Insufficient_Enrollment": 9,
+              "Study_Design": 1,
+              "Covid19": 3,
+              "Regulatory": 1,
+              "Negative": 1
+            },
+            "example_why_stopped_any_disease": "Excess of mortality in the treatment group created safety concerns.",
+            "latest_report_year_any_disease": null
+          }
+        ],
+        "drugs_other_diseases_context_only": [
+          {
+            "drug": "PHENPROCOUMON",
+            "chembl_id": "CHEMBL1465",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "Recurrent thrombophlebitis",
+              "thrombotic disease",
+              "hemorrhage",
+              "atrial fibrillation",
+              "Thromboembolism",
+              "heart failure"
+            ],
+            "n_reports_this_disease": 0,
+            "max_stage_this_disease": null,
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 7,
+            "n_stop_any_disease": 2,
+            "stop_reason_categories_any_disease": {
+              "Insufficient_Enrollment": 1,
+              "Safety_Sideeffects": 1
+            },
+            "example_why_stopped_any_disease": "Recruiting problems",
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "PHENINDIONE",
+            "chembl_id": "CHEMBL711",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "Recurrent thrombophlebitis",
+              "blood coagulation disease",
+              "pulmonary embolism",
+              "atrial fibrillation"
+            ],
+            "n_reports_this_disease": 0,
+            "max_stage_this_disease": null,
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 5,
+            "n_stop_any_disease": 0,
+            "stop_reason_categories_any_disease": null,
+            "example_why_stopped_any_disease": null,
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "DICUMAROL",
+            "chembl_id": "CHEMBL1466",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "Recurrent thrombophlebitis",
+              "hemorrhagic disease",
+              "thrombotic disease"
+            ],
+            "n_reports_this_disease": 0,
+            "max_stage_this_disease": null,
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 3,
+            "n_stop_any_disease": 0,
+            "stop_reason_categories_any_disease": null,
+            "example_why_stopped_any_disease": null,
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "ACENOCOUMAROL",
+            "chembl_id": "CHEMBL397420",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "Recurrent thrombophlebitis",
+              "thrombotic disease",
+              "pulmonary embolism",
+              "cervical artery dissection",
+              "Stroke",
+              "atrial fibrillation"
+            ],
+            "n_reports_this_disease": 0,
+            "max_stage_this_disease": null,
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 24,
+            "n_stop_any_disease": 2,
+            "stop_reason_categories_any_disease": {
+              "Business_Administrative": 1,
+              "Covid19": 1
+            },
+            "example_why_stopped_any_disease": "lack of funds",
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "TECARFARIN",
+            "chembl_id": "CHEMBL2105664",
+            "max_stage_any_disease": "PHASE_3",
+            "diseases": [
+              "thrombotic disease"
+            ],
+            "n_reports_this_disease": 0,
+            "max_stage_this_disease": null,
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 3,
+            "n_stop_any_disease": 0,
+            "stop_reason_categories_any_disease": null,
+            "example_why_stopped_any_disease": null,
+            "latest_report_year_any_disease": null
+          }
+        ],
+        "note": "Phase and trial status mean trials EXIST, not that they worked — a COMPLETED phase-3 trial can be a failed one; only why-stopped fields carry failure information, and only approval carries a regulator's efficacy judgement. Registries lag press releases by a data release or more.",
+        "url": "https://platform.opentargets.org/target/ENSG00000167397",
+        "source_release": "Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)"
+      },
+      "seconds": 1.361,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "VKORC1",
+        "venous thrombosis"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "VKORC1",
+          "disease": "venous thrombosis",
+          "note": "No pQTL-based MR estimate for VKORC1 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "VKORC1",
+        "disease": "venous thrombosis",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
       "exception": null
     }
   ],
-  "model_verdict": "GO — VKORC1 is a well-established biological and pharmacological target linked to vitamin K metabolism and clinical thrombosis management, supported by extensive genetic and pharmacogenomic evidence.",
-  "model_reasoning": "Open Targets associates VKORC1 with venous thrombosis, backed by multiple GWAS association records in the GWAS Catalog. While a direct MR causal estimate was not available from the EpiGraphDB pQTL resource, PharmGKB and ClinPGx document extensive pharmacogenomic annotations and drug-gene relationships involving coumarin anticoagulants such as warfarin and acenocoumarol. Furthermore, gnomAD constraint metrics indicate that VKORC1 is loss-of-function tolerant, and UniProt confirms its essential role as the catalytic subunit of the vitamin K epoxide reductase complex governing blood coagulation.",
+  "model_verdict": "GO — VKORC1 is the validated, clinically approved molecular target of coumarin anticoagulants (such as warfarin) used to treat and prevent venous thrombosis.",
+  "model_reasoning": "The Open Targets and clinical evidence records confirm that drugs targeting VKORC1, including warfarin sodium, have achieved regulatory approval for venous thrombosis. The target is heavily documented in PharmGKB with multiple clinical annotations connecting genetic variation to drug dosing and toxicity, reflecting its established pharmacological role. Although no pQTL-based Mendelian randomization estimate was available for venous thrombosis, the target's extensive clinical validation and established ChEMBL modulators establish its therapeutic utility.",
   "validation": {
     "ok": true,
     "unsupported": [],
     "checked": 0
   },
-  "card_markdown": "# Target Evidence Card — VKORC1 × venous thrombosis\n\n**Verdict:** GO — VKORC1 is a well-established biological and pharmacological target linked to vitamin K metabolism and clinical thrombosis management, supported by extensive genetic and pharmacogenomic evidence.\n\n> **Question actually answered:** the free-text disease was resolved to **HP_0004936 (Venous thrombosis)**. If that is not what you meant, every score below answers a different question.\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.586 (literature=0.214, genetic_association=0.0312, clinical=0.949) |\n| Protein context | `get_uniprot_dossier` | Q9BQB6 — Vitamin K epoxide reductase complex subunit 1; location: Endoplasmic reticulum membrane |\n| Known modulators / druggability | `get_chembl_modulators` | **tool error** — ChEMBL HTTP 500 |\n| Clinical variants | `get_clinvar_variants` | 75 ClinVar records; 3 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=0.00028, LOEUF=1.31 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 106 unique SNPs from 226/226 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 38 clinical annotations across 4 drugs (level 1A: 3, level 1B: 5, level 2A: 8, level 3: 21, level 4: 1) |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'VKORC1' -> ENSG00000167397 (VKORC1); 'venous thrombosis' -> HP_0004936 (Venous thrombosis). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — No pQTL-based MR estimate for VKORC1 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 75 ClinVar records for this gene; it is a sample, not a rate.\n\n## Reasoning\n\nOpen Targets associates VKORC1 with venous thrombosis, backed by multiple GWAS association records in the GWAS Catalog. While a direct MR causal estimate was not available from the EpiGraphDB pQTL resource, PharmGKB and ClinPGx document extensive pharmacogenomic annotations and drug-gene relationships involving coumarin anticoagulants such as warfarin and acenocoumarol. Furthermore, gnomAD constraint metrics indicate that VKORC1 is loss-of-function tolerant, and UniProt confirms its essential role as the catalytic subunit of the vitamin K epoxide reductase complex governing blood coagulation.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q9BQB6 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000167397/HP_0004936 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=VKORC1%5Bgene%5D — _ClinVar build Build260809-1055.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/VKORC1 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/VKORC1 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=VKORC1 — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n\n## Provenance\n\n- Generated: 2026-08-17T22:26:23\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (8 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+  "card_markdown": "# Target Evidence Card — VKORC1 × venous thrombosis\n\n**Verdict:** GO — VKORC1 is the validated, clinically approved molecular target of coumarin anticoagulants (such as warfarin) used to treat and prevent venous thrombosis.\n\n> **You asked about \"venous thrombosis\". This card scored HP_0004936 — Venous thrombosis.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Vitamin K epoxide reductase complex subunit 1\" (CHEMBL1930),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.586 (literature=0.214, genetic_association=0.0312, clinical=0.949) |\n| Protein context | `get_uniprot_dossier` | Q9BQB6 — Vitamin K epoxide reductase complex subunit 1; location: Endoplasmic reticulum membrane |\n| Known modulators / druggability | `get_chembl_modulators` | 7 known modulators (INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 76 ClinVar records; 3 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=0.00028, LOEUF=1.31 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 103 unique SNPs from 226/226 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 38 clinical annotation(s) over 4 drug(s): acenocoumarol, fluindione, phenprocoumon, warfarin — ClinPGx evidence level 1A/1B/2A/3/4 (scale 1A strongest to 4 weakest) — e.g. rs9923231 (VKORC1); warfarin; Hemorrhage (level 2A Toxicity) |\n| Clinical development record | `get_clinical_evidence` | max stage for THIS disease: **APPROVAL** — e.g. WARFARIN SODIUM (APPROVAL, 2 trial report(s) for this disease); +1 more drug(s) for this disease  \n_stages mean trials exist, not that they worked_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'VKORC1' -> ENSG00000167397 (VKORC1); 'venous thrombosis' -> HP_0004936 (Venous thrombosis). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — No pQTL-based MR estimate for VKORC1 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'VKORC1' and resolved to 'Vitamin K epoxide reductase complex subunit 1' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 76 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_clinical_evidence`** — Phase and trial status mean trials EXIST, not that they worked — a COMPLETED phase-3 trial can be a failed one; only why-stopped fields carry failure information, and only approval carries a regulator's efficacy judgement. Registries lag press releases by a data release or more.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nThe Open Targets and clinical evidence records confirm that drugs targeting VKORC1, including warfarin sodium, have achieved regulatory approval for venous thrombosis. The target is heavily documented in PharmGKB with multiple clinical annotations connecting genetic variation to drug dosing and toxicity, reflecting its established pharmacological role. Although no pQTL-based Mendelian randomization estimate was available for venous thrombosis, the target's extensive clinical validation and established ChEMBL modulators establish its therapeutic utility.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q9BQB6 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000167397/HP_0004936 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL1930/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=VKORC1%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/VKORC1 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/VKORC1 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=VKORC1 — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n- `get_clinical_evidence`: https://platform.opentargets.org/target/ENSG00000167397 — _Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:34:51\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
 }

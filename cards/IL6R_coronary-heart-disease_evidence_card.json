@@ -1,7 +1,7 @@
 {
   "protein": "IL6R",
   "disease": "coronary heart disease",
-  "generated_at": "2026-08-17T22:20:45",
+  "generated_at": "2026-08-21T15:32:13",
   "model": "gemini-flash-lite-latest",
   "tools_called": [
     "get_uniprot_dossier",
@@ -11,7 +11,9 @@
     "get_clinvar_variants",
     "get_gnomad_constraint",
     "get_gwas_catalog",
-    "get_pharmgkb_drug_gene"
+    "get_pharmgkb_drug_gene",
+    "get_clinical_evidence",
+    "classify_evidence_concordance"
   ],
   "tool_ledger": [
     {
@@ -40,7 +42,7 @@
         "url": "https://www.uniprot.org/uniprotkb/P08887",
         "source_release": "UniProt release 2026_02 (10-June-2026)"
       },
-      "seconds": 1.052,
+      "seconds": 1.675,
       "exception": null
     },
     {
@@ -66,7 +68,7 @@
         "url": "https://platform.opentargets.org/evidence/ENSG00000160712/MONDO_0005010",
         "source_release": "Open Targets data release 26.06"
       },
-      "seconds": 2.874,
+      "seconds": 2.373,
       "exception": null
     },
     {
@@ -298,7 +300,7 @@
         "url": "https://epigraphdb.org/pqtl/",
         "note": "Estimates RETRIEVED from published pQTL MR, not computed by this agent. Check cis_or_trans (cis instruments are less pleiotropy-prone), steiger_direction_ok, and coloc_prob before treating this as causal; coloc_prob=null means colocalization was not available for this pair."
       },
-      "seconds": 1.976,
+      "seconds": 1.864,
       "exception": null
     },
     {
@@ -308,9 +310,38 @@
         "gene_symbol": "IL6R"
       },
       "result": {
-        "error": "ChEMBL HTTP 500"
+        "found": true,
+        "target_chembl_id": "CHEMBL2364155",
+        "target_name": "Interleukin-6 receptor subunit alpha",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 4,
+        "modulators": [
+          {
+            "drug": "CHEMBL1237022",
+            "action": "INHIBITOR",
+            "moa": "Interleukin-6 receptor alpha subunit inhibitor"
+          },
+          {
+            "drug": "CHEMBL2108730",
+            "action": "ANTAGONIST",
+            "moa": "Interleukin-6 receptor alpha subunit antagonist"
+          },
+          {
+            "drug": "CHEMBL3833343",
+            "action": "INHIBITOR",
+            "moa": "Interleukin-6 receptor alpha subunit inhibitor"
+          },
+          {
+            "drug": "CHEMBL4650406",
+            "action": "INHIBITOR",
+            "moa": "Interleukin-6 receptor alpha subunit inhibitor"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'IL6R' and resolved to 'Interleukin-6 receptor subunit alpha' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL2364155/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
       },
-      "seconds": 5.224,
+      "seconds": 5.494,
       "exception": null
     },
     {
@@ -349,9 +380,9 @@
         ],
         "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 366 ClinVar records for this gene; it is a sample, not a rate.",
         "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=IL6R%5Bgene%5D",
-        "source_release": "ClinVar build Build260809-1055.1"
+        "source_release": "ClinVar build Build260818-0035.1"
       },
-      "seconds": 1.578,
+      "seconds": 1.493,
       "exception": null
     },
     {
@@ -378,7 +409,7 @@
         "url": "https://gnomad.broadinstitute.org/gene/IL6R",
         "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
       },
-      "seconds": 0.73,
+      "seconds": 0.408,
       "exception": null
     },
     {
@@ -390,7 +421,7 @@
       "result": {
         "found": true,
         "gene_symbol": "IL6R",
-        "n_unique_snps": 144,
+        "n_unique_snps": 140,
         "n_association_rows": 368,
         "total_association_rows_reported": 368,
         "sweep_complete": true,
@@ -400,22 +431,22 @@
           "rs12404927",
           "rs538456803",
           "rs6686750",
-          "rs117525971",
-          "rs2228145",
-          "rs117709635",
-          "rs41269917",
-          "rs532031638",
-          "rs117103761",
+          "rs4845373",
+          "rs4537545",
+          "rs4393147",
+          "rs4845625",
           "rs7512646",
-          "rs2481065",
-          "rs78664422",
-          "rs76289529",
-          "rs35717427"
+          "rs1194589",
+          "rs550089465",
+          "rs557762149",
+          "rs68062313",
+          "rs12563213",
+          "rs1194607"
         ],
         "url": "https://www.ebi.ac.uk/gwas/genes/IL6R",
         "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
       },
-      "seconds": 103.496,
+      "seconds": 4.249,
       "exception": null
     },
     {
@@ -462,22 +493,459 @@
         "url": "https://www.pharmgkb.org/search?query=IL6R",
         "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
       },
-      "seconds": 0.422,
+      "seconds": 0.466,
+      "exception": null
+    },
+    {
+      "tool": "get_clinical_evidence",
+      "args": [],
+      "kwargs": {
+        "protein": "IL6R",
+        "disease": "coronary heart disease"
+      },
+      "result": {
+        "found": true,
+        "computed_here": false,
+        "protein": "IL6R",
+        "disease": "coronary heart disease",
+        "ensembl_id": "ENSG00000160712",
+        "n_drug_programmes": 5,
+        "max_stage_any_disease": "APPROVAL",
+        "max_stage_this_disease": "PHASE_2",
+        "drugs_for_this_disease": [
+          {
+            "drug": "TOCILIZUMAB",
+            "chembl_id": "CHEMBL1237022",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "temporal arteritis",
+              "juvenile idiopathic arthritis",
+              "rheumatoid arthritis",
+              "systemic sclerosis",
+              "temporal arteritis",
+              "COVID-19"
+            ],
+            "n_reports_this_disease": 5,
+            "max_stage_this_disease": "PHASE_2",
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 427,
+            "n_stop_any_disease": 52,
+            "stop_reason_categories_any_disease": {
+              "Negative": 11,
+              "Study_Design": 3,
+              "Business_Administrative": 11,
+              "Logistics_Resources": 2,
+              "Safety_Sideeffects": 3,
+              "Regulatory": 1,
+              "Insufficient_Enrollment": 18,
+              "Study_Staff_Moved": 1,
+              "Covid19": 3,
+              "Another_Study": 3,
+              "Invalid_Reason": 1
+            },
+            "example_why_stopped_any_disease": "Clinical development program terminated due to failure to achieve efficacy",
+            "latest_report_year_any_disease": null
+          }
+        ],
+        "drugs_other_diseases_context_only": [
+          {
+            "drug": "SATRALIZUMAB",
+            "chembl_id": "CHEMBL3833307",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "neuromyelitis optica",
+              "neuromyelitis optica",
+              "immune system disorder",
+              "Encephalopathy",
+              "rheumatoid arthritis",
+              "myasthenia gravis"
+            ],
+            "n_reports_this_disease": 0,
+            "max_stage_this_disease": null,
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 23,
+            "n_stop_any_disease": 2,
+            "stop_reason_categories_any_disease": {
+              "Study_Design": 1,
+              "Insufficient_Enrollment": 1
+            },
+            "example_why_stopped_any_disease": "Sponsor decided to halt development of satralizumab in generalized myasthenia gravis and discontinued further dosing with the study drug (while the OLE period w",
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "LEVILIMAB",
+            "chembl_id": "CHEMBL4650406",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "immune system disorder",
+              "rheumatoid arthritis",
+              "COVID-19"
+            ],
+            "n_reports_this_disease": 0,
+            "max_stage_this_disease": null,
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 5,
+            "n_stop_any_disease": 0,
+            "stop_reason_categories_any_disease": null,
+            "example_why_stopped_any_disease": null,
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "SARILUMAB",
+            "chembl_id": "CHEMBL2108730",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "rheumatoid arthritis",
+              "immune system disorder",
+              "ankylosing spondylitis",
+              "COVID-19",
+              "temporal arteritis",
+              "polymyalgia rheumatica"
+            ],
+            "n_reports_this_disease": 0,
+            "max_stage_this_disease": null,
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 67,
+            "n_stop_any_disease": 11,
+            "stop_reason_categories_any_disease": {
+              "Insufficient_Enrollment": 4,
+              "Covid19": 3,
+              "Negative": 2,
+              "Business_Administrative": 2,
+              "Logistics_Resources": 1,
+              "Regulatory": 1
+            },
+            "example_why_stopped_any_disease": "Due to small number of participants entering randomization. Not a safety issue.",
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "VOBARILIZUMAB",
+            "chembl_id": "CHEMBL3833343",
+            "max_stage_any_disease": "PHASE_2",
+            "diseases": [
+              "rheumatoid arthritis",
+              "systemic lupus erythematosus"
+            ],
+            "n_reports_this_disease": 0,
+            "max_stage_this_disease": null,
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 10,
+            "n_stop_any_disease": 0,
+            "stop_reason_categories_any_disease": null,
+            "example_why_stopped_any_disease": null,
+            "latest_report_year_any_disease": null
+          }
+        ],
+        "note": "Phase and trial status mean trials EXIST, not that they worked — a COMPLETED phase-3 trial can be a failed one; only why-stopped fields carry failure information, and only approval carries a regulator's efficacy judgement. Registries lag press releases by a data release or more.",
+        "url": "https://platform.opentargets.org/target/ENSG00000160712",
+        "source_release": "Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)"
+      },
+      "seconds": 1.363,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "IL6R",
+        "coronary heart disease"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": true,
+          "computed_here": false,
+          "protein": "IL6R",
+          "disease": "coronary heart disease",
+          "n_outcomes_available": 133,
+          "matched_disease_estimates": [
+            {
+              "outcome": "Coronary heart disease",
+              "outcome_gwas_id": "7",
+              "beta": -0.0441899892357374,
+              "se": 0.00853005023322569,
+              "p_value": 2.21283026387414e-07,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            }
+          ],
+          "other_outcomes_for_this_protein": [
+            {
+              "outcome": "Coronary heart disease",
+              "outcome_gwas_id": "7",
+              "beta": -0.0441899892357374,
+              "se": 0.00853005023322569,
+              "p_value": 2.21283026387414e-07,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Crohn's disease",
+              "outcome_gwas_id": "12",
+              "beta": -0.0473484930032293,
+              "se": 0.0113813413001435,
+              "p_value": 3.17988978551373e-05,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Chronic kidney disease",
+              "outcome_gwas_id": "1102",
+              "beta": -0.0206315034086832,
+              "se": 0.0134553283100108,
+              "p_value": 0.125193745581814,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Parkinson's disease",
+              "outcome_gwas_id": "812",
+              "beta": 0.101916690695163,
+              "se": 0.0377470994028645,
+              "p_value": 0.00693421136611944,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Inflammatory bowel disease",
+              "outcome_gwas_id": "294",
+              "beta": -0.0331923214926444,
+              "se": 0.00939557114971295,
+              "p_value": 0.00041124172230895,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Small vessel disease",
+              "outcome_gwas_id": "1111",
+              "beta": -0.031664872622892,
+              "se": 0.0319339791890922,
+              "p_value": 0.321405849188784,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Hirschsprung's disease",
+              "outcome_gwas_id": "983",
+              "beta": -0.222675816289917,
+              "se": 0.12113742375314,
+              "p_value": 0.0660317190381366,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Cough on most days",
+              "outcome_gwas_id": "UKB-a:258",
+              "beta": -0.0112484780658728,
+              "se": 0.0113306901925887,
+              "p_value": 0.320834581945575,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Bipolar disorder",
+              "outcome_gwas_id": "801",
+              "beta": -0.0361301098838985,
+              "se": 0.0214388231072838,
+              "p_value": 0.0919373503527749,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Knee and hip osteoarthritis",
+              "outcome_gwas_id": "1170",
+              "beta": 0.0351818381353439,
+              "se": 0.0197202244204718,
+              "p_value": 0.0744157735550906,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Vascular or heart problems diagnosed by doctor: Angina",
+              "outcome_gwas_id": "UKB-a:436",
+              "beta": -0.0357535174281389,
+              "se": 0.0127194428749105,
+              "p_value": 0.00493978816345632,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Urinary albumin-to-creatinine ratio",
+              "outcome_gwas_id": "1107",
+              "beta": -0.00547183351273771,
+              "se": 0.00538213132400431,
+              "p_value": 0.309312028034449,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            }
+          ],
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/",
+          "note": "Estimates RETRIEVED from published pQTL MR, not computed by this agent. Check cis_or_trans (cis instruments are less pleiotropy-prone), steiger_direction_ok, and coloc_prob before treating this as causal; coloc_prob=null means colocalization was not available for this pair."
+        }
+      },
+      "result": {
+        "found": true,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "IL6R",
+        "disease": "coronary heart disease",
+        "retrieval_coverage": {
+          "epigraphdb": "pair_matched",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 1,
+          "direction": "single_estimate",
+          "independence": "not_assessable",
+          "label": "single_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [
+            0
+          ],
+          "best_validation_depth": 0,
+          "validation_signals": [
+            {
+              "multi_snp": false,
+              "steiger": false,
+              "coloc": false,
+              "ld_check": false,
+              "depth": 0
+            }
+          ]
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
       "exception": null
     }
   ],
-  "model_verdict": "GO — genetic association, robust Mendelian randomization support, and loss-of-function tolerance indicate a causal and safe target for coronary heart disease.",
-  "model_reasoning": "Open Targets records strong genetic association evidence for IL6R with coronary artery disorder, supported by hundreds of associations in the GWAS Catalog. Published Mendelian randomization estimates retrieved from EpiGraphDB demonstrate a significant causal relationship between IL6R perturbation and coronary heart disease using cis-pQTL instruments. Furthermore, gnomAD constraint metrics show the gene is tolerant to loss-of-function variants, suggesting that targeting IL6R should be well tolerated from a safety perspective. PharmGKB annotations confirm established pharmacogenetic links with the IL6R inhibitor tocilizumab, corroborating its clinical relevance.",
+  "model_verdict": "GO — genetic and causal Mendelian randomization support a protective effect of IL6R inhibition against coronary heart disease, and clinical-stage modulators exist.",
+  "model_reasoning": "Open Targets shows strong genetic association for IL6R with coronary artery disorder, supported by a large pool of mapped GWAS associations. Retrieved Mendelian randomization results provide a significant cis-pQTL causal estimate supporting a protective effect on coronary heart disease. The target is readily druggable with approved monoclonal antibodies such as tocilizumab that have reached phase 2 clinical evaluation in this disease context. Furthermore, gnomAD constraint metrics indicate that IL6R is tolerant to loss-of-function variation, mitigating safety concerns regarding target inhibition.",
   "validation": {
     "ok": false,
     "unsupported": [
       {
         "kind": "causal-claim-on-unvalidated-estimate",
         "token": "causal",
-        "detail": "the retrieved estimate is a single-instrument Wald ratio (n_snp=1) with steiger=NA, coloc=None, ld_check=None — none of the three sanity checks that separate a causal effect from LD confounding or reverse causation is available, so causal wording is unearned. Say 'associated with' and state which checks are missing."
+        "detail": "every retrieved estimate (1) is a single-instrument Wald ratio with steiger=NA, coloc=None, ld_check=None — none of the three sanity checks that separate a causal effect from LD confounding or reverse causation is available, so causal wording is unearned. Say 'associated with' and state which checks are missing."
+      },
+      {
+        "kind": "direction-contradicts-beta",
+        "token": "inhibition",
+        "detail": "beta=-0.04419 describes IL6R PROTEIN ABUNDANCE, and higher abundance goes with less disease. A claim about 'inhibition' is a claim about DRUG ACTION, which no retrieved field covers — abundance and pathway activity can even run opposite when the instrument alters shedding, cleavage or receptor decoy behaviour. State the abundance-outcome direction, not a therapeutic one."
+      },
+      {
+        "kind": "modality-not-in-chembl",
+        "token": "monoclonal",
+        "detail": "no ChEMBL action/moa in this run supports that modality"
       }
     ],
-    "checked": 0
+    "checked": 1
   },
-  "card_markdown": "# Target Evidence Card — IL6R × coronary heart disease\n\n**Verdict:** GO — genetic association, robust Mendelian randomization support, and loss-of-function tolerance indicate a causal and safe target for coronary heart disease.\n\n> **Question actually answered:** the free-text disease was resolved to **MONDO_0005010 (coronary artery disorder)**. If that is not what you meant, every score below answers a different question.\n\n## MR direction — rendered from the ledger, not written by the model\n\n- Genetically-predicted **higher plasma IL6R** is associated with **LOWER Coronary heart disease** (beta -0.04419, se 0.00853, p=2.21e-07; Wald ratio, n_snp 1, instrument rs4129267, cis).\n  - Not available for this estimate: Steiger direction, colocalization, LD check.\n  - Single-instrument Wald ratio: no heterogeneity or pleiotropy test is possible.\n\n> **The exposure is IL6R protein abundance, not a drug.** This run retrieved no evidence about what pharmacological inhibition or activation of IL6R does. Turning the direction above into a drug direction needs a mechanism this run did not retrieve.\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | outcome: Coronary heart disease — beta=-0.0442, se=0.00853, p=2.21e-07, Wald ratio, n_snp=1, cis instrument, coloc=not available  \n_retrieved from published MR; not computed here_ |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.586 (literature=0.868, genetic_association=0.92, clinical=0.0061) |\n| Protein context | `get_uniprot_dossier` | P08887 — Interleukin-6 receptor subunit alpha; location: Cell membrane, Secreted, Secreted |\n| Known modulators / druggability | `get_chembl_modulators` | **tool error** — ChEMBL HTTP 500 |\n| Clinical variants | `get_clinvar_variants` | 366 ClinVar records; 1 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=7.9e-11, LOEUF=1.03 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 144 unique SNPs from 368/368 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 3 clinical annotations across 1 drugs (level 3: 2, level 4: 1) |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'IL6R' -> ENSG00000160712 (IL6R); 'coronary heart disease' -> MONDO_0005010 (coronary artery disorder). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — Estimates RETRIEVED from published pQTL MR, not computed by this agent. Check cis_or_trans (cis instruments are less pleiotropy-prone), steiger_direction_ok, and coloc_prob before treating this as causal; coloc_prob=null means colocalization was not available for this pair.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 366 ClinVar records for this gene; it is a sample, not a rate.\n\n## Reasoning\n\nOpen Targets records strong genetic association evidence for IL6R with coronary artery disorder, supported by hundreds of associations in the GWAS Catalog. Published Mendelian randomization estimates retrieved from EpiGraphDB demonstrate a significant causal relationship between IL6R perturbation and coronary heart disease using cis-pQTL instruments. Furthermore, gnomAD constraint metrics show the gene is tolerant to loss-of-function variants, suggesting that targeting IL6R should be well tolerated from a safety perspective. PharmGKB annotations confirm established pharmacogenetic links with the IL6R inhibitor tocilizumab, corroborating its clinical relevance.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P08887 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000160712/MONDO_0005010 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=IL6R%5Bgene%5D — _ClinVar build Build260809-1055.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/IL6R — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/IL6R — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=IL6R — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n\n## Provenance\n\n- Generated: 2026-08-17T22:20:45\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (8 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n\n> **VALIDATION FAILED** — the model wrote claim tokens with no support in tool output:\n> - [causal-claim-on-unvalidated-estimate] `causal`\n"
+  "card_markdown": "# Target Evidence Card — IL6R × coronary heart disease\n\n**Verdict:** GO — genetic and causal Mendelian randomization support a protective effect of IL6R inhibition against coronary heart disease, and clinical-stage modulators exist.\n\n> **You asked about \"coronary heart disease\". This card scored MONDO_0005010 — coronary artery disorder.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Interleukin-6 receptor subunit alpha\" (CHEMBL2364155),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## MR direction — rendered from the ledger, not written by the model\n\n- Genetically-predicted **higher plasma IL6R** is associated with **LOWER Coronary heart disease** (beta -0.04419, se 0.00853, p=2.21e-07; Wald ratio, n_snp 1, instrument rs4129267, cis).\n  - Not available for this estimate: Steiger direction, colocalization, LD check.\n  - Single-instrument Wald ratio: no heterogeneity or pleiotropy test is possible.\n\n> **The exposure is IL6R protein abundance, not a drug.** This run retrieved no evidence about what pharmacological inhibition or activation of IL6R does. Turning the direction above into a drug direction needs a mechanism this run did not retrieve.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — estimate found · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n- Single matched estimate; validation depth 0 of 4 (multi-SNP / Steiger / coloc / LD check).\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | outcome: Coronary heart disease — beta=-0.0442, se=0.00853, p=2.21e-07, Wald ratio, n_snp=1, cis instrument, coloc=not available  \n_retrieved from published MR; not computed here_ |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.586 (literature=0.868, genetic_association=0.92, clinical=0.0061) |\n| Protein context | `get_uniprot_dossier` | P08887 — Interleukin-6 receptor subunit alpha; location: Cell membrane, Secreted, Secreted |\n| Known modulators / druggability | `get_chembl_modulators` | 4 known modulators (ANTAGONIST, INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 366 ClinVar records; 1 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=7.9e-11, LOEUF=1.03 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 140 unique SNPs from 368/368 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 3 clinical annotation(s) over 1 drug(s): tocilizumab — ClinPGx evidence level 3/4 (scale 1A strongest to 4 weakest) — e.g. rs12083537 (IL6R); tocilizumab; Arthritis, Rheumatoid (level 3 Efficacy) |\n| Clinical development record | `get_clinical_evidence` | max stage for THIS disease: **PHASE_2** — e.g. TOCILIZUMAB (PHASE_2, 5 trial report(s) for this disease)  \n_stages mean trials exist, not that they worked_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'IL6R' -> ENSG00000160712 (IL6R); 'coronary heart disease' -> MONDO_0005010 (coronary artery disorder). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — Estimates RETRIEVED from published pQTL MR, not computed by this agent. Check cis_or_trans (cis instruments are less pleiotropy-prone), steiger_direction_ok, and coloc_prob before treating this as causal; coloc_prob=null means colocalization was not available for this pair.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'IL6R' and resolved to 'Interleukin-6 receptor subunit alpha' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 366 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_clinical_evidence`** — Phase and trial status mean trials EXIST, not that they worked — a COMPLETED phase-3 trial can be a failed one; only why-stopped fields carry failure information, and only approval carries a regulator's efficacy judgement. Registries lag press releases by a data release or more.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets shows strong genetic association for IL6R with coronary artery disorder, supported by a large pool of mapped GWAS associations. Retrieved Mendelian randomization results provide a significant cis-pQTL causal estimate supporting a protective effect on coronary heart disease. The target is readily druggable with approved monoclonal antibodies such as tocilizumab that have reached phase 2 clinical evaluation in this disease context. Furthermore, gnomAD constraint metrics indicate that IL6R is tolerant to loss-of-function variation, mitigating safety concerns regarding target inhibition.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P08887 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000160712/MONDO_0005010 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL2364155/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=IL6R%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/IL6R — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/IL6R — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=IL6R — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n- `get_clinical_evidence`: https://platform.opentargets.org/target/ENSG00000160712 — _Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:32:13\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n\n> **VALIDATION FAILED** — the model wrote claim tokens with no support in tool output:\n> - [causal-claim-on-unvalidated-estimate] `causal`\n> - [direction-contradicts-beta] `inhibition`\n> - [modality-not-in-chembl] `monoclonal`\n"
 }

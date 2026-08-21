@@ -1,0 +1,450 @@
+{
+  "protein": "PCSK9",
+  "disease": "high cholesterol",
+  "generated_at": "2026-08-17T22:18:46",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_mr_result",
+    "get_chembl_modulators",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PCSK9"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PCSK9",
+        "accession": "Q8NBP7",
+        "gene_names": [
+          "PCSK9"
+        ],
+        "protein_name": "Proprotein convertase subtilisin/kexin type 9",
+        "function": "Crucial player in the regulation of plasma cholesterol homeostasis. Binds to low-density lipid receptor family members: low density lipoprotein receptor (LDLR), very low density lipoprotein receptor (VLDLR), apolipoprotein E receptor (LRP1/APOER) and apolipoprotein receptor 2 (LRP8/APOER2), and promotes their degradation in intracellular acidic compartments (PubMed:18039658). Acts via a non-proteolytic mechanism to enhance the degradation of the hepatic LDLR through a clathrin LDLRAP1/ARH-mediated pathway. May prevent the recycling of LDLR from endosomes to the cell surface or direct it to lysosomes for degradation. Can induce ubiquitination of LDLR leading to its subsequent degradation (PubMed:17461796, PubMed:18197702, PubMed:18799458, PubMed:22074827). Inhibits intracellular degradation of APOB via the autophagosome/lysosome pathway in a LDLR-independent manner. Involved in the disposal of non-acetylated intermediates of BACE1 in the early secretory pathway (PubMed:18660751). Inhibits epithelial Na(+) channel (ENaC)-mediated Na(+) absorption by reducing ENaC surface expression primarily by increasing its proteasomal degradation. Regulates neuronal apoptosis via modulation of LRP8/APOER2 levels and related anti-apoptotic signaling pathways",
+        "subcellular_location": [
+          "Cytoplasm",
+          "Secreted",
+          "Endosome",
+          "Lysosome",
+          "Cell surface",
+          "Endoplasmic reticulum",
+          "Golgi apparatus"
+        ],
+        "diseases": [
+          "Hypercholesterolemia, familial, 3"
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/Q8NBP7",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 1.116,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PCSK9",
+        "disease": "high cholesterol"
+      },
+      "result": {
+        "found": true,
+        "ensembl_id": "ENSG00000169174",
+        "efo_id": "HP_0003124",
+        "resolved_target_name": "PCSK9",
+        "resolved_disease_name": "Hypercholesterolemia",
+        "overall_score": 0.8197,
+        "datatype_scores": {
+          "literature": 0.8585,
+          "genetic_association": 0.9233,
+          "clinical": 0.9704,
+          "genetic_literature": 0.6079
+        },
+        "note": "Free-text inputs were resolved to ontology terms: 'PCSK9' -> ENSG00000169174 (PCSK9); 'high cholesterol' -> HP_0003124 (Hypercholesterolemia). Scores below describe THAT term, not the free-text phrase.",
+        "url": "https://platform.opentargets.org/evidence/ENSG00000169174/HP_0003124",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.859,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "PCSK9",
+        "disease": "high cholesterol"
+      },
+      "result": {
+        "found": true,
+        "computed_here": false,
+        "protein": "PCSK9",
+        "disease": "high cholesterol",
+        "n_outcomes_available": 64,
+        "matched_disease_estimates": [
+          {
+            "outcome": "Non-cancer illness code  self-reported: high cholesterol",
+            "outcome_gwas_id": "UKB-a:108",
+            "beta": 0.277233958,
+            "se": 0.029369372,
+            "p_value": 3.74e-21,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs191448950",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "TRUE",
+            "steiger_p": 4.44089209850063e-16,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": 1.0
+          }
+        ],
+        "other_outcomes_for_this_protein": [
+          {
+            "outcome": "Non-cancer illness code  self-reported: high cholesterol",
+            "outcome_gwas_id": "UKB-a:108",
+            "beta": 0.277233958,
+            "se": 0.029369372,
+            "p_value": 3.74e-21,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs191448950",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "TRUE",
+            "steiger_p": 4.44089209850063e-16,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": 1.0
+          },
+          {
+            "outcome": "Weight",
+            "outcome_gwas_id": "UKB-a:249",
+            "beta": -0.01588101,
+            "se": 0.012644153,
+            "p_value": 0.209117301,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs191448950",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Cough on most days",
+            "outcome_gwas_id": "UKB-a:258",
+            "beta": 0.089047903,
+            "se": 0.068897729,
+            "p_value": 0.196196163,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs191448950",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Hippocampus volume",
+            "outcome_gwas_id": "1045",
+            "beta": -42.29513564,
+            "se": 35.88437792,
+            "p_value": 0.238537422,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs191448950",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Non-cancer illness code  self-reported: osteoporosis",
+            "outcome_gwas_id": "UKB-a:87",
+            "beta": 0.169343365,
+            "se": 0.098117848,
+            "p_value": 0.084362155,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs191448950",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Pallidum volume",
+            "outcome_gwas_id": "1046",
+            "beta": -12.69766137,
+            "se": 13.8575304,
+            "p_value": 0.359509331,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs191448950",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Diagnoses - main ICD10: K80 Cholelithiasis",
+            "outcome_gwas_id": "UKB-a:559",
+            "beta": -0.134661224,
+            "se": 0.115925949,
+            "p_value": 0.245392226,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs191448950",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Eye problems or disorders: Glaucoma",
+            "outcome_gwas_id": "UKB-a:424",
+            "beta": -0.292771143,
+            "se": 0.166855708,
+            "p_value": 0.079321476,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs191448950",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Happiness",
+            "outcome_gwas_id": "UKB-a:367",
+            "beta": 0.012743312,
+            "se": 0.017893358,
+            "p_value": 0.476352642,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs191448950",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Diagnoses - main ICD10: G47 Sleep disorders",
+            "outcome_gwas_id": "UKB-a:527",
+            "beta": -0.406297621,
+            "se": 0.314663377,
+            "p_value": 0.196629632,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs191448950",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Cancer code  self-reported: prostate cancer",
+            "outcome_gwas_id": "UKB-a:57",
+            "beta": -0.169756371,
+            "se": 0.209387845,
+            "p_value": 0.417522489,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs191448950",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Diagnoses - main ICD10: N81 Female genital prolapse",
+            "outcome_gwas_id": "UKB-a:577",
+            "beta": -0.111742843,
+            "se": 0.136830526,
+            "p_value": 0.414127661,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs191448950",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          }
+        ],
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/",
+        "note": "Estimates RETRIEVED from published pQTL MR, not computed by this agent. Check cis_or_trans (cis instruments are less pleiotropy-prone), steiger_direction_ok, and coloc_prob before treating this as causal; coloc_prob=null means colocalization was not available for this pair."
+      },
+      "seconds": 2.032,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PCSK9"
+      },
+      "result": {
+        "error": "ChEMBL HTTP 500"
+      },
+      "seconds": 5.171,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PCSK9"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PCSK9",
+        "total_records": 1569,
+        "pathogenic_in_sample": 0,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "GRCh37/hg19 1p32.3(chr1:55505154-55507762)x1",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_174936.4(PCSK9):c.208-1832G>A",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "NM_174936.4(PCSK9):c.1101C>A (p.Asp367Glu)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_174936.4(PCSK9):c.683C>A (p.Thr228Asn)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_174936.4(PCSK9):c.1142C>T (p.Ser381Leu)",
+            "significance": "Uncertain significance"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 1569 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=PCSK9%5Bgene%5D",
+        "source_release": "ClinVar build Build260809-1055.1"
+      },
+      "seconds": 1.707,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PCSK9"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PCSK9",
+        "pLI": 2.765187110917745e-18,
+        "LOEUF": 1.1441346736692857,
+        "LOEUF_percentile": 52,
+        "oe_lof": 0.9176378304213768,
+        "oe_lof_lower": 0.7416265467075939,
+        "obs_lof": 57,
+        "exp_lof": 62.116009290752274,
+        "plain_language": "gnomAD expected about 62 loss-of-function variants in this gene and observed 57. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 1.2360458676592712,
+        "lof_z": 0.5506733800624035,
+        "interpretation": "LoF-tolerant: no population-level depletion of loss-of-function variants, which is reassuring but is NOT positive evidence of efficacy.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/PCSK9",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.728,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PCSK9"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PCSK9",
+        "n_unique_snps": 110,
+        "n_association_rows": 246,
+        "total_association_rows_reported": 246,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs12136600",
+          "rs67171713",
+          "rs17111648",
+          "rs74492184",
+          "rs2149039",
+          "rs146471967",
+          "rs11583680",
+          "rs7525649",
+          "rs287227",
+          "rs287230",
+          "rs11591147",
+          "rs17192725",
+          "rs34232196",
+          "rs113681127",
+          "rs77875082"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/PCSK9",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 40.636,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PCSK9"
+      },
+      "result": {
+        "found": false,
+        "gene_symbol": "PCSK9",
+        "note": "No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.632,
+      "exception": null
+    }
+  ],
+  "model_verdict": "GO — robust genetic, causal, and clinical evidence strongly supports PCSK9 as a target for high cholesterol.",
+  "model_reasoning": "The target PCSK9 shows strong genetic association with hypercholesterolemia in Open Targets alongside published Mendelian randomization evidence confirming a causal effect. Genetic mapping yields numerous variants in the GWAS Catalog, and UniProt details its established role in promoting LDLR degradation to regulate plasma cholesterol homeostasis. Furthermore, gnomAD constraint data indicates the gene is loss-of-function tolerant, providing reassurance regarding target safety.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 0
+  },
+  "card_markdown": "# Target Evidence Card — PCSK9 × high cholesterol\n\n**Verdict:** GO — robust genetic, causal, and clinical evidence strongly supports PCSK9 as a target for high cholesterol.\n\n> **Question actually answered:** the free-text disease was resolved to **HP_0003124 (Hypercholesterolemia)**. If that is not what you meant, every score below answers a different question.\n\n## MR direction — rendered from the ledger, not written by the model\n\n- Genetically-predicted **higher plasma PCSK9** is associated with **HIGHER Non-cancer illness code  self-reported: high cholesterol** (beta +0.2772, se 0.0294, p=3.74e-21; Wald ratio, n_snp 1, instrument rs191448950, cis).\n  - Not available for this estimate: colocalization.\n  - Single-instrument Wald ratio: no heterogeneity or pleiotropy test is possible.\n\n> **The exposure is PCSK9 protein abundance, not a drug.** This run retrieved no evidence about what pharmacological inhibition or activation of PCSK9 does. Turning the direction above into a drug direction needs a mechanism this run did not retrieve.\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | outcome: Non-cancer illness code  self-reported: high cholesterol — beta=0.277, se=0.0294, p=3.74e-21, Wald ratio, n_snp=1, cis instrument, coloc=not available  \n_retrieved from published MR; not computed here_ |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.82 (literature=0.859, genetic_association=0.923, clinical=0.97, genetic_literature=0.608) |\n| Protein context | `get_uniprot_dossier` | Q8NBP7 — Proprotein convertase subtilisin/kexin type 9; location: Cytoplasm, Secreted, Endosome, Lysosome, Cell surface, Endop |\n| Known modulators / druggability | `get_chembl_modulators` | **tool error** — ChEMBL HTTP 500 |\n| Clinical variants | `get_clinvar_variants` | 1569 ClinVar records; 0 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=2.8e-18, LOEUF=1.14 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 110 unique SNPs from 246/246 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'PCSK9' -> ENSG00000169174 (PCSK9); 'high cholesterol' -> HP_0003124 (Hypercholesterolemia). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — Estimates RETRIEVED from published pQTL MR, not computed by this agent. Check cis_or_trans (cis instruments are less pleiotropy-prone), steiger_direction_ok, and coloc_prob before treating this as causal; coloc_prob=null means colocalization was not available for this pair.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 1569 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n\n## Reasoning\n\nThe target PCSK9 shows strong genetic association with hypercholesterolemia in Open Targets alongside published Mendelian randomization evidence confirming a causal effect. Genetic mapping yields numerous variants in the GWAS Catalog, and UniProt details its established role in promoting LDLR degradation to regulate plasma cholesterol homeostasis. Furthermore, gnomAD constraint data indicates the gene is loss-of-function tolerant, providing reassurance regarding target safety.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q8NBP7 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000169174/HP_0003124 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=PCSK9%5Bgene%5D — _ClinVar build Build260809-1055.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/PCSK9 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/PCSK9 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n\n## Provenance\n\n- Generated: 2026-08-17T22:18:46\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (8 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

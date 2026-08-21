@@ -8,10 +8,10 @@
         "unsupported": [],
         "checked": 0
       },
-      "verdict": "GO — robust genetic, causal, and clinical evidence strongly supports PCSK9 as a target for high cholesterol.",
+      "verdict": "GO — PCSK9 is an extensively validated causal target for high cholesterol with multiple FDA-approved therapeutics.",
       "written": "cards/PCSK9_high-cholesterol_evidence_card.md",
-      "n_tool_calls": 8,
-      "n_words": 77,
+      "n_tool_calls": 10,
+      "n_words": 73,
       "tools_called": [
         "get_uniprot_dossier",
         "get_target_disease_evidence",
@@ -20,7 +20,9 @@
         "get_clinvar_variants",
         "get_gnomad_constraint",
         "get_gwas_catalog",
-        "get_pharmgkb_drug_gene"
+        "get_pharmgkb_drug_gene",
+        "get_clinical_evidence",
+        "classify_evidence_concordance"
       ]
     },
     {
@@ -32,15 +34,25 @@
           {
             "kind": "causal-claim-on-unvalidated-estimate",
             "token": "causal",
-            "detail": "the retrieved estimate is a single-instrument Wald ratio (n_snp=1) with steiger=NA, coloc=None, ld_check=None — none of the three sanity checks that separate a causal effect from LD confounding or reverse causation is available, so causal wording is unearned. Say 'associated with' and state which checks are missing."
+            "detail": "every retrieved estimate (1) is a single-instrument Wald ratio with steiger=NA, coloc=None, ld_check=None — none of the three sanity checks that separate a causal effect from LD confounding or reverse causation is available, so causal wording is unearned. Say 'associated with' and state which checks are missing."
+          },
+          {
+            "kind": "direction-contradicts-beta",
+            "token": "inhibition",
+            "detail": "beta=-0.04419 describes IL6R PROTEIN ABUNDANCE, and higher abundance goes with less disease. A claim about 'inhibition' is a claim about DRUG ACTION, which no retrieved field covers — abundance and pathway activity can even run opposite when the instrument alters shedding, cleavage or receptor decoy behaviour. State the abundance-outcome direction, not a therapeutic one."
+          },
+          {
+            "kind": "modality-not-in-chembl",
+            "token": "monoclonal",
+            "detail": "no ChEMBL action/moa in this run supports that modality"
           }
         ],
-        "checked": 0
+        "checked": 1
       },
-      "verdict": "GO — genetic association, robust Mendelian randomization support, and loss-of-function tolerance indicate a causal and safe target for coronary heart disease.",
+      "verdict": "GO — genetic and causal Mendelian randomization support a protective effect of IL6R inhibition against coronary heart disease, and clinical-stage modulators exist.",
       "written": "cards/IL6R_coronary-heart-disease_evidence_card.md",
-      "n_tool_calls": 8,
-      "n_words": 104,
+      "n_tool_calls": 10,
+      "n_words": 102,
       "tools_called": [
         "get_uniprot_dossier",
         "get_target_disease_evidence",
@@ -49,7 +61,9 @@
         "get_clinvar_variants",
         "get_gnomad_constraint",
         "get_gwas_catalog",
-        "get_pharmgkb_drug_gene"
+        "get_pharmgkb_drug_gene",
+        "get_clinical_evidence",
+        "classify_evidence_concordance"
       ]
     },
     {
@@ -58,21 +72,23 @@
       "validation": {
         "ok": true,
         "unsupported": [],
-        "checked": 0
+        "checked": 2
       },
-      "verdict": "GO — robust genetic, causal MR, and GWAS evidence strongly links LPA to coronary heart disease risk.",
+      "verdict": "GO — Strong genetic, causal, and clinical-stage evidence supports LPA as a therapeutic target for coronary heart disease.",
       "written": "cards/LPA_coronary-heart-disease_evidence_card.md",
-      "n_tool_calls": 8,
-      "n_words": 74,
+      "n_tool_calls": 10,
+      "n_words": 97,
       "tools_called": [
         "get_uniprot_dossier",
         "get_target_disease_evidence",
-        "get_chembl_modulators",
         "get_mr_result",
+        "get_chembl_modulators",
         "get_clinvar_variants",
         "get_gnomad_constraint",
         "get_gwas_catalog",
-        "get_pharmgkb_drug_gene"
+        "get_pharmgkb_drug_gene",
+        "get_clinical_evidence",
+        "classify_evidence_concordance"
       ]
     },
     {
@@ -81,44 +97,58 @@
       "validation": {
         "ok": true,
         "unsupported": [],
-        "checked": 2
+        "checked": 1
       },
-      "verdict": "GO — Strong genetic and literature evidence supports PNPLA3 as a key target for metabolic dysfunction-associated steatotic liver disease (MASLD).",
+      "verdict": "GO — PNPLA3 is robustly associated with metabolic dysfunction-associated steatotic liver disease via genetic evidence, acting on lipid droplets in the liver, though no causal Mendelian randomization estimate or clinical drug trials are currently recorded in the retrieved sources.",
       "written": "cards/PNPLA3_MASLD_evidence_card.md",
-      "n_tool_calls": 8,
-      "n_words": 106,
+      "n_tool_calls": 10,
+      "n_words": 126,
       "tools_called": [
-        "get_uniprot_dossier",
         "get_target_disease_evidence",
-        "get_chembl_modulators",
-        "get_mr_result",
-        "get_clinvar_variants",
+        "get_uniprot_dossier",
         "get_gnomad_constraint",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
         "get_gwas_catalog",
-        "get_pharmgkb_drug_gene"
+        "get_pharmgkb_drug_gene",
+        "get_clinical_evidence",
+        "get_mr_result",
+        "classify_evidence_concordance"
       ]
     },
     {
       "protein": "HMGCR",
       "disease": "high cholesterol",
       "validation": {
-        "ok": true,
-        "unsupported": [],
-        "checked": 0
+        "ok": false,
+        "unsupported": [
+          {
+            "kind": "efficacy-claim-not-retrievable",
+            "token": "clinically validated",
+            "detail": "stages and statuses say trials EXIST, not that they worked — no tool in this panel returns efficacy; report the stage or the approval, never 'proven'"
+          },
+          {
+            "kind": "qualitative-claim",
+            "token": "FDA-approved"
+          }
+        ],
+        "checked": 1
       },
-      "verdict": "GO — HMGCR shows strong genetic association, extensive GWAS mapping, and extensive pharmacogenomic and clinical evidence linking it to high cholesterol.",
+      "verdict": "GO — HMGCR is the clinically validated, primary pharmacological target of statins for hypercholesterolemia, backed by extensive genetic and clinical trial evidence.",
       "written": "cards/HMGCR_high-cholesterol_evidence_card.md",
-      "n_tool_calls": 8,
-      "n_words": 77,
+      "n_tool_calls": 10,
+      "n_words": 90,
       "tools_called": [
         "get_uniprot_dossier",
         "get_target_disease_evidence",
-        "get_mr_result",
         "get_chembl_modulators",
+        "get_mr_result",
         "get_clinvar_variants",
         "get_gnomad_constraint",
         "get_gwas_catalog",
-        "get_pharmgkb_drug_gene"
+        "get_pharmgkb_drug_gene",
+        "get_clinical_evidence",
+        "classify_evidence_concordance"
       ]
     },
     {
@@ -129,10 +159,35 @@
         "unsupported": [],
         "checked": 0
       },
-      "verdict": "GO — SCN2A has exceptionally strong genetic, clinical, and literature support linking it to epilepsy, backed by numerous pathogenic variants and established pharmacogenetic annotations.",
+      "verdict": "GO — SCN2A shows extensive genetic, clinical, and pharmacological validation for epilepsy, supported by strong Open Targets associations and clinical approvals for channel-modulating drugs.",
       "written": "cards/SCN2A_epilepsy_evidence_card.md",
-      "n_tool_calls": 8,
-      "n_words": 112,
+      "n_tool_calls": 10,
+      "n_words": 107,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "get_clinical_evidence",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "TREM2",
+      "disease": "Alzheimer disease",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "GO — TREM2 shows strong genetic and literature associations with Alzheimer disease, supported by loss-of-function tolerance indicating safety for therapeutic modulation.",
+      "written": "cards/TREM2_Alzheimer-disease_evidence_card.md",
+      "n_tool_calls": 10,
+      "n_words": 111,
       "tools_called": [
         "get_uniprot_dossier",
         "get_target_disease_evidence",
@@ -141,13 +196,10 @@
         "get_clinvar_variants",
         "get_gnomad_constraint",
         "get_gwas_catalog",
-        "get_pharmgkb_drug_gene"
+        "get_pharmgkb_drug_gene",
+        "get_clinical_evidence",
+        "classify_evidence_concordance"
       ]
-    },
-    {
-      "protein": "TREM2",
-      "disease": "Alzheimer disease",
-      "error": "ServerError(\"503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The service is currently unavailable.', 'status': 'UNAVAILABLE'}}\")"
     },
     {
       "protein": "OR51E2",
@@ -157,19 +209,21 @@
         "unsupported": [],
         "checked": 0
       },
-      "verdict": "INSUFFICIENT EVIDENCE — there is currently no direct genetic association, causal estimate, or disease-specific evidence linking OR51E2 to epilepsy.",
+      "verdict": "INSUFFICIENT EVIDENCE — there is no genetic association, causal estimate, or clinical trial record linking OR51E2 to epilepsy.",
       "written": "cards/OR51E2_epilepsy_evidence_card.md",
-      "n_tool_calls": 8,
-      "n_words": 92,
+      "n_tool_calls": 10,
+      "n_words": 79,
       "tools_called": [
         "get_uniprot_dossier",
         "get_target_disease_evidence",
-        "get_chembl_modulators",
         "get_mr_result",
+        "get_chembl_modulators",
         "get_clinvar_variants",
         "get_gnomad_constraint",
         "get_gwas_catalog",
-        "get_pharmgkb_drug_gene"
+        "get_pharmgkb_drug_gene",
+        "get_clinical_evidence",
+        "classify_evidence_concordance"
       ]
     },
     {
@@ -180,10 +234,10 @@
         "unsupported": [],
         "checked": 0
       },
-      "verdict": "GO — VKORC1 is a well-established biological and pharmacological target linked to vitamin K metabolism and clinical thrombosis management, supported by extensive genetic and pharmacogenomic evidence.",
+      "verdict": "GO — VKORC1 is the validated, clinically approved molecular target of coumarin anticoagulants (such as warfarin) used to treat and prevent venous thrombosis.",
       "written": "cards/VKORC1_venous-thrombosis_evidence_card.md",
-      "n_tool_calls": 8,
-      "n_words": 105,
+      "n_tool_calls": 10,
+      "n_words": 93,
       "tools_called": [
         "get_uniprot_dossier",
         "get_target_disease_evidence",
@@ -192,7 +246,9 @@
         "get_clinvar_variants",
         "get_gnomad_constraint",
         "get_gwas_catalog",
-        "get_pharmgkb_drug_gene"
+        "get_pharmgkb_drug_gene",
+        "get_clinical_evidence",
+        "classify_evidence_concordance"
       ]
     },
     {
@@ -203,25 +259,27 @@
         "unsupported": [],
         "checked": 0
       },
-      "verdict": "INSUFFICIENT EVIDENCE — while genetic and GWAS associations link IL6R to Alzheimer's disease, no specific causal Mendelian randomization estimate is available for this disease.",
+      "verdict": "NO-GO — No causal estimate or clinical trial evidence supports IL6R as a target for Alzheimer disease.",
       "written": "cards/IL6R_Alzheimer-disease_evidence_card.md",
-      "n_tool_calls": 8,
-      "n_words": 95,
+      "n_tool_calls": 10,
+      "n_words": 92,
       "tools_called": [
         "get_uniprot_dossier",
         "get_target_disease_evidence",
-        "get_chembl_modulators",
         "get_mr_result",
+        "get_chembl_modulators",
         "get_clinvar_variants",
         "get_gnomad_constraint",
         "get_gwas_catalog",
-        "get_pharmgkb_drug_gene"
+        "get_pharmgkb_drug_gene",
+        "get_clinical_evidence",
+        "classify_evidence_concordance"
       ]
     }
   ],
   "passed": 8,
   "total": 10,
-  "claim_tokens_checked": 2,
-  "reasoning_words": 842,
-  "claim_density_per_100_words": 0.24
+  "claim_tokens_checked": 5,
+  "reasoning_words": 970,
+  "claim_density_per_100_words": 0.52
 }
