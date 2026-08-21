@@ -1,0 +1,341 @@
+{
+  "protein": "PDGFRB",
+  "disease": "Retinal Detachment",
+  "generated_at": "2026-08-21T15:53:07",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_chembl_modulators",
+    "get_mr_result",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PDGFRB"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PDGFRB",
+        "accession": "P09619",
+        "gene_names": [
+          "PDGFRB"
+        ],
+        "protein_name": "Platelet-derived growth factor receptor beta",
+        "function": "Tyrosine-protein kinase that acts as a cell-surface receptor for homodimeric PDGFB and PDGFD and for heterodimers formed by PDGFA and PDGFB, and plays an essential role in the regulation of embryonic development, cell proliferation, survival, differentiation, chemotaxis and migration. Plays an essential role in blood vessel development by promoting proliferation, migration and recruitment of pericytes and smooth muscle cells to endothelial cells. Plays a role in the migration of vascular smooth muscle cells and the formation of neointima at vascular injury sites. Required for normal development of the cardiovascular system. Required for normal recruitment of pericytes (mesangial cells) in the kidney glomerulus, and for normal formation of a branched network of capillaries in kidney glomeruli. Promotes rearrangement of the actin cytoskeleton and the formation of membrane ruffles. Binding of its cognate ligands - homodimeric PDGFB, heterodimers formed by PDGFA and PDGFB or homodimeric PDGFD -leads to the activation of several signaling cascades; the response depends on the nature of the bound ligand and is modulated by the formation of heterodimers between PDGFRA and PDGFRB. Phosphorylates PLCG1, PIK3R1, PTPN11, RASA1/GAP, CBL, SHC1 and NCK1. Activation of PLCG1 leads to the production of the cellular signaling molecules diacylglycerol and inositol 1,4,5-trisphosphate, mobilization of cytosolic Ca(2+) and the activation of protein kinase C. Phosphorylation of PIK3R1, the regulatory subunit of phosphatidylinositol 3-kinase, leads to the activation of the AKT1 signaling pathway. Phosphorylation of SHC1, or of the C-terminus of PTPN11, creates a binding site for GRB2, resulting in the activation of HRAS, RAF1 and down-stream MAP kinases, including MAPK1/ERK2 and/or MAPK3/ERK1. Promotes phosphorylation and activation of SRC family kinases. Promotes phosphorylation of PDCD6IP/ALIX and STAM. Receptor signaling is down-regulated by protein phosphatases that dephosphorylate the receptor and its down-stream effectors, and by rapid internalization of the activated receptor",
+        "subcellular_location": [
+          "Cell membrane",
+          "Cytoplasmic vesicle",
+          "Lysosome lumen"
+        ],
+        "diseases": [
+          "Myeloproliferative disorder chronic with eosinophilia",
+          "Leukemia, acute myelogenous",
+          "Leukemia, juvenile myelomonocytic",
+          "Basal ganglia calcification, idiopathic, 4",
+          "Myofibromatosis, infantile 1",
+          "Kosaki overgrowth syndrome",
+          "Premature aging syndrome, Penttinen type",
+          "Ocular pterygium-digital keloid dysplasia syndrome"
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/P09619",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 5.368,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PDGFRB",
+        "disease": "Retinal Detachment"
+      },
+      "result": {
+        "found": false,
+        "resolved": {
+          "ensembl_id": "ENSG00000113721",
+          "efo_id": "MONDO_0008375",
+          "target_name": "PDGFRB",
+          "disease_name": "retinal detachment"
+        },
+        "note": "PDGFRB is not among the top 500 associated targets for MONDO_0008375 (retinal detachment). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'PDGFRB' -> ENSG00000113721 (PDGFRB); 'Retinal Detachment' -> MONDO_0008375 (retinal detachment). Scores below describe THAT term, not the free-text phrase.",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.194,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PDGFRB"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL1913",
+        "target_name": "Platelet-derived growth factor receptor beta",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 17,
+        "modulators": [
+          {
+            "drug": "CHEMBL1421",
+            "action": "INHIBITOR",
+            "moa": "Platelet-derived growth factor receptor beta inhibitor"
+          },
+          {
+            "drug": "CHEMBL1200485",
+            "action": "INHIBITOR",
+            "moa": "Platelet-derived growth factor receptor beta inhibitor"
+          },
+          {
+            "drug": "CHEMBL1642",
+            "action": "INHIBITOR",
+            "moa": "Platelet-derived growth factor receptor beta inhibitor"
+          },
+          {
+            "drug": "CHEMBL3545427",
+            "action": "INHIBITOR",
+            "moa": "Platelet-derived growth factor receptor beta inhibitor"
+          },
+          {
+            "drug": "CHEMBL3545196",
+            "action": "INHIBITOR",
+            "moa": "Platelet-derived growth factor receptor beta inhibitor"
+          },
+          {
+            "drug": "CHEMBL1980391",
+            "action": "INHIBITOR",
+            "moa": "Platelet-derived growth factor receptor beta inhibitor"
+          },
+          {
+            "drug": "CHEMBL4545915",
+            "action": "INHIBITOR",
+            "moa": "Platelet-derived growth factor receptor beta inhibitor"
+          },
+          {
+            "drug": "CHEMBL6067987",
+            "action": "INHIBITOR",
+            "moa": "Platelet-derived growth factor receptor beta inhibitor"
+          },
+          {
+            "drug": "CHEMBL4303201",
+            "action": "INHIBITOR",
+            "moa": "Platelet-derived growth factor receptor beta inhibitor"
+          },
+          {
+            "drug": "CHEMBL2079588",
+            "action": "INHIBITOR",
+            "moa": "Platelet-derived growth factor receptor beta inhibitor"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'PDGFRB' and resolved to 'Platelet-derived growth factor receptor beta' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL1913/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 4.916,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "PDGFRB",
+        "disease": "Retinal Detachment"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "PDGFRB",
+        "disease": "Retinal Detachment",
+        "note": "No pQTL-based MR estimate for PDGFRB in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.64,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PDGFRB"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PDGFRB",
+        "total_records": 870,
+        "pathogenic_in_sample": 1,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "NM_002609.4(PDGFRB):c.1811G>T (p.Arg604Leu)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_002609.4(PDGFRB):c.592G>A (p.Glu198Lys)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_002609.4(PDGFRB):c.1692C>T (p.Ile564=)",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "NM_002609.4(PDGFRB):c.1532G>A (p.Arg511His)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_002609.4(PDGFRB):c.3306G>A (p.Glu1102=)",
+            "significance": "Likely benign"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 870 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=PDGFRB%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.211,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PDGFRB"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PDGFRB",
+        "pLI": 0.999581662969727,
+        "LOEUF": 0.45207766833123914,
+        "LOEUF_percentile": 11,
+        "oe_lof": 0.34951919545355287,
+        "oe_lof_lower": 0.2730547068005187,
+        "obs_lof": 42,
+        "exp_lof": 120.16507403977852,
+        "plain_language": "gnomAD expected about 120 loss-of-function variants in this gene and observed 42. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 3.6328415867572956,
+        "lof_z": 6.0490635332434985,
+        "interpretation": "LoF-INTOLERANT: this gene is depleted of loss-of-function variants in the population, so inhibiting it carries a safety warning.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/PDGFRB",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.447,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PDGFRB"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PDGFRB",
+        "n_unique_snps": 114,
+        "n_association_rows": 287,
+        "total_association_rows_reported": 287,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs17110942",
+          "rs2855783",
+          "rs10074391",
+          "rs740751",
+          "rs2304058",
+          "rs246389",
+          "rs2286639",
+          "rs2278394",
+          "rs112661564",
+          "rs216146",
+          "rs2027798",
+          "rs3756309",
+          "rs138787440",
+          "rs2302274",
+          "rs190594537"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/PDGFRB",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 3.75,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PDGFRB"
+      },
+      "result": {
+        "found": false,
+        "gene_symbol": "PDGFRB",
+        "note": "No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.448,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "PDGFRB",
+        "Retinal Detachment"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "PDGFRB",
+          "disease": "Retinal Detachment",
+          "note": "No pQTL-based MR estimate for PDGFRB in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "PDGFRB",
+        "disease": "Retinal Detachment",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "INSUFFICIENT EVIDENCE — there is no available causal estimate or direct genetic association linking PDGFRB to retinal detachment.",
+  "model_reasoning": "Open Targets did not retrieve an association between PDGFRB and retinal detachment, and no Mendelian randomization estimate was available to establish a causal link. Although ChEMBL confirms the target is druggable with known modulators and gnomAD indicates constraint, the lack of disease-specific genetic support leaves insufficient evidence to prioritize this target for retinal detachment.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 0
+  },
+  "card_markdown": "# Target Evidence Card — PDGFRB × Retinal Detachment\n\n**Verdict:** INSUFFICIENT EVIDENCE — there is no available causal estimate or direct genetic association linking PDGFRB to retinal detachment.\n\n> **You asked about \"Retinal Detachment\". This card scored MONDO_0008375 — retinal detachment.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Platelet-derived growth factor receptor beta\" (CHEMBL1913),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | **not available** — PDGFRB is not among the top 500 associated targets for MONDO_0008375 (retinal detachment). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'PDGFRB' -> ENSG00000113721 (PDGFRB); 'Retinal Detachment' -> MONDO_0008375 (retinal detachment). Scores below describe THAT term, not the free-text phrase. |\n| Protein context | `get_uniprot_dossier` | P09619 — Platelet-derived growth factor receptor beta; location: Cell membrane, Cytoplasmic vesicle, Lysosome lumen |\n| Known modulators / druggability | `get_chembl_modulators` | 17 known modulators (INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 870 ClinVar records; 1 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1, LOEUF=0.452 → LoF-INTOLERANT (handle with care) |\n| Extra genetic evidence | `get_gwas_catalog` | 114 unique SNPs from 287/287 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n| Clinical development record | `get_clinical_evidence` | _tool not called by the agent in this run_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — PDGFRB is not among the top 500 associated targets for MONDO_0008375 (retinal detachment). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'PDGFRB' -> ENSG00000113721 (PDGFRB); 'Retinal Detachment' -> MONDO_0008375 (retinal detachment). Scores below describe THAT term, not the free-text phrase.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'PDGFRB' and resolved to 'Platelet-derived growth factor receptor beta' — confirm this is the intended target.\n- **`get_mr_result`** — No pQTL-based MR estimate for PDGFRB in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 870 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets did not retrieve an association between PDGFRB and retinal detachment, and no Mendelian randomization estimate was available to establish a causal link. Although ChEMBL confirms the target is druggable with known modulators and gnomAD indicates constraint, the lack of disease-specific genetic support leaves insufficient evidence to prioritize this target for retinal detachment.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P09619 — _UniProt release 2026_02 (10-June-2026)_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL1913/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=PDGFRB%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/PDGFRB — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/PDGFRB — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:53:07\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (9 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

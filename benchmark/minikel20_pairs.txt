@@ -1,0 +1,21 @@
+# 20 resolved Minikel-2024 pairs - benchmark input (labels in minikel20_labels.tsv)
+TNF	Dermatitis, Seborrheic
+PTPN11	Leishmaniasis
+VDR	Psoriasis
+IFNAR1	Infections
+SCN9A	Neuralgia, Postherpetic
+JAK3	Colitis, Ulcerative
+ITGAV	Surgical Procedures, Operative
+NR3C1	Rhinitis, Allergic, Seasonal
+ROCK2	Graft vs Host Disease
+SLC5A2	Kidney Failure, Chronic
+FGA	Hearing Loss
+TLR4	Reproductive Tract Infections
+HDAC2	Melanoma
+ENG	Kidney Neoplasms
+AGTR1	Pneumonia
+PRKCE	Graft vs Host Disease
+ANGPT1	Sarcoma
+CDK1	Melanoma
+OGFR	HIV Infections
+PDGFRB	Retinal Detachment

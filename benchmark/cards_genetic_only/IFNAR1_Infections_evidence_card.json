@@ -1,0 +1,553 @@
+{
+  "protein": "IFNAR1",
+  "disease": "Infections",
+  "generated_at": "2026-08-21T15:46:56",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_mr_result",
+    "get_chembl_modulators",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "IFNAR1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "IFNAR1",
+        "accession": "P17181",
+        "gene_names": [
+          "IFNAR1"
+        ],
+        "protein_name": "Interferon alpha/beta receptor 1",
+        "function": "Together with IFNAR2, forms the heterodimeric receptor for type I interferons (including interferons alpha, beta, epsilon, omega and kappa) (PubMed:10049744, PubMed:14532120, PubMed:15337770, PubMed:2153461, PubMed:21854986, PubMed:24075985, PubMed:31270247, PubMed:33252644, PubMed:35442418, PubMed:7813427). Type I interferon binding activates the JAK-STAT signaling cascade, resulting in transcriptional activation or repression of interferon-regulated genes that encode the effectors of the interferon response (PubMed:10049744, PubMed:21854986, PubMed:7665574). Mechanistically, type I interferon-binding brings the IFNAR1 and IFNAR2 subunits into close proximity with one another, driving their associated Janus kinases (JAKs) (TYK2 bound to IFNAR1 and JAK1 bound to IFNAR2) to cross-phosphorylate one another (PubMed:21854986, PubMed:32972995, PubMed:7665574, PubMed:7813427). The activated kinases phosphorylate specific tyrosine residues on the intracellular domains of IFNAR1 and IFNAR2, forming docking sites for the STAT transcription factors (PubMed:21854986, PubMed:32972995, PubMed:7526154, PubMed:7665574, PubMed:7813427). STAT proteins are then phosphorylated by the JAKs, promoting their translocation into the nucleus to regulate expression of interferon-regulated genes (PubMed:19561067, PubMed:21854986, PubMed:32972995, PubMed:7665574, PubMed:7813427, PubMed:9121453). Can also act independently of IFNAR2: form an active IFNB1 receptor by itself and activate a signaling cascade that does not involve activation of the JAK-STAT pathway (By similarity)",
+        "subcellular_location": [
+          "Cell membrane",
+          "Late endosome",
+          "Lysosome"
+        ],
+        "diseases": [
+          "Immunodeficiency 106, susceptibility to viral infections"
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/P17181",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 3.981,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "IFNAR1",
+        "disease": "Infections"
+      },
+      "result": {
+        "found": false,
+        "resolved": {
+          "ensembl_id": "ENSG00000142166",
+          "efo_id": "MONDO_0021679",
+          "target_name": "IFNAR1",
+          "disease_name": "gram-positive bacterial infections"
+        },
+        "note": "IFNAR1 is not among the top 500 associated targets for MONDO_0021679 (gram-positive bacterial infections). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'IFNAR1' -> ENSG00000142166 (IFNAR1); 'Infections' -> MONDO_0021679 (gram-positive bacterial infections). Scores below describe THAT term, not the free-text phrase.",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.764,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "IFNAR1",
+        "disease": "Infections"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "IFNAR1",
+        "disease": "Infections",
+        "n_outcomes_available": 84,
+        "matched_disease_estimates": [],
+        "other_outcomes_for_this_protein": [
+          {
+            "outcome": "Happiness",
+            "outcome_gwas_id": "UKB-a:367",
+            "beta": 0.0119448740075941,
+            "se": 0.0152581981360028,
+            "p_value": 0.433715448435759,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs2257167",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Fasting insulin",
+            "outcome_gwas_id": "775",
+            "beta": 0.041422160856058,
+            "se": 0.0165688643424232,
+            "p_value": 0.0124193306515523,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs2257167",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Fasting proinsulin",
+            "outcome_gwas_id": "769",
+            "beta": 0.0331377286848464,
+            "se": 0.0379703141180532,
+            "p_value": 0.382811748670737,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs2257167",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Depressive symptoms",
+            "outcome_gwas_id": "1000",
+            "beta": 0.020711080428029,
+            "se": 0.0172592336900242,
+            "p_value": 0.230139340443417,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs2257167",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Endometrioid ovarian cancer",
+            "outcome_gwas_id": "1125",
+            "beta": -0.134000690369348,
+            "se": 0.148325854332068,
+            "p_value": 0.366302503304481,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs2257167",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Subjective well being",
+            "outcome_gwas_id": "1009",
+            "beta": 0.0276147739040387,
+            "se": 0.0172592336900242,
+            "p_value": 0.109598583399116,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs2257167",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Creatinine (enzymatic) in urine",
+            "outcome_gwas_id": "UKB-a:333",
+            "beta": 0.016487469796341,
+            "se": 0.011849775629962,
+            "p_value": 0.164112042599726,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs2257167",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Primary sclerosing cholangitis ",
+            "outcome_gwas_id": "1112",
+            "beta": -0.145326807106094,
+            "se": 0.151881256472213,
+            "p_value": 0.338645540872703,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs2257167",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          }
+        ],
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/",
+        "note": "IFNAR1 HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Infections'. The other outcomes are listed for context only — do not present them as evidence about 'Infections'."
+      },
+      "seconds": 2.08,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "IFNAR1"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL1887",
+        "target_name": "Interferon alpha/beta receptor 1",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 1,
+        "modulators": [
+          {
+            "drug": "CHEMBL2364653",
+            "action": "ANTAGONIST",
+            "moa": "Interferon-alpha/beta receptor alpha chain antagonist"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'IFNAR1' and resolved to 'Interferon alpha/beta receptor 1' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL1887/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 5.199,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "IFNAR1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "IFNAR1",
+        "total_records": 439,
+        "pathogenic_in_sample": 4,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "NM_000629.3(IFNAR1):c.381G>A (p.Gln127=)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "GRCh37/hg19 21q22.11(chr21:34701363-34752816)x1",
+            "significance": "Pathogenic"
+          },
+          {
+            "title": "NM_000629.3(IFNAR1):c.666_673+66dup",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_000629.3(IFNAR1):c.1497C>A (p.Ile499=)",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "GRCh38/hg38 21q11.2-22.3(chr21:13644166-44968483)x3",
+            "significance": "Pathogenic"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 439 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=IFNAR1%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.682,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "IFNAR1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "IFNAR1",
+        "pLI": 1.2706038428488948e-12,
+        "LOEUF": 0.9658028770841904,
+        "LOEUF_percentile": 40,
+        "oe_lof": 0.7573601322985466,
+        "oe_lof_lower": 0.5994467988386473,
+        "obs_lof": 47,
+        "exp_lof": 62.0576631850921,
+        "plain_language": "gnomAD expected about 62 loss-of-function variants in this gene and observed 47. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 0.2743916723425465,
+        "lof_z": 1.6215278083774731,
+        "interpretation": "LoF-tolerant: no population-level depletion of loss-of-function variants, which is reassuring but is NOT positive evidence of efficacy.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/IFNAR1",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.491,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "IFNAR1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "IFNAR1",
+        "n_unique_snps": 107,
+        "n_association_rows": 219,
+        "total_association_rows_reported": 219,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs8126756",
+          "rs17885438",
+          "rs2834215",
+          "rs9808753",
+          "rs2284553",
+          "rs45573535",
+          "rs2834167",
+          "rs8178521",
+          "rs2284550",
+          "rs57996174",
+          "rs78462601",
+          "rs8178524",
+          "rs2096464",
+          "rs62226371",
+          "rs872708"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/IFNAR1",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 3.567,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "IFNAR1"
+      },
+      "result": {
+        "found": false,
+        "gene_symbol": "IFNAR1",
+        "note": "No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.527,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "IFNAR1",
+        "Infections"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "IFNAR1",
+          "disease": "Infections",
+          "n_outcomes_available": 84,
+          "matched_disease_estimates": [],
+          "other_outcomes_for_this_protein": [
+            {
+              "outcome": "Happiness",
+              "outcome_gwas_id": "UKB-a:367",
+              "beta": 0.0119448740075941,
+              "se": 0.0152581981360028,
+              "p_value": 0.433715448435759,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs2257167",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Fasting insulin",
+              "outcome_gwas_id": "775",
+              "beta": 0.041422160856058,
+              "se": 0.0165688643424232,
+              "p_value": 0.0124193306515523,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs2257167",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Fasting proinsulin",
+              "outcome_gwas_id": "769",
+              "beta": 0.0331377286848464,
+              "se": 0.0379703141180532,
+              "p_value": 0.382811748670737,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs2257167",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Depressive symptoms",
+              "outcome_gwas_id": "1000",
+              "beta": 0.020711080428029,
+              "se": 0.0172592336900242,
+              "p_value": 0.230139340443417,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs2257167",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Endometrioid ovarian cancer",
+              "outcome_gwas_id": "1125",
+              "beta": -0.134000690369348,
+              "se": 0.148325854332068,
+              "p_value": 0.366302503304481,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs2257167",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Subjective well being",
+              "outcome_gwas_id": "1009",
+              "beta": 0.0276147739040387,
+              "se": 0.0172592336900242,
+              "p_value": 0.109598583399116,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs2257167",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Creatinine (enzymatic) in urine",
+              "outcome_gwas_id": "UKB-a:333",
+              "beta": 0.016487469796341,
+              "se": 0.011849775629962,
+              "p_value": 0.164112042599726,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs2257167",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Primary sclerosing cholangitis ",
+              "outcome_gwas_id": "1112",
+              "beta": -0.145326807106094,
+              "se": 0.151881256472213,
+              "p_value": 0.338645540872703,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs2257167",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            }
+          ],
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/",
+          "note": "IFNAR1 HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Infections'. The other outcomes are listed for context only — do not present them as evidence about 'Infections'."
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "IFNAR1",
+        "disease": "Infections",
+        "retrieval_coverage": {
+          "epigraphdb": "instrument_exists_disease_unmatched",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "INSUFFICIENT EVIDENCE — while IFNAR1 has known roles in viral susceptibility and a ChEMBL modulator, there are no matching MR causal estimates or direct Open Targets genetic associations for infections.",
+  "model_reasoning": "The protein IFNAR1 functions as a receptor subunit for type I interferons, with UniProt documenting its role in immunodeficiency and viral infection susceptibility. However, no Mendelian randomization estimates were available for infections, and Open Targets disease evidence for the nearest mapped term did not highlight an association. The gene is loss-of-function tolerant according to gnomAD, and GWAS catalog queries returned 107 unique SNPs. One modulator was identified in ChEMBL, but clinical-stage or pharmacogenomic evidence was lacking.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 1
+  },
+  "card_markdown": "# Target Evidence Card — IFNAR1 × Infections\n\n**Verdict:** INSUFFICIENT EVIDENCE — while IFNAR1 has known roles in viral susceptibility and a ChEMBL modulator, there are no matching MR causal estimates or direct Open Targets genetic associations for infections.\n\n> **You asked about \"Infections\". This card scored MONDO_0021679 — gram-positive bacterial infections.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Interferon alpha/beta receptor 1\" (CHEMBL1887),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — protein present, no estimate for THIS disease · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | **not available** — IFNAR1 is not among the top 500 associated targets for MONDO_0021679 (gram-positive bacterial infections). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'IFNAR1' -> ENSG00000142166 (IFNAR1); 'Infections' -> MONDO_0021679 (gram-positive bacterial infections). Scores below describe THAT term, not the free-text phrase. |\n| Protein context | `get_uniprot_dossier` | P17181 — Interferon alpha/beta receptor 1; location: Cell membrane, Late endosome, Lysosome |\n| Known modulators / druggability | `get_chembl_modulators` | 1 known modulators (ANTAGONIST) |\n| Clinical variants | `get_clinvar_variants` | 439 ClinVar records; 4 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1.3e-12, LOEUF=0.966 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 107 unique SNPs from 219/219 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n| Clinical development record | `get_clinical_evidence` | _tool not called by the agent in this run_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — IFNAR1 is not among the top 500 associated targets for MONDO_0021679 (gram-positive bacterial infections). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'IFNAR1' -> ENSG00000142166 (IFNAR1); 'Infections' -> MONDO_0021679 (gram-positive bacterial infections). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — IFNAR1 HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Infections'. The other outcomes are listed for context only — do not present them as evidence about 'Infections'.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'IFNAR1' and resolved to 'Interferon alpha/beta receptor 1' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 439 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nThe protein IFNAR1 functions as a receptor subunit for type I interferons, with UniProt documenting its role in immunodeficiency and viral infection susceptibility. However, no Mendelian randomization estimates were available for infections, and Open Targets disease evidence for the nearest mapped term did not highlight an association. The gene is loss-of-function tolerant according to gnomAD, and GWAS catalog queries returned 107 unique SNPs. One modulator was identified in ChEMBL, but clinical-stage or pharmacogenomic evidence was lacking.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P17181 — _UniProt release 2026_02 (10-June-2026)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL1887/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=IFNAR1%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/IFNAR1 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/IFNAR1 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:46:56\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (9 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

@@ -1,0 +1,302 @@
+{
+  "protein": "CDK1",
+  "disease": "Melanoma",
+  "generated_at": "2026-08-21T15:52:24",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_mr_result",
+    "get_chembl_modulators",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "CDK1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "CDK1",
+        "accession": "P06493",
+        "gene_names": [
+          "CDK1"
+        ],
+        "protein_name": "Cyclin-dependent kinase 1",
+        "function": "Plays a key role in the control of the eukaryotic cell cycle by modulating the centrosome cycle as well as mitotic onset; promotes G2-M transition via association with multiple interphase cyclins (PubMed:16407259, PubMed:16933150, PubMed:17459720, PubMed:18356527, PubMed:19509060, PubMed:19917720, PubMed:20171170, PubMed:20935635, PubMed:20937773, PubMed:21063390, PubMed:2188730, PubMed:23355470, PubMed:2344612, PubMed:23601106, PubMed:23602554, PubMed:25556658, PubMed:26829474, PubMed:27814491, PubMed:30139873, PubMed:30704899, PubMed:40440427). Phosphorylates PARVA/actopaxin, APC, AMPH, APC, ASB7, BARD1, Bcl-xL/BCL2L1, BRCA2, CALD1, CASP8, CDC7, CDC20, CDC25A, CDC25C, CC2D1A, CENPA, CSNK2 proteins/CKII, FZR1/CDH1, CDK7, CEBPB, CHAMP1, DMD/dystrophin, EEF1 proteins/EF-1, EZH2, KIF11/EG5, EGFR, FANCG, FOS, GFAP, GOLGA2/GM130, GRASP1, UBE2A/hHR6A, HIST1H1 proteins/histone H1, HMGA1, HIVEP3/KRC, UHRF1, KAT5, LMNA, LMNB, LBR, MKI67, LATS1, MAP1B, MAP4, MARCKS, MCM2, MCM4, MKLP1, MLST8, MYB, NEFH, NFIC, NPC/nuclear pore complex, PITPNM1/NIR2, NPM1, NCL, NUCKS1, NPM1/numatrin, ORC1, PRKAR2A, EEF1E1/p18, EIF3F/p47, p53/TP53, NONO/p54NRB, PAPOLA, PLEC/plectin, RB1, TPPP, UL40/R2, RAB4A, RAP1GAP, RBBP8/CtIP, RCC1, RPS6KB1/S6K1, KHDRBS1/SAM68, ESPL1, SKI, BIRC5/survivin, STIP1, TEX14, beta-tubulins, MAPT/TAU, NEDD1, VIM/vimentin, TK1, FOXO1, RUNX1/AML1, SAMHD1, SIRT2, CGAS, GLI2 and RUNX2 (PubMed:16407259, PubMed:16933150, PubMed:17459720, PubMed:18356527, PubMed:19202191, PubMed:19509060, PubMed:19917720, PubMed:20171170, PubMed:20935635, PubMed:20937773, PubMed:21063390, PubMed:2188730, PubMed:22411829, PubMed:23355470, PubMed:2344612, PubMed:23601106, PubMed:23602554, PubMed:25012651, PubMed:25556658, PubMed:26829474, PubMed:27814491, PubMed:30704899, PubMed:31279575, PubMed:32351706, PubMed:34741373, PubMed:40440427). CDK1/CDC2-cyclin-B controls pronuclear union in interphase fertilized eggs (PubMed:18480403, PubMed:20360007). Essential for early stages of embryonic development (PubMed:18480403, PubMed:20360007). During G2 and early mitosis, CDC25A/B/C-mediated dephosphorylation activates CDK1/cyclin complexes which phosphorylate several substrates that trigger at least centrosome separation, Golgi dynamics, nuclear envelope breakdown and chromosome condensation (PubMed:18480403, PubMed:20360007, PubMed:2188730, PubMed:2344612, PubMed:30139873). Once chromosomes are condensed and aligned at the metaphase plate, CDK1 activity is switched off by WEE1- and PKMYT1-mediated phosphorylation to allow sister chromatid separation, chromosome decondensation, reformation of the nuclear envelope and cytokinesis (PubMed:18480403, PubMed:20360007). Phosphorylates KRT5 during prometaphase and metaphase (By similarity). Activated by the CDK-activating kinase (CAK) complex consisting of CDK7, cyclin-H/CCNH and MAT1, which is a master regulator of CDK activity (PubMed:41100585). Inactivated by PKR/EIF2AK2- and WEE1-mediated phosphorylation upon DNA damage to stop cell cycle and genome replication at the G2 checkpoint thus facilitating DNA repair (PubMed:20360007). Reactivated after successful DNA repair through WIP1-dependent signaling leading to CDC25A/B/C-mediated dephosphorylation and restoring cell cycle progression (PubMed:20395957). Catalyzes lamin (LMNA, LMNB1 and LMNB2) phosphorylation at the onset of mitosis, promoting nuclear envelope breakdown (PubMed:2188730, PubMed:2344612, PubMed:37788673). In proliferating cells, CDK1-mediated FOXO1 phosphorylation at the G2-M phase represses FOXO1 interaction with 14-3-3 proteins and thereby promotes FOXO1 nuclear accumulation and transcription factor activity, leading to cell death of postmitotic neurons (PubMed:18356527). The phosphorylation of beta-tubulins regulates microtubule dynamics during mitosis (PubMed:16371510). NEDD1 phosphorylation promotes PLK1-mediated NEDD1 phosphorylation and subsequent targeting of the gamma-tubulin ring complex (gTuRC) to the centrosome, an important step for spindle formation (PubMed:19509060). In addition, CC2D1A phosphorylation regulates CC2D1A spindle pole localization and association with SCC1/RAD21 and centriole cohesion during mitosis (PubMed:20171170). The phosphorylation of Bcl-xL/BCL2L1 after prolongated G2 arrest upon DNA damage triggers apoptosis (PubMed:19917720). In contrast, CASP8 phosphorylation during mitosis prevents its activation by proteolysis and subsequent apoptosis (PubMed:20937773). This phosphorylation occurs in cancer cell lines, as well as in primary breast tissues and lymphocytes (PubMed:20937773). EZH2 phosphorylation promotes H3K27me3 maintenance and epigenetic gene silencing (PubMed:20935635). CALD1 phosphorylation promotes Schwann cell migration during peripheral nerve regeneration (By similarity). CDK1-cyclin-B complex phosphorylates NCKAP5L and mediates its dissociation from centrosomes during mitosis (PubMed:26549230). Regulates the amplitude of the cyclic expression of the core clock gene BMAL1 by phosphorylating its transcriptional repressor NR1D1, and this phosphorylation is necessary for SCF(FBXW7)-mediated ubiquitination and proteasomal degradation of NR1D1 (PubMed:27238018). Phosphorylates EML3 at 'Thr-881' which is essential for its interaction with HAUS augmin-like complex and TUBG1 (PubMed:30723163). Phosphorylates CGAS during mitosis, leading to its inhibition, thereby preventing CGAS activation by self DNA during mitosis (PubMed:32351706). Phosphorylates SKA3 on multiple sites during mitosis which promotes SKA3 binding to the NDC80 complex and anchoring of the SKA complex to kinetochores, to enable stable attachment of mitotic spindle microtubules to kinetochores (PubMed:28479321, PubMed:31804178, PubMed:32491969) (Microbial infection) Acts as a receptor for hepatitis C virus (HCV) in hepatocytes and facilitates its cell entry",
+        "subcellular_location": [
+          "Nucleus",
+          "Cytoplasm",
+          "Mitochondrion",
+          "Cytoplasm, cytoskeleton, microtubule organizing center, centrosome",
+          "Cytoplasm, cytoskeleton, spindle"
+        ],
+        "diseases": [
+          "None annotated."
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/P06493",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 5.151,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "CDK1",
+        "disease": "Melanoma"
+      },
+      "result": {
+        "found": false,
+        "resolved": {
+          "ensembl_id": "ENSG00000170312",
+          "efo_id": "MONDO_0005105",
+          "target_name": "CDK1",
+          "disease_name": "melanoma"
+        },
+        "note": "CDK1 is not among the top 500 associated targets for MONDO_0005105 (melanoma). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'CDK1' -> ENSG00000170312 (CDK1); 'Melanoma' -> MONDO_0005105 (melanoma). Scores below describe THAT term, not the free-text phrase.",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 3.178,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "CDK1",
+        "disease": "Melanoma"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "CDK1",
+        "disease": "Melanoma",
+        "note": "No pQTL-based MR estimate for CDK1 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.711,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "CDK1"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL4523963",
+        "target_name": "CDK4/CDK1",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 0,
+        "modulators": [],
+        "note": "ChEMBL target matched by text search on 'CDK1' and resolved to 'CDK4/CDK1' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4523963/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 5.353,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "CDK1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "CDK1",
+        "total_records": 52,
+        "pathogenic_in_sample": 3,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "GRCh37/hg19 10q21.1-21.3(chr10:59402774-65652920)x1",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "GRCh37/hg19 10q21.2(chr10:62094738-63033038)x3",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_001786.5(CDK1):c.*306A>T",
+            "significance": "N/A"
+          },
+          {
+            "title": "NM_001786.5(CDK1):c.*290T>G",
+            "significance": "N/A"
+          },
+          {
+            "title": "NM_001786.5(CDK1):c.653+5C>G",
+            "significance": "N/A"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 52 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=CDK1%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.353,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "CDK1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "CDK1",
+        "pLI": 0.9999713575278776,
+        "LOEUF": 0.3041329584511889,
+        "LOEUF_percentile": 5,
+        "oe_lof": 0.14464565232172108,
+        "oe_lof_lower": 0.07559224444011037,
+        "obs_lof": 5,
+        "exp_lof": 34.56723323338466,
+        "plain_language": "gnomAD expected about 35 loss-of-function variants in this gene and observed 5. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 4.328603940645942,
+        "lof_z": 4.266216673199896,
+        "interpretation": "LoF-INTOLERANT: this gene is depleted of loss-of-function variants in the population, so inhibiting it carries a safety warning.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/CDK1",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.415,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "CDK1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "CDK1",
+        "n_unique_snps": 20,
+        "n_association_rows": 40,
+        "total_association_rows_reported": 40,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs11815438",
+          "rs79078979",
+          "rs144130033",
+          "rs7908589",
+          "rs2456778",
+          "rs7091284",
+          "rs3213056",
+          "rs117368932",
+          "rs185695670",
+          "rs11817236",
+          "rs10821852",
+          "rs1816798",
+          "rs7093851",
+          "rs7086524",
+          "rs556024592"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/CDK1",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 1.923,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "CDK1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "CDK1",
+        "n_clinical_annotations": 1,
+        "evidence_level_counts": {
+          "3": 1
+        },
+        "drugs": [
+          "radiotherapy"
+        ],
+        "n_drugs": 1,
+        "examples": [
+          {
+            "drugs": [
+              "radiotherapy"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs10711 (CDK1); radiotherapy; pneumonitis (level 3 Toxicity)"
+          }
+        ],
+        "url": "https://www.pharmgkb.org/search?query=CDK1",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.441,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "CDK1",
+        "Melanoma"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "CDK1",
+          "disease": "Melanoma",
+          "note": "No pQTL-based MR estimate for CDK1 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "CDK1",
+        "disease": "Melanoma",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "INSUFFICIENT EVIDENCE — there is no direct genetic association or causal estimate linking CDK1 to melanoma.",
+  "model_reasoning": "CDK1 encodes a key cell cycle kinase (cyclin-dependent kinase 1) involved in mitotic onset and G2-M transition, but it is not among the top associated targets for melanoma in Open Targets, and no causal Mendelian randomization estimate is available. Although gnomAD constraint metrics indicate strong intolerance to loss-of-function variants (high pLI and low LOEUF), suggesting that systemic inhibition could carry safety risks, ChEMBL modulators identify no direct targeted inhibitors specific to CDK1 alone. Furthermore, GWAS catalog hits and pharmacogenomic records provide no direct evidence linking CDK1 variation to melanoma pathogenesis or therapeutic response.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 1
+  },
+  "card_markdown": "# Target Evidence Card — CDK1 × Melanoma\n\n**Verdict:** INSUFFICIENT EVIDENCE — there is no direct genetic association or causal estimate linking CDK1 to melanoma.\n\n> **You asked about \"Melanoma\". This card scored MONDO_0005105 — melanoma.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"CDK4/CDK1\" (CHEMBL4523963),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | **not available** — CDK1 is not among the top 500 associated targets for MONDO_0005105 (melanoma). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'CDK1' -> ENSG00000170312 (CDK1); 'Melanoma' -> MONDO_0005105 (melanoma). Scores below describe THAT term, not the free-text phrase. |\n| Protein context | `get_uniprot_dossier` | P06493 — Cyclin-dependent kinase 1; location: Nucleus, Cytoplasm, Mitochondrion, Cytoplasm, cytoskeleton,  |\n| Known modulators / druggability | `get_chembl_modulators` | target CHEMBL4523963 — **0 known modulators in ChEMBL** |\n| Clinical variants | `get_clinvar_variants` | 52 ClinVar records; 3 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1, LOEUF=0.304 → LoF-INTOLERANT (handle with care) |\n| Extra genetic evidence | `get_gwas_catalog` | 20 unique SNPs from 40/40 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 1 clinical annotation(s) over 1 drug(s): radiotherapy — ClinPGx evidence level 3 (scale 1A strongest to 4 weakest) — e.g. rs10711 (CDK1); radiotherapy; pneumonitis (level 3 Toxicity) |\n| Clinical development record | `get_clinical_evidence` | _tool not called by the agent in this run_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — CDK1 is not among the top 500 associated targets for MONDO_0005105 (melanoma). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'CDK1' -> ENSG00000170312 (CDK1); 'Melanoma' -> MONDO_0005105 (melanoma). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — No pQTL-based MR estimate for CDK1 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'CDK1' and resolved to 'CDK4/CDK1' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 52 ClinVar records for this gene; it is a sample, not a rate.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nCDK1 encodes a key cell cycle kinase (cyclin-dependent kinase 1) involved in mitotic onset and G2-M transition, but it is not among the top associated targets for melanoma in Open Targets, and no causal Mendelian randomization estimate is available. Although gnomAD constraint metrics indicate strong intolerance to loss-of-function variants (high pLI and low LOEUF), suggesting that systemic inhibition could carry safety risks, ChEMBL modulators identify no direct targeted inhibitors specific to CDK1 alone. Furthermore, GWAS catalog hits and pharmacogenomic records provide no direct evidence linking CDK1 variation to melanoma pathogenesis or therapeutic response.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P06493 — _UniProt release 2026_02 (10-June-2026)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4523963/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=CDK1%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/CDK1 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/CDK1 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=CDK1 — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n\n## Provenance\n\n- Generated: 2026-08-21T15:52:24\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (9 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

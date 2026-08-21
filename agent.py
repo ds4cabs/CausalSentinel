@@ -99,8 +99,13 @@ def split_model_output(text: str):
     return verdict, reasoning
 
 
-def generate_one(client, system_prompt, protein, disease, out_dir, allow_unvalidated=False):
-    ledger = ToolLedger(TOOLS)
+def generate_one(client, system_prompt, protein, disease, out_dir, allow_unvalidated=False,
+                 tools=None):
+    # `tools` exists for benchmarking: scoring the verdict against historical drug
+    # outcomes requires running WITHOUT get_clinical_evidence, because that tool would
+    # hand the model the answer (a launched drug is visible as an APPROVAL stage). The
+    # default is always the full panel.
+    ledger = ToolLedger(tools if tools is not None else TOOLS)
     request = (
         f"Assemble the target evidence for protein {protein} and disease {disease}. "
         f"Call the tools to gather evidence, then reply in the required two-block format."
@@ -175,10 +180,21 @@ def main() -> None:
     ap.add_argument("--batch", help="File with one 'PROTEIN<TAB>DISEASE' pair per line")
     ap.add_argument("--allow-unvalidated", action="store_true",
                     help="Write the card even when validation fails (it is annotated)")
+    ap.add_argument("--exclude-tool", action="append", default=[],
+                    help="Tool name to withhold from the model (repeatable). Built for "
+                         "benchmarking against historical outcomes, where "
+                         "get_clinical_evidence would leak the answer.")
+    ap.add_argument("--out-dir", default=None,
+                    help="Directory for the cards (default: cards/)")
     args = ap.parse_args()
 
     system_prompt = (HERE / "system_prompt.md").read_text(encoding="utf-8")
-    out_dir = HERE / "cards"
+    out_dir = Path(args.out_dir) if args.out_dir else HERE / "cards"
+
+    run_tools = [t for t in TOOLS if t.__name__ not in set(args.exclude_tool)]
+    if len(run_tools) != len(TOOLS):
+        dropped = sorted(set(args.exclude_tool) & {t.__name__ for t in TOOLS})
+        print(f"[CausalSentinel] running WITHOUT: {', '.join(dropped)}", flush=True)
 
     pairs = []
     if args.batch:
@@ -199,7 +215,7 @@ def main() -> None:
         print(f"[CausalSentinel] {protein} x {disease} ...", flush=True)
         try:
             r = generate_one(client, system_prompt, protein, disease, out_dir,
-                             args.allow_unvalidated)
+                             args.allow_unvalidated, tools=run_tools)
         except Exception as e:
             print(f"  RUN FAILED: {type(e).__name__}: {e}")
             summary.append({"protein": protein, "disease": disease, "error": repr(e)})

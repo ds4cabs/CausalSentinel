@@ -1,0 +1,294 @@
+{
+  "protein": "ROCK2",
+  "disease": "Graft vs Host Disease",
+  "generated_at": "2026-08-21T15:48:54",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_mr_result",
+    "get_chembl_modulators",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ROCK2"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "ROCK2",
+        "accession": "O75116",
+        "gene_names": [
+          "ROCK2"
+        ],
+        "protein_name": "Rho-associated protein kinase 2",
+        "function": "Protein kinase which is a key regulator of actin cytoskeleton and cell polarity. Involved in regulation of smooth muscle contraction, actin cytoskeleton organization, stress fiber and focal adhesion formation, neurite retraction, cell adhesion and motility via phosphorylation of ADD1, BRCA2, CNN1, EZR, DPYSL2, EP300, MSN, MYL9/MLC2, NPM1, RDX, PPP1R12A and VIM. Phosphorylates SORL1 and IRF4. Acts as a negative regulator of VEGF-induced angiogenic endothelial cell activation. Positively regulates the activation of p42/MAPK1-p44/MAPK3 and of p90RSK/RPS6KA1 during myogenic differentiation. Plays an important role in the timely initiation of centrosome duplication. Inhibits keratinocyte terminal differentiation. May regulate closure of the eyelids and ventral body wall through organization of actomyosin bundles. Plays a critical role in the regulation of spine and synaptic properties in the hippocampus. Plays an important role in generating the circadian rhythm of the aortic myofilament Ca(2+) sensitivity and vascular contractility by modulating the myosin light chain phosphorylation",
+        "subcellular_location": [
+          "Cytoplasm",
+          "Cell membrane",
+          "Nucleus",
+          "Cytoplasm, cytoskeleton, microtubule organizing center, centrosome"
+        ],
+        "diseases": [
+          "None annotated."
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/O75116",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 3.818,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ROCK2",
+        "disease": "Graft vs Host Disease"
+      },
+      "result": {
+        "found": true,
+        "ensembl_id": "ENSG00000134318",
+        "efo_id": "MONDO_0013730",
+        "resolved_target_name": "ROCK2",
+        "resolved_disease_name": "graft versus host disease",
+        "overall_score": 0.5588,
+        "datatype_scores": {
+          "literature": 0.1349,
+          "clinical": 0.9124
+        },
+        "note": "Free-text inputs were resolved to ontology terms: 'ROCK2' -> ENSG00000134318 (ROCK2); 'Graft vs Host Disease' -> MONDO_0013730 (graft versus host disease). Scores below describe THAT term, not the free-text phrase.",
+        "url": "https://platform.opentargets.org/evidence/ENSG00000134318/MONDO_0013730",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.534,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "ROCK2",
+        "disease": "Graft vs Host Disease"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "ROCK2",
+        "disease": "Graft vs Host Disease",
+        "note": "No pQTL-based MR estimate for ROCK2 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.615,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ROCK2"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL2973",
+        "target_name": "Rho-associated protein kinase 2",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 1,
+        "modulators": [
+          {
+            "drug": "CHEMBL2005186",
+            "action": "INHIBITOR",
+            "moa": "Rho-associated protein kinase 2 inhibitor"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'ROCK2' and resolved to 'Rho-associated protein kinase 2' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL2973/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 10.134,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ROCK2"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "ROCK2",
+        "total_records": 210,
+        "pathogenic_in_sample": 1,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "NM_004850.5(ROCK2):c.1297T>G (p.Ser433Ala)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_004850.5(ROCK2):c.1619T>G (p.Leu540Arg)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_004850.5(ROCK2):c.1919T>G (p.Ile640Arg)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "GRCh37/hg19 2p25.3-23.1(chr2:12771-30565600)x3",
+            "significance": "Pathogenic"
+          },
+          {
+            "title": "NM_004850.5(ROCK2):c.2495A>G (p.Asn832Ser)",
+            "significance": "Uncertain significance"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 210 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=ROCK2%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.899,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ROCK2"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "ROCK2",
+        "pLI": 0.9999999996722783,
+        "LOEUF": 0.3870391983793986,
+        "LOEUF_percentile": 8,
+        "oe_lof": 0.3127290579045024,
+        "oe_lof_lower": 0.2544964249870662,
+        "obs_lof": 61,
+        "exp_lof": 195.05702606832102,
+        "plain_language": "gnomAD expected about 195 loss-of-function variants in this gene and observed 61. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 5.569382222333302,
+        "lof_z": 8.142791470019056,
+        "interpretation": "LoF-INTOLERANT: this gene is depleted of loss-of-function variants in the population, so inhibiting it carries a safety warning.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/ROCK2",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.471,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ROCK2"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "ROCK2",
+        "n_unique_snps": 54,
+        "n_association_rows": 106,
+        "total_association_rows_reported": 106,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs4606895",
+          "rs552051170",
+          "rs4668715",
+          "rs62118909",
+          "rs921322",
+          "rs16857178",
+          "rs6432169",
+          "rs3732103",
+          "rs3951242",
+          "rs17366643",
+          "rs72774870",
+          "rs11693023",
+          "rs12619687",
+          "rs6432187",
+          "rs55913674"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/ROCK2",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 1.911,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ROCK2"
+      },
+      "result": {
+        "found": false,
+        "gene_symbol": "ROCK2",
+        "note": "No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.48,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "ROCK2",
+        "Graft vs Host Disease"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "ROCK2",
+          "disease": "Graft vs Host Disease",
+          "note": "No pQTL-based MR estimate for ROCK2 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "ROCK2",
+        "disease": "Graft vs Host Disease",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "GO — Strong clinical evidence linking ROCK2 to graft versus host disease supports its pursuit as a therapeutic target.",
+  "model_reasoning": "Open Targets shows a substantial overall association score for ROCK2 with graft versus host disease, driven heavily by clinical evidence. ChEMBL identifies known modulators against the target, confirming its pharmacological tractability. However, gnomAD constraint metrics indicate that ROCK2 is highly intolerant to loss-of-function variants, signaling potential safety considerations for inhibition. No Mendelian randomization estimate or PharmGKB annotation was available for this gene-disease pair.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 0
+  },
+  "card_markdown": "# Target Evidence Card — ROCK2 × Graft vs Host Disease\n\n**Verdict:** GO — Strong clinical evidence linking ROCK2 to graft versus host disease supports its pursuit as a therapeutic target.\n\n> **You asked about \"Graft vs Host Disease\". This card scored MONDO_0013730 — graft versus host disease.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Rho-associated protein kinase 2\" (CHEMBL2973),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.559 (literature=0.135, clinical=0.912) |\n| Protein context | `get_uniprot_dossier` | O75116 — Rho-associated protein kinase 2; location: Cytoplasm, Cell membrane, Nucleus, Cytoplasm, cytoskeleton,  |\n| Known modulators / druggability | `get_chembl_modulators` | 1 known modulators (INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 210 ClinVar records; 1 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1, LOEUF=0.387 → LoF-INTOLERANT (handle with care) |\n| Extra genetic evidence | `get_gwas_catalog` | 54 unique SNPs from 106/106 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n| Clinical development record | `get_clinical_evidence` | _tool not called by the agent in this run_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'ROCK2' -> ENSG00000134318 (ROCK2); 'Graft vs Host Disease' -> MONDO_0013730 (graft versus host disease). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — No pQTL-based MR estimate for ROCK2 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'ROCK2' and resolved to 'Rho-associated protein kinase 2' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 210 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets shows a substantial overall association score for ROCK2 with graft versus host disease, driven heavily by clinical evidence. ChEMBL identifies known modulators against the target, confirming its pharmacological tractability. However, gnomAD constraint metrics indicate that ROCK2 is highly intolerant to loss-of-function variants, signaling potential safety considerations for inhibition. No Mendelian randomization estimate or PharmGKB annotation was available for this gene-disease pair.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/O75116 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000134318/MONDO_0013730 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL2973/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=ROCK2%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/ROCK2 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/ROCK2 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:48:54\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (9 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

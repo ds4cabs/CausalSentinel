@@ -1,0 +1,341 @@
+{
+  "protein": "TLR4",
+  "disease": "Reproductive Tract Infections",
+  "generated_at": "2026-08-21T15:50:20",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_mr_result",
+    "get_chembl_modulators",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "TLR4"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "TLR4",
+        "accession": "O00206",
+        "gene_names": [
+          "TLR4"
+        ],
+        "protein_name": "Toll-like receptor 4",
+        "function": "Transmembrane receptor that functions as a pattern recognition receptor recognizing pathogen- and damage-associated molecular patterns (PAMPs and DAMPs) to induce innate immune responses via downstream signaling pathways (PubMed:10835634, PubMed:15809303, PubMed:16622205, PubMed:17292937, PubMed:17478729, PubMed:20037584, PubMed:20711192, PubMed:23880187, PubMed:27022195, PubMed:29038465, PubMed:17803912, PubMed:15852007). At the plasma membrane, cooperates with LY96 to mediate the innate immune response to bacterial lipopolysaccharide (LPS) (PubMed:27022195). Also involved in LPS-independent inflammatory responses triggered by free fatty acids, such as palmitate, and Ni(2+) (PubMed:20711192). Mechanistically, acts via MYD88, TIRAP and TRAF6, leading to NF-kappa-B activation, cytokine secretion and the inflammatory response (PubMed:10835634, PubMed:21393102, PubMed:27022195, PubMed:36945827, PubMed:9237759). Alternatively, CD14-mediated TLR4 internalization via endocytosis is associated with the initiation of a MYD88-independent signaling via the TICAM1-TBK1-IRF3 axis leading to type I interferon production (PubMed:14517278). In addition to the secretion of proinflammatory cytokines, initiates the activation of NLRP3 inflammasome and formation of a positive feedback loop between autophagy and NF-kappa-B signaling cascade (PubMed:32894580). In complex with TLR6, promotes inflammation in monocytes/macrophages by associating with TLR6 and the receptor CD86 (PubMed:23880187). Upon ligand binding, such as oxLDL or amyloid-beta 42, the TLR4:TLR6 complex is internalized and triggers inflammatory response, leading to NF-kappa-B-dependent production of CXCL1, CXCL2 and CCL9 cytokines, via MYD88 signaling pathway, and CCL5 cytokine, via TICAM1 signaling pathway (PubMed:23880187). In myeloid dendritic cells, vesicular stomatitis virus glycoprotein G but not LPS promotes the activation of IRF7, leading to type I IFN production in a CD14-dependent manner (PubMed:15265881, PubMed:23880187). Required for the migration-promoting effects of ZG16B/PAUF on pancreatic cancer cells",
+        "subcellular_location": [
+          "Cell membrane",
+          "Early endosome",
+          "Cell projection, ruffle"
+        ],
+        "diseases": [
+          "None annotated."
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/O00206",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 1.648,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "TLR4",
+        "disease": "Reproductive Tract Infections"
+      },
+      "result": {
+        "found": false,
+        "resolved": {
+          "ensembl_id": "ENSG00000136869",
+          "efo_id": "MONDO_0006845",
+          "target_name": "TLR4",
+          "disease_name": "male genital tuberculosis"
+        },
+        "note": "TLR4 is not among the top 500 associated targets for MONDO_0006845 (male genital tuberculosis). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'TLR4' -> ENSG00000136869 (TLR4); 'Reproductive Tract Infections' -> MONDO_0006845 (male genital tuberculosis). Scores below describe THAT term, not the free-text phrase.",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.024,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "TLR4",
+        "disease": "Reproductive Tract Infections"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "TLR4",
+        "disease": "Reproductive Tract Infections",
+        "note": "No pQTL-based MR estimate for TLR4 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 2.029,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "TLR4"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL4106126",
+        "target_name": "TLR4-MD2",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 0,
+        "modulators": [],
+        "note": "ChEMBL target matched by text search on 'TLR4' and resolved to 'TLR4-MD2' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4106126/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 17.342,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "TLR4"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "TLR4",
+        "total_records": 175,
+        "pathogenic_in_sample": 1,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "NM_138554.5(TLR4):c.789T>C (p.Phe263=)",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "GRCh37/hg19 9q31.1-33.2(chr9:103690293-124400407)x1",
+            "significance": "Pathogenic"
+          },
+          {
+            "title": "GRCh37/hg19 9q33.1(chr9:119920495-122047532)x3",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_138554.5(TLR4):c.2473G>A (p.Gly825Arg)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "GRCh38/hg38 9q33.1(chr9:117058386-119537868)x3",
+            "significance": "Uncertain significance"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 175 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=TLR4%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.395,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "TLR4"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "TLR4",
+        "pLI": 0.00038256122183692883,
+        "LOEUF": 0.9305182225782251,
+        "LOEUF_percentile": 37,
+        "oe_lof": 0.6203642122695219,
+        "oe_lof_lower": 0.4245591854298096,
+        "obs_lof": 17,
+        "exp_lof": 27.403257092809575,
+        "plain_language": "gnomAD expected about 27 loss-of-function variants in this gene and observed 17. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 0.4989543146900237,
+        "lof_z": 1.6859037246136441,
+        "interpretation": "LoF-tolerant: no population-level depletion of loss-of-function variants, which is reassuring but is NOT positive evidence of efficacy.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/TLR4",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.452,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "TLR4"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "TLR4",
+        "n_unique_snps": 110,
+        "n_association_rows": 196,
+        "total_association_rows_reported": 196,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs10739499",
+          "rs7855252",
+          "rs1999066",
+          "rs13296664",
+          "rs10115586",
+          "rs1927903",
+          "rs2491646",
+          "rs12552443",
+          "rs181065863",
+          "rs7025144",
+          "rs12344353",
+          "rs7039838",
+          "rs13302141",
+          "rs757891585",
+          "rs535131141"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/TLR4",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 1.815,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "TLR4"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "TLR4",
+        "n_clinical_annotations": 6,
+        "evidence_level_counts": {
+          "3": 6
+        },
+        "drugs": [
+          "Pertussis vaccines",
+          "Tumor necrosis factor alpha (TNF-alpha) inhibitors",
+          "folic acid",
+          "methotrexate",
+          "pravastatin",
+          "tacrolimus"
+        ],
+        "n_drugs": 6,
+        "examples": [
+          {
+            "drugs": [
+              "Tumor necrosis factor alpha (TNF-alpha) inhibitors"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs5030728 (TLR4); Tumor necrosis factor alpha (TNF-alpha) inhibitors; Inflammatory Bowel Diseases (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "pravastatin"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs4986790 (TLR4); pravastatin; Coronary Artery Disease (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "folic acid",
+              "methotrexate"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs4986790 (TLR4); folic acid or methotrexate; Arthritis, Rheumatoid (level 3 Toxicity)"
+          },
+          {
+            "drugs": [
+              "Pertussis vaccines"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs2770150 (TLR4); Pertussis vaccines (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "Pertussis vaccines"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs4986790 (TLR4); Pertussis vaccines (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "tacrolimus"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs1927907 (TLR4); tacrolimus; Organ Transplantation (level 3)"
+          }
+        ],
+        "url": "https://www.pharmgkb.org/search?query=TLR4",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.649,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "TLR4",
+        "Reproductive Tract Infections"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "TLR4",
+          "disease": "Reproductive Tract Infections",
+          "note": "No pQTL-based MR estimate for TLR4 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "TLR4",
+        "disease": "Reproductive Tract Infections",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "INSUFFICIENT EVIDENCE — there is no direct genetic or causal evidence linking TLR4 to reproductive tract infections.",
+  "model_reasoning": "TLR4 encodes a well-characterized pattern recognition receptor involved in innate immunity and inflammatory signaling, but open targets evidence for reproductive tract infections resolved specifically to male genital tuberculosis with no recorded top-tier associations. No Mendelian randomization estimate is available for TLR4 on this disease, and ChEMBL lists no approved small-molecule modulators targeting the TLR4-MD2 complex. Furthermore, gnomAD constraint data indicates the gene is loss-of-function tolerant and GWAS associations map to various immune and inflammatory traits rather than direct reproductive pathogen outcomes.\n```",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 0
+  },
+  "card_markdown": "# Target Evidence Card — TLR4 × Reproductive Tract Infections\n\n**Verdict:** INSUFFICIENT EVIDENCE — there is no direct genetic or causal evidence linking TLR4 to reproductive tract infections.\n\n> **You asked about \"Reproductive Tract Infections\". This card scored MONDO_0006845 — male genital tuberculosis.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"TLR4-MD2\" (CHEMBL4106126),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | **not available** — TLR4 is not among the top 500 associated targets for MONDO_0006845 (male genital tuberculosis). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'TLR4' -> ENSG00000136869 (TLR4); 'Reproductive Tract Infections' -> MONDO_0006845 (male genital tuberculosis). Scores below describe THAT term, not the free-text phrase. |\n| Protein context | `get_uniprot_dossier` | O00206 — Toll-like receptor 4; location: Cell membrane, Early endosome, Cell projection, ruffle |\n| Known modulators / druggability | `get_chembl_modulators` | target CHEMBL4106126 — **0 known modulators in ChEMBL** |\n| Clinical variants | `get_clinvar_variants` | 175 ClinVar records; 1 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=0.00038, LOEUF=0.931 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 110 unique SNPs from 196/196 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 6 clinical annotation(s) over 6 drug(s): Pertussis vaccines, Tumor necrosis factor alpha (TNF-alpha) inhibitors, folic acid, methotrexate +2 more — ClinPGx evidence level 3 (scale 1A strongest to 4 weakest) — e.g. rs5030728 (TLR4); Tumor necrosis factor alpha (TNF-alpha) inhibitors; Inflammatory Bowel Diseases (level 3 Eff |\n| Clinical development record | `get_clinical_evidence` | _tool not called by the agent in this run_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — TLR4 is not among the top 500 associated targets for MONDO_0006845 (male genital tuberculosis). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'TLR4' -> ENSG00000136869 (TLR4); 'Reproductive Tract Infections' -> MONDO_0006845 (male genital tuberculosis). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — No pQTL-based MR estimate for TLR4 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'TLR4' and resolved to 'TLR4-MD2' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 175 ClinVar records for this gene; it is a sample, not a rate.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nTLR4 encodes a well-characterized pattern recognition receptor involved in innate immunity and inflammatory signaling, but open targets evidence for reproductive tract infections resolved specifically to male genital tuberculosis with no recorded top-tier associations. No Mendelian randomization estimate is available for TLR4 on this disease, and ChEMBL lists no approved small-molecule modulators targeting the TLR4-MD2 complex. Furthermore, gnomAD constraint data indicates the gene is loss-of-function tolerant and GWAS associations map to various immune and inflammatory traits rather than direct reproductive pathogen outcomes.\n```\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/O00206 — _UniProt release 2026_02 (10-June-2026)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4106126/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=TLR4%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/TLR4 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/TLR4 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=TLR4 — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n\n## Provenance\n\n- Generated: 2026-08-21T15:50:20\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (9 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

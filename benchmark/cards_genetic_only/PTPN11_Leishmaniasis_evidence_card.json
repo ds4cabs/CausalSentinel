@@ -1,0 +1,291 @@
+{
+  "protein": "PTPN11",
+  "disease": "Leishmaniasis",
+  "generated_at": "2026-08-21T15:45:51",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_mr_result",
+    "get_chembl_modulators",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PTPN11"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PTPN11",
+        "accession": "Q06124",
+        "gene_names": [
+          "PTPN11"
+        ],
+        "protein_name": "Tyrosine-protein phosphatase non-receptor type 11",
+        "function": "Acts downstream of various receptor and cytoplasmic protein tyrosine kinases to participate in the signal transduction from the cell surface to the nucleus (PubMed:10655584, PubMed:14739280, PubMed:18559669, PubMed:18829466, PubMed:26742426, PubMed:28074573, PubMed:32184441). Positively regulates MAPK signal transduction pathway (PubMed:28074573). Dephosphorylates GAB1, ARHGAP35 and EGFR (PubMed:28074573). Dephosphorylates ROCK2 at 'Tyr-722' resulting in stimulation of its RhoA binding activity (PubMed:18559669). Dephosphorylates CDC73 (PubMed:26742426). Dephosphorylates SOX9 on tyrosine residues, leading to inactivate SOX9 and promote ossification (By similarity). Dephosphorylates tyrosine-phosphorylated NEDD9/CAS-L (PubMed:19275884). Acts as an effector of PDCD1-mediated inhibition of T-cell response: recruited by phosphorylated PDCD1, mediating dephosphorylation of key T-cell receptor (TCR) proximal signaling molecules, leading to TCR signaling inhibition (PubMed:32184441)",
+        "subcellular_location": [
+          "Cytoplasm",
+          "Nucleus"
+        ],
+        "diseases": [
+          "LEOPARD syndrome 1",
+          "Noonan syndrome 1",
+          "Leukemia, juvenile myelomonocytic",
+          "Metachondromatosis"
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/Q06124",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 0.782,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PTPN11",
+        "disease": "Leishmaniasis"
+      },
+      "result": {
+        "found": false,
+        "resolved": {
+          "ensembl_id": "ENSG00000179295",
+          "efo_id": "MONDO_0011989",
+          "target_name": "PTPN11",
+          "disease_name": "leishmaniasis"
+        },
+        "note": "PTPN11 is not among the top 500 associated targets for MONDO_0011989 (leishmaniasis). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'PTPN11' -> ENSG00000179295 (PTPN11); 'Leishmaniasis' -> MONDO_0011989 (leishmaniasis). Scores below describe THAT term, not the free-text phrase.",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.459,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "PTPN11",
+        "disease": "Leishmaniasis"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "PTPN11",
+        "disease": "Leishmaniasis",
+        "note": "No pQTL-based MR estimate for PTPN11 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.781,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PTPN11"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL3864",
+        "target_name": "Tyrosine-protein phosphatase non-receptor type 11",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 1,
+        "modulators": [
+          {
+            "drug": "CHEMBL4650521",
+            "action": "INHIBITOR",
+            "moa": "Protein-tyrosine phosphatase 2C inhibitor"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'PTPN11' and resolved to 'Tyrosine-protein phosphatase non-receptor type 11' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL3864/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 6.417,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PTPN11"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PTPN11",
+        "total_records": 1379,
+        "pathogenic_in_sample": 1,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "NM_002834.5(PTPN11):c.1052G>T (p.Arg351Leu)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_002834.5(PTPN11):c.1054G>A (p.Val352Met)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_002834.5(PTPN11):c.420C>T (p.Ser140=)",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "NM_002834.5(PTPN11):c.1616G>A (p.Gly539Glu)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_002834.5(PTPN11):c.1569A>G (p.Glu523=)",
+            "significance": "Likely benign"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 1379 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=PTPN11%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.246,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PTPN11"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PTPN11",
+        "pLI": 0.9999999999999746,
+        "LOEUF": 0.15029738459026243,
+        "LOEUF_percentile": 0,
+        "oe_lof": 0.076148807556288,
+        "oe_lof_lower": 0.04169547873062344,
+        "obs_lof": 6,
+        "exp_lof": 78.79309200692202,
+        "plain_language": "gnomAD expected about 79 loss-of-function variants in this gene and observed 6. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 5.606563570757228,
+        "lof_z": 6.9568177626242,
+        "interpretation": "LoF-INTOLERANT: this gene is depleted of loss-of-function variants in the population, so inhibiting it carries a safety warning.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/PTPN11",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.571,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PTPN11"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PTPN11",
+        "n_unique_snps": 110,
+        "n_association_rows": 223,
+        "total_association_rows_reported": 223,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs41279092",
+          "rs10850034",
+          "rs233722",
+          "rs112732885",
+          "rs146628426",
+          "rs11066359",
+          "rs3741983",
+          "rs148422684",
+          "rs233698",
+          "rs34034288",
+          "rs2037357773",
+          "rs232918",
+          "rs11066325",
+          "rs11066284",
+          "rs537602334"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/PTPN11",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 3.223,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PTPN11"
+      },
+      "result": {
+        "found": false,
+        "gene_symbol": "PTPN11",
+        "note": "No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.462,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "PTPN11",
+        "Leishmaniasis"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "PTPN11",
+          "disease": "Leishmaniasis",
+          "note": "No pQTL-based MR estimate for PTPN11 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "PTPN11",
+        "disease": "Leishmaniasis",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "INSUFFICIENT EVIDENCE — there is currently no direct evidence linking PTPN11 to leishmaniasis and no available causal estimate.",
+  "model_reasoning": "Open Targets shows PTPN11 is not among the top associated targets for leishmaniasis, and no Mendelian randomization estimate is available for this disease-protein pair. While PTPN11 is a well-studied tyrosine-protein phosphatase with known modulators in ChEMBL and multiple GWAS catalog associations, gnomAD constraint metrics indicate high loss-of-function intolerance, presenting potential safety risks if inhibited. Furthermore, there are no pharmacogenomic annotations in PharmGKB for PTPN11.\n```",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 0
+  },
+  "card_markdown": "# Target Evidence Card — PTPN11 × Leishmaniasis\n\n**Verdict:** INSUFFICIENT EVIDENCE — there is currently no direct evidence linking PTPN11 to leishmaniasis and no available causal estimate.\n\n> **You asked about \"Leishmaniasis\". This card scored MONDO_0011989 — leishmaniasis.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Tyrosine-protein phosphatase non-receptor type 11\" (CHEMBL3864),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | **not available** — PTPN11 is not among the top 500 associated targets for MONDO_0011989 (leishmaniasis). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'PTPN11' -> ENSG00000179295 (PTPN11); 'Leishmaniasis' -> MONDO_0011989 (leishmaniasis). Scores below describe THAT term, not the free-text phrase. |\n| Protein context | `get_uniprot_dossier` | Q06124 — Tyrosine-protein phosphatase non-receptor type 11; location: Cytoplasm, Nucleus |\n| Known modulators / druggability | `get_chembl_modulators` | 1 known modulators (INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 1379 ClinVar records; 1 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1, LOEUF=0.15 → LoF-INTOLERANT (handle with care) |\n| Extra genetic evidence | `get_gwas_catalog` | 110 unique SNPs from 223/223 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n| Clinical development record | `get_clinical_evidence` | _tool not called by the agent in this run_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — PTPN11 is not among the top 500 associated targets for MONDO_0011989 (leishmaniasis). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'PTPN11' -> ENSG00000179295 (PTPN11); 'Leishmaniasis' -> MONDO_0011989 (leishmaniasis). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — No pQTL-based MR estimate for PTPN11 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'PTPN11' and resolved to 'Tyrosine-protein phosphatase non-receptor type 11' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 1379 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets shows PTPN11 is not among the top associated targets for leishmaniasis, and no Mendelian randomization estimate is available for this disease-protein pair. While PTPN11 is a well-studied tyrosine-protein phosphatase with known modulators in ChEMBL and multiple GWAS catalog associations, gnomAD constraint metrics indicate high loss-of-function intolerance, presenting potential safety risks if inhibited. Furthermore, there are no pharmacogenomic annotations in PharmGKB for PTPN11.\n```\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q06124 — _UniProt release 2026_02 (10-June-2026)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL3864/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=PTPN11%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/PTPN11 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/PTPN11 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:45:51\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (9 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

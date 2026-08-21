@@ -1,0 +1,21 @@
+gene	disease	label	historical_max_phase	year_launch	genetic_status	ti_uid
+TNF	Dermatitis, Seborrheic	SUCCESS	Launched		unsupported target	TNF-D012628
+PTPN11	Leishmaniasis	SUCCESS	Launched			PTPN11-D007896
+VDR	Psoriasis	SUCCESS	Launched	2012	unsupported target	VDR-D011565
+IFNAR1	Infections	SUCCESS	Launched	1989	unsupported target	IFNAR1-D007239
+SCN9A	Neuralgia, Postherpetic	SUCCESS	Launched		unsupported target	SCN9A-D051474
+JAK3	Colitis, Ulcerative	SUCCESS	Launched		unsupported target	JAK3-D003093
+ITGAV	Surgical Procedures, Operative	SUCCESS	Launched	2013		ITGAV-D013514
+NR3C1	Rhinitis, Allergic, Seasonal	SUCCESS	Launched	1996	unsupported target	NR3C1-D006255
+ROCK2	Graft vs Host Disease	SUCCESS	Launched		unsupported target	ROCK2-D006086
+SLC5A2	Kidney Failure, Chronic	SUCCESS	Launched		unsupported target	SLC5A2-D007676
+FGA	Hearing Loss	FAILURE	Phase II		unsupported target	FGA-D034381
+TLR4	Reproductive Tract Infections	FAILURE	Phase II			TLR4-D060737
+HDAC2	Melanoma	FAILURE	Phase II		unsupported target	HDAC2-D008545
+ENG	Kidney Neoplasms	FAILURE	Phase II		unsupported target	ENG-D007680
+AGTR1	Pneumonia	FAILURE	Phase II		unsupported target	AGTR1-D011014
+PRKCE	Graft vs Host Disease	FAILURE	Phase II		unsupported target	PRKCE-D006086
+ANGPT1	Sarcoma	FAILURE	Phase III			ANGPT1-D012509
+CDK1	Melanoma	FAILURE	Phase III		unsupported target	CDK1-D008545
+OGFR	HIV Infections	FAILURE	Phase II			OGFR-D015658
+PDGFRB	Retinal Detachment	FAILURE	Phase III		unsupported target	PDGFRB-D012163
