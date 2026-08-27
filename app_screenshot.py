@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Screenshot the running OpenCausal app (localhost:8503) for README + deck."""
+"""Screenshot the running OpenCausal app (localhost:8501) for README + deck."""
 from playwright.sync_api import sync_playwright
 
-URL = "http://localhost:8503"
+URL = "http://localhost:8501"
 OUT = "figs"
 
 with sync_playwright() as p:
