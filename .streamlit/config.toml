@@ -1,0 +1,9 @@
+[theme]
+# The deck palette: DEEP #065A82 on white, LIGHT panels.
+primaryColor = "#065A82"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F1F6F9"
+textColor = "#1A1A1A"
+
+[browser]
+gatherUsageStats = false
