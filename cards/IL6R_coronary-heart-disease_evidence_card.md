@@ -1,6 +1,6 @@
 # Target Evidence Card — IL6R × coronary heart disease
 
-**Verdict:** GO — genetic and causal Mendelian randomization support a protective effect of IL6R inhibition against coronary heart disease, and clinical-stage modulators exist.
+**Verdict:** GO — robust genetic and causal pQTL evidence supports IL6R inhibition for coronary heart disease, complemented by clinical trial experience.
 
 > **You asked about "coronary heart disease". This card scored MONDO_0005010 — coronary artery disorder.** If those are not the same thing, every number below answers a different question.
 > **The druggability row is about ChEMBL target "Interleukin-6 receptor subunit alpha" (CHEMBL2364155),** matched by text search. If that is not the molecular target you meant, that row is about something else.
@@ -16,7 +16,7 @@
 ## Evidence concordance — classified by rule, not written by the model
 
 - Sources: EpiGraphDB — estimate found · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run
-- Single matched estimate; validation depth 0 of 4 (multi-SNP / Steiger / coloc / LD check).
+- Single matched estimate; sensitivity checks reported: 0 of 3 (multi-SNP / Steiger / shared-variant [coloc or LD check]).
 
 ## Evidence
 
@@ -29,7 +29,7 @@ _retrieved from published MR; not computed here_ |
 | Known modulators / druggability | `get_chembl_modulators` | 4 known modulators (ANTAGONIST, INHIBITOR) |
 | Clinical variants | `get_clinvar_variants` | 366 ClinVar records; 1 pathogenic in a sample of 30 |
 | Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=7.9e-11, LOEUF=1.03 → LoF-tolerant |
-| Extra genetic evidence | `get_gwas_catalog` | 140 unique SNPs from 368/368 association rows |
+| Extra genetic evidence | `get_gwas_catalog` | 158 unique SNPs from 368/368 association rows |
 | Pharmacogenomics | `get_pharmgkb_drug_gene` | 3 clinical annotation(s) over 1 drug(s): tocilizumab — ClinPGx evidence level 3/4 (scale 1A strongest to 4 weakest) — e.g. rs12083537 (IL6R); tocilizumab; Arthritis, Rheumatoid (level 3 Efficacy) |
 | Clinical development record | `get_clinical_evidence` | max stage for THIS disease: **PHASE_2** — e.g. TOCILIZUMAB (PHASE_2, 5 trial report(s) for this disease)  
 _stages mean trials exist, not that they worked_ |
@@ -45,7 +45,7 @@ _stages mean trials exist, not that they worked_ |
 
 ## Reasoning
 
-Open Targets shows strong genetic association for IL6R with coronary artery disorder, supported by a large pool of mapped GWAS associations. Retrieved Mendelian randomization results provide a significant cis-pQTL causal estimate supporting a protective effect on coronary heart disease. The target is readily druggable with approved monoclonal antibodies such as tocilizumab that have reached phase 2 clinical evaluation in this disease context. Furthermore, gnomAD constraint metrics indicate that IL6R is tolerant to loss-of-function variation, mitigating safety concerns regarding target inhibition.
+Open Targets shows a strong genetic association between IL6R and coronary artery disease. Published pQTL Mendelian randomization estimates using the cis-instrument rs4129267 indicate a protective causal effect on coronary heart disease. ChEMBL identifies multiple modulators targeting the interleukin-6 receptor subunit alpha, and clinical evidence records phase 2 trial experience for tocilizumab in this indication alongside approvals for related inflammatory conditions. Furthermore, gnomAD constraint metrics indicate the gene is loss-of-function tolerant.
 
 ## Sources
 
@@ -53,7 +53,7 @@ Open Targets shows strong genetic association for IL6R with coronary artery diso
 - `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000160712/MONDO_0005010 — _Open Targets data release 26.06_
 - `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_
 - `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL2364155/ — _ChEMBL_37 (released 2026-05-01)_
-- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=IL6R%5Bgene%5D — _ClinVar build Build260818-0035.1_
+- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=IL6R%5Bgene%5D — _ClinVar build Build260823-0900.1_
 - `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/IL6R — _gnomAD constraint via GraphQL API (reference genome GRCh38)_
 - `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/IL6R — _GWAS Catalog REST (live; release not exposed by this endpoint)_
 - `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=IL6R — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_
@@ -61,7 +61,7 @@ Open Targets shows strong genetic association for IL6R with coronary artery diso
 
 ## Provenance
 
-- Generated: 2026-08-21T15:32:13
+- Generated: 2026-08-27T11:48:32
 - Model (reasoning text only): `gemini-flash-lite-latest`
 - Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`
 - Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.
@@ -70,4 +70,3 @@ Open Targets shows strong genetic association for IL6R with coronary artery diso
 > **VALIDATION FAILED** — the model wrote claim tokens with no support in tool output:
 > - [causal-claim-on-unvalidated-estimate] `causal`
 > - [direction-contradicts-beta] `inhibition`
-> - [modality-not-in-chembl] `monoclonal`

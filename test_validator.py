@@ -75,6 +75,19 @@ MR_UNVALIDATED = FakeLedger({
                            "coloc_prob": None, "ld_check": None}]},
 })
 
+# A REPORTED-BUT-FAILED Steiger is positive evidence of reverse causation. Before the
+# fix, "FALSE" was non-blank and therefore counted as validation — the one state in
+# which causal wording is LEAST earned was the one that licensed it.
+MR_STEIGER_FAILED = FakeLedger({
+    "get_mr_result": {"found": True, "protein": "IL6R",
+                      "matched_disease_estimates": [
+                          {"beta": -0.0441899892357374, "se": 0.00853005023322569,
+                           "p_value": 2.21283026387414e-07, "method": "Wald ratio", "n_snp": 1,
+                           "instrument_rsid": "rs4129267", "cis_or_trans": "cis",
+                           "steiger_direction_ok": "FALSE", "steiger_p": 0.04,
+                           "coloc_prob": None, "ld_check": None}]},
+})
+
 # The LPA x CHD row from the same batch: same outcome, same tool, same single instrument —
 # but Steiger passed and the LD check is 1.0. Causal wording here IS earned, and the rule
 # must not fire, or it would punish the better-evidenced card equally.
@@ -263,6 +276,14 @@ CASES = [
     ("stating the causal limitation is not a causal claim", MR_UNVALIDATED,
      "A causal interpretation is not supported: this is a single-instrument Wald ratio "
      "with no Steiger direction test and no colocalization.", True),
+    ("a FAILED Steiger licenses no causal wording — it is worse than absent",
+     MR_STEIGER_FAILED,
+     "Mendelian randomization evidence supports a causal role of IL6R in coronary heart "
+     "disease.", False),
+    ("the failed-Steiger estimate is fine described as an association",
+     MR_STEIGER_FAILED,
+     "Genetically-predicted higher plasma IL6R is associated with lower coronary heart "
+     "disease risk, but the Steiger direction test failed for this estimate.", True),
     ("validated estimate may carry causal wording", MR_VALIDATED,
      "Mendelian randomization evidence supports a causal effect of LPA on coronary heart "
      "disease risk.", True),

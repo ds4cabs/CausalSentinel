@@ -19,7 +19,17 @@ ACC_RE = re.compile(r"\b(?:CHEMBL\d+|ENSG\d+|MONDO_\d+|EFO_\d+|[OPQ][0-9][A-Z0-9
 
 
 def _haystack(ledger) -> str:
-    """Everything the tools returned, as one searchable string."""
+    """Everything the tools returned, as one searchable string.
+
+    Built from ALL ledger entries when available (results_by_tool keeps only one
+    result per tool, so a number the model honestly took from an earlier call to
+    the same tool would be flagged as unsupported). Falls back to
+    results_by_tool() for ledger-shaped test doubles.
+    """
+    entries = getattr(ledger, "entries", None)
+    if entries:
+        return json.dumps([e.get("result") for e in entries],
+                          ensure_ascii=False, default=str)
     return json.dumps(ledger.results_by_tool(), ensure_ascii=False, default=str)
 
 
@@ -512,8 +522,14 @@ def check_evidence_consistency(model_text: str, ledger) -> list:
     if mr_has_estimate:
         def _blank(v):
             return v is None or (isinstance(v, str) and v.strip().upper() in {"", "NA", "NAN", "NULL"})
+        def _failed(v):
+            # A reported-but-FAILED Steiger is positive evidence of reverse causation.
+            # It must count as LESS than absent, never as validation — before this
+            # check, steiger_direction_ok="FALSE" licensed causal wording.
+            return isinstance(v, str) and v.strip().upper() == "FALSE"
         def _unvalidated(e):
-            return (_blank(e.get("steiger_direction_ok"))
+            steiger = e.get("steiger_direction_ok")
+            return ((_blank(steiger) or _failed(steiger))
                     and _blank(e.get("coloc_prob"))
                     and _blank(e.get("ld_check"))
                     and e.get("n_snp") in (1, "1", 1.0))

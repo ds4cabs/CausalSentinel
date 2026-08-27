@@ -1,6 +1,6 @@
 # Target Evidence Card — LPA × coronary heart disease
 
-**Verdict:** GO — Strong genetic, causal, and clinical-stage evidence supports LPA as a therapeutic target for coronary heart disease.
+**Verdict:** GO — LPA demonstrates strong causal genetic evidence, high LoF tolerance, and active phase 3 clinical development for coronary-related disorders.
 
 > **You asked about "coronary heart disease". This card scored MONDO_0005010 — coronary artery disorder.** If those are not the same thing, every number below answers a different question.
 > **The druggability row is about ChEMBL target "LPA mRNA" (CHEMBL4662965),** matched by text search. If that is not the molecular target you meant, that row is about something else.
@@ -16,7 +16,7 @@
 ## Evidence concordance — classified by rule, not written by the model
 
 - Sources: EpiGraphDB — estimate found · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run
-- Single matched estimate; validation depth 2 of 4 (multi-SNP / Steiger / coloc / LD check).
+- Single matched estimate; sensitivity checks reported: 2 of 3 (multi-SNP / Steiger / shared-variant [coloc or LD check]).
 
 ## Evidence
 
@@ -29,7 +29,7 @@ _retrieved from published MR; not computed here_ |
 | Known modulators / druggability | `get_chembl_modulators` | 2 known modulators (ANTISENSE INHIBITOR, RNAI INHIBITOR) |
 | Clinical variants | `get_clinvar_variants` | 365 ClinVar records; 2 pathogenic in a sample of 30 |
 | Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=2.1e-68, LOEUF=1.13 → LoF-tolerant |
-| Extra genetic evidence | `get_gwas_catalog` | 266 unique SNPs from 692/692 association rows |
+| Extra genetic evidence | `get_gwas_catalog` | 259 unique SNPs from 692/692 association rows |
 | Pharmacogenomics | `get_pharmgkb_drug_gene` | 3 clinical annotation(s) over 2 drug(s): HMG-CoA reductase inhibitors, rosuvastatin — ClinPGx evidence level 3 (scale 1A strongest to 4 weakest) — e.g. rs10455872 (LPA); rosuvastatin (level 3 Efficacy) |
 | Clinical development record | `get_clinical_evidence` | max stage for THIS disease: **PHASE_3** — e.g. PELACARSEN (PHASE_3, 9 trial report(s) for this disease, 1 of them with a stop reason); +1 more drug(s) for this disease  
 _stages mean trials exist, not that they worked_ |
@@ -45,7 +45,7 @@ _stages mean trials exist, not that they worked_ |
 
 ## Reasoning
 
-Open Targets reports a strong genetic association for LPA with coronary artery disorder, alongside extensive GWAS support. Retrieved Mendelian randomization estimates using the cis-instrument rs55730499 indicate a robust causal relationship with coronary heart disease. ChEMBL lists known modulators targeting LPA mRNA, and clinical evidence confirms that multiple therapeutic programmes (such as pelacarsen and olpasiran) have advanced to Phase 3 evaluation. Furthermore, gnomAD constraint data indicates that LPA is tolerant to loss-of-function variants, suggesting a favorable safety profile for inhibition.
+Retrieved Mendelian randomization estimates link LPA to coronary heart disease with strong statistical support, corroborated by hundreds of GWAS associations and a high genetic association score in Open Targets. The gene exhibits loss-of-function tolerance in gnomAD, suggesting safety upon inhibition, and has active phase 3 clinical candidates such as pelacarsen and olpasiran targeted against it.
 
 ## Sources
 
@@ -53,7 +53,7 @@ Open Targets reports a strong genetic association for LPA with coronary artery d
 - `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000198670/MONDO_0005010 — _Open Targets data release 26.06_
 - `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_
 - `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4662965/ — _ChEMBL_37 (released 2026-05-01)_
-- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=LPA%5Bgene%5D — _ClinVar build Build260818-0035.1_
+- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=LPA%5Bgene%5D — _ClinVar build Build260823-0900.1_
 - `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/LPA — _gnomAD constraint via GraphQL API (reference genome GRCh38)_
 - `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/LPA — _GWAS Catalog REST (live; release not exposed by this endpoint)_
 - `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=LPA — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_
@@ -61,7 +61,7 @@ Open Targets reports a strong genetic association for LPA with coronary artery d
 
 ## Provenance
 
-- Generated: 2026-08-21T15:32:38
+- Generated: 2026-08-27T11:48:56
 - Model (reasoning text only): `gemini-flash-lite-latest`
 - Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`
 - Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.

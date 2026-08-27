@@ -182,6 +182,13 @@ def _direction_block(protein: str, results: dict) -> list:
                 if v in (None, "NA", "")]
         if weak:
             out.append(f"  - Not available for this estimate: {', '.join(weak)}.")
+        # A reported-but-FAILED direction test is worse than an absent one, and until
+        # now it was the one state this block never showed.
+        sd = m.get("steiger_direction_ok")
+        if isinstance(sd, str) and sd.strip().upper() == "FALSE":
+            out.append("  - **Steiger direction test FAILED** — the protein→disease "
+                       "direction is NOT supported for this estimate; reverse causation "
+                       "is indicated.")
         if m.get("n_snp") == 1:
             out.append("  - Single-instrument Wald ratio: no heterogeneity or pleiotropy "
                        "test is possible.")
@@ -233,12 +240,12 @@ def _concordance_block(results: dict) -> list:
                  "not_assessable": "direction agreement NOT assessable — at least one "
                                    "estimate carries no usable beta"}.get(
             ec.get("label") or ec.get("direction"), ec.get("direction"))
-        out.append(f"- {n} matched estimates: {label}. Validation depth per estimate "
-                   f"(0-4): {ec.get('validation_depth_per_estimate')}.")
+        out.append(f"- {n} matched estimates: {label}. Sensitivity checks reported per "
+                   f"estimate (0-3): {ec.get('validation_depth_per_estimate')}.")
     elif n == 1:
-        out.append(f"- Single matched estimate; validation depth "
-                   f"{ec.get('best_validation_depth', 0)} of 4 "
-                   f"(multi-SNP / Steiger / coloc / LD check).")
+        out.append(f"- Single matched estimate; sensitivity checks reported: "
+                   f"{ec.get('best_validation_depth', 0)} of 3 "
+                   f"(multi-SNP / Steiger / shared-variant [coloc or LD check]).")
     out.append("")
     return out
 

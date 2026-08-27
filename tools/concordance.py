@@ -26,7 +26,8 @@ WHAT THE REAL DATA FORCED (censused 2026-08-20 over all 991 dossier caches)
    analyte-identity note below.
 3. Validation is vanishingly rare: of 101,543 estimate rows, coloc_prob is non-null on
    0.19%, steiger_p on 0.35%, ld_check on 0.16%. "Validated" is therefore a per-estimate
-   ANNOTATION here (depth 0-4), not a class most pairs could ever join.
+   ANNOTATION here (depth 0-3; coloc and ld_check are one shared-variant signal — the
+   source ran one or the other, never both), not a class most pairs could ever join.
 
 The classification is computed here, by fixed rules, with no model anywhere in the path.
 The MR estimates it reads remain retrieved, never computed — same as everywhere else.
@@ -56,14 +57,29 @@ def _sign(beta):
 
 
 def _validation_depth(est: dict) -> dict:
-    """Per-estimate annotation: which of the four validation signals are present."""
+    """Per-estimate annotation: which validation signals are REPORTED (depth 0-3).
+
+    coloc and ld_check are one signal, not two. In the source resource (Zheng 2020)
+    the LD check was the fallback run exactly when the full regional statistics that
+    colocalization needs were not available — across all 101,543 rows the two never
+    co-occur. Scored separately they made 4/4 unreachable by construction; merged,
+    the observed depth of every existing estimate is unchanged (verified: 0 rows
+    carry both). `shared_variant_via` keeps the audit trail of WHICH check it was.
+
+    This counts that a check is reported, not that it passed — a reported-but-FAILED
+    Steiger is handled by the validator (validate_card.py), which refuses causal
+    wording on it.
+    """
+    has_coloc = not _blank(est.get("coloc_prob"))
+    has_ld = not _blank(est.get("ld_check"))
     signals = {
         "multi_snp": not _blank(est.get("n_snp")) and est.get("n_snp") not in (1, "1", 1.0),
         "steiger": not _blank(est.get("steiger_direction_ok")) or not _blank(est.get("steiger_p")),
-        "coloc": not _blank(est.get("coloc_prob")),
-        "ld_check": not _blank(est.get("ld_check")),
+        "shared_variant": has_coloc or has_ld,
     }
-    return {**signals, "depth": sum(signals.values())}
+    return {**signals,
+            "shared_variant_via": "coloc" if has_coloc else ("ld_check" if has_ld else None),
+            "depth": sum(signals.values())}
 
 
 def _coverage_state(published, count) -> str:

@@ -1,6 +1,6 @@
 # Target Evidence Card — HMGCR × high cholesterol
 
-**Verdict:** GO — HMGCR is the clinically validated, primary pharmacological target of statins for hypercholesterolemia, backed by extensive genetic and clinical trial evidence.
+**Verdict:** GO — HMGCR is a heavily validated, clinically approved drug target for hypercholesterolemia with robust genetic and pharmacological evidence.
 
 > **You asked about "high cholesterol". This card scored HP_0003124 — Hypercholesterolemia.** If those are not the same thing, every number below answers a different question.
 > **The druggability row is about ChEMBL target "3-hydroxy-3-methylglutaryl-coenzyme A reductase" (CHEMBL402),** matched by text search. If that is not the molecular target you meant, that row is about something else.
@@ -35,7 +35,7 @@ _stages mean trials exist, not that they worked_ |
 
 ## Reasoning
 
-HMGCR encodes 3-hydroxy-3-methylglutaryl-coenzyme A reductase, the rate-limiting enzyme in cholesterol biosynthesis and the well-established target of multiple FDA-approved statin drugs such as simvastatin, atorvastatin, and rosuvastatin. Open Targets demonstrates strong genetic and clinical association scores for hypercholesterolemia, and numerous ChEMBL modulators target this protein. While gnomAD constraint metrics indicate that the gene is LoF-intolerant, its successful inhibition by approved therapeutics underscores its exceptional target validation for lowering cholesterol.
+Open Targets demonstrates a strong association score between HMGCR and hypercholesterolemia, backed by extensive GWAS and clinical evidence. ChEMBL lists multiple approved inhibitors targeting the enzyme, and clinical development records confirm regulatory approvals for multiple statin drugs against this indication. Although gnomAD constraint metrics indicate strong loss-of-function intolerance, decades of safe clinical modulation via small-molecule inhibitors establish its proven therapeutic viability.
 
 ## Sources
 
@@ -43,7 +43,7 @@ HMGCR encodes 3-hydroxy-3-methylglutaryl-coenzyme A reductase, the rate-limiting
 - `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000113161/HP_0003124 — _Open Targets data release 26.06_
 - `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL402/ — _ChEMBL_37 (released 2026-05-01)_
 - `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_
-- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=HMGCR%5Bgene%5D — _ClinVar build Build260818-0035.1_
+- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=HMGCR%5Bgene%5D — _ClinVar build Build260823-0900.1_
 - `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/HMGCR — _gnomAD constraint via GraphQL API (reference genome GRCh38)_
 - `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/HMGCR — _GWAS Catalog REST (live; release not exposed by this endpoint)_
 - `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=HMGCR — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_
@@ -51,12 +51,11 @@ HMGCR encodes 3-hydroxy-3-methylglutaryl-coenzyme A reductase, the rate-limiting
 
 ## Provenance
 
-- Generated: 2026-08-21T15:33:17
+- Generated: 2026-08-27T11:49:35
 - Model (reasoning text only): `gemini-flash-lite-latest`
 - Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`
 - Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.
 - No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.
 
 > **VALIDATION FAILED** — the model wrote claim tokens with no support in tool output:
-> - [efficacy-claim-not-retrievable] `clinically validated`
-> - [qualitative-claim] `FDA-approved`
+> - [efficacy-claim-not-retrievable] `proven`

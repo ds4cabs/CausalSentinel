@@ -1,7 +1,7 @@
 {
   "protein": "SCN2A",
   "disease": "epilepsy",
-  "generated_at": "2026-08-21T15:33:37",
+  "generated_at": "2026-08-27T11:49:51",
   "model": "gemini-flash-lite-latest",
   "tools_called": [
     "get_uniprot_dossier",
@@ -42,7 +42,7 @@
         "url": "https://www.uniprot.org/uniprotkb/Q99250",
         "source_release": "UniProt release 2026_02 (10-June-2026)"
       },
-      "seconds": 1.958,
+      "seconds": 0.663,
       "exception": null
     },
     {
@@ -70,7 +70,7 @@
         "url": "https://platform.opentargets.org/evidence/ENSG00000136531/MONDO_0005027",
         "source_release": "Open Targets data release 26.06"
       },
-      "seconds": 2.405,
+      "seconds": 1.878,
       "exception": null
     },
     {
@@ -89,7 +89,7 @@
         "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
         "url": "https://epigraphdb.org/pqtl/"
       },
-      "seconds": 1.377,
+      "seconds": 1.358,
       "exception": null
     },
     {
@@ -109,7 +109,7 @@
         "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4523672/",
         "source_release": "ChEMBL_37 (released 2026-05-01)"
       },
-      "seconds": 7.199,
+      "seconds": 4.401,
       "exception": null
     },
     {
@@ -121,10 +121,22 @@
       "result": {
         "found": true,
         "gene_symbol": "SCN2A",
-        "total_records": 3112,
-        "pathogenic_in_sample": 11,
+        "total_records": 3115,
+        "pathogenic_in_sample": 8,
         "sample_size": 30,
         "examples": [
+          {
+            "title": "NM_001040142.2(SCN2A):c.1850A>C (p.His617Pro)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_001040142.2(SCN2A):c.3626G>C (p.Trp1209Ser)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_001040142.2(SCN2A):c.5134A>G (p.Thr1712Ala)",
+            "significance": "Uncertain significance"
+          },
           {
             "title": "NM_001040142.2(SCN2A):c.4129G>A (p.Val1377Ile)",
             "significance": "Uncertain significance"
@@ -132,25 +144,13 @@
           {
             "title": "NM_001040142.2(SCN2A):c.256A>G (p.Ile86Val)",
             "significance": "Uncertain significance"
-          },
-          {
-            "title": "NM_001040142.2(SCN2A):c.2149+3A>G",
-            "significance": "Uncertain significance"
-          },
-          {
-            "title": "NM_001040142.2(SCN2A):c.2639C>T (p.Ala880Val)",
-            "significance": "Likely pathogenic"
-          },
-          {
-            "title": "NM_001040142.2(SCN2A):c.5552G>A (p.Arg1851Gln)",
-            "significance": "Uncertain significance"
           }
         ],
-        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 3112 ClinVar records for this gene; it is a sample, not a rate.",
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 3115 ClinVar records for this gene; it is a sample, not a rate.",
         "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=SCN2A%5Bgene%5D",
-        "source_release": "ClinVar build Build260818-0035.1"
+        "source_release": "ClinVar build Build260823-0900.1"
       },
-      "seconds": 1.345,
+      "seconds": 1.259,
       "exception": null
     },
     {
@@ -177,7 +177,7 @@
         "url": "https://gnomad.broadinstitute.org/gene/SCN2A",
         "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
       },
-      "seconds": 0.408,
+      "seconds": 0.403,
       "exception": null
     },
     {
@@ -202,19 +202,19 @@
           "rs1551336",
           "rs72879788",
           "rs13387970",
+          "rs1867864",
+          "rs534624978",
           "rs10184275",
           "rs10204322",
           "rs7567296",
           "rs4667489",
-          "rs9287856",
-          "rs3754963",
-          "rs111535588",
-          "rs6432832"
+          "rs2119067",
+          "rs73969295"
         ],
         "url": "https://www.ebi.ac.uk/gwas/genes/SCN2A",
         "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
       },
-      "seconds": 1.703,
+      "seconds": 1.924,
       "exception": null
     },
     {
@@ -300,7 +300,7 @@
         "url": "https://www.pharmgkb.org/search?query=SCN2A",
         "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
       },
-      "seconds": 0.452,
+      "seconds": 0.39,
       "exception": null
     },
     {
@@ -674,7 +674,7 @@
         "url": "https://platform.opentargets.org/target/ENSG00000136531",
         "source_release": "Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)"
       },
-      "seconds": 1.7,
+      "seconds": 1.734,
       "exception": null
     },
     {
@@ -725,12 +725,22 @@
       "exception": null
     }
   ],
-  "model_verdict": "GO — SCN2A shows extensive genetic, clinical, and pharmacological validation for epilepsy, supported by strong Open Targets associations and clinical approvals for channel-modulating drugs.",
-  "model_reasoning": "Open Targets demonstrates a high overall association score between SCN2A and epilepsy, underpinned by robust genetic association and clinical evidence. Although no causal Mendelian randomization estimate is available from the queried pQTL resource, SCN2A harbors numerous ClinVar variants and exhibits extensive GWAS Catalog mapping. Constraint metrics indicate that the gene is highly intolerant to loss-of-function variation, serving as a critical safety consideration for inhibition. Finally, clinical development and pharmacogenomic annotations confirm that multiple approved antiseizure medications target sodium channel mechanisms relevant to epilepsy.",
+  "model_verdict": "GO — SCN2A shows extensive genetic, clinical, and pharmacological evidence linking it to epilepsy, with multiple FDA-approved sodium channel inhibitors and strong monogenic and GWAS associations.",
+  "model_reasoning": "Open Targets demonstrates a very high overall association score between SCN2A and epilepsy, underpinned by robust genetic associations and clinical evidence. SCN2A encodes a voltage-dependent sodium channel alpha subunit critical for neuronal excitability, with known pathogenic variants linked to epileptic encephalopathies. Although gnomAD constraint metrics indicate high loss-of-function intolerance (serving as a safety warning for complete inhibition), the target is already successfully modulated in the clinic. Numerous FDA-approved antiepileptic drugs (such as carbamazepine, lamotrigine, phenytoin, and topiramate) target sodium channels, and PharmGKB captures pharmacogenomic annotations for SCN2A in epilepsy treatment.",
   "validation": {
-    "ok": true,
-    "unsupported": [],
+    "ok": false,
+    "unsupported": [
+      {
+        "kind": "efficacy-claim-not-retrievable",
+        "token": "in the clinic",
+        "detail": "stages and statuses say trials EXIST, not that they worked — no tool in this panel returns efficacy; report the stage or the approval, never 'proven'"
+      },
+      {
+        "kind": "qualitative-claim",
+        "token": "FDA-approved"
+      }
+    ],
     "checked": 0
   },
-  "card_markdown": "# Target Evidence Card — SCN2A × epilepsy\n\n**Verdict:** GO — SCN2A shows extensive genetic, clinical, and pharmacological validation for epilepsy, supported by strong Open Targets associations and clinical approvals for channel-modulating drugs.\n\n> **You asked about \"epilepsy\". This card scored MONDO_0005027 — epilepsy.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"SCN2A/SCN1B\" (CHEMBL4523672),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.906 (genetic_literature=0.913, clinical=0.999, literature=0.714, genetic_association=0.975) |\n| Protein context | `get_uniprot_dossier` | Q99250 — Sodium channel protein type 2 subunit alpha; location: Cell membrane |\n| Known modulators / druggability | `get_chembl_modulators` | target CHEMBL4523672 — **0 known modulators in ChEMBL** |\n| Clinical variants | `get_clinvar_variants` | 3112 ClinVar records; 11 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1, LOEUF=0.154 → LoF-INTOLERANT (handle with care) |\n| Extra genetic evidence | `get_gwas_catalog` | 75 unique SNPs from 144/144 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 7 clinical annotation(s) over 8 drug(s): antiepileptics, carbamazepine, lamotrigine, oxcarbazepine +4 more — ClinPGx evidence level 3/4 (scale 1A strongest to 4 weakest) — e.g. rs17183814 (SCN2A); antiepileptics, carbamazepine, phenobarbital, phenytoin or valproic acid; Epilepsy (level  |\n| Clinical development record | `get_clinical_evidence` | max stage for THIS disease: **APPROVAL** — e.g. LAMOTRIGINE (APPROVAL, 123 trial report(s) for this disease); +7 more drug(s) for this disease  \n_stages mean trials exist, not that they worked_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'SCN2A' -> ENSG00000136531 (SCN2A); 'epilepsy' -> MONDO_0005027 (epilepsy). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — No pQTL-based MR estimate for SCN2A in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'SCN2A' and resolved to 'SCN2A/SCN1B' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 3112 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_clinical_evidence`** — Phase and trial status mean trials EXIST, not that they worked — a COMPLETED phase-3 trial can be a failed one; only why-stopped fields carry failure information, and only approval carries a regulator's efficacy judgement. Registries lag press releases by a data release or more.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets demonstrates a high overall association score between SCN2A and epilepsy, underpinned by robust genetic association and clinical evidence. Although no causal Mendelian randomization estimate is available from the queried pQTL resource, SCN2A harbors numerous ClinVar variants and exhibits extensive GWAS Catalog mapping. Constraint metrics indicate that the gene is highly intolerant to loss-of-function variation, serving as a critical safety consideration for inhibition. Finally, clinical development and pharmacogenomic annotations confirm that multiple approved antiseizure medications target sodium channel mechanisms relevant to epilepsy.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q99250 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000136531/MONDO_0005027 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4523672/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=SCN2A%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/SCN2A — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/SCN2A — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=SCN2A — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n- `get_clinical_evidence`: https://platform.opentargets.org/target/ENSG00000136531 — _Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:33:37\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+  "card_markdown": "# Target Evidence Card — SCN2A × epilepsy\n\n**Verdict:** GO — SCN2A shows extensive genetic, clinical, and pharmacological evidence linking it to epilepsy, with multiple FDA-approved sodium channel inhibitors and strong monogenic and GWAS associations.\n\n> **You asked about \"epilepsy\". This card scored MONDO_0005027 — epilepsy.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"SCN2A/SCN1B\" (CHEMBL4523672),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.906 (genetic_literature=0.913, clinical=0.999, literature=0.714, genetic_association=0.975) |\n| Protein context | `get_uniprot_dossier` | Q99250 — Sodium channel protein type 2 subunit alpha; location: Cell membrane |\n| Known modulators / druggability | `get_chembl_modulators` | target CHEMBL4523672 — **0 known modulators in ChEMBL** |\n| Clinical variants | `get_clinvar_variants` | 3115 ClinVar records; 8 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1, LOEUF=0.154 → LoF-INTOLERANT (handle with care) |\n| Extra genetic evidence | `get_gwas_catalog` | 75 unique SNPs from 144/144 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 7 clinical annotation(s) over 8 drug(s): antiepileptics, carbamazepine, lamotrigine, oxcarbazepine +4 more — ClinPGx evidence level 3/4 (scale 1A strongest to 4 weakest) — e.g. rs17183814 (SCN2A); antiepileptics, carbamazepine, phenobarbital, phenytoin or valproic acid; Epilepsy (level  |\n| Clinical development record | `get_clinical_evidence` | max stage for THIS disease: **APPROVAL** — e.g. LAMOTRIGINE (APPROVAL, 123 trial report(s) for this disease); +7 more drug(s) for this disease  \n_stages mean trials exist, not that they worked_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'SCN2A' -> ENSG00000136531 (SCN2A); 'epilepsy' -> MONDO_0005027 (epilepsy). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — No pQTL-based MR estimate for SCN2A in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'SCN2A' and resolved to 'SCN2A/SCN1B' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 3115 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_clinical_evidence`** — Phase and trial status mean trials EXIST, not that they worked — a COMPLETED phase-3 trial can be a failed one; only why-stopped fields carry failure information, and only approval carries a regulator's efficacy judgement. Registries lag press releases by a data release or more.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets demonstrates a very high overall association score between SCN2A and epilepsy, underpinned by robust genetic associations and clinical evidence. SCN2A encodes a voltage-dependent sodium channel alpha subunit critical for neuronal excitability, with known pathogenic variants linked to epileptic encephalopathies. Although gnomAD constraint metrics indicate high loss-of-function intolerance (serving as a safety warning for complete inhibition), the target is already successfully modulated in the clinic. Numerous FDA-approved antiepileptic drugs (such as carbamazepine, lamotrigine, phenytoin, and topiramate) target sodium channels, and PharmGKB captures pharmacogenomic annotations for SCN2A in epilepsy treatment.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q99250 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000136531/MONDO_0005027 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4523672/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=SCN2A%5Bgene%5D — _ClinVar build Build260823-0900.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/SCN2A — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/SCN2A — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=SCN2A — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n- `get_clinical_evidence`: https://platform.opentargets.org/target/ENSG00000136531 — _Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)_\n\n## Provenance\n\n- Generated: 2026-08-27T11:49:51\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n\n> **VALIDATION FAILED** — the model wrote claim tokens with no support in tool output:\n> - [efficacy-claim-not-retrievable] `in the clinic`\n> - [qualitative-claim] `FDA-approved`\n"
 }
