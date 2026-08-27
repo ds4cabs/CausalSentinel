@@ -50,10 +50,8 @@ because the card is rendered by code from tool output; the model only ever write
 one-line verdict and one paragraph. Paste your own free
 [Gemini key](https://aistudio.google.com/apikey) in the sidebar (used for that run,
 never stored) to add those two sentences — and watch the validator check them on the
-A **Databases** picker in the sidebar lets you query only the sources you need —
-skipped sources render honestly as “tool not called in this run”.
-
-page.
+page. A **Databases** picker in the sidebar lets you query only the sources you
+need — skipped sources render honestly as “tool not called in this run”.
 
 One app, three tabs — build your own card, browse the ten worked cards, and open
 any of the 991 protein dossiers:
