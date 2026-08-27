@@ -256,13 +256,18 @@ with st.sidebar:
     model = st.text_input("Model", value=MODEL_DEFAULT)
     st.divider()
     st.header("Databases")
-    sel_labels = st.multiselect(
-        "Query only these \u2014 all free, all keyless",
-        list(PLAN_LABELS),
-        default=list(PLAN_LABELS),
-        help="Un-tick what you don't need and the run gets faster. Rows for sources "
-             "you skip say 'tool not called in this run' \u2014 the card never pretends.",
-    )
+    st.caption("Query only these \u2014 all free, all keyless. Un-tick what you don't "
+               "need and the run gets faster; skipped sources say so on the card.")
+
+    def _set_all_dbs(value: bool) -> None:
+        for k in PLAN_LABELS:
+            st.session_state[f"db_{k}"] = value
+
+    ca, cb = st.columns(2)
+    ca.button("All", use_container_width=True, on_click=_set_all_dbs, args=(True,))
+    cb.button("None", use_container_width=True, on_click=_set_all_dbs, args=(False,))
+    sel_labels = [k for k in PLAN_LABELS
+                  if st.checkbox(k, value=True, key=f"db_{k}")]
     st.markdown(
         "Also online: [protein gallery](https://ds4cabs.github.io/CausalSentinel/dossiers/) \u00b7 "
         "[card viewer](https://ds4cabs.github.io/CausalSentinel/viewer/)"
