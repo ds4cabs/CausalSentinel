@@ -291,7 +291,9 @@ function renderTimelines(){
     against PubMed / openFDA / EMA / ClinicalTrials.gov, 2026-08-21). The point: genetic
     evidence precedes the clinic's verdict by a decade — and the verdict does not always
     agree. <b>A stage means a trial exists, not that it worked.</b></p>` +
-    CASES.map(c => {
+    CASES.map(caseHTML).join("");
+}
+function caseHTML(c){
       const [a,b] = c.span, W = b - a;
       const dots = c.events.map(([y,txt,kind,side]) =>
         `<div class="tl-dot ${kind}" style="left:${((y-a)/W*100).toFixed(1)}%" title="${esc(y+" — "+txt)}"></div>` +
@@ -300,7 +302,6 @@ function renderTimelines(){
       return `<div class="tl-case"><h3>${esc(c.name)}</h3>
         <div class="tl-outcome ${c.hit?"hit":"miss"}">${esc(c.outcome)}</div>
         <div class="tl-axis">${dots}</div></div>`;
-    }).join("");
 }
 
 /* ---------------- boot ---------------- */

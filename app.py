@@ -283,9 +283,20 @@ def _viewer_embed(single: dict | None = None, height: int = 1500) -> None:
         page = re.sub(r"const PAIRS = \[.*?\];",
                       "const PAIRS = [[" + json.dumps(p) + ", " + json.dumps(d) + "]];",
                       page, count=1, flags=re.S)
-        page = page.replace("</body>",
-                            "<style>.tabs, .picker, header, footer "
-                            "{display:none !important}</style></body>", 1)
+        extra = (
+            "<style>.tabs, .picker, header, footer {display:none !important}"
+            ".tlhead {margin:1.4rem 0 .2rem}</style>"
+            "<script>(function(){var n=0,t=setInterval(function(){"
+            "var el=document.getElementById(\"card\");"
+            "if(el&&el.childElementCount){clearInterval(t);"
+            "var prot=PAIRS[0][0].toUpperCase();"
+            "var hits=CASES.filter(function(c){return c.name.toUpperCase().indexOf(prot)===0});"
+            "if(hits.length){el.insertAdjacentHTML(\"beforeend\","
+            "\"<h2 class=tlhead>Genetics → clinic timeline — hand-verified</h2>\""
+            "+hits.map(caseHTML).join(\"\"))}}"
+            "else if(++n>60){clearInterval(t)}},200);})();</script>"
+        )
+        page = page.replace("</body>", extra + "</body>", 1)
     _components_html(page, height=height, scrolling=True)
 
 
