@@ -72,13 +72,13 @@
   .tl-outcome.hit { color:var(--good); }
   .tl-outcome.miss { color:var(--bad); }
   .tl-axis { position:relative; height:4px; background:var(--line); border-radius:2px;
-             margin:2.4rem .5rem 3.2rem; }
+             margin:5.4rem 3.2rem 6.0rem; }
   .tl-dot { position:absolute; top:-6px; width:14px; height:14px; border-radius:50%;
             background:var(--deep); transform:translateX(-50%); cursor:default; }
   .tl-dot.launch { background:var(--good); }
   .tl-dot.fail { background:var(--bad); }
-  .tl-lab { position:absolute; transform:translateX(-50%); font-size:.68rem; width:110px;
-            text-align:center; color:var(--muted); line-height:1.25; }
+  .tl-lab { position:absolute; transform:translateX(-50%); font-size:.68rem; width:128px;
+            text-align:center; color:var(--muted); line-height:1.3; }
   .tl-lab.up { bottom:14px; } .tl-lab.down { top:14px; }
   .tl-lab b { color:var(--ink); }
   footer { text-align:center; color:var(--muted); font-size:.78rem; padding:2rem 0; }
@@ -155,7 +155,7 @@ const RENDER = {
       `<span class="covchip ${cls(s)}">${n}: ${esc(s ?? "?")}</span>`).join("") + "</div>";
     h += kv("estimates compared", esc(ec.n_estimates_compared)) +
          kv("direction", esc(ec.label || ec.direction)) +
-         kv("validation depth (0–4)", esc(JSON.stringify(ec.validation_depth_per_estimate||[])));
+         kv("sensitivity checks reported (0–3)", esc(JSON.stringify(ec.validation_depth_per_estimate||[])));
     return h + raw(r);
   },
   get_target_disease_evidence(r){
@@ -237,7 +237,7 @@ async function showCard(i){
     }
   }
   const v = j.model_verdict || "";
-  const cls = /NO-GO/i.test(v) ? "NOGO" : (/INSUFFICIENT/i.test(v) ? "INSUFF" : "GO");
+  const cls = /NO-GO/i.test(v) ? "NOGO" : (/INSUFFICIENT|no verdict/i.test(v) ? "INSUFF" : "GO");
   const val = j.validation || {};
   const fails = (val.unsupported||[]).map(u=>`<span class="failchip">${esc(u.kind)}</span>`).join("");
   const led = {};
@@ -258,8 +258,8 @@ async function showCard(i){
     `<div class="vstrip">generated ${esc(j.generated_at)} · model ${esc(j.model)} · validation: ` +
     (val.ok ? `<b style="color:var(--good)">PASS</b> (${val.checked} claim tokens checked)`
             : `<span class="vfail">FAIL</span> ${fails}`) + `</div>` +
+    `<div class="reasoning"><b>${/^none/.test(j.model||"") ? "Reading of the evidence — composed by code from the ledger; no model ran" : "Model reasoning — the only text the model wrote, validated against the ledger"}</b>:<br>${esc(j.model_reasoning)}</div>` +
     `<div class="grid">${panels}</div>` +
-    `<div class="reasoning"><b>Model reasoning</b> — the only text the model wrote, validated against the ledger:<br>${esc(j.model_reasoning)}</div>` +
     (notes ? `<div class="caveats"><b>Caveats declared by the tools</b><ul>${notes}</ul></div>` : "");
 }
 
@@ -291,7 +291,9 @@ function renderTimelines(){
     against PubMed / openFDA / EMA / ClinicalTrials.gov, 2026-08-21). The point: genetic
     evidence precedes the clinic's verdict by a decade — and the verdict does not always
     agree. <b>A stage means a trial exists, not that it worked.</b></p>` +
-    CASES.map(c => {
+    CASES.map(caseHTML).join("");
+}
+function caseHTML(c){
       const [a,b] = c.span, W = b - a;
       const dots = c.events.map(([y,txt,kind,side]) =>
         `<div class="tl-dot ${kind}" style="left:${((y-a)/W*100).toFixed(1)}%" title="${esc(y+" — "+txt)}"></div>` +
@@ -300,7 +302,6 @@ function renderTimelines(){
       return `<div class="tl-case"><h3>${esc(c.name)}</h3>
         <div class="tl-outcome ${c.hit?"hit":"miss"}">${esc(c.outcome)}</div>
         <div class="tl-axis">${dots}</div></div>`;
-    }).join("");
 }
 
 /* ---------------- boot ---------------- */

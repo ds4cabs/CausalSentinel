@@ -69,6 +69,89 @@ PLAN = [
 ]
 
 
+@st.cache_data(show_spinner=False)
+def _figures(protein: str):
+    """The two per-protein figures (forest of retrieved MR estimates; gnomAD
+    constraint), drawn by plots.py from live tool output."""
+    import tempfile
+    from plots import mr_forest, constraint_plot
+    out = Path(tempfile.mkdtemp(prefix="opencausal_figs_"))
+    f1 = f2 = None
+    try:
+        f1 = mr_forest(protein, out)
+    except Exception:
+        pass
+    try:
+        f2 = constraint_plot(protein, out)
+    except Exception:
+        pass
+    return (str(f1) if f1 else None, str(f2) if f2 else None)
+
+
+def _code_reading(results: dict) -> str:
+    """A reading of the evidence composed by CODE from the tool results.
+
+    This is what sits at the top of a no-model card: every clause below is a
+    fixed template filled with a retrieved value — no model, no free text.
+    """
+    parts = []
+
+    mr = results.get("get_mr_result") or {}
+    ests = mr.get("matched_disease_estimates") or []
+    if ests:
+        m = ests[0]
+        conc = results.get("classify_evidence_concordance") or {}
+        depth = conc.get("best_validation_depth")
+        sent = (f"EpiGraphDB holds a published MR estimate for this pair "
+                f"(beta {m.get('beta')}, p {m.get('p_value')}, "
+                f"{m.get('n_snp')} instrument(s), {m.get('cis_or_trans')})")
+        if depth is not None:
+            sent += f"; sensitivity checks reported: {depth} of 3"
+        parts.append(sent + ".")
+    elif mr.get("found"):
+        parts.append(f"The protein has {mr.get('n_outcomes_available')} outcomes in the "
+                     "MR resource, but none matches this disease.")
+    else:
+        parts.append("No published MR estimate exists for this pair in the resource — "
+                     "absence of an estimate is not evidence of no effect.")
+
+    clin = results.get("get_clinical_evidence") or {}
+    if clin.get("drugs_for_this_disease"):
+        parts.append(f"The clinic has already tried this target for this disease "
+                     f"(max stage: {clin.get('max_stage_this_disease')}) — a stage means "
+                     "a trial exists, not that it worked.")
+    elif clin.get("n_drug_programmes"):
+        parts.append(f"No programme for this disease is on record; "
+                     f"{clin.get('n_drug_programmes')} drug programme(s) exist against "
+                     "this target for other diseases.")
+    elif clin:
+        parts.append("No drug or clinical candidate against this target is on record.")
+
+    gn = results.get("get_gnomad_constraint") or {}
+    pli, loeuf = gn.get("pLI"), gn.get("LOEUF")
+    if pli is not None or loeuf is not None:
+        if (pli is not None and pli > 0.9) or (loeuf is not None and loeuf < 0.35):
+            parts.append("gnomAD marks the gene LoF-intolerant — a safety flag.")
+        else:
+            parts.append("gnomAD marks the gene LoF-tolerant — a hint about safety, "
+                         "not a licence to inhibit.")
+
+    gw = results.get("get_gwas_catalog") or {}
+    if gw.get("n_unique_snps") is not None:
+        parts.append(f"The GWAS Catalog maps {gw.get('n_unique_snps')} unique SNPs "
+                     "to the locus.")
+
+    ch = results.get("get_chembl_modulators") or {}
+    if ch.get("n_modulators"):
+        parts.append(f"ChEMBL lists {ch.get('n_modulators')} known modulator(s).")
+    elif ch and ch.get("found") is not False:
+        parts.append("ChEMBL lists no known modulators — druggability is unproven.")
+
+    parts.append("Every value above appears in a panel below, with the database "
+                 "release it came from.")
+    return " ".join(parts)
+
+
 def _run_tools(protein: str, disease: str, progress=None) -> ToolLedger:
     """Call the nine public sources through the ledger, then classify concordance."""
     ledger = ToolLedger(TOOLS)
@@ -125,23 +208,33 @@ def _model_sentences(api_key: str, model: str, protein: str, disease: str, ledge
 
 
 # ---------------------------------------------------------------------------------
-# page
+# page — one site, three tabs: build a card / ten worked cards / the 991 gallery
 # ---------------------------------------------------------------------------------
-st.set_page_config(page_title="OpenCausal — target evidence card",
-                   page_icon="🧬", layout="wide")
+st.set_page_config(page_title="OpenCausal", page_icon="\U0001f9ec", layout="wide")
 
-st.title("🧬 OpenCausal — target evidence card")
-st.caption(
-    "Type a protein and a disease. Nine public databases are queried live, and the card "
-    "below is assembled **by code** from what came back — every number traceable to the "
-    "tool and database release it came from. No account, no key, no cost."
-)
+# Look & feel: the deck palette (DEEP #065A82 / TEAL #1C7293), quieter chrome.
+st.markdown("""
+<style>
+#MainMenu, footer, [data-testid="stToolbar"] {visibility: hidden;}
+.block-container {padding-top: 1.1rem; max-width: 1200px;}
+.oc-hero {background: linear-gradient(90deg, #065A82, #1C7293); border-radius: 14px;
+          padding: 20px 28px; color: #fff; margin-bottom: 10px;}
+.oc-hero h1 {color: #fff; font-size: 2.0rem; margin: 0 0 6px 0;}
+.oc-hero p  {color: #DCE9F2; margin: 0; font-size: 0.97rem;}
+.stTabs [data-baseweb="tab"] {font-size: 1.02rem; font-weight: 600;}
+</style>
+<div class="oc-hero">
+  <h1>\U0001f9ec OpenCausal</h1>
+  <p>One protein \u00d7 one disease \u2192 one evidence card you can check, line by line.
+     Nine public databases, queried live, rendered by code \u2014 no account, no key, no cost.</p>
+</div>
+""", unsafe_allow_html=True)
 
 with st.sidebar:
     st.header("Optional: add a model")
     st.markdown(
         "The card needs no model. A model only writes the **verdict line** and one "
-        "paragraph — and then a validator checks both against the retrieval.\n\n"
+        "paragraph \u2014 and then a validator checks both against the retrieval.\n\n"
         "Paste your own Gemini key to switch that on. It is used for this run only and "
         "never stored."
     )
@@ -150,109 +243,238 @@ with st.sidebar:
     model = st.text_input("Model", value=MODEL_DEFAULT)
     st.divider()
     st.markdown(
-        "**Sources** — all free, all keyless\n\n"
-        "EpiGraphDB · Open Targets · ChEMBL · UniProt · ClinVar · gnomAD · "
-        "GWAS Catalog · ClinPGx · clinical development record"
+        "**Sources** \u2014 all free, all keyless\n\n"
+        "EpiGraphDB \u00b7 Open Targets \u00b7 ChEMBL \u00b7 UniProt \u00b7 ClinVar \u00b7 gnomAD \u00b7 "
+        "GWAS Catalog \u00b7 ClinPGx \u00b7 clinical development record"
     )
     st.markdown(
-        "[991 pre-built protein pages](https://ds4cabs.github.io/CausalSentinel/dossiers/) · "
-        "[worked examples](https://ds4cabs.github.io/CausalSentinel/viewer/)"
+        "Also online: [protein gallery](https://ds4cabs.github.io/CausalSentinel/dossiers/) \u00b7 "
+        "[card viewer](https://ds4cabs.github.io/CausalSentinel/viewer/)"
     )
 
-EXAMPLES = [
-    ("PCSK9", "high cholesterol"),
-    ("IL6R", "coronary heart disease"),
-    ("PNPLA3", "MASLD"),
-    ("LPA", "coronary heart disease"),
-]
+import datetime as _dt
+from streamlit.components.v1 import html as _components_html
 
-st.session_state.setdefault("protein_in", "PCSK9")
-st.session_state.setdefault("disease_in", "high cholesterol")
+_VIEWER = HERE / "viewer" / "index.html"
+_BUNDLE = HERE / "viewer" / "cards_data.js"
 
 
-def _set_pair(p: str, d: str) -> None:
-    # Widget state must be changed via a callback, BEFORE the widgets render.
-    st.session_state.protein_in = p
-    st.session_state.disease_in = d
+def _viewer_embed(single: dict | None = None, height: int = 1500) -> None:
+    """Render cards through viewer/index.html — the panel-per-tool interface.
 
-
-cols = st.columns(len(EXAMPLES))
-for c, (p, d) in zip(cols, EXAMPLES):
-    c.button(f"{p} × {d}", use_container_width=True, on_click=_set_pair, args=(p, d))
-
-c1, c2 = st.columns(2)
-protein = c1.text_input("Protein / gene symbol", key="protein_in")
-disease = c2.text_input("Disease", key="disease_in")
-go = st.button("Build the evidence card", type="primary", use_container_width=True)
-
-# Build on click; keep the result in session state so it SURVIVES reruns —
-# without this, clicking the Download button (which reruns the script) wipes the card.
-if go:
-    if not protein.strip() or not disease.strip():
-        st.error("Give both a protein and a disease.")
-        st.stop()
-
-    bar = st.progress(0.0, text="starting …")
-    ledger = _run_tools(protein.strip(), disease.strip(), bar)
-    bar.empty()
-
-    verdict, reasoning = NO_MODEL_VERDICT, NO_MODEL_REASONING
-    validation = None
-    if api_key.strip():
-        with st.spinner("the model is writing its two sentences …"):
-            try:
-                verdict, reasoning = _model_sentences(api_key.strip(), model.strip(),
-                                                      protein.strip(), disease.strip(), ledger)
-                validation = validate(verdict + "\n" + reasoning, ledger)
-            except Exception as exc:  # noqa: BLE001
-                st.error(f"Model call failed — showing the card without it. ({exc})")
-                verdict, reasoning = NO_MODEL_VERDICT, NO_MODEL_REASONING
-
-    card_md = render_card(protein.strip(), disease.strip(), ledger, reasoning, verdict,
-                          model.strip() if validation else "none — no model was called")
-    if validation is not None and not validation["ok"]:
-        card_md += (
-            "\n> **VALIDATION FAILED** — the model wrote claim tokens with no support "
-            "in tool output:\n"
-            + "\n".join(f"> - [{u['kind']}] `{u['token']}`"
-                        for u in validation["unsupported"]) + "\n"
-        )
-
-    st.session_state["last_run"] = {
-        "protein": protein.strip(),
-        "disease": disease.strip(),
-        "card_md": card_md,
-        "entries": ledger.entries,
-        "validation": validation,
-    }
-
-run = st.session_state.get("last_run")
-if run:
-    validation = run["validation"]
-    if validation is not None:
-        if validation["ok"]:
-            st.success("✅ VALIDATOR PASSED — " + format_report(validation))
-        else:
-            st.error("❌ VALIDATION FAILED — every flagged word is something the model "
-                     "wrote that the retrieval does not support:")
-            st.table(pd.DataFrame(validation["unsupported"]))
+    With single=None the full viewer is embedded: the ten worked pairs plus the
+    genetics-to-clinic timelines. With a card dict, the same engine renders JUST
+    that card — PAIRS is rewritten to one pair, the chrome is hidden, and the
+    data bundle is that one card — so a freshly built card looks exactly like
+    the published ones.
+    """
+    page = _VIEWER.read_text(encoding="utf-8")
+    if single is None:
+        bundle = _BUNDLE.read_text(encoding="utf-8")
     else:
-        st.info("No model was called. Everything below is retrieval, rendered by code — "
-                "which is the point: the card does not depend on a model.")
+        p, d = single["protein"], single["disease"]
+        fname = f"{p}_{re.sub(r'[^A-Za-z0-9]+', '-', d).strip('-')}_evidence_card.json"
+        bundle = ("window.CARD_DATA = "
+                  + json.dumps({fname: single}, ensure_ascii=False, default=str) + ";")
+    page = page.replace('<script src="cards_data.js"></script>',
+                        "<script>" + bundle + "</script>", 1)
+    if single is not None:
+        p, d = single["protein"], single["disease"]
+        page = re.sub(r"const PAIRS = \[.*?\];",
+                      "const PAIRS = [[" + json.dumps(p) + ", " + json.dumps(d) + "]];",
+                      page, count=1, flags=re.S)
+        extra = (
+            "<style>.tabs, .picker, header, footer {display:none !important}"
+            ".tlhead {margin:1.4rem 0 .2rem}</style>"
+            "<script>(function(){var n=0,t=setInterval(function(){"
+            "var el=document.getElementById(\"card\");"
+            "if(el&&el.childElementCount){clearInterval(t);"
+            "var prot=PAIRS[0][0].toUpperCase();"
+            "var hits=CASES.filter(function(c){return c.name.toUpperCase().indexOf(prot)===0});"
+            "if(hits.length){el.insertAdjacentHTML(\"beforeend\","
+            "\"<h2 class=tlhead>Genetics → clinic timeline — hand-verified</h2>\""
+            "+hits.map(caseHTML).join(\"\"))}}"
+            "else if(++n>60){clearInterval(t)}},200);})();</script>"
+        )
+        page = page.replace("</body>", extra + "</body>", 1)
+    _components_html(page, height=height, scrolling=True)
 
-    st.markdown("---")
-    st.markdown(run["card_md"])
 
-    with st.expander(f"🔎 The ledger — every call and its verbatim return "
-                     f"({len(run['entries'])} calls)"):
-        for e in run["entries"]:
-            st.markdown(f"**`{e.get('tool')}`** · args: `{e.get('args')}`")
-            st.json(e.get("result"), expanded=False)
+tab_build, tab_viewer, tab_gallery = st.tabs(
+    ["\U0001f528 Build a card", "\U0001f5c2\ufe0f Ten worked cards", "\U0001f9ed 991-protein gallery"])
 
-    stem = f"{run['protein']}_{re.sub(r'[^A-Za-z0-9]+', '-', run['disease']).strip('-')}"
-    st.download_button("⬇️ Download this card (Markdown)",
-                       data=run["card_md"].encode("utf-8"),
-                       file_name=f"{stem}_evidence_card.md", mime="text/markdown")
-else:
-    st.info("Pick an example above or type your own pair, then press "
-            "**Build the evidence card**.")
+# ================================ tab 1: build ====================================
+with tab_build:
+    EXAMPLES = [
+        ("PCSK9", "high cholesterol"),
+        ("IL6R", "coronary heart disease"),
+        ("PNPLA3", "MASLD"),
+        ("LPA", "coronary heart disease"),
+    ]
+
+    st.session_state.setdefault("protein_in", "PCSK9")
+    st.session_state.setdefault("disease_in", "high cholesterol")
+
+    def _set_pair(p: str, d: str) -> None:
+        # Widget state must be changed via a callback, BEFORE the widgets render.
+        st.session_state.protein_in = p
+        st.session_state.disease_in = d
+
+    cols = st.columns(len(EXAMPLES))
+    for c, (p, d) in zip(cols, EXAMPLES):
+        c.button(f"{p} \u00d7 {d}", use_container_width=True, on_click=_set_pair, args=(p, d))
+
+    c1, c2 = st.columns(2)
+    protein = c1.text_input("Protein / gene symbol", key="protein_in")
+    disease = c2.text_input("Disease", key="disease_in")
+    go = st.button("Build the evidence card", type="primary", use_container_width=True)
+
+    # Build on click; keep the result in session state so it SURVIVES reruns \u2014
+    # without this, clicking the Download button (which reruns the script) wipes the card.
+    if go:
+        if not protein.strip() or not disease.strip():
+            st.error("Give both a protein and a disease.")
+            st.stop()
+
+        bar = st.progress(0.0, text="starting \u2026")
+        ledger = _run_tools(protein.strip(), disease.strip(), bar)
+        bar.empty()
+
+        verdict, reasoning = NO_MODEL_VERDICT, NO_MODEL_REASONING
+        validation = None
+        if not api_key.strip():
+            reasoning = _code_reading(ledger.results_by_tool())
+        if api_key.strip():
+            with st.spinner("the model is writing its two sentences \u2026"):
+                try:
+                    verdict, reasoning = _model_sentences(api_key.strip(), model.strip(),
+                                                          protein.strip(), disease.strip(),
+                                                          ledger)
+                    validation = validate(verdict + "\n" + reasoning, ledger)
+                except Exception as exc:  # noqa: BLE001
+                    st.error(f"Model call failed \u2014 showing the card without it. ({exc})")
+                    verdict, reasoning = NO_MODEL_VERDICT, NO_MODEL_REASONING
+
+        card_md = render_card(protein.strip(), disease.strip(), ledger, reasoning, verdict,
+                              model.strip() if validation else "none \u2014 no model was called")
+        if validation is not None and not validation["ok"]:
+            card_md += (
+                "\n> **VALIDATION FAILED** \u2014 the model wrote claim tokens with no support "
+                "in tool output:\n"
+                + "\n".join(f"> - [{u['kind']}] `{u['token']}`"
+                             for u in validation["unsupported"]) + "\n"
+            )
+
+        st.session_state["last_run"] = {
+            "protein": protein.strip(),
+            "disease": disease.strip(),
+            "card_md": card_md,
+            "entries": ledger.entries,
+            "validation": validation,
+            "verdict": verdict,
+            "reasoning": reasoning,
+            "model": model.strip() if validation is not None else "none — no model was called",
+            "generated_at": _dt.datetime.now().isoformat(timespec="seconds"),
+        }
+
+    run = st.session_state.get("last_run")
+    if run:
+        validation = run["validation"]
+        if validation is not None:
+            if validation["ok"]:
+                st.success("\u2705 VALIDATOR PASSED \u2014 " + format_report(validation))
+            else:
+                st.error("\u274c VALIDATION FAILED \u2014 every flagged word is something the "
+                         "model wrote that the retrieval does not support:")
+                st.table(pd.DataFrame(validation["unsupported"]))
+        else:
+            st.info("No model was called. Everything below is retrieval, rendered by code "
+                    "\u2014 which is the point: the card does not depend on a model.")
+
+        st.markdown("---")
+        _viewer_embed(single={
+            "protein": run["protein"],
+            "disease": run["disease"],
+            "generated_at": run.get("generated_at", ""),
+            "model": run.get("model", ""),
+            "model_verdict": run.get("verdict", ""),
+            "model_reasoning": run.get("reasoning", ""),
+            "validation": run["validation"] or {"ok": True, "checked": 0, "unsupported": []},
+            "tool_ledger": run["entries"],
+        }, height=1350)
+
+        with st.expander("📈 Figures — drawn from tool output, nothing typed in", expanded=True):
+            with st.spinner("drawing …"):
+                fig_forest, fig_con = _figures(run["protein"])
+            fc1, fc2 = st.columns(2)
+            if fig_forest:
+                fc1.image(fig_forest, use_container_width=True)
+            else:
+                fc1.caption("no retrieved MR estimates — nothing to plot")
+            if fig_con:
+                fc2.image(fig_con, use_container_width=True)
+            else:
+                fc2.caption("no gnomAD constraint data")
+
+        stem = f"{run['protein']}_{re.sub(r'[^A-Za-z0-9]+', '-', run['disease']).strip('-')}"
+        st.download_button("\u2b07\ufe0f Download this card (Markdown)",
+                           data=run["card_md"].encode("utf-8"),
+                           file_name=f"{stem}_evidence_card.md", mime="text/markdown")
+    else:
+        st.info("Pick an example above or type your own pair, then press "
+                "**Build the evidence card**.")
+
+# ============================ tab 2: ten worked cards =============================
+with tab_viewer:
+    st.caption("The card viewer \u2014 one panel per tool, every value read from each "
+               "card's own ledger. Second tab inside: the genetics \u2192 clinic timelines.")
+    _viewer_embed(None, height=1600)
+
+# ============================ tab 3: the 991 gallery ==============================
+@st.cache_data(show_spinner=False)
+def _gallery_index() -> "pd.DataFrame":
+    return pd.read_csv(HERE / "dossiers" / "master_index.csv", encoding="utf-8-sig")
+
+with tab_gallery:
+    try:
+        idx = _gallery_index()
+    except OSError:
+        idx = None
+    if idx is None or idx.empty:
+        st.info("dossiers/master_index.csv not found \u2014 run proteome_sweep.py first.")
+    else:
+        g1, g2, g3 = st.columns(3)
+        g1.metric("proteins", len(idx))
+        g2.metric("retrieved MR estimate rows", f"{int(idx['n_mr_outcomes'].fillna(0).sum()):,}")
+        g3.metric("with published MR (tier A)", int((idx["tier"] == "A").sum()))
+
+        f1, f2 = st.columns([2, 1])
+        q = f1.text_input("Filter proteins", placeholder="e.g. IL6R, ACE, PCSK9 \u2026")
+        tiers = f2.multiselect("MR feasibility tier", sorted(idx["tier"].dropna().unique()),
+                               default=[])
+        view = idx
+        if q.strip():
+            view = view[view["protein"].str.contains(q.strip(), case=False, na=False)]
+        if tiers:
+            view = view[view["tier"].isin(tiers)]
+
+        SHOW = ["protein", "tier", "n_mr_outcomes", "top_mr_outcome", "top_mr_p",
+                "gwas_unique_snps", "n_modulators", "pLI", "LOEUF", "clinvar_records"]
+        st.dataframe(
+            view[SHOW], use_container_width=True, hide_index=True, height=260,
+            column_config={
+                "top_mr_p": st.column_config.NumberColumn(format="%.1e"),
+                "pLI": st.column_config.NumberColumn(format="%.2e"),
+                "LOEUF": st.column_config.NumberColumn(format="%.2f"),
+            })
+
+        if len(view):
+            sel = st.selectbox("Open a dossier", view["protein"].tolist())
+            md_path = HERE / "dossiers" / f"{sel}_dossier.md"
+            if md_path.exists():
+                st.markdown("---")
+                st.markdown(md_path.read_text(encoding="utf-8"))
+                st.caption(f"Same page online: "
+                           f"https://ds4cabs.github.io/CausalSentinel/dossiers/{sel}_dossier")
+            else:
+                st.warning(f"{md_path.name} not found.")
