@@ -220,15 +220,31 @@ tool returned no estimate**, and any claim that this agent performed MR itself.
 On the 10-pair benchmark it currently rejects 2 cards — each for a real defect, not a false
 alarm. Run `test_validator.py` after any change to it.
 
-## OpenSentinel (Natalie Huang)
+## OpenSentinel — the drug-safety side (Natalie Huang)
 
-A companion, beginner-scoped sub-project in this repo: a **drug-comparison agent**.
-Given two drug names, it pulls molecular properties (PubChem) and adverse-event data
-(openFDA FAERS), then uses Gemini to summarize the key differences in a Streamlit UI —
-a fast, sourced answer to "how do these two drugs actually differ?"
+The repo's companion sub-project, **shipped in [`nathdrug/natalie-drug-agent/`](nathdrug/natalie-drug-agent/)**:
+a **drug-comparison agent**. Give it two drug names, and it autonomously calls
+**PubChem** (molecular properties) and **openFDA** (FAERS safety signals) for each —
+four tool calls — then builds a side-by-side comparison table, an AI pattern summary,
+and a CSV export, all in a Streamlit UI. Both databases are free and keyless; only the
+summary uses a Gemini key.
 
-Full scope, timeline, and stretch goals: [`MVP_Natalie.md`](MVP_Natalie.md).
-Tracking issue: [#10](https://github.com/ds4cabs/CausalSentinel/issues/10).
+Run it (two minutes, same pattern as the app above):
+
+```bash
+cd nathdrug/natalie-drug-agent
+pip install -r requirements.txt
+streamlit run natalie_app.py
+```
+
+Details, examples and screenshots: [her README](nathdrug/natalie-drug-agent/README.md).
+Original scope: [`MVP_Natalie.md`](MVP_Natalie.md) · merged in
+[#20](https://github.com/ds4cabs/CausalSentinel/pull/20).
+
+Together the two halves cover the target-selection question from both directions:
+**OpenCausal** asks *"is this protein worth pursuing?"* from the genetics up, and
+**OpenSentinel** asks *"how do the candidate drugs actually differ?"* from the
+pharmacy down.
 
 ## Notes
 This project is the cohort's causal evidence reference implementation with strong
