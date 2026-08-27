@@ -7,3 +7,5 @@
 google-genai>=1.0.0        # Gemini SDK (current package; google-generativeai is deprecated)
 python-dotenv>=1.0.0       # load API keys from ../.env (never hard-code keys)
 requests>=2.31.0           # calling the public database REST/GraphQL APIs
+streamlit>=1.30.0          # v0.5: the type-your-own-pair web app (app.py)
+pandas>=2.0.0              # v0.5: tables in the web app
