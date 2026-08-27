@@ -1,7 +1,7 @@
 {
   "protein": "TREM2",
   "disease": "Alzheimer disease",
-  "generated_at": "2026-08-21T15:34:04",
+  "generated_at": "2026-08-27T11:50:10",
   "model": "gemini-flash-lite-latest",
   "tools_called": [
     "get_uniprot_dossier",
@@ -43,7 +43,7 @@
         "url": "https://www.uniprot.org/uniprotkb/Q9NZC2",
         "source_release": "UniProt release 2026_02 (10-June-2026)"
       },
-      "seconds": 3.054,
+      "seconds": 0.771,
       "exception": null
     },
     {
@@ -69,7 +69,7 @@
         "url": "https://platform.opentargets.org/evidence/ENSG00000095970/MONDO_0004975",
         "source_release": "Open Targets data release 26.06"
       },
-      "seconds": 2.827,
+      "seconds": 1.785,
       "exception": null
     },
     {
@@ -89,7 +89,7 @@
         "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL6196124/",
         "source_release": "ChEMBL_37 (released 2026-05-01)"
       },
-      "seconds": 4.47,
+      "seconds": 4.095,
       "exception": null
     },
     {
@@ -240,7 +240,7 @@
         "url": "https://epigraphdb.org/pqtl/",
         "note": "TREM2 HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Alzheimer disease'. The other outcomes are listed for context only — do not present them as evidence about 'Alzheimer disease'."
       },
-      "seconds": 1.549,
+      "seconds": 1.643,
       "exception": null
     },
     {
@@ -279,9 +279,9 @@
         ],
         "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 202 ClinVar records for this gene; it is a sample, not a rate.",
         "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=TREM2%5Bgene%5D",
-        "source_release": "ClinVar build Build260818-0035.1"
+        "source_release": "ClinVar build Build260823-0900.1"
       },
-      "seconds": 2.017,
+      "seconds": 2.597,
       "exception": null
     },
     {
@@ -308,7 +308,7 @@
         "url": "https://gnomad.broadinstitute.org/gene/TREM2",
         "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
       },
-      "seconds": 1.157,
+      "seconds": 0.48,
       "exception": null
     },
     {
@@ -328,24 +328,24 @@
         "example_rsids": [
           "rs2234247",
           "rs142232675",
+          "rs151084487",
           "rs13207171",
+          "rs2395751",
           "rs113052081",
+          "rs62396317",
+          "rs9381031",
+          "rs2101270",
+          "rs1968871",
+          "rs9394764",
           "rs2234253",
-          "rs9296359",
-          "rs1872245",
-          "rs13216201",
-          "rs7748513",
-          "rs75932628",
-          "rs61998254",
-          "rs4711658",
-          "rs7748777",
-          "rs60755019",
-          "rs6902672"
+          "rs12202176",
+          "rs17643398",
+          "rs56104198"
         ],
         "url": "https://www.ebi.ac.uk/gwas/genes/TREM2",
         "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
       },
-      "seconds": 2.265,
+      "seconds": 2.708,
       "exception": null
     },
     {
@@ -360,7 +360,7 @@
         "note": "No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).",
         "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
       },
-      "seconds": 0.541,
+      "seconds": 0.457,
       "exception": null
     },
     {
@@ -380,7 +380,7 @@
         "url": "https://platform.opentargets.org/target/ENSG00000095970",
         "source_release": "Open Targets data release 26.06"
       },
-      "seconds": 1.604,
+      "seconds": 1.25,
       "exception": null
     },
     {
@@ -563,12 +563,12 @@
       "exception": null
     }
   ],
-  "model_verdict": "GO — TREM2 shows strong genetic and literature associations with Alzheimer disease, supported by loss-of-function tolerance indicating safety for therapeutic modulation.",
-  "model_reasoning": "Open Targets data reveals a strong overall association score and high genetic and literature evidence for TREM2 in Alzheimer disease. The protein functions as a microglial receptor mediating amyloid-beta uptake and degradation, aligning directly with disease pathology. Although no pre-computed Mendelian randomization estimate matching Alzheimer disease was available from the EpiGraphDB resource and no clinical modulators are currently cataloged in ChEMBL or Open Targets clinical evidence, ClinVar records and gnomAD constraint metrics indicate the gene is loss-of-function tolerant. Furthermore, GWAS Catalog mapping identifies multiple associated SNPs, reinforcing the genetic link.",
+  "model_verdict": "GO — TREM2 shows substantial genetic and experimental evidence linking it to Alzheimer disease, supported by multiple GWAS associations and microglial functional roles.",
+  "model_reasoning": "Open Targets records a strong genetic association score for TREM2 in Alzheimer disease alongside supporting literature and animal model evidence. The GWAS Catalog maps 70 unique SNPs to the locus, and UniProt details TREM2's role as a microglial receptor for amyloid-beta and apolipoproteins involved in phagocytosis and immune response. While no causal MR estimate was available for Alzheimer disease and no clinical candidate records are present in Open Targets, the gene is tolerant to loss-of-function variants in gnomAD and features pathogenic variants in ClinVar, pointing to a strong and biologically plausible genetic link.",
   "validation": {
     "ok": true,
     "unsupported": [],
-    "checked": 0
+    "checked": 1
   },
-  "card_markdown": "# Target Evidence Card — TREM2 × Alzheimer disease\n\n**Verdict:** GO — TREM2 shows strong genetic and literature associations with Alzheimer disease, supported by loss-of-function tolerance indicating safety for therapeutic modulation.\n\n> **You asked about \"Alzheimer disease\". This card scored MONDO_0004975 — Alzheimer disease.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Triggering receptor expressed on myeloid cells 2\" (CHEMBL6196124),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — protein present, no estimate for THIS disease · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.558 (literature=0.994, animal_model=0.288, genetic_association=0.862) |\n| Protein context | `get_uniprot_dossier` | Q9NZC2 — Triggering receptor expressed on myeloid cells 2; location: Cell membrane, Secreted, Secreted |\n| Known modulators / druggability | `get_chembl_modulators` | target CHEMBL6196124 — **0 known modulators in ChEMBL** |\n| Clinical variants | `get_clinvar_variants` | 202 ClinVar records; 5 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=7.9e-07, LOEUF=1.27 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 70 unique SNPs from 140/140 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n| Clinical development record | `get_clinical_evidence` | **not available** — No drug or clinical candidate against TREM2 in Open Targets. An empty clinical record means the clinic has not filed results against this target — NOT that the target is bad, and not that nothing was ever tried outside registries. |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'TREM2' -> ENSG00000095970 (TREM2); 'Alzheimer disease' -> MONDO_0004975 (Alzheimer disease). Scores below describe THAT term, not the free-text phrase.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'TREM2' and resolved to 'Triggering receptor expressed on myeloid cells 2' — confirm this is the intended target.\n- **`get_mr_result`** — TREM2 HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Alzheimer disease'. The other outcomes are listed for context only — do not present them as evidence about 'Alzheimer disease'.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 202 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n- **`get_clinical_evidence`** — No drug or clinical candidate against TREM2 in Open Targets. An empty clinical record means the clinic has not filed results against this target — NOT that the target is bad, and not that nothing was ever tried outside registries.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets data reveals a strong overall association score and high genetic and literature evidence for TREM2 in Alzheimer disease. The protein functions as a microglial receptor mediating amyloid-beta uptake and degradation, aligning directly with disease pathology. Although no pre-computed Mendelian randomization estimate matching Alzheimer disease was available from the EpiGraphDB resource and no clinical modulators are currently cataloged in ChEMBL or Open Targets clinical evidence, ClinVar records and gnomAD constraint metrics indicate the gene is loss-of-function tolerant. Furthermore, GWAS Catalog mapping identifies multiple associated SNPs, reinforcing the genetic link.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q9NZC2 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000095970/MONDO_0004975 — _Open Targets data release 26.06_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL6196124/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=TREM2%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/TREM2 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/TREM2 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_clinical_evidence`: https://platform.opentargets.org/target/ENSG00000095970 — _Open Targets data release 26.06_\n\n## Provenance\n\n- Generated: 2026-08-21T15:34:04\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+  "card_markdown": "# Target Evidence Card — TREM2 × Alzheimer disease\n\n**Verdict:** GO — TREM2 shows substantial genetic and experimental evidence linking it to Alzheimer disease, supported by multiple GWAS associations and microglial functional roles.\n\n> **You asked about \"Alzheimer disease\". This card scored MONDO_0004975 — Alzheimer disease.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Triggering receptor expressed on myeloid cells 2\" (CHEMBL6196124),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — protein present, no estimate for THIS disease · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.558 (literature=0.994, animal_model=0.288, genetic_association=0.862) |\n| Protein context | `get_uniprot_dossier` | Q9NZC2 — Triggering receptor expressed on myeloid cells 2; location: Cell membrane, Secreted, Secreted |\n| Known modulators / druggability | `get_chembl_modulators` | target CHEMBL6196124 — **0 known modulators in ChEMBL** |\n| Clinical variants | `get_clinvar_variants` | 202 ClinVar records; 5 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=7.9e-07, LOEUF=1.27 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 70 unique SNPs from 140/140 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n| Clinical development record | `get_clinical_evidence` | **not available** — No drug or clinical candidate against TREM2 in Open Targets. An empty clinical record means the clinic has not filed results against this target — NOT that the target is bad, and not that nothing was ever tried outside registries. |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'TREM2' -> ENSG00000095970 (TREM2); 'Alzheimer disease' -> MONDO_0004975 (Alzheimer disease). Scores below describe THAT term, not the free-text phrase.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'TREM2' and resolved to 'Triggering receptor expressed on myeloid cells 2' — confirm this is the intended target.\n- **`get_mr_result`** — TREM2 HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Alzheimer disease'. The other outcomes are listed for context only — do not present them as evidence about 'Alzheimer disease'.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 202 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n- **`get_clinical_evidence`** — No drug or clinical candidate against TREM2 in Open Targets. An empty clinical record means the clinic has not filed results against this target — NOT that the target is bad, and not that nothing was ever tried outside registries.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets records a strong genetic association score for TREM2 in Alzheimer disease alongside supporting literature and animal model evidence. The GWAS Catalog maps 70 unique SNPs to the locus, and UniProt details TREM2's role as a microglial receptor for amyloid-beta and apolipoproteins involved in phagocytosis and immune response. While no causal MR estimate was available for Alzheimer disease and no clinical candidate records are present in Open Targets, the gene is tolerant to loss-of-function variants in gnomAD and features pathogenic variants in ClinVar, pointing to a strong and biologically plausible genetic link.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q9NZC2 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000095970/MONDO_0004975 — _Open Targets data release 26.06_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL6196124/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=TREM2%5Bgene%5D — _ClinVar build Build260823-0900.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/TREM2 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/TREM2 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_clinical_evidence`: https://platform.opentargets.org/target/ENSG00000095970 — _Open Targets data release 26.06_\n\n## Provenance\n\n- Generated: 2026-08-27T11:50:10\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
 }

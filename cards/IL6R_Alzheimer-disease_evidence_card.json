@@ -1,13 +1,13 @@
 {
   "protein": "IL6R",
   "disease": "Alzheimer disease",
-  "generated_at": "2026-08-21T15:35:13",
+  "generated_at": "2026-08-27T11:51:10",
   "model": "gemini-flash-lite-latest",
   "tools_called": [
     "get_uniprot_dossier",
     "get_target_disease_evidence",
-    "get_mr_result",
     "get_chembl_modulators",
+    "get_mr_result",
     "get_clinvar_variants",
     "get_gnomad_constraint",
     "get_gwas_catalog",
@@ -42,7 +42,7 @@
         "url": "https://www.uniprot.org/uniprotkb/P08887",
         "source_release": "UniProt release 2026_02 (10-June-2026)"
       },
-      "seconds": 0.819,
+      "seconds": 0.66,
       "exception": null
     },
     {
@@ -67,7 +67,48 @@
         "url": "https://platform.opentargets.org/evidence/ENSG00000160712/MONDO_0004975",
         "source_release": "Open Targets data release 26.06"
       },
-      "seconds": 2.031,
+      "seconds": 2.373,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "IL6R"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL2364155",
+        "target_name": "Interleukin-6 receptor subunit alpha",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 4,
+        "modulators": [
+          {
+            "drug": "CHEMBL1237022",
+            "action": "INHIBITOR",
+            "moa": "Interleukin-6 receptor alpha subunit inhibitor"
+          },
+          {
+            "drug": "CHEMBL2108730",
+            "action": "ANTAGONIST",
+            "moa": "Interleukin-6 receptor alpha subunit antagonist"
+          },
+          {
+            "drug": "CHEMBL3833343",
+            "action": "INHIBITOR",
+            "moa": "Interleukin-6 receptor alpha subunit inhibitor"
+          },
+          {
+            "drug": "CHEMBL4650406",
+            "action": "INHIBITOR",
+            "moa": "Interleukin-6 receptor alpha subunit inhibitor"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'IL6R' and resolved to 'Interleukin-6 receptor subunit alpha' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL2364155/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 3.993,
       "exception": null
     },
     {
@@ -218,48 +259,7 @@
         "url": "https://epigraphdb.org/pqtl/",
         "note": "IL6R HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Alzheimer disease'. The other outcomes are listed for context only — do not present them as evidence about 'Alzheimer disease'."
       },
-      "seconds": 1.752,
-      "exception": null
-    },
-    {
-      "tool": "get_chembl_modulators",
-      "args": [],
-      "kwargs": {
-        "gene_symbol": "IL6R"
-      },
-      "result": {
-        "found": true,
-        "target_chembl_id": "CHEMBL2364155",
-        "target_name": "Interleukin-6 receptor subunit alpha",
-        "matched_target_organism": "Homo sapiens",
-        "n_modulators": 4,
-        "modulators": [
-          {
-            "drug": "CHEMBL1237022",
-            "action": "INHIBITOR",
-            "moa": "Interleukin-6 receptor alpha subunit inhibitor"
-          },
-          {
-            "drug": "CHEMBL2108730",
-            "action": "ANTAGONIST",
-            "moa": "Interleukin-6 receptor alpha subunit antagonist"
-          },
-          {
-            "drug": "CHEMBL3833343",
-            "action": "INHIBITOR",
-            "moa": "Interleukin-6 receptor alpha subunit inhibitor"
-          },
-          {
-            "drug": "CHEMBL4650406",
-            "action": "INHIBITOR",
-            "moa": "Interleukin-6 receptor alpha subunit inhibitor"
-          }
-        ],
-        "note": "ChEMBL target matched by text search on 'IL6R' and resolved to 'Interleukin-6 receptor subunit alpha' — confirm this is the intended target.",
-        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL2364155/",
-        "source_release": "ChEMBL_37 (released 2026-05-01)"
-      },
-      "seconds": 5.756,
+      "seconds": 1.743,
       "exception": null
     },
     {
@@ -298,9 +298,9 @@
         ],
         "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 366 ClinVar records for this gene; it is a sample, not a rate.",
         "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=IL6R%5Bgene%5D",
-        "source_release": "ClinVar build Build260818-0035.1"
+        "source_release": "ClinVar build Build260823-0900.1"
       },
-      "seconds": 1.64,
+      "seconds": 2.192,
       "exception": null
     },
     {
@@ -327,7 +327,7 @@
         "url": "https://gnomad.broadinstitute.org/gene/IL6R",
         "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
       },
-      "seconds": 0.529,
+      "seconds": 0.436,
       "exception": null
     },
     {
@@ -339,7 +339,7 @@
       "result": {
         "found": true,
         "gene_symbol": "IL6R",
-        "n_unique_snps": 150,
+        "n_unique_snps": 144,
         "n_association_rows": 368,
         "total_association_rows_reported": 368,
         "sweep_complete": true,
@@ -350,21 +350,21 @@
           "rs538456803",
           "rs6686750",
           "rs4845373",
+          "rs11265608",
           "rs12121180",
+          "rs11265618",
           "rs4537545",
+          "rs117525971",
+          "rs117709635",
+          "rs4393147",
           "rs41269917",
           "rs532031638",
-          "rs574437162",
-          "rs79438587",
-          "rs7525477",
-          "rs35717427",
-          "rs78664422",
-          "rs76289529"
+          "rs574437162"
         ],
         "url": "https://www.ebi.ac.uk/gwas/genes/IL6R",
         "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
       },
-      "seconds": 4.683,
+      "seconds": 6.336,
       "exception": null
     },
     {
@@ -411,7 +411,7 @@
         "url": "https://www.pharmgkb.org/search?query=IL6R",
         "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
       },
-      "seconds": 0.543,
+      "seconds": 0.57,
       "exception": null
     },
     {
@@ -567,7 +567,7 @@
         "url": "https://platform.opentargets.org/target/ENSG00000160712",
         "source_release": "Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)"
       },
-      "seconds": 1.632,
+      "seconds": 1.921,
       "exception": null
     },
     {
@@ -750,12 +750,12 @@
       "exception": null
     }
   ],
-  "model_verdict": "NO-GO — No causal estimate or clinical trial evidence supports IL6R as a target for Alzheimer disease.",
-  "model_reasoning": "Open Targets shows only modest genetic and literature association scores for IL6R in Alzheimer disease, and no Mendelian randomization estimates were available for this specific disease outcome. Although multiple modulators and approved drugs exist for IL6R in other immune-mediated and inflammatory indications, none have advanced in clinical development for Alzheimer disease. Furthermore, the gene displays high tolerance to loss-of-function variants in gnomAD, but the absence of causal or clinical evidence in this indication precludes pursuit.",
+  "model_verdict": "INSUFFICIENT EVIDENCE — while IL6R has genetic association and druggable modulators, there is no available Mendelian randomization estimate or clinical trial history for Alzheimer disease.",
+  "model_reasoning": "Open Targets records genetic and literature associations for IL6R with Alzheimer disease, and GWAS catalog entries map multiple variants to the locus. However, no Mendelian randomization estimate was available to establish a causal link for this specific disease outcome. While the protein is well-druggable with approved modulators like tocilizumab and sarilumab for other indications, no clinical trials targeting IL6R have been reported for Alzheimer disease. Furthermore, gnomAD constraint metrics indicate the gene is tolerant to loss-of-function variation.",
   "validation": {
     "ok": true,
     "unsupported": [],
     "checked": 0
   },
-  "card_markdown": "# Target Evidence Card — IL6R × Alzheimer disease\n\n**Verdict:** NO-GO — No causal estimate or clinical trial evidence supports IL6R as a target for Alzheimer disease.\n\n> **You asked about \"Alzheimer disease\". This card scored MONDO_0004975 — Alzheimer disease.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Interleukin-6 receptor subunit alpha\" (CHEMBL2364155),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — protein present, no estimate for THIS disease · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.369 (literature=0.482, genetic_association=0.583) |\n| Protein context | `get_uniprot_dossier` | P08887 — Interleukin-6 receptor subunit alpha; location: Cell membrane, Secreted, Secreted |\n| Known modulators / druggability | `get_chembl_modulators` | 4 known modulators (ANTAGONIST, INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 366 ClinVar records; 1 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=7.9e-11, LOEUF=1.03 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 150 unique SNPs from 368/368 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 3 clinical annotation(s) over 1 drug(s): tocilizumab — ClinPGx evidence level 3/4 (scale 1A strongest to 4 weakest) — e.g. rs12083537 (IL6R); tocilizumab; Arthritis, Rheumatoid (level 3 Efficacy) |\n| Clinical development record | `get_clinical_evidence` | **no programme for this disease on record** — 5 drug programme(s) against this target for other diseases (max stage APPROVAL); context, not evidence about this disease |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'IL6R' -> ENSG00000160712 (IL6R); 'Alzheimer disease' -> MONDO_0004975 (Alzheimer disease). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — IL6R HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Alzheimer disease'. The other outcomes are listed for context only — do not present them as evidence about 'Alzheimer disease'.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'IL6R' and resolved to 'Interleukin-6 receptor subunit alpha' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 366 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_clinical_evidence`** — Phase and trial status mean trials EXIST, not that they worked — a COMPLETED phase-3 trial can be a failed one; only why-stopped fields carry failure information, and only approval carries a regulator's efficacy judgement. Registries lag press releases by a data release or more. All 5 drug programme(s) target OTHER diseases — their clinical stages are context about the drugs, not evidence about 'Alzheimer disease'.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets shows only modest genetic and literature association scores for IL6R in Alzheimer disease, and no Mendelian randomization estimates were available for this specific disease outcome. Although multiple modulators and approved drugs exist for IL6R in other immune-mediated and inflammatory indications, none have advanced in clinical development for Alzheimer disease. Furthermore, the gene displays high tolerance to loss-of-function variants in gnomAD, but the absence of causal or clinical evidence in this indication precludes pursuit.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P08887 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000160712/MONDO_0004975 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL2364155/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=IL6R%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/IL6R — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/IL6R — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=IL6R — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n- `get_clinical_evidence`: https://platform.opentargets.org/target/ENSG00000160712 — _Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:35:13\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+  "card_markdown": "# Target Evidence Card — IL6R × Alzheimer disease\n\n**Verdict:** INSUFFICIENT EVIDENCE — while IL6R has genetic association and druggable modulators, there is no available Mendelian randomization estimate or clinical trial history for Alzheimer disease.\n\n> **You asked about \"Alzheimer disease\". This card scored MONDO_0004975 — Alzheimer disease.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Interleukin-6 receptor subunit alpha\" (CHEMBL2364155),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — protein present, no estimate for THIS disease · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.369 (literature=0.482, genetic_association=0.583) |\n| Protein context | `get_uniprot_dossier` | P08887 — Interleukin-6 receptor subunit alpha; location: Cell membrane, Secreted, Secreted |\n| Known modulators / druggability | `get_chembl_modulators` | 4 known modulators (ANTAGONIST, INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 366 ClinVar records; 1 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=7.9e-11, LOEUF=1.03 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 144 unique SNPs from 368/368 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 3 clinical annotation(s) over 1 drug(s): tocilizumab — ClinPGx evidence level 3/4 (scale 1A strongest to 4 weakest) — e.g. rs12083537 (IL6R); tocilizumab; Arthritis, Rheumatoid (level 3 Efficacy) |\n| Clinical development record | `get_clinical_evidence` | **no programme for this disease on record** — 5 drug programme(s) against this target for other diseases (max stage APPROVAL); context, not evidence about this disease |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'IL6R' -> ENSG00000160712 (IL6R); 'Alzheimer disease' -> MONDO_0004975 (Alzheimer disease). Scores below describe THAT term, not the free-text phrase.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'IL6R' and resolved to 'Interleukin-6 receptor subunit alpha' — confirm this is the intended target.\n- **`get_mr_result`** — IL6R HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Alzheimer disease'. The other outcomes are listed for context only — do not present them as evidence about 'Alzheimer disease'.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 366 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_clinical_evidence`** — Phase and trial status mean trials EXIST, not that they worked — a COMPLETED phase-3 trial can be a failed one; only why-stopped fields carry failure information, and only approval carries a regulator's efficacy judgement. Registries lag press releases by a data release or more. All 5 drug programme(s) target OTHER diseases — their clinical stages are context about the drugs, not evidence about 'Alzheimer disease'.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets records genetic and literature associations for IL6R with Alzheimer disease, and GWAS catalog entries map multiple variants to the locus. However, no Mendelian randomization estimate was available to establish a causal link for this specific disease outcome. While the protein is well-druggable with approved modulators like tocilizumab and sarilumab for other indications, no clinical trials targeting IL6R have been reported for Alzheimer disease. Furthermore, gnomAD constraint metrics indicate the gene is tolerant to loss-of-function variation.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P08887 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000160712/MONDO_0004975 — _Open Targets data release 26.06_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL2364155/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=IL6R%5Bgene%5D — _ClinVar build Build260823-0900.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/IL6R — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/IL6R — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=IL6R — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n- `get_clinical_evidence`: https://platform.opentargets.org/target/ENSG00000160712 — _Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)_\n\n## Provenance\n\n- Generated: 2026-08-27T11:51:10\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
 }

@@ -75,20 +75,20 @@ def _run_tools(protein: str, disease: str, progress=None) -> ToolLedger:
     for i, (fn, kind) in enumerate(PLAN):
         if progress is not None:
             progress.progress((i + 1) / (len(PLAN) + 1), text=f"querying {fn.__name__} …")
-        try:
-            if kind == "protein_disease":
-                ledger._wrap(fn)(protein, disease)
-            else:
-                ledger._wrap(fn)(protein)
-        except Exception as exc:  # a dead API must not kill the page
-            st.warning(f"{fn.__name__} failed: {type(exc).__name__}: {exc}")
+        # ToolLedger._wrap never raises: a crashed tool comes back as {"error": ...}.
+        # So a dead API is detected on the RESULT, not with try/except.
+        if kind == "protein_disease":
+            res = ledger._wrap(fn)(protein, disease)
+        else:
+            res = ledger._wrap(fn)(protein)
+        if isinstance(res, dict) and res.get("error"):
+            st.warning(f"{fn.__name__}: {res['error']}")
 
     mr_res = ledger.results_by_tool().get("get_mr_result")
     if isinstance(mr_res, dict) and not mr_res.get("error"):
-        try:
-            ledger._wrap(classify_evidence_concordance)(protein, disease, mr_result=mr_res)
-        except Exception as exc:
-            st.warning(f"concordance failed: {type(exc).__name__}: {exc}")
+        res = ledger._wrap(classify_evidence_concordance)(protein, disease, mr_result=mr_res)
+        if isinstance(res, dict) and res.get("error"):
+            st.warning(f"classify_evidence_concordance: {res['error']}")
     if progress is not None:
         progress.progress(1.0, text="rendering the card …")
     return ledger
@@ -100,7 +100,14 @@ def _model_sentences(api_key: str, model: str, protein: str, disease: str, ledge
     from google.genai import types
     from agent import WRITER_INSTRUCTION, split_model_output
 
-    system_prompt = (HERE / "system_prompt.md").read_text(encoding="utf-8")
+    # The CLI prompt orders the model to CALL tools; here the tools were already run and
+    # no tool is declared, so that order must be overridden or the reply goes off-format.
+    system_prompt = (
+        (HERE / "system_prompt.md").read_text(encoding="utf-8")
+        + "\n\nOVERRIDE FOR THIS RUN: the tools have already been called for you; their "
+        "verbatim results are in the user message. Do NOT attempt to call any tool — "
+        "read the results and write the two blocks."
+    )
     evidence = json.dumps(ledger.results_by_tool(), ensure_ascii=False, default=str)[:120_000]
     client = genai.Client(api_key=api_key)
     resp = client.models.generate_content(
@@ -178,6 +185,8 @@ protein = c1.text_input("Protein / gene symbol", key="protein_in")
 disease = c2.text_input("Disease", key="disease_in")
 go = st.button("Build the evidence card", type="primary", use_container_width=True)
 
+# Build on click; keep the result in session state so it SURVIVES reruns —
+# without this, clicking the Download button (which reruns the script) wipes the card.
 if go:
     if not protein.strip() or not disease.strip():
         st.error("Give both a protein and a disease.")
@@ -201,7 +210,25 @@ if go:
 
     card_md = render_card(protein.strip(), disease.strip(), ledger, reasoning, verdict,
                           model.strip() if validation else "none — no model was called")
+    if validation is not None and not validation["ok"]:
+        card_md += (
+            "\n> **VALIDATION FAILED** — the model wrote claim tokens with no support "
+            "in tool output:\n"
+            + "\n".join(f"> - [{u['kind']}] `{u['token']}`"
+                        for u in validation["unsupported"]) + "\n"
+        )
 
+    st.session_state["last_run"] = {
+        "protein": protein.strip(),
+        "disease": disease.strip(),
+        "card_md": card_md,
+        "entries": ledger.entries,
+        "validation": validation,
+    }
+
+run = st.session_state.get("last_run")
+if run:
+    validation = run["validation"]
     if validation is not None:
         if validation["ok"]:
             st.success("✅ VALIDATOR PASSED — " + format_report(validation))
@@ -209,27 +236,22 @@ if go:
             st.error("❌ VALIDATION FAILED — every flagged word is something the model "
                      "wrote that the retrieval does not support:")
             st.table(pd.DataFrame(validation["unsupported"]))
-            card_md += (
-                "\n> **VALIDATION FAILED** — the model wrote claim tokens with no support "
-                "in tool output:\n"
-                + "\n".join(f"> - [{u['kind']}] `{u['token']}`"
-                            for u in validation["unsupported"]) + "\n"
-            )
     else:
         st.info("No model was called. Everything below is retrieval, rendered by code — "
                 "which is the point: the card does not depend on a model.")
 
     st.markdown("---")
-    st.markdown(card_md)
+    st.markdown(run["card_md"])
 
     with st.expander(f"🔎 The ledger — every call and its verbatim return "
-                     f"({len(ledger.entries)} calls)"):
-        for e in ledger.entries:
+                     f"({len(run['entries'])} calls)"):
+        for e in run["entries"]:
             st.markdown(f"**`{e.get('tool')}`** · args: `{e.get('args')}`")
             st.json(e.get("result"), expanded=False)
 
-    stem = f"{protein.strip()}_{re.sub(r'[^A-Za-z0-9]+', '-', disease.strip()).strip('-')}"
-    st.download_button("⬇️ Download this card (Markdown)", data=card_md.encode("utf-8"),
+    stem = f"{run['protein']}_{re.sub(r'[^A-Za-z0-9]+', '-', run['disease']).strip('-')}"
+    st.download_button("⬇️ Download this card (Markdown)",
+                       data=run["card_md"].encode("utf-8"),
                        file_name=f"{stem}_evidence_card.md", mime="text/markdown")
 else:
     st.info("Pick an example above or type your own pair, then press "

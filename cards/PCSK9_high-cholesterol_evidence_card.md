@@ -1,6 +1,6 @@
 # Target Evidence Card — PCSK9 × high cholesterol
 
-**Verdict:** GO — PCSK9 is an extensively validated causal target for high cholesterol with multiple FDA-approved therapeutics.
+**Verdict:** GO — Robust genetic association, causal Mendelian randomization support, and successful clinical approvals validate PCSK9 as a premier target for high cholesterol.
 
 > **You asked about "high cholesterol". This card scored HP_0003124 — Hypercholesterolemia.** If those are not the same thing, every number below answers a different question.
 > **The druggability row is about ChEMBL target "PCSK9 mRNA" (CHEMBL4630662),** matched by text search. If that is not the molecular target you meant, that row is about something else.
@@ -16,7 +16,7 @@
 ## Evidence concordance — classified by rule, not written by the model
 
 - Sources: EpiGraphDB — estimate found · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run
-- Single matched estimate; validation depth 2 of 4 (multi-SNP / Steiger / coloc / LD check).
+- Single matched estimate; sensitivity checks reported: 2 of 3 (multi-SNP / Steiger / shared-variant [coloc or LD check]).
 
 ## Evidence
 
@@ -29,7 +29,7 @@ _retrieved from published MR; not computed here_ |
 | Known modulators / druggability | `get_chembl_modulators` | 2 known modulators (RNAI INHIBITOR) |
 | Clinical variants | `get_clinvar_variants` | 1570 ClinVar records; 0 pathogenic in a sample of 30 |
 | Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=2.8e-18, LOEUF=1.14 → LoF-tolerant |
-| Extra genetic evidence | `get_gwas_catalog` | 105 unique SNPs from 246/246 association rows |
+| Extra genetic evidence | `get_gwas_catalog` | 109 unique SNPs from 246/246 association rows |
 | Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |
 | Clinical development record | `get_clinical_evidence` | max stage for THIS disease: **APPROVAL** — e.g. EVOLOCUMAB (APPROVAL, 39 trial report(s) for this disease, 2 of them with a stop reason); +7 more drug(s) for this disease  
 _stages mean trials exist, not that they worked_ |
@@ -37,8 +37,8 @@ _stages mean trials exist, not that they worked_ |
 ## Caveats declared by the tools
 
 - **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'PCSK9' -> ENSG00000169174 (PCSK9); 'high cholesterol' -> HP_0003124 (Hypercholesterolemia). Scores below describe THAT term, not the free-text phrase.
-- **`get_mr_result`** — Estimates RETRIEVED from published pQTL MR, not computed by this agent. Check cis_or_trans (cis instruments are less pleiotropy-prone), steiger_direction_ok, and coloc_prob before treating this as causal; coloc_prob=null means colocalization was not available for this pair.
 - **`get_chembl_modulators`** — ChEMBL target matched by text search on 'PCSK9' and resolved to 'PCSK9 mRNA' — confirm this is the intended target.
+- **`get_mr_result`** — Estimates RETRIEVED from published pQTL MR, not computed by this agent. Check cis_or_trans (cis instruments are less pleiotropy-prone), steiger_direction_ok, and coloc_prob before treating this as causal; coloc_prob=null means colocalization was not available for this pair.
 - **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 1570 ClinVar records for this gene; it is a sample, not a rate.
 - **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).
 - **`get_clinical_evidence`** — Phase and trial status mean trials EXIST, not that they worked — a COMPLETED phase-3 trial can be a failed one; only why-stopped fields carry failure information, and only approval carries a regulator's efficacy judgement. Registries lag press releases by a data release or more.
@@ -46,23 +46,23 @@ _stages mean trials exist, not that they worked_ |
 
 ## Reasoning
 
-Genetic association and pre-computed Mendelian randomization evidence strongly support a causal role for PCSK9 in hypercholesterolemia. Clinical development records confirm that multiple modulators against PCSK9, including evolocumab, alirocumab, and inclisiran, have successfully reached regulatory approval for high cholesterol and related conditions. Furthermore, numerous GWAS associations and target-disease evidence scores reinforce its central regulatory position in cholesterol homeostasis.
+Open Targets establishes a high genetic and clinical association score between PCSK9 and hypercholesterolemia. Mendelian randomization provides a significant causal estimate linking the locus to self-reported high cholesterol. Clinical evidence confirms multiple approved therapies, including evolocumab, alirocumab, and inclisiran, reaching the maximum stage of regulatory approval.
 
 ## Sources
 
 - `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q8NBP7 — _UniProt release 2026_02 (10-June-2026)_
 - `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000169174/HP_0003124 — _Open Targets data release 26.06_
-- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_
 - `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4630662/ — _ChEMBL_37 (released 2026-05-01)_
-- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=PCSK9%5Bgene%5D — _ClinVar build Build260818-0035.1_
+- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_
+- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=PCSK9%5Bgene%5D — _ClinVar build Build260823-0900.1_
 - `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/PCSK9 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_
 - `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/PCSK9 — _GWAS Catalog REST (live; release not exposed by this endpoint)_
 - `get_clinical_evidence`: https://platform.opentargets.org/target/ENSG00000169174 — _Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)_
 
 ## Provenance
 
-- Generated: 2026-08-21T15:31:52
+- Generated: 2026-08-27T11:48:10
 - Model (reasoning text only): `gemini-flash-lite-latest`
-- Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`
+- Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`
 - Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.
 - No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.

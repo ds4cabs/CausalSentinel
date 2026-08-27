@@ -1,7 +1,7 @@
 {
   "protein": "LPA",
   "disease": "coronary heart disease",
-  "generated_at": "2026-08-21T15:32:38",
+  "generated_at": "2026-08-27T11:48:56",
   "model": "gemini-flash-lite-latest",
   "tools_called": [
     "get_uniprot_dossier",
@@ -40,7 +40,7 @@
         "url": "https://www.uniprot.org/uniprotkb/P08519",
         "source_release": "UniProt release 2026_02 (10-June-2026)"
       },
-      "seconds": 2.95,
+      "seconds": 0.677,
       "exception": null
     },
     {
@@ -66,7 +66,7 @@
         "url": "https://platform.opentargets.org/evidence/ENSG00000198670/MONDO_0005010",
         "source_release": "Open Targets data release 26.06"
       },
-      "seconds": 2.42,
+      "seconds": 2.028,
       "exception": null
     },
     {
@@ -298,7 +298,7 @@
         "url": "https://epigraphdb.org/pqtl/",
         "note": "Estimates RETRIEVED from published pQTL MR, not computed by this agent. Check cis_or_trans (cis instruments are less pleiotropy-prone), steiger_direction_ok, and coloc_prob before treating this as causal; coloc_prob=null means colocalization was not available for this pair."
       },
-      "seconds": 1.718,
+      "seconds": 1.583,
       "exception": null
     },
     {
@@ -329,7 +329,7 @@
         "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4662965/",
         "source_release": "ChEMBL_37 (released 2026-05-01)"
       },
-      "seconds": 4.504,
+      "seconds": 4.151,
       "exception": null
     },
     {
@@ -368,9 +368,9 @@
         ],
         "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 365 ClinVar records for this gene; it is a sample, not a rate.",
         "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=LPA%5Bgene%5D",
-        "source_release": "ClinVar build Build260818-0035.1"
+        "source_release": "ClinVar build Build260823-0900.1"
       },
-      "seconds": 1.429,
+      "seconds": 1.808,
       "exception": null
     },
     {
@@ -397,7 +397,7 @@
         "url": "https://gnomad.broadinstitute.org/gene/LPA",
         "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
       },
-      "seconds": 0.403,
+      "seconds": 0.372,
       "exception": null
     },
     {
@@ -409,7 +409,7 @@
       "result": {
         "found": true,
         "gene_symbol": "LPA",
-        "n_unique_snps": 266,
+        "n_unique_snps": 259,
         "n_association_rows": 692,
         "total_association_rows_reported": 692,
         "sweep_complete": true,
@@ -417,24 +417,24 @@
         "example_rsids": [
           "rs6905073",
           "rs6903649",
+          "rs1652507",
           "rs115069429",
           "rs1084651",
           "rs569981808",
           "rs75234242",
           "rs6940254",
+          "rs4708876",
+          "rs12212507",
           "rs140306630",
           "rs76144756",
-          "rs9355814",
-          "rs115848955",
-          "rs769689096",
-          "rs9355297",
-          "rs7453836",
-          "rs372450873"
+          "rs4252050",
+          "rs14224",
+          "rs4252152"
         ],
         "url": "https://www.ebi.ac.uk/gwas/genes/LPA",
         "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
       },
-      "seconds": 7.022,
+      "seconds": 9.172,
       "exception": null
     },
     {
@@ -481,7 +481,7 @@
         "url": "https://www.pharmgkb.org/search?query=LPA",
         "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
       },
-      "seconds": 0.438,
+      "seconds": 0.582,
       "exception": null
     },
     {
@@ -551,7 +551,7 @@
         "url": "https://platform.opentargets.org/target/ENSG00000198670",
         "source_release": "Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)"
       },
-      "seconds": 1.458,
+      "seconds": 1.308,
       "exception": null
     },
     {
@@ -811,8 +811,8 @@
             {
               "multi_snp": false,
               "steiger": true,
-              "coloc": false,
-              "ld_check": true,
+              "shared_variant": true,
+              "shared_variant_via": "ld_check",
               "depth": 2
             }
           ]
@@ -825,12 +825,12 @@
       "exception": null
     }
   ],
-  "model_verdict": "GO — Strong genetic, causal, and clinical-stage evidence supports LPA as a therapeutic target for coronary heart disease.",
-  "model_reasoning": "Open Targets reports a strong genetic association for LPA with coronary artery disorder, alongside extensive GWAS support. Retrieved Mendelian randomization estimates using the cis-instrument rs55730499 indicate a robust causal relationship with coronary heart disease. ChEMBL lists known modulators targeting LPA mRNA, and clinical evidence confirms that multiple therapeutic programmes (such as pelacarsen and olpasiran) have advanced to Phase 3 evaluation. Furthermore, gnomAD constraint data indicates that LPA is tolerant to loss-of-function variants, suggesting a favorable safety profile for inhibition.",
+  "model_verdict": "GO — LPA demonstrates strong causal genetic evidence, high LoF tolerance, and active phase 3 clinical development for coronary-related disorders.",
+  "model_reasoning": "Retrieved Mendelian randomization estimates link LPA to coronary heart disease with strong statistical support, corroborated by hundreds of GWAS associations and a high genetic association score in Open Targets. The gene exhibits loss-of-function tolerance in gnomAD, suggesting safety upon inhibition, and has active phase 3 clinical candidates such as pelacarsen and olpasiran targeted against it.",
   "validation": {
     "ok": true,
     "unsupported": [],
-    "checked": 2
+    "checked": 1
   },
-  "card_markdown": "# Target Evidence Card — LPA × coronary heart disease\n\n**Verdict:** GO — Strong genetic, causal, and clinical-stage evidence supports LPA as a therapeutic target for coronary heart disease.\n\n> **You asked about \"coronary heart disease\". This card scored MONDO_0005010 — coronary artery disorder.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"LPA mRNA\" (CHEMBL4662965),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## MR direction — rendered from the ledger, not written by the model\n\n- Genetically-predicted **higher plasma LPA** is associated with **HIGHER Coronary heart disease** (beta +0.2523, se 0.0193, p=5.39e-39; Wald ratio, n_snp 1, instrument rs55730499, cis).\n  - Not available for this estimate: colocalization.\n  - Single-instrument Wald ratio: no heterogeneity or pleiotropy test is possible.\n\n> **The exposure is LPA protein abundance, not a drug.** This run retrieved no evidence about what pharmacological inhibition or activation of LPA does. Turning the direction above into a drug direction needs a mechanism this run did not retrieve.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — estimate found · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n- Single matched estimate; validation depth 2 of 4 (multi-SNP / Steiger / coloc / LD check).\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | outcome: Coronary heart disease — beta=0.252, se=0.0193, p=5.39e-39, Wald ratio, n_snp=1, cis instrument, coloc=not available  \n_retrieved from published MR; not computed here_ |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.576 (literature=0.977, genetic_association=0.898, clinical=0.0061) |\n| Protein context | `get_uniprot_dossier` | P08519 — Apolipoprotein(a); location: Not annotated. |\n| Known modulators / druggability | `get_chembl_modulators` | 2 known modulators (ANTISENSE INHIBITOR, RNAI INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 365 ClinVar records; 2 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=2.1e-68, LOEUF=1.13 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 266 unique SNPs from 692/692 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 3 clinical annotation(s) over 2 drug(s): HMG-CoA reductase inhibitors, rosuvastatin — ClinPGx evidence level 3 (scale 1A strongest to 4 weakest) — e.g. rs10455872 (LPA); rosuvastatin (level 3 Efficacy) |\n| Clinical development record | `get_clinical_evidence` | max stage for THIS disease: **PHASE_3** — e.g. PELACARSEN (PHASE_3, 9 trial report(s) for this disease, 1 of them with a stop reason); +1 more drug(s) for this disease  \n_stages mean trials exist, not that they worked_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'LPA' -> ENSG00000198670 (LPA); 'coronary heart disease' -> MONDO_0005010 (coronary artery disorder). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — Estimates RETRIEVED from published pQTL MR, not computed by this agent. Check cis_or_trans (cis instruments are less pleiotropy-prone), steiger_direction_ok, and coloc_prob before treating this as causal; coloc_prob=null means colocalization was not available for this pair.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'LPA' and resolved to 'LPA mRNA' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 365 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_clinical_evidence`** — Phase and trial status mean trials EXIST, not that they worked — a COMPLETED phase-3 trial can be a failed one; only why-stopped fields carry failure information, and only approval carries a regulator's efficacy judgement. Registries lag press releases by a data release or more.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets reports a strong genetic association for LPA with coronary artery disorder, alongside extensive GWAS support. Retrieved Mendelian randomization estimates using the cis-instrument rs55730499 indicate a robust causal relationship with coronary heart disease. ChEMBL lists known modulators targeting LPA mRNA, and clinical evidence confirms that multiple therapeutic programmes (such as pelacarsen and olpasiran) have advanced to Phase 3 evaluation. Furthermore, gnomAD constraint data indicates that LPA is tolerant to loss-of-function variants, suggesting a favorable safety profile for inhibition.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P08519 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000198670/MONDO_0005010 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4662965/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=LPA%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/LPA — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/LPA — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=LPA — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n- `get_clinical_evidence`: https://platform.opentargets.org/target/ENSG00000198670 — _Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:32:38\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+  "card_markdown": "# Target Evidence Card — LPA × coronary heart disease\n\n**Verdict:** GO — LPA demonstrates strong causal genetic evidence, high LoF tolerance, and active phase 3 clinical development for coronary-related disorders.\n\n> **You asked about \"coronary heart disease\". This card scored MONDO_0005010 — coronary artery disorder.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"LPA mRNA\" (CHEMBL4662965),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## MR direction — rendered from the ledger, not written by the model\n\n- Genetically-predicted **higher plasma LPA** is associated with **HIGHER Coronary heart disease** (beta +0.2523, se 0.0193, p=5.39e-39; Wald ratio, n_snp 1, instrument rs55730499, cis).\n  - Not available for this estimate: colocalization.\n  - Single-instrument Wald ratio: no heterogeneity or pleiotropy test is possible.\n\n> **The exposure is LPA protein abundance, not a drug.** This run retrieved no evidence about what pharmacological inhibition or activation of LPA does. Turning the direction above into a drug direction needs a mechanism this run did not retrieve.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — estimate found · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n- Single matched estimate; sensitivity checks reported: 2 of 3 (multi-SNP / Steiger / shared-variant [coloc or LD check]).\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | outcome: Coronary heart disease — beta=0.252, se=0.0193, p=5.39e-39, Wald ratio, n_snp=1, cis instrument, coloc=not available  \n_retrieved from published MR; not computed here_ |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.576 (literature=0.977, genetic_association=0.898, clinical=0.0061) |\n| Protein context | `get_uniprot_dossier` | P08519 — Apolipoprotein(a); location: Not annotated. |\n| Known modulators / druggability | `get_chembl_modulators` | 2 known modulators (ANTISENSE INHIBITOR, RNAI INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 365 ClinVar records; 2 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=2.1e-68, LOEUF=1.13 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 259 unique SNPs from 692/692 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 3 clinical annotation(s) over 2 drug(s): HMG-CoA reductase inhibitors, rosuvastatin — ClinPGx evidence level 3 (scale 1A strongest to 4 weakest) — e.g. rs10455872 (LPA); rosuvastatin (level 3 Efficacy) |\n| Clinical development record | `get_clinical_evidence` | max stage for THIS disease: **PHASE_3** — e.g. PELACARSEN (PHASE_3, 9 trial report(s) for this disease, 1 of them with a stop reason); +1 more drug(s) for this disease  \n_stages mean trials exist, not that they worked_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'LPA' -> ENSG00000198670 (LPA); 'coronary heart disease' -> MONDO_0005010 (coronary artery disorder). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — Estimates RETRIEVED from published pQTL MR, not computed by this agent. Check cis_or_trans (cis instruments are less pleiotropy-prone), steiger_direction_ok, and coloc_prob before treating this as causal; coloc_prob=null means colocalization was not available for this pair.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'LPA' and resolved to 'LPA mRNA' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 365 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_clinical_evidence`** — Phase and trial status mean trials EXIST, not that they worked — a COMPLETED phase-3 trial can be a failed one; only why-stopped fields carry failure information, and only approval carries a regulator's efficacy judgement. Registries lag press releases by a data release or more.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nRetrieved Mendelian randomization estimates link LPA to coronary heart disease with strong statistical support, corroborated by hundreds of GWAS associations and a high genetic association score in Open Targets. The gene exhibits loss-of-function tolerance in gnomAD, suggesting safety upon inhibition, and has active phase 3 clinical candidates such as pelacarsen and olpasiran targeted against it.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P08519 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000198670/MONDO_0005010 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4662965/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=LPA%5Bgene%5D — _ClinVar build Build260823-0900.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/LPA — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/LPA — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=LPA — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n- `get_clinical_evidence`: https://platform.opentargets.org/target/ENSG00000198670 — _Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)_\n\n## Provenance\n\n- Generated: 2026-08-27T11:48:56\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
 }

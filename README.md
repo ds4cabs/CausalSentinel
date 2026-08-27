@@ -25,11 +25,34 @@ reviewer can *falsify* — so the design puts the model where it can do least da
 
 ## Try it in ten seconds — no install, no key
 
-**[Browse the 991 pre-generated protein dossiers](dossiers/README.md)** — one page per
-protein: its published MR estimates (retrieved, never computed here), pQTL instruments,
-GWAS signal, and a phenome map. 101,543 protein-outcome estimates indexed in total.
-Pure static markdown, no language model anywhere in that path — also served on
-[GitHub Pages](https://ds4cabs.github.io/CausalSentinel/dossiers/).
+- **[Browse the 991 pre-generated protein dossiers](https://ds4cabs.github.io/CausalSentinel/dossiers/)** —
+  one page per protein: its published MR estimates (retrieved, never computed here),
+  pQTL instruments, GWAS signal, and a phenome map. 101,543 protein-outcome estimates
+  indexed in total. Pure static markdown, no language model anywhere in that path
+  (also browsable [in-repo](dossiers/README.md)).
+- **[Open the card viewer](https://ds4cabs.github.io/CausalSentinel/viewer/)** — ten worked
+  protein × disease cards, one panel per tool, every value read from each card's own
+  ledger; second tab shows genetics-to-clinic timelines.
+
+## Run the web app — type your own pair (two minutes)
+
+```bash
+git clone https://github.com/ds4cabs/CausalSentinel.git
+cd CausalSentinel
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+Your browser opens a page: type any **protein** and **disease**, press *Build the
+evidence card*, and ~20 seconds later the full card is on screen — built from live
+queries to the nine public databases, all keyless and free. **No API key is needed**,
+because the card is rendered by code from tool output; the model only ever writes a
+one-line verdict and one paragraph. Paste your own free
+[Gemini key](https://aistudio.google.com/apikey) in the sidebar (used for that run,
+never stored) to add those two sentences — and watch the validator check them on the
+page.
+
+![The web app building a card](figs/app_02_card.png)
 
 The figures are drawn from tool output too — nothing on these axes is typed in by hand:
 
@@ -112,10 +135,12 @@ per version, each with a README saying what that version got wrong and where it 
 Python, **`google-genai`** (Gemini SDK; the older `google-generativeai` is deprecated),
 requests, python-dotenv.
 
-## Getting Started (Round 1)
+## Getting Started — full CLI
 
-**Prerequisites:** Python 3.10+, and a free Gemini API key in `../.env` as `GEMINI_API_KEY`
-(see `.env.example`). The `.env` file lives one level up and is never committed.
+**Prerequisites:** Python 3.10+. A free Gemini API key is needed only for `agent.py`
+(the model's two sentences); put it in `../.env` as `GEMINI_API_KEY` (see
+`.env.example` — the `.env` file lives one level up and is never committed). The
+individual tools, the validator tests and the web app's no-key mode need no key at all.
 
 ```bash
 # 1) create and activate an isolated environment

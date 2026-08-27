@@ -58,11 +58,20 @@ class ToolLedger:
 
     # ---- read side -------------------------------------------------------
     def results_by_tool(self) -> dict:
-        """Latest successful-shaped result per tool name (last call wins)."""
-        out = {}
+        """Latest result per tool name — a success is never displaced by a later failure.
+
+        Plain last-call-wins let a failed retry erase an earlier good result from the
+        card, the validator haystack and the concordance input. Now the latest
+        SUCCESSFUL call wins; an errored result stands only if the tool never succeeded.
+        """
+        latest, latest_ok = {}, {}
         for e in self.entries:
-            out[e["tool"]] = e["result"]
-        return out
+            errored = bool(e.get("exception")) or (
+                isinstance(e.get("result"), dict) and e["result"].get("error"))
+            latest[e["tool"]] = e["result"]
+            if not errored:
+                latest_ok[e["tool"]] = e["result"]
+        return {t: latest_ok.get(t, r) for t, r in latest.items()}
 
     def called(self) -> list:
         return [e["tool"] for e in self.entries]

@@ -5,6 +5,29 @@ same-input before/after evidence is quoted — the objective yardstick for every
 is *identical input, compared output*. Any older version's full output can be
 reconstructed from git (see "Comparing versions" at the bottom).
 
+## v0.5.1 — 2026-08-27 · Scoring honesty (branch `v0.5.1-scoring`)
+
+**Changed**
+- **Depth is now 0–3, not 0–4.** coloc and ld_check were two points for one
+  question: in Zheng 2020 the LD check is the fallback used exactly when the full
+  regional statistics for colocalization are unavailable — across all 101,543 rows
+  the two never co-occur, so 4/4 was unreachable by construction. They are now one
+  `shared_variant` signal, with `shared_variant_via` keeping which check it was.
+  No existing estimate's depth value changes. Cards now read
+  "sensitivity checks reported: N of 3" — "reported", because presence is counted,
+  not passing.
+- **A FAILED Steiger no longer licenses causal wording.** `steiger_direction_ok="FALSE"`
+  is positive evidence of reverse causation; it used to count as validation because it
+  was non-blank. The validator now treats it as worse than absent, and the card prints
+  a bold warning line. Two regression cases added (62 total).
+- **The ledger no longer lets a failed retry erase a good result.**
+  `results_by_tool()` prefers the latest successful call; the validator haystack is
+  built from all entries.
+
+All ten benchmark cards regenerated (7/10 passed this run; among the catches, the
+model wrote "FDA-approved" for VKORC1 from memory — the phrase appears nowhere in
+tool output). Viewer bundle rebuilt.
+
 ## v0.5 — 2026-08-27 · The web app: type your own pair (branch `v0.5-webapp`)
 
 **Added**

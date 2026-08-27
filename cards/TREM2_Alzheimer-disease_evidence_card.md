@@ -1,6 +1,6 @@
 # Target Evidence Card — TREM2 × Alzheimer disease
 
-**Verdict:** GO — TREM2 shows strong genetic and literature associations with Alzheimer disease, supported by loss-of-function tolerance indicating safety for therapeutic modulation.
+**Verdict:** GO — TREM2 shows substantial genetic and experimental evidence linking it to Alzheimer disease, supported by multiple GWAS associations and microglial functional roles.
 
 > **You asked about "Alzheimer disease". This card scored MONDO_0004975 — Alzheimer disease.** If those are not the same thing, every number below answers a different question.
 > **The druggability row is about ChEMBL target "Triggering receptor expressed on myeloid cells 2" (CHEMBL6196124),** matched by text search. If that is not the molecular target you meant, that row is about something else.
@@ -35,7 +35,7 @@
 
 ## Reasoning
 
-Open Targets data reveals a strong overall association score and high genetic and literature evidence for TREM2 in Alzheimer disease. The protein functions as a microglial receptor mediating amyloid-beta uptake and degradation, aligning directly with disease pathology. Although no pre-computed Mendelian randomization estimate matching Alzheimer disease was available from the EpiGraphDB resource and no clinical modulators are currently cataloged in ChEMBL or Open Targets clinical evidence, ClinVar records and gnomAD constraint metrics indicate the gene is loss-of-function tolerant. Furthermore, GWAS Catalog mapping identifies multiple associated SNPs, reinforcing the genetic link.
+Open Targets records a strong genetic association score for TREM2 in Alzheimer disease alongside supporting literature and animal model evidence. The GWAS Catalog maps 70 unique SNPs to the locus, and UniProt details TREM2's role as a microglial receptor for amyloid-beta and apolipoproteins involved in phagocytosis and immune response. While no causal MR estimate was available for Alzheimer disease and no clinical candidate records are present in Open Targets, the gene is tolerant to loss-of-function variants in gnomAD and features pathogenic variants in ClinVar, pointing to a strong and biologically plausible genetic link.
 
 ## Sources
 
@@ -43,14 +43,14 @@ Open Targets data reveals a strong overall association score and high genetic an
 - `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000095970/MONDO_0004975 — _Open Targets data release 26.06_
 - `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL6196124/ — _ChEMBL_37 (released 2026-05-01)_
 - `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_
-- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=TREM2%5Bgene%5D — _ClinVar build Build260818-0035.1_
+- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=TREM2%5Bgene%5D — _ClinVar build Build260823-0900.1_
 - `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/TREM2 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_
 - `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/TREM2 — _GWAS Catalog REST (live; release not exposed by this endpoint)_
 - `get_clinical_evidence`: https://platform.opentargets.org/target/ENSG00000095970 — _Open Targets data release 26.06_
 
 ## Provenance
 
-- Generated: 2026-08-21T15:34:04
+- Generated: 2026-08-27T11:50:10
 - Model (reasoning text only): `gemini-flash-lite-latest`
 - Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`
 - Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.
