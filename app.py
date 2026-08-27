@@ -55,7 +55,19 @@ NO_MODEL_REASONING = (
 )
 
 # Which tools run, in which order, and with which arguments. The model normally picks;
-# without a model we simply call all nine, which is what it converges on anyway.
+# without a model we simply call the SELECTED sources (all nine by default).
+# label -> (function, argument kind); order = the order they run and render.
+PLAN_LABELS = {
+    "MR estimate (EpiGraphDB)": (get_mr_result, "protein_disease"),
+    "Clinical record (Open Targets)": (get_clinical_evidence, "protein_disease"),
+    "Target-disease association (Open Targets)": (get_target_disease_evidence, "protein_disease"),
+    "Protein context (UniProt)": (get_uniprot_dossier, "protein"),
+    "Druggability (ChEMBL)": (get_chembl_modulators, "protein"),
+    "Clinical variants (ClinVar)": (get_clinvar_variants, "protein"),
+    "Constraint / knock-out tolerance (gnomAD)": (get_gnomad_constraint, "protein"),
+    "GWAS signal (GWAS Catalog)": (get_gwas_catalog, "protein"),
+    "Pharmacogenomics (ClinPGx)": (get_pharmgkb_drug_gene, "protein"),
+}
 PLAN = [
     (get_mr_result, "protein_disease"),
     (get_clinical_evidence, "protein_disease"),
@@ -152,12 +164,13 @@ def _code_reading(results: dict) -> str:
     return " ".join(parts)
 
 
-def _run_tools(protein: str, disease: str, progress=None) -> ToolLedger:
+def _run_tools(protein: str, disease: str, progress=None, plan=None) -> ToolLedger:
     """Call the nine public sources through the ledger, then classify concordance."""
     ledger = ToolLedger(TOOLS)
-    for i, (fn, kind) in enumerate(PLAN):
+    plan = PLAN if plan is None else plan
+    for i, (fn, kind) in enumerate(plan):
         if progress is not None:
-            progress.progress((i + 1) / (len(PLAN) + 1), text=f"querying {fn.__name__} …")
+            progress.progress((i + 1) / (len(plan) + 1), text=f"querying {fn.__name__} …")
         # ToolLedger._wrap never raises: a crashed tool comes back as {"error": ...}.
         # So a dead API is detected on the RESULT, not with try/except.
         if kind == "protein_disease":
@@ -242,10 +255,13 @@ with st.sidebar:
                             help="Free key: https://aistudio.google.com/apikey")
     model = st.text_input("Model", value=MODEL_DEFAULT)
     st.divider()
-    st.markdown(
-        "**Sources** \u2014 all free, all keyless\n\n"
-        "EpiGraphDB \u00b7 Open Targets \u00b7 ChEMBL \u00b7 UniProt \u00b7 ClinVar \u00b7 gnomAD \u00b7 "
-        "GWAS Catalog \u00b7 ClinPGx \u00b7 clinical development record"
+    st.header("Databases")
+    sel_labels = st.multiselect(
+        "Query only these \u2014 all free, all keyless",
+        list(PLAN_LABELS),
+        default=list(PLAN_LABELS),
+        help="Un-tick what you don't need and the run gets faster. Rows for sources "
+             "you skip say 'tool not called in this run' \u2014 the card never pretends.",
     )
     st.markdown(
         "Also online: [protein gallery](https://ds4cabs.github.io/CausalSentinel/dossiers/) \u00b7 "
@@ -336,8 +352,12 @@ with tab_build:
             st.error("Give both a protein and a disease.")
             st.stop()
 
+        if not sel_labels:
+            st.error("Pick at least one database in the sidebar.")
+            st.stop()
+        plan = [PLAN_LABELS[k] for k in PLAN_LABELS if k in sel_labels]
         bar = st.progress(0.0, text="starting \u2026")
-        ledger = _run_tools(protein.strip(), disease.strip(), bar)
+        ledger = _run_tools(protein.strip(), disease.strip(), bar, plan=plan)
         bar.empty()
 
         verdict, reasoning = NO_MODEL_VERDICT, NO_MODEL_REASONING
