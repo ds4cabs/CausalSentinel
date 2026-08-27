@@ -58,15 +58,15 @@ NO_MODEL_REASONING = (
 # without a model we simply call the SELECTED sources (all nine by default).
 # label -> (function, argument kind); order = the order they run and render.
 PLAN_LABELS = {
-    "MR estimate (EpiGraphDB)": (get_mr_result, "protein_disease"),
-    "Clinical record (Open Targets)": (get_clinical_evidence, "protein_disease"),
-    "Target-disease association (Open Targets)": (get_target_disease_evidence, "protein_disease"),
-    "Protein context (UniProt)": (get_uniprot_dossier, "protein"),
-    "Druggability (ChEMBL)": (get_chembl_modulators, "protein"),
-    "Clinical variants (ClinVar)": (get_clinvar_variants, "protein"),
-    "Constraint / knock-out tolerance (gnomAD)": (get_gnomad_constraint, "protein"),
-    "GWAS signal (GWAS Catalog)": (get_gwas_catalog, "protein"),
-    "Pharmacogenomics (ClinPGx)": (get_pharmgkb_drug_gene, "protein"),
+    "🧬 MR estimate (EpiGraphDB)": (get_mr_result, "protein_disease"),
+    "🏥 Clinical record (Open Targets)": (get_clinical_evidence, "protein_disease"),
+    "🎯 Target-disease association (Open Targets)": (get_target_disease_evidence, "protein_disease"),
+    "🧾 Protein context (UniProt)": (get_uniprot_dossier, "protein"),
+    "💊 Druggability (ChEMBL)": (get_chembl_modulators, "protein"),
+    "🩺 Clinical variants (ClinVar)": (get_clinvar_variants, "protein"),
+    "🛡️ Constraint / knock-out tolerance (gnomAD)": (get_gnomad_constraint, "protein"),
+    "📈 GWAS signal (GWAS Catalog)": (get_gwas_catalog, "protein"),
+    "⚗️ Pharmacogenomics (ClinPGx)": (get_pharmgkb_drug_gene, "protein"),
 }
 PLAN = [
     (get_mr_result, "protein_disease"),
