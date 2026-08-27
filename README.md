@@ -64,9 +64,9 @@ any of the 991 protein dossiers:
 |---|---|
 | *the ten worked cards, same panel-per-tool engine* | *hand-verified genetics → clinic timelines — genetic evidence precedes the clinic's verdict by a decade* |
 
-| ![The 991-protein gallery](figs/app_06_gallery.png) | ![The build tab](figs/app_01_home.png) |
+| ![The 991-protein gallery](figs/app_06_gallery.png) | ![Pick your databases](figs/app_07_pick_sources.png) |
 |---|---|
-| *the 991-protein gallery: filterable index, dossiers rendered in-app* | *the build tab — type any pair, no key needed* |
+| *the 991-protein gallery: filterable index, dossiers rendered in-app* | *pick your databases — query only what you need; skipped sources say so instead of pretending* |
 
 The figures are drawn from tool output too — nothing on these axes is typed in by hand:
 
