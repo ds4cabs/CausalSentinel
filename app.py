@@ -169,6 +169,43 @@ with st.sidebar:
         "[card viewer](https://ds4cabs.github.io/CausalSentinel/viewer/)"
     )
 
+import datetime as _dt
+from streamlit.components.v1 import html as _components_html
+
+_VIEWER = HERE / "viewer" / "index.html"
+_BUNDLE = HERE / "viewer" / "cards_data.js"
+
+
+def _viewer_embed(single: dict | None = None, height: int = 1500) -> None:
+    """Render cards through viewer/index.html — the panel-per-tool interface.
+
+    With single=None the full viewer is embedded: the ten worked pairs plus the
+    genetics-to-clinic timelines. With a card dict, the same engine renders JUST
+    that card — PAIRS is rewritten to one pair, the chrome is hidden, and the
+    data bundle is that one card — so a freshly built card looks exactly like
+    the published ones.
+    """
+    page = _VIEWER.read_text(encoding="utf-8")
+    if single is None:
+        bundle = _BUNDLE.read_text(encoding="utf-8")
+    else:
+        p, d = single["protein"], single["disease"]
+        fname = f"{p}_{re.sub(r'[^A-Za-z0-9]+', '-', d).strip('-')}_evidence_card.json"
+        bundle = ("window.CARD_DATA = "
+                  + json.dumps({fname: single}, ensure_ascii=False, default=str) + ";")
+    page = page.replace('<script src="cards_data.js"></script>',
+                        "<script>" + bundle + "</script>", 1)
+    if single is not None:
+        p, d = single["protein"], single["disease"]
+        page = re.sub(r"const PAIRS = \[.*?\];",
+                      "const PAIRS = [[" + json.dumps(p) + ", " + json.dumps(d) + "]];",
+                      page, count=1, flags=re.S)
+        page = page.replace("</body>",
+                            "<style>.tabs, .picker, header, footer "
+                            "{display:none !important}</style></body>", 1)
+    _components_html(page, height=height, scrolling=True)
+
+
 tab_build, tab_viewer, tab_gallery = st.tabs(
     ["\U0001f528 Build a card", "\U0001f5c2\ufe0f Ten worked cards", "\U0001f9ed 991-protein gallery"])
 
@@ -238,6 +275,10 @@ with tab_build:
             "card_md": card_md,
             "entries": ledger.entries,
             "validation": validation,
+            "verdict": verdict,
+            "reasoning": reasoning,
+            "model": model.strip() if validation is not None else "none — no model was called",
+            "generated_at": _dt.datetime.now().isoformat(timespec="seconds"),
         }
 
     run = st.session_state.get("last_run")
@@ -255,13 +296,16 @@ with tab_build:
                     "\u2014 which is the point: the card does not depend on a model.")
 
         st.markdown("---")
-        st.markdown(run["card_md"])
-
-        with st.expander(f"\U0001f50e The ledger \u2014 every call and its verbatim return "
-                         f"({len(run['entries'])} calls)"):
-            for e in run["entries"]:
-                st.markdown(f"**`{e.get('tool')}`** \u00b7 args: `{e.get('args')}`")
-                st.json(e.get("result"), expanded=False)
+        _viewer_embed(single={
+            "protein": run["protein"],
+            "disease": run["disease"],
+            "generated_at": run.get("generated_at", ""),
+            "model": run.get("model", ""),
+            "model_verdict": run.get("verdict", ""),
+            "model_reasoning": run.get("reasoning", ""),
+            "validation": run["validation"] or {"ok": True, "checked": 0, "unsupported": []},
+            "tool_ledger": run["entries"],
+        }, height=1350)
 
         stem = f"{run['protein']}_{re.sub(r'[^A-Za-z0-9]+', '-', run['disease']).strip('-')}"
         st.download_button("\u2b07\ufe0f Download this card (Markdown)",
@@ -272,49 +316,10 @@ with tab_build:
                 "**Build the evidence card**.")
 
 # ============================ tab 2: ten worked cards =============================
-@st.cache_data(show_spinner=False)
-def _load_worked_cards() -> dict:
-    """The ten benchmark cards, loaded from cards/*.json (each carries its full ledger)."""
-    out = {}
-    for f in sorted((HERE / "cards").glob("*_evidence_card.json")):
-        try:
-            d = json.loads(f.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError):
-            continue
-        out[f"{d.get('protein')} \u00d7 {d.get('disease')}"] = d
-    return out
-
 with tab_viewer:
-    cards = _load_worked_cards()
-    if not cards:
-        st.info("No pre-built cards found in cards/.")
-    else:
-        pick = st.selectbox("Ten pairs, chosen to exercise different behaviours \u2014 "
-                            "positive controls, no-MR-available, safety cases, a negative "
-                            "control:", list(cards))
-        d = cards[pick]
-        val = d.get("validation") or {}
-        m1, m2, m3, m4 = st.columns(4)
-        m1.metric("tool calls", len(d.get("tool_ledger") or []))
-        m2.metric("validator", "PASS" if val.get("ok") else "FAIL")
-        m3.metric("checked claim tokens", val.get("checked", 0))
-        m4.metric("generated", (d.get("generated_at") or "")[:10])
-        v = (d.get("model_verdict") or "").strip()
-        if v.startswith("GO"):
-            st.success(v)
-        elif v.startswith("NO-GO"):
-            st.error(v)
-        else:
-            st.info(v or "no verdict on record")
-        t_card, t_tools = st.tabs(["The card", "Per-tool panels \u2014 the verbatim ledger"])
-        with t_card:
-            st.markdown(d.get("card_markdown") or "_no markdown stored_")
-        with t_tools:
-            for e in d.get("tool_ledger") or []:
-                with st.expander(f"{e.get('tool')} \u00b7 args {e.get('args')}"):
-                    st.json(e.get("result"), expanded=False)
-        st.caption("The same ten cards with timelines: "
-                   "[online viewer](https://ds4cabs.github.io/CausalSentinel/viewer/)")
+    st.caption("The card viewer \u2014 one panel per tool, every value read from each "
+               "card's own ledger. Second tab inside: the genetics \u2192 clinic timelines.")
+    _viewer_embed(None, height=1600)
 
 # ============================ tab 3: the 991 gallery ==============================
 @st.cache_data(show_spinner=False)
