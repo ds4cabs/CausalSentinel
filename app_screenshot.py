@@ -77,4 +77,50 @@ with sync_playwright() as p:
     page.screenshot(path=f"{OUT}/app_06_gallery.png")
     print("saved app_06_gallery.png")
 
+    # 7 — pick your databases: un-tick six checkboxes, build with three, and show the
+    # sidebar next to a card whose skipped panels say "tool not called in this run".
+    # NOTE: the checkbox aria-label is the label WITHOUT its pictogram (Streamlit
+    # strips it), and a click can land during a rerun — hence the retry loop.
+    page.get_by_role("tab", name="Build a card").click()
+    page.wait_for_timeout(1000)
+
+    def _uncheck(plain):
+        for _ in range(5):
+            box = page.get_by_role("checkbox", name=plain)
+            if box.count() and not box.first.is_checked():
+                return
+            page.locator(f'[data-testid="stCheckbox"]:has-text("{plain}")') \
+                .first.locator("label").click()
+            page.wait_for_timeout(700)
+
+    for plain in ["Clinical record (Open Targets)",
+                  "Target-disease association (Open Targets)",
+                  "Druggability (ChEMBL)", "Clinical variants (ClinVar)",
+                  "Pharmacogenomics (ClinPGx)", "GWAS signal (GWAS Catalog)"]:
+        _uncheck(plain)
+    page.get_by_role("button", name="Build the evidence card").click()
+    # the PREVIOUS card (all nine sources) stays on screen while the subset run is in
+    # flight, so waiting for the Download button returns immediately — instead poll the
+    # embedded card until a skipped panel says "tool not called in this run"
+    for _ in range(60):
+        page.wait_for_timeout(2000)
+        done = False
+        for fr in page.frames:
+            if fr == page.main_frame:
+                continue
+            try:
+                if fr.locator("#card").count() and \
+                   "tool not called in this run" in fr.evaluate(
+                       "document.getElementById('card').innerText"):
+                    done = True
+            except Exception:
+                pass
+        if done:
+            break
+    page.wait_for_timeout(1500)
+    page.mouse.wheel(0, 420)
+    page.wait_for_timeout(600)
+    page.screenshot(path=f"{OUT}/app_07_pick_sources.png")
+    print("saved app_07_pick_sources.png")
+
     browser.close()
