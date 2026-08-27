@@ -5,6 +5,25 @@ same-input before/after evidence is quoted — the objective yardstick for every
 is *identical input, compared output*. Any older version's full output can be
 reconstructed from git (see "Comparing versions" at the bottom).
 
+## v0.5 — 2026-08-27 · The web app: type your own pair (branch `v0.5-webapp`)
+
+**Added**
+- `app.py`: a Streamlit web page where anyone types a protein × disease and gets the
+  full evidence card — **with no account, no key and no cost**. The nine public
+  sources are queried live through the same `ToolLedger`, and the card is rendered by
+  `render.py` exactly as on the CLI. This works because the card never depended on a
+  model: without a key, the verdict/reasoning lines simply state that no model ran,
+  and nothing else on the card changes.
+- Optional model mode: paste your own Gemini key (used for the run, never stored) to
+  add the model's two sentences — and `validate_card.py` runs on them live, shown
+  on the page including any VALIDATION FAILED tokens.
+- `app_screenshot.py`: Playwright capture of the running app for README/deck
+  (same pattern as `nathdrug`'s screenshot helper). Screenshots in `figs/`.
+- `requirements.txt`: + `streamlit`, `pandas`.
+
+Same-input evidence (PCSK9 × high cholesterol, no key): 10 tool calls, ~20 s,
+card identical in structure to the CLI card except the two model-written lines.
+
 ## v0.3 — 2026-08-14 · The proteome resource (branch `round3-real-mr-and-validation`)
 
 **Added**
