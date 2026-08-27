@@ -52,7 +52,20 @@ one-line verdict and one paragraph. Paste your own free
 never stored) to add those two sentences — and watch the validator check them on the
 page.
 
-![The web app building a card](figs/app_02_card.png)
+One app, three tabs — build your own card, browse the ten worked cards, and open
+any of the 991 protein dossiers:
+
+| ![A freshly built card](figs/app_02_card.png) | ![The two live figures under the card](figs/app_03_figures.png) |
+|---|---|
+| *a freshly built card — verdict, a code-written reading of the evidence, then one panel per tool* | *under every card: the forest of retrieved MR estimates and the gnomAD constraint figure, drawn live* |
+
+| ![The ten worked cards](figs/app_04_viewer.png) | ![Genetics-to-clinic timelines](figs/app_05_timeline.png) |
+|---|---|
+| *the ten worked cards, same panel-per-tool engine* | *hand-verified genetics → clinic timelines — genetic evidence precedes the clinic's verdict by a decade* |
+
+| ![The 991-protein gallery](figs/app_06_gallery.png) | ![The build tab](figs/app_01_home.png) |
+|---|---|
+| *the 991-protein gallery: filterable index, dossiers rendered in-app* | *the build tab — type any pair, no key needed* |
 
 The figures are drawn from tool output too — nothing on these axes is typed in by hand:
 
