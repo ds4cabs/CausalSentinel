@@ -155,7 +155,7 @@ const RENDER = {
       `<span class="covchip ${cls(s)}">${n}: ${esc(s ?? "?")}</span>`).join("") + "</div>";
     h += kv("estimates compared", esc(ec.n_estimates_compared)) +
          kv("direction", esc(ec.label || ec.direction)) +
-         kv("validation depth (0–4)", esc(JSON.stringify(ec.validation_depth_per_estimate||[])));
+         kv("sensitivity checks reported (0–3)", esc(JSON.stringify(ec.validation_depth_per_estimate||[])));
     return h + raw(r);
   },
   get_target_disease_evidence(r){
@@ -258,7 +258,7 @@ async function showCard(i){
     `<div class="vstrip">generated ${esc(j.generated_at)} · model ${esc(j.model)} · validation: ` +
     (val.ok ? `<b style="color:var(--good)">PASS</b> (${val.checked} claim tokens checked)`
             : `<span class="vfail">FAIL</span> ${fails}`) + `</div>` +
-    `<div class="reasoning"><b>Model reasoning</b> — the only text the model wrote, validated against the ledger:<br>${esc(j.model_reasoning)}</div>` +
+    `<div class="reasoning"><b>${/^none/.test(j.model||"") ? "Reading of the evidence — composed by code from the ledger; no model ran" : "Model reasoning — the only text the model wrote, validated against the ledger"}</b>:<br>${esc(j.model_reasoning)}</div>` +
     `<div class="grid">${panels}</div>` +
     (notes ? `<div class="caveats"><b>Caveats declared by the tools</b><ul>${notes}</ul></div>` : "");
 }

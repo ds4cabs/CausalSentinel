@@ -69,6 +69,89 @@ PLAN = [
 ]
 
 
+@st.cache_data(show_spinner=False)
+def _figures(protein: str):
+    """The two per-protein figures (forest of retrieved MR estimates; gnomAD
+    constraint), drawn by plots.py from live tool output."""
+    import tempfile
+    from plots import mr_forest, constraint_plot
+    out = Path(tempfile.mkdtemp(prefix="opencausal_figs_"))
+    f1 = f2 = None
+    try:
+        f1 = mr_forest(protein, out)
+    except Exception:
+        pass
+    try:
+        f2 = constraint_plot(protein, out)
+    except Exception:
+        pass
+    return (str(f1) if f1 else None, str(f2) if f2 else None)
+
+
+def _code_reading(results: dict) -> str:
+    """A reading of the evidence composed by CODE from the tool results.
+
+    This is what sits at the top of a no-model card: every clause below is a
+    fixed template filled with a retrieved value — no model, no free text.
+    """
+    parts = []
+
+    mr = results.get("get_mr_result") or {}
+    ests = mr.get("matched_disease_estimates") or []
+    if ests:
+        m = ests[0]
+        conc = results.get("classify_evidence_concordance") or {}
+        depth = conc.get("best_validation_depth")
+        sent = (f"EpiGraphDB holds a published MR estimate for this pair "
+                f"(beta {m.get('beta')}, p {m.get('p_value')}, "
+                f"{m.get('n_snp')} instrument(s), {m.get('cis_or_trans')})")
+        if depth is not None:
+            sent += f"; sensitivity checks reported: {depth} of 3"
+        parts.append(sent + ".")
+    elif mr.get("found"):
+        parts.append(f"The protein has {mr.get('n_outcomes_available')} outcomes in the "
+                     "MR resource, but none matches this disease.")
+    else:
+        parts.append("No published MR estimate exists for this pair in the resource — "
+                     "absence of an estimate is not evidence of no effect.")
+
+    clin = results.get("get_clinical_evidence") or {}
+    if clin.get("drugs_for_this_disease"):
+        parts.append(f"The clinic has already tried this target for this disease "
+                     f"(max stage: {clin.get('max_stage_this_disease')}) — a stage means "
+                     "a trial exists, not that it worked.")
+    elif clin.get("n_drug_programmes"):
+        parts.append(f"No programme for this disease is on record; "
+                     f"{clin.get('n_drug_programmes')} drug programme(s) exist against "
+                     "this target for other diseases.")
+    elif clin:
+        parts.append("No drug or clinical candidate against this target is on record.")
+
+    gn = results.get("get_gnomad_constraint") or {}
+    pli, loeuf = gn.get("pLI"), gn.get("LOEUF")
+    if pli is not None or loeuf is not None:
+        if (pli is not None and pli > 0.9) or (loeuf is not None and loeuf < 0.35):
+            parts.append("gnomAD marks the gene LoF-intolerant — a safety flag.")
+        else:
+            parts.append("gnomAD marks the gene LoF-tolerant — a hint about safety, "
+                         "not a licence to inhibit.")
+
+    gw = results.get("get_gwas_catalog") or {}
+    if gw.get("n_unique_snps") is not None:
+        parts.append(f"The GWAS Catalog maps {gw.get('n_unique_snps')} unique SNPs "
+                     "to the locus.")
+
+    ch = results.get("get_chembl_modulators") or {}
+    if ch.get("n_modulators"):
+        parts.append(f"ChEMBL lists {ch.get('n_modulators')} known modulator(s).")
+    elif ch and ch.get("found") is not False:
+        parts.append("ChEMBL lists no known modulators — druggability is unproven.")
+
+    parts.append("Every value above appears in a panel below, with the database "
+                 "release it came from.")
+    return " ".join(parts)
+
+
 def _run_tools(protein: str, disease: str, progress=None) -> ToolLedger:
     """Call the nine public sources through the ledger, then classify concordance."""
     ledger = ToolLedger(TOOLS)
@@ -248,6 +331,8 @@ with tab_build:
 
         verdict, reasoning = NO_MODEL_VERDICT, NO_MODEL_REASONING
         validation = None
+        if not api_key.strip():
+            reasoning = _code_reading(ledger.results_by_tool())
         if api_key.strip():
             with st.spinner("the model is writing its two sentences \u2026"):
                 try:
@@ -306,6 +391,19 @@ with tab_build:
             "validation": run["validation"] or {"ok": True, "checked": 0, "unsupported": []},
             "tool_ledger": run["entries"],
         }, height=1350)
+
+        with st.expander("📈 Figures — drawn from tool output, nothing typed in", expanded=True):
+            with st.spinner("drawing …"):
+                fig_forest, fig_con = _figures(run["protein"])
+            fc1, fc2 = st.columns(2)
+            if fig_forest:
+                fc1.image(fig_forest, use_container_width=True)
+            else:
+                fc1.caption("no retrieved MR estimates — nothing to plot")
+            if fig_con:
+                fc2.image(fig_con, use_container_width=True)
+            else:
+                fc2.caption("no gnomAD constraint data")
 
         stem = f"{run['protein']}_{re.sub(r'[^A-Za-z0-9]+', '-', run['disease']).strip('-')}"
         st.download_button("\u2b07\ufe0f Download this card (Markdown)",
