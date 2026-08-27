@@ -36,10 +36,18 @@ def get_uniprot_dossier(gene_symbol: str) -> dict:
     if resp.status_code != 200:
         return {"gene_symbol": gene_symbol, "error": f"UniProt HTTP {resp.status_code}"}
 
+    # UniProt states its release in response headers — a dated card is not a reproducible
+    # card, so we record the release, not just when we happened to ask.
+    release = resp.headers.get("X-UniProt-Release")
+    release_date = resp.headers.get("X-UniProt-Release-Date")
+    source_release = (f"UniProt release {release}" + (f" ({release_date})" if release_date else "")
+                      if release else "UniProt (release not reported)")
+
     results = resp.json().get("results", [])
     if not results:
         return {"gene_symbol": gene_symbol, "found": False,
-                "note": f"No reviewed human UniProt entry for '{gene_symbol}'."}
+                "note": f"No reviewed human UniProt entry for '{gene_symbol}'.",
+                "source_release": source_release}
 
     entry = results[0]
     accession = entry.get("primaryAccession", "N/A")
@@ -77,6 +85,7 @@ def get_uniprot_dossier(gene_symbol: str) -> dict:
         "subcellular_location": [loc for loc in locations if loc] or ["Not annotated."],
         "diseases": diseases or ["None annotated."],
         "url": f"https://www.uniprot.org/uniprotkb/{accession}",
+        "source_release": source_release,
     }
 
 

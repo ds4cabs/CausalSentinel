@@ -1,0 +1,836 @@
+{
+  "protein": "LPA",
+  "disease": "coronary heart disease",
+  "generated_at": "2026-08-21T15:32:38",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_mr_result",
+    "get_chembl_modulators",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "get_clinical_evidence",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "LPA"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "LPA",
+        "accession": "P08519",
+        "gene_names": [
+          "LPA"
+        ],
+        "protein_name": "Apolipoprotein(a)",
+        "function": "Apo(a) is the main constituent of lipoprotein(a) (Lp(a)). It has serine proteinase activity and is able of autoproteolysis. Inhibits tissue-type plasminogen activator 1. Lp(a) may be a ligand for megalin/Gp 330",
+        "subcellular_location": [
+          "Not annotated."
+        ],
+        "diseases": [
+          "None annotated."
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/P08519",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 2.95,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "LPA",
+        "disease": "coronary heart disease"
+      },
+      "result": {
+        "found": true,
+        "ensembl_id": "ENSG00000198670",
+        "efo_id": "MONDO_0005010",
+        "resolved_target_name": "LPA",
+        "resolved_disease_name": "coronary artery disorder",
+        "overall_score": 0.5762,
+        "datatype_scores": {
+          "literature": 0.9766,
+          "genetic_association": 0.8983,
+          "clinical": 0.0061
+        },
+        "note": "Free-text inputs were resolved to ontology terms: 'LPA' -> ENSG00000198670 (LPA); 'coronary heart disease' -> MONDO_0005010 (coronary artery disorder). Scores below describe THAT term, not the free-text phrase.",
+        "url": "https://platform.opentargets.org/evidence/ENSG00000198670/MONDO_0005010",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.42,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "LPA",
+        "disease": "coronary heart disease"
+      },
+      "result": {
+        "found": true,
+        "computed_here": false,
+        "protein": "LPA",
+        "disease": "coronary heart disease",
+        "n_outcomes_available": 111,
+        "matched_disease_estimates": [
+          {
+            "outcome": "Coronary heart disease",
+            "outcome_gwas_id": "7",
+            "beta": 0.252303585657371,
+            "se": 0.0193149800796813,
+            "p_value": 5.38664852468177e-39,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs55730499",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "TRUE",
+            "steiger_p": 0.0,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": 1.0
+          }
+        ],
+        "other_outcomes_for_this_protein": [
+          {
+            "outcome": "Coronary heart disease",
+            "outcome_gwas_id": "7",
+            "beta": 0.252303585657371,
+            "se": 0.0193149800796813,
+            "p_value": 5.38664852468177e-39,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs55730499",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "TRUE",
+            "steiger_p": 0.0,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": 1.0
+          },
+          {
+            "outcome": "Alzheimer's disease",
+            "outcome_gwas_id": "297",
+            "beta": -0.044063745,
+            "se": 0.029641434,
+            "p_value": 0.137131286,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs55730499",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Chronic kidney disease",
+            "outcome_gwas_id": "1102",
+            "beta": 0.0677290836653387,
+            "se": 0.0334661354581673,
+            "p_value": 0.0429897539234366,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs55730499",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Large vessel disease",
+            "outcome_gwas_id": "1110",
+            "beta": 0.180876494023904,
+            "se": 0.072191235059761,
+            "p_value": 0.0122271910441319,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs55730499",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Celiac disease",
+            "outcome_gwas_id": "1058",
+            "beta": 0.0312515642655628,
+            "se": 0.0289634262948207,
+            "p_value": 0.280587307568651,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs55730499",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Small vessel disease",
+            "outcome_gwas_id": "1111",
+            "beta": -0.0643027888446215,
+            "se": 0.0808764940239044,
+            "p_value": 0.426570520802671,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs55730499",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Bipolar disorder",
+            "outcome_gwas_id": "801",
+            "beta": 0.0699984785443786,
+            "se": 0.0424701195219124,
+            "p_value": 0.0993153679746274,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs55730499",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Vascular or heart problems diagnosed by doctor: Angina",
+            "outcome_gwas_id": "UKB-a:436",
+            "beta": 0.205226720588581,
+            "se": 0.0159853813789559,
+            "p_value": 9.99181549914533e-38,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs55730499",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "TRUE",
+            "steiger_p": 0.0,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": 1.0
+          },
+          {
+            "outcome": "Urinary albumin-to-creatinine ratio",
+            "outcome_gwas_id": "1107",
+            "beta": -0.0231075697211155,
+            "se": 0.0159362549800797,
+            "p_value": 0.147058519219297,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs55730499",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Eye problems or disorders: Diabetes related eye disease",
+            "outcome_gwas_id": "UKB-a:423",
+            "beta": -0.0481868432160772,
+            "se": 0.0471436219028065,
+            "p_value": 0.30672004890977,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs55730499",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Amyotrophic lateral sclerosis",
+            "outcome_gwas_id": "1086",
+            "beta": 0.0314741035856574,
+            "se": 0.0292430278884462,
+            "p_value": 0.28179566693452,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs55730499",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Diagnoses - main ICD10: K57 Diverticular disease of intestine",
+            "outcome_gwas_id": "UKB-a:555",
+            "beta": 0.0680649759784059,
+            "se": 0.0230139393496886,
+            "p_value": 0.00310090097596846,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs55730499",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          }
+        ],
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/",
+        "note": "Estimates RETRIEVED from published pQTL MR, not computed by this agent. Check cis_or_trans (cis instruments are less pleiotropy-prone), steiger_direction_ok, and coloc_prob before treating this as causal; coloc_prob=null means colocalization was not available for this pair."
+      },
+      "seconds": 1.718,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "LPA"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL4662965",
+        "target_name": "LPA mRNA",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 2,
+        "modulators": [
+          {
+            "drug": "CHEMBL4650413",
+            "action": "RNAI INHIBITOR",
+            "moa": "LPA mRNA rnai inhibitor"
+          },
+          {
+            "drug": "CHEMBL4298202",
+            "action": "ANTISENSE INHIBITOR",
+            "moa": "LPA mRNA antisense inhibitor"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'LPA' and resolved to 'LPA mRNA' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4662965/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 4.504,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "LPA"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "LPA",
+        "total_records": 365,
+        "pathogenic_in_sample": 2,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "NM_005577.4(LPA):c.4331T>C (p.Ile1444Thr)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "GRCh38/hg38 6q25.2-27(chr6:153483970-170605209)x3",
+            "significance": "Likely pathogenic"
+          },
+          {
+            "title": "GRCh38/hg38 6q24.2-27(chr6:144488859-170610382)x3",
+            "significance": "Pathogenic"
+          },
+          {
+            "title": "NM_005577.4(LPA):c.4193G>A (p.Gly1398Asp)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_005577.4(LPA):c.3722A>G (p.Asn1241Ser)",
+            "significance": "Uncertain significance"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 365 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=LPA%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.429,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "LPA"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "LPA",
+        "pLI": 2.136107517358245e-68,
+        "LOEUF": 1.130777975608824,
+        "LOEUF_percentile": 51,
+        "oe_lof": 1.005399890837265,
+        "oe_lof_lower": 0.895869338222263,
+        "obs_lof": 199,
+        "exp_lof": 197.9311931636268,
+        "plain_language": "gnomAD expected about 198 loss-of-function variants in this gene and observed 199. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": -0.6782383315115139,
+        "lof_z": -0.06444758280489003,
+        "interpretation": "LoF-tolerant: no population-level depletion of loss-of-function variants, which is reassuring but is NOT positive evidence of efficacy.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/LPA",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.403,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "LPA"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "LPA",
+        "n_unique_snps": 266,
+        "n_association_rows": 692,
+        "total_association_rows_reported": 692,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs6905073",
+          "rs6903649",
+          "rs115069429",
+          "rs1084651",
+          "rs569981808",
+          "rs75234242",
+          "rs6940254",
+          "rs140306630",
+          "rs76144756",
+          "rs9355814",
+          "rs115848955",
+          "rs769689096",
+          "rs9355297",
+          "rs7453836",
+          "rs372450873"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/LPA",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 7.022,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "LPA"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "LPA",
+        "n_clinical_annotations": 3,
+        "evidence_level_counts": {
+          "3": 3
+        },
+        "drugs": [
+          "HMG-CoA reductase inhibitors",
+          "rosuvastatin"
+        ],
+        "n_drugs": 2,
+        "examples": [
+          {
+            "drugs": [
+              "rosuvastatin"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs10455872 (LPA); rosuvastatin (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "HMG-CoA reductase inhibitors"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs10455872 (LPA); hmg coa reductase inhibitors; Coronary Artery Disease (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "HMG-CoA reductase inhibitors"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs10455872 (LPA); hmg coa reductase inhibitors; Coronary Artery Disease (level 3 Toxicity)"
+          }
+        ],
+        "url": "https://www.pharmgkb.org/search?query=LPA",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.438,
+      "exception": null
+    },
+    {
+      "tool": "get_clinical_evidence",
+      "args": [],
+      "kwargs": {
+        "protein": "LPA",
+        "disease": "coronary heart disease"
+      },
+      "result": {
+        "found": true,
+        "computed_here": false,
+        "protein": "LPA",
+        "disease": "coronary heart disease",
+        "ensembl_id": "ENSG00000198670",
+        "n_drug_programmes": 2,
+        "max_stage_any_disease": "PHASE_3",
+        "max_stage_this_disease": "PHASE_3",
+        "drugs_for_this_disease": [
+          {
+            "drug": "PELACARSEN",
+            "chembl_id": "CHEMBL4298202",
+            "max_stage_any_disease": "PHASE_3",
+            "diseases": [
+              "cardiovascular disorder",
+              "hyperlipoproteinemia",
+              "hyperlipoproteinemia",
+              "myocardial infarction",
+              "coronary artery disorder"
+            ],
+            "n_reports_this_disease": 9,
+            "max_stage_this_disease": "PHASE_3",
+            "n_stop_this_disease": 1,
+            "stop_reason_categories_this_disease": {
+              "Business_Administrative": 1
+            },
+            "example_why_stopped_this_disease": "Administrative reason",
+            "n_reports_any_disease": 17,
+            "n_stop_any_disease": 1,
+            "stop_reason_categories_any_disease": {
+              "Business_Administrative": 1
+            },
+            "example_why_stopped_any_disease": "Administrative reason",
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "OLPASIRAN",
+            "chembl_id": "CHEMBL4650413",
+            "max_stage_any_disease": "PHASE_3",
+            "diseases": [
+              "atherosclerosis"
+            ],
+            "n_reports_this_disease": 1,
+            "max_stage_this_disease": "UNKNOWN",
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 7,
+            "n_stop_any_disease": 0,
+            "stop_reason_categories_any_disease": null,
+            "example_why_stopped_any_disease": null,
+            "latest_report_year_any_disease": null
+          }
+        ],
+        "drugs_other_diseases_context_only": [],
+        "note": "Phase and trial status mean trials EXIST, not that they worked — a COMPLETED phase-3 trial can be a failed one; only why-stopped fields carry failure information, and only approval carries a regulator's efficacy judgement. Registries lag press releases by a data release or more.",
+        "url": "https://platform.opentargets.org/target/ENSG00000198670",
+        "source_release": "Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)"
+      },
+      "seconds": 1.458,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "LPA",
+        "coronary heart disease"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": true,
+          "computed_here": false,
+          "protein": "LPA",
+          "disease": "coronary heart disease",
+          "n_outcomes_available": 111,
+          "matched_disease_estimates": [
+            {
+              "outcome": "Coronary heart disease",
+              "outcome_gwas_id": "7",
+              "beta": 0.252303585657371,
+              "se": 0.0193149800796813,
+              "p_value": 5.38664852468177e-39,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs55730499",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "TRUE",
+              "steiger_p": 0.0,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": 1.0
+            }
+          ],
+          "other_outcomes_for_this_protein": [
+            {
+              "outcome": "Coronary heart disease",
+              "outcome_gwas_id": "7",
+              "beta": 0.252303585657371,
+              "se": 0.0193149800796813,
+              "p_value": 5.38664852468177e-39,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs55730499",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "TRUE",
+              "steiger_p": 0.0,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": 1.0
+            },
+            {
+              "outcome": "Alzheimer's disease",
+              "outcome_gwas_id": "297",
+              "beta": -0.044063745,
+              "se": 0.029641434,
+              "p_value": 0.137131286,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs55730499",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Chronic kidney disease",
+              "outcome_gwas_id": "1102",
+              "beta": 0.0677290836653387,
+              "se": 0.0334661354581673,
+              "p_value": 0.0429897539234366,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs55730499",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Large vessel disease",
+              "outcome_gwas_id": "1110",
+              "beta": 0.180876494023904,
+              "se": 0.072191235059761,
+              "p_value": 0.0122271910441319,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs55730499",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Celiac disease",
+              "outcome_gwas_id": "1058",
+              "beta": 0.0312515642655628,
+              "se": 0.0289634262948207,
+              "p_value": 0.280587307568651,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs55730499",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Small vessel disease",
+              "outcome_gwas_id": "1111",
+              "beta": -0.0643027888446215,
+              "se": 0.0808764940239044,
+              "p_value": 0.426570520802671,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs55730499",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Bipolar disorder",
+              "outcome_gwas_id": "801",
+              "beta": 0.0699984785443786,
+              "se": 0.0424701195219124,
+              "p_value": 0.0993153679746274,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs55730499",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Vascular or heart problems diagnosed by doctor: Angina",
+              "outcome_gwas_id": "UKB-a:436",
+              "beta": 0.205226720588581,
+              "se": 0.0159853813789559,
+              "p_value": 9.99181549914533e-38,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs55730499",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "TRUE",
+              "steiger_p": 0.0,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": 1.0
+            },
+            {
+              "outcome": "Urinary albumin-to-creatinine ratio",
+              "outcome_gwas_id": "1107",
+              "beta": -0.0231075697211155,
+              "se": 0.0159362549800797,
+              "p_value": 0.147058519219297,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs55730499",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Eye problems or disorders: Diabetes related eye disease",
+              "outcome_gwas_id": "UKB-a:423",
+              "beta": -0.0481868432160772,
+              "se": 0.0471436219028065,
+              "p_value": 0.30672004890977,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs55730499",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Amyotrophic lateral sclerosis",
+              "outcome_gwas_id": "1086",
+              "beta": 0.0314741035856574,
+              "se": 0.0292430278884462,
+              "p_value": 0.28179566693452,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs55730499",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Diagnoses - main ICD10: K57 Diverticular disease of intestine",
+              "outcome_gwas_id": "UKB-a:555",
+              "beta": 0.0680649759784059,
+              "se": 0.0230139393496886,
+              "p_value": 0.00310090097596846,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs55730499",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            }
+          ],
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/",
+          "note": "Estimates RETRIEVED from published pQTL MR, not computed by this agent. Check cis_or_trans (cis instruments are less pleiotropy-prone), steiger_direction_ok, and coloc_prob before treating this as causal; coloc_prob=null means colocalization was not available for this pair."
+        }
+      },
+      "result": {
+        "found": true,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "LPA",
+        "disease": "coronary heart disease",
+        "retrieval_coverage": {
+          "epigraphdb": "pair_matched",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 1,
+          "direction": "single_estimate",
+          "independence": "not_assessable",
+          "label": "single_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [
+            2
+          ],
+          "best_validation_depth": 2,
+          "validation_signals": [
+            {
+              "multi_snp": false,
+              "steiger": true,
+              "coloc": false,
+              "ld_check": true,
+              "depth": 2
+            }
+          ]
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "GO — Strong genetic, causal, and clinical-stage evidence supports LPA as a therapeutic target for coronary heart disease.",
+  "model_reasoning": "Open Targets reports a strong genetic association for LPA with coronary artery disorder, alongside extensive GWAS support. Retrieved Mendelian randomization estimates using the cis-instrument rs55730499 indicate a robust causal relationship with coronary heart disease. ChEMBL lists known modulators targeting LPA mRNA, and clinical evidence confirms that multiple therapeutic programmes (such as pelacarsen and olpasiran) have advanced to Phase 3 evaluation. Furthermore, gnomAD constraint data indicates that LPA is tolerant to loss-of-function variants, suggesting a favorable safety profile for inhibition.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 2
+  },
+  "card_markdown": "# Target Evidence Card — LPA × coronary heart disease\n\n**Verdict:** GO — Strong genetic, causal, and clinical-stage evidence supports LPA as a therapeutic target for coronary heart disease.\n\n> **You asked about \"coronary heart disease\". This card scored MONDO_0005010 — coronary artery disorder.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"LPA mRNA\" (CHEMBL4662965),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## MR direction — rendered from the ledger, not written by the model\n\n- Genetically-predicted **higher plasma LPA** is associated with **HIGHER Coronary heart disease** (beta +0.2523, se 0.0193, p=5.39e-39; Wald ratio, n_snp 1, instrument rs55730499, cis).\n  - Not available for this estimate: colocalization.\n  - Single-instrument Wald ratio: no heterogeneity or pleiotropy test is possible.\n\n> **The exposure is LPA protein abundance, not a drug.** This run retrieved no evidence about what pharmacological inhibition or activation of LPA does. Turning the direction above into a drug direction needs a mechanism this run did not retrieve.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — estimate found · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n- Single matched estimate; validation depth 2 of 4 (multi-SNP / Steiger / coloc / LD check).\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | outcome: Coronary heart disease — beta=0.252, se=0.0193, p=5.39e-39, Wald ratio, n_snp=1, cis instrument, coloc=not available  \n_retrieved from published MR; not computed here_ |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.576 (literature=0.977, genetic_association=0.898, clinical=0.0061) |\n| Protein context | `get_uniprot_dossier` | P08519 — Apolipoprotein(a); location: Not annotated. |\n| Known modulators / druggability | `get_chembl_modulators` | 2 known modulators (ANTISENSE INHIBITOR, RNAI INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 365 ClinVar records; 2 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=2.1e-68, LOEUF=1.13 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 266 unique SNPs from 692/692 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 3 clinical annotation(s) over 2 drug(s): HMG-CoA reductase inhibitors, rosuvastatin — ClinPGx evidence level 3 (scale 1A strongest to 4 weakest) — e.g. rs10455872 (LPA); rosuvastatin (level 3 Efficacy) |\n| Clinical development record | `get_clinical_evidence` | max stage for THIS disease: **PHASE_3** — e.g. PELACARSEN (PHASE_3, 9 trial report(s) for this disease, 1 of them with a stop reason); +1 more drug(s) for this disease  \n_stages mean trials exist, not that they worked_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'LPA' -> ENSG00000198670 (LPA); 'coronary heart disease' -> MONDO_0005010 (coronary artery disorder). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — Estimates RETRIEVED from published pQTL MR, not computed by this agent. Check cis_or_trans (cis instruments are less pleiotropy-prone), steiger_direction_ok, and coloc_prob before treating this as causal; coloc_prob=null means colocalization was not available for this pair.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'LPA' and resolved to 'LPA mRNA' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 365 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_clinical_evidence`** — Phase and trial status mean trials EXIST, not that they worked — a COMPLETED phase-3 trial can be a failed one; only why-stopped fields carry failure information, and only approval carries a regulator's efficacy judgement. Registries lag press releases by a data release or more.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets reports a strong genetic association for LPA with coronary artery disorder, alongside extensive GWAS support. Retrieved Mendelian randomization estimates using the cis-instrument rs55730499 indicate a robust causal relationship with coronary heart disease. ChEMBL lists known modulators targeting LPA mRNA, and clinical evidence confirms that multiple therapeutic programmes (such as pelacarsen and olpasiran) have advanced to Phase 3 evaluation. Furthermore, gnomAD constraint data indicates that LPA is tolerant to loss-of-function variants, suggesting a favorable safety profile for inhibition.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P08519 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000198670/MONDO_0005010 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4662965/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=LPA%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/LPA — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/LPA — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=LPA — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n- `get_clinical_evidence`: https://platform.opentargets.org/target/ENSG00000198670 — _Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:32:38\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

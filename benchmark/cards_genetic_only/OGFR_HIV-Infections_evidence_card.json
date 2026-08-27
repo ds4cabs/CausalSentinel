@@ -1,0 +1,282 @@
+{
+  "protein": "OGFR",
+  "disease": "HIV Infections",
+  "generated_at": "2026-08-21T15:52:45",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_mr_result",
+    "get_chembl_modulators",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "OGFR"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "OGFR",
+        "accession": "Q9NZT2",
+        "gene_names": [
+          "OGFR"
+        ],
+        "protein_name": "Opioid growth factor receptor",
+        "function": "Receptor for opioid growth factor (OGF), also known as Met-enkephalin. Seems to be involved in growth regulation",
+        "subcellular_location": [
+          "Cytoplasm",
+          "Nucleus"
+        ],
+        "diseases": [
+          "None annotated."
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/Q9NZT2",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 4.338,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "OGFR",
+        "disease": "HIV Infections"
+      },
+      "result": {
+        "found": false,
+        "resolved": {
+          "ensembl_id": "ENSG00000060491",
+          "efo_id": "Orphanet_275517",
+          "target_name": "OGFR",
+          "disease_name": "Autoimmune lymphoproliferative syndrome with recurrent viral infections"
+        },
+        "note": "OGFR is not among the top 500 associated targets for Orphanet_275517 (Autoimmune lymphoproliferative syndrome with recurrent viral infections). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'OGFR' -> ENSG00000060491 (OGFR); 'HIV Infections' -> Orphanet_275517 (Autoimmune lymphoproliferative syndrome with recurrent viral infections). Scores below describe THAT term, not the free-text phrase.",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.141,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "OGFR",
+        "disease": "HIV Infections"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "OGFR",
+        "disease": "HIV Infections",
+        "note": "No pQTL-based MR estimate for OGFR in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.485,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "OGFR"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL4105797",
+        "target_name": "Opioid growth factor receptor",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 0,
+        "modulators": [],
+        "note": "ChEMBL target matched by text search on 'OGFR' and resolved to 'Opioid growth factor receptor' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4105797/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 6.356,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "OGFR"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "OGFR",
+        "total_records": 175,
+        "pathogenic_in_sample": 0,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "NM_007346.4(OGFR):c.770T>A (p.Phe257Tyr)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_007346.4(OGFR):c.1734A>G (p.Pro578=)",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "NM_007346.4(OGFR):c.1674A>G (p.Pro558=)",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "NM_007346.4(OGFR):c.1614A>G (p.Pro538=)",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "NM_007346.4(OGFR):c.603G>C (p.Gln201His)",
+            "significance": "Uncertain significance"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 175 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=OGFR%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.234,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "OGFR"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "OGFR",
+        "pLI": 0.0024699227271095378,
+        "LOEUF": 0.7954458960683151,
+        "LOEUF_percentile": 28,
+        "oe_lof": 0.5364210002612327,
+        "oe_lof_lower": 0.3707846911031601,
+        "obs_lof": 18,
+        "exp_lof": 33.55573326032005,
+        "plain_language": "gnomAD expected about 34 loss-of-function variants in this gene and observed 18. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 1.0865793307890672,
+        "lof_z": 2.278094063495481,
+        "interpretation": "LoF-tolerant: no population-level depletion of loss-of-function variants, which is reassuring but is NOT positive evidence of efficacy.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/OGFR",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.426,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "OGFR"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "OGFR",
+        "n_unique_snps": 37,
+        "n_association_rows": 74,
+        "total_association_rows_reported": 74,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs55771770",
+          "rs3069123",
+          "rs6062675",
+          "rs17854409",
+          "rs66658258",
+          "rs6010746",
+          "rs6062637",
+          "rs6010784",
+          "rs2064056109",
+          "rs6122206",
+          "rs61734651",
+          "rs747680",
+          "rs116074508",
+          "rs11543349",
+          "rs1077418"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/OGFR",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 2.015,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "OGFR"
+      },
+      "result": {
+        "found": false,
+        "gene_symbol": "OGFR",
+        "note": "No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.458,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "OGFR",
+        "HIV Infections"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "OGFR",
+          "disease": "HIV Infections",
+          "note": "No pQTL-based MR estimate for OGFR in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "OGFR",
+        "disease": "HIV Infections",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "INSUFFICIENT EVIDENCE — There is no direct genetic or causal evidence linking OGFR to HIV infections, and no known modulators for this receptor.",
+  "model_reasoning": "The target OGFR is an intracellular receptor involved in growth regulation, with no available Mendelian randomization estimates or disease-specific genetic association scores for HIV infections. Although gnomAD constraint data suggests the gene is relatively tolerant to loss-of-function variants, ChEMBL queries returned no known modulators. Without supporting functional or genetic links to the disease pathobiology, pursuing OGFR as an HIV target lacks empirical justification.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 0
+  },
+  "card_markdown": "# Target Evidence Card — OGFR × HIV Infections\n\n**Verdict:** INSUFFICIENT EVIDENCE — There is no direct genetic or causal evidence linking OGFR to HIV infections, and no known modulators for this receptor.\n\n> **You asked about \"HIV Infections\". This card scored Orphanet_275517 — Autoimmune lymphoproliferative syndrome with recurrent viral infections.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Opioid growth factor receptor\" (CHEMBL4105797),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | **not available** — OGFR is not among the top 500 associated targets for Orphanet_275517 (Autoimmune lymphoproliferative syndrome with recurrent viral infections). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'OGFR' -> ENSG00000060491 (OGFR); 'HIV Infections' -> Orphanet_275517 (Autoimmune lymphoproliferative syndrome with recurrent viral infections). Scores below describe THAT term, not the free-text phrase. |\n| Protein context | `get_uniprot_dossier` | Q9NZT2 — Opioid growth factor receptor; location: Cytoplasm, Nucleus |\n| Known modulators / druggability | `get_chembl_modulators` | target CHEMBL4105797 — **0 known modulators in ChEMBL** |\n| Clinical variants | `get_clinvar_variants` | 175 ClinVar records; 0 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=0.0025, LOEUF=0.795 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 37 unique SNPs from 74/74 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n| Clinical development record | `get_clinical_evidence` | _tool not called by the agent in this run_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — OGFR is not among the top 500 associated targets for Orphanet_275517 (Autoimmune lymphoproliferative syndrome with recurrent viral infections). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'OGFR' -> ENSG00000060491 (OGFR); 'HIV Infections' -> Orphanet_275517 (Autoimmune lymphoproliferative syndrome with recurrent viral infections). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — No pQTL-based MR estimate for OGFR in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'OGFR' and resolved to 'Opioid growth factor receptor' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 175 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nThe target OGFR is an intracellular receptor involved in growth regulation, with no available Mendelian randomization estimates or disease-specific genetic association scores for HIV infections. Although gnomAD constraint data suggests the gene is relatively tolerant to loss-of-function variants, ChEMBL queries returned no known modulators. Without supporting functional or genetic links to the disease pathobiology, pursuing OGFR as an HIV target lacks empirical justification.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q9NZT2 — _UniProt release 2026_02 (10-June-2026)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4105797/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=OGFR%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/OGFR — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/OGFR — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:52:45\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (9 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

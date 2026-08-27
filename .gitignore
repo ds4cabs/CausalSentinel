@@ -5,6 +5,12 @@
 *.key
 secrets/
 
+# ===== Private working notes - never commit to this shared org repo =====
+# CLAUDE.md is local agent guidance and names unpublished, coauthored PhD work
+# (specific proteins and sample sizes). It must not reach a public repository.
+CLAUDE.md
+AGENTS.md
+
 # ===== Python =====
 __pycache__/
 *.py[cod]
@@ -17,6 +23,11 @@ env/
 # ===== Large data files (pre-computed MR DB etc. - too big for git; remove this line to share) =====
 *.duckdb
 *.parquet
+
+# ===== Proteome sweep output: all 991 dossiers (~9 MB of markdown) ship in git — they are
+# the free, no-key, no-compute demo. Only the raw API cache (~63 MB of JSON) stays local.
+# Regenerate everything with proteome_sweep.py.
+dossiers/_cache/
 
 # ===== OS / editor =====
 .DS_Store

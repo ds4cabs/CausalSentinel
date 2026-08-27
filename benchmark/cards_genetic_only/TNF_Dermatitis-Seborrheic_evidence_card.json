@@ -1,0 +1,379 @@
+{
+  "protein": "TNF",
+  "disease": "Dermatitis, Seborrheic",
+  "generated_at": "2026-08-21T15:45:32",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_chembl_modulators",
+    "get_mr_result",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "TNF"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "TNF",
+        "accession": "P01375",
+        "gene_names": [
+          "TNF"
+        ],
+        "protein_name": "Tumor necrosis factor",
+        "function": "Cytokine that binds to TNFRSF1A/TNFR1 and TNFRSF1B/TNFBR. It is mainly secreted by macrophages and can induce cell death of certain tumor cell lines. It is potent pyrogen causing fever by direct action or by stimulation of interleukin-1 secretion and is implicated in the induction of cachexia, Under certain conditions it can stimulate cell proliferation and induce cell differentiation. Impairs regulatory T-cells (Treg) function in individuals with rheumatoid arthritis via FOXP3 dephosphorylation. Up-regulates the expression of protein phosphatase 1 (PP1), which dephosphorylates the key 'Ser-418' residue of FOXP3, thereby inactivating FOXP3 and rendering Treg cells functionally defective (PubMed:23396208). Key mediator of cell death in the anticancer action of BCG-stimulated neutrophils in combination with DIABLO/SMAC mimetic in the RT4v6 bladder cancer cell line (PubMed:16829952, PubMed:22517918, PubMed:23396208). Induces insulin resistance in adipocytes via inhibition of insulin-induced IRS1 tyrosine phosphorylation and insulin-induced glucose uptake. Induces GKAP42 protein degradation in adipocytes which is partially responsible for TNF-induced insulin resistance (By similarity). Plays a role in angiogenesis by inducing VEGF production synergistically with IL1B and IL6 (PubMed:12794819). Promotes osteoclastogenesis and therefore mediates bone resorption (By similarity) The TNF intracellular domain (ICD) form induces IL12 production in dendritic cells",
+        "subcellular_location": [
+          "Cell membrane",
+          "Membrane",
+          "Secreted",
+          "Secreted",
+          "Secreted"
+        ],
+        "diseases": [
+          "Psoriatic arthritis",
+          "Immunodeficiency 127"
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/P01375",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 10.1,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "TNF",
+        "disease": "Dermatitis, Seborrheic"
+      },
+      "result": {
+        "found": true,
+        "ensembl_id": "ENSG00000232810",
+        "efo_id": "MONDO_0002406",
+        "resolved_target_name": "TNF",
+        "resolved_disease_name": "dermatitis",
+        "overall_score": 0.6438,
+        "datatype_scores": {
+          "literature": 0.9894,
+          "animal_model": 0.6436,
+          "clinical": 0.9952
+        },
+        "note": "Free-text inputs were resolved to ontology terms: 'TNF' -> ENSG00000232810 (TNF); 'Dermatitis, Seborrheic' -> MONDO_0002406 (dermatitis). Scores below describe THAT term, not the free-text phrase.",
+        "url": "https://platform.opentargets.org/evidence/ENSG00000232810/MONDO_0002406",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.957,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "TNF"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL3588728",
+        "target_name": "TNF receptor-associated factor 6",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 0,
+        "modulators": [],
+        "note": "ChEMBL target matched by text search on 'TNF' and resolved to 'TNF receptor-associated factor 6' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL3588728/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 11.135,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "TNF",
+        "disease": "Dermatitis, Seborrheic"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "TNF",
+        "disease": "Dermatitis, Seborrheic",
+        "note": "No pQTL-based MR estimate for TNF in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.658,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "TNF"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "TNF",
+        "total_records": 36,
+        "pathogenic_in_sample": 7,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "GRCh37/hg19 6p21.33(chr6:30944923-31867966)x1",
+            "significance": "Likely pathogenic"
+          },
+          {
+            "title": "NM_000594.4(TNF):c.196G>A (p.Asp66Asn)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_000594.4(TNF):c.169G>A (p.Gly57Ser)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_000594.4(TNF):c.280+1G>C",
+            "significance": "N/A"
+          },
+          {
+            "title": "NM_000594.4(TNF):c.187-3C>G",
+            "significance": "N/A"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 36 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=TNF%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.498,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "TNF"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "TNF",
+        "pLI": 0.83611460936656,
+        "LOEUF": 0.6031986625713975,
+        "LOEUF_percentile": 18,
+        "oe_lof": 0.3211404085366778,
+        "oe_lof_lower": 0.18262900798127715,
+        "obs_lof": 7,
+        "exp_lof": 21.797319222132465,
+        "plain_language": "gnomAD expected about 22 loss-of-function variants in this gene and observed 7. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 1.9967782472209785,
+        "lof_z": 2.688722813907257,
+        "interpretation": "LoF-tolerant: no population-level depletion of loss-of-function variants, which is reassuring but is NOT positive evidence of efficacy.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/TNF",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.669,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "TNF"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "TNF",
+        "n_unique_snps": 507,
+        "n_association_rows": 1372,
+        "total_association_rows_reported": 1372,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs760293",
+          "rs2534687",
+          "rs2844479",
+          "rs2248462",
+          "rs2844498",
+          "rs114771815",
+          "rs17200628",
+          "rs116662199",
+          "rs28478022",
+          "rs71563354",
+          "rs559399635",
+          "rs17200816",
+          "rs564276051",
+          "rs9267257",
+          "rs16899682"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/TNF",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 29.021,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "TNF"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "TNF",
+        "n_clinical_annotations": 18,
+        "evidence_level_counts": {
+          "2B": 1,
+          "3": 16,
+          "4": 1
+        },
+        "drugs": [
+          "Tumor necrosis factor alpha (TNF-alpha) inhibitors",
+          "aspirin",
+          "atorvastatin",
+          "carbamazepine",
+          "carboplatin",
+          "cyclosporine",
+          "diclofenac",
+          "etanercept",
+          "ethambutol",
+          "gemcitabine",
+          "ibuprofen",
+          "indomethacin",
+          "infliximab",
+          "isoniazid",
+          "ketorolac",
+          "mycophenolate mofetil",
+          "naproxen",
+          "pyrazinamide",
+          "rifampin",
+          "sorafenib"
+        ],
+        "n_drugs": 21,
+        "examples": [
+          {
+            "drugs": [
+              "Tumor necrosis factor alpha (TNF-alpha) inhibitors"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs1800629 (TNF); Tumor necrosis factor alpha (TNF-alpha) inhibitors (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "stavudine"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs1799964 (TNF); stavudine; HIV Infections (level 3 Toxicity)"
+          },
+          {
+            "drugs": [
+              "Tumor necrosis factor alpha (TNF-alpha) inhibitors"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs1799964 (TNF); Tumor necrosis factor alpha (TNF-alpha) inhibitors; Spondylitis, Ankylosing (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "atorvastatin"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs1800629 (TNF); atorvastatin; Acute coronary syndrome (level 3)"
+          },
+          {
+            "drugs": [
+              "sorafenib"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs1800629 (TNF); sorafenib; Carcinoma, Hepatocellular and hand-foot syndrome (level 3 Toxicity)"
+          },
+          {
+            "drugs": [
+              "Tumor necrosis factor alpha (TNF-alpha) inhibitors"
+            ],
+            "level_of_evidence": "4",
+            "annotation": "rs1799724 (TNF); Tumor necrosis factor alpha (TNF-alpha) inhibitors; Arthritis, Rheumatoid, Crohn Disease, Psoriasis and Spondylitis, Ankylosing (level 4 Efficacy)"
+          },
+          {
+            "drugs": [
+              "cyclosporine",
+              "mycophenolate mofetil"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs1800629 (TNF); cyclosporine or mycophenolate mofetil; Kidney Transplantation (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "etanercept"
+            ],
+            "level_of_evidence": "2B",
+            "annotation": "rs1800629 (TNF); etanercept; Arthritis, Psoriatic, Arthritis, Rheumatoid, Crohn Disease, Inflammation, Psoriasis and Spondylitis, Ankylosing (level 2B Efficacy)"
+          }
+        ],
+        "url": "https://www.pharmgkb.org/search?query=TNF",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.738,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "TNF",
+        "Dermatitis, Seborrheic"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "TNF",
+          "disease": "Dermatitis, Seborrheic",
+          "note": "No pQTL-based MR estimate for TNF in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "TNF",
+        "disease": "Dermatitis, Seborrheic",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "INSUFFICIENT EVIDENCE — although extensive genetic associations and pharmacogenomic data link TNF to various inflammatory conditions, no causal Mendelian randomization estimate is available for seborrheic dermatitis.",
+  "model_reasoning": "Open Targets evidence for TNF associates it with the resolved ontology term dermatitis. However, no Mendelian randomization estimate is available for this target and disease pairing in EpiGraphDB. Although the GWAS catalog lists numerous associated SNPs for TNF, and PharmGKB documents multiple pharmacogenomic annotations with TNF-alpha inhibitors, the absence of disease-specific causal evidence prevents a definitive assessment. Furthermore, constraint metrics and ClinVar variant records indicate potential safety and genetic considerations, but do not establish a direct causal mechanism for seborrheic dermatitis.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 0
+  },
+  "card_markdown": "# Target Evidence Card — TNF × Dermatitis, Seborrheic\n\n**Verdict:** INSUFFICIENT EVIDENCE — although extensive genetic associations and pharmacogenomic data link TNF to various inflammatory conditions, no causal Mendelian randomization estimate is available for seborrheic dermatitis.\n\n> **You asked about \"Dermatitis, Seborrheic\". This card scored MONDO_0002406 — dermatitis.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"TNF receptor-associated factor 6\" (CHEMBL3588728),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.644 (literature=0.989, animal_model=0.644, clinical=0.995) |\n| Protein context | `get_uniprot_dossier` | P01375 — Tumor necrosis factor; location: Cell membrane, Membrane, Secreted, Secreted, Secreted |\n| Known modulators / druggability | `get_chembl_modulators` | target CHEMBL3588728 — **0 known modulators in ChEMBL** |\n| Clinical variants | `get_clinvar_variants` | 36 ClinVar records; 7 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=0.84, LOEUF=0.603 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 507 unique SNPs from 1372/1372 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 18 clinical annotation(s) over 20 drug(s): Tumor necrosis factor alpha (TNF-alpha) inhibitors, aspirin, atorvastatin, carbamazepine +16 more — ClinPGx evidence level 2B/3/4 (scale 1A strongest to 4 weakest) — e.g. rs1800629 (TNF); Tumor necrosis factor alpha (TNF-alpha) inhibitors (level 3 Efficacy) |\n| Clinical development record | `get_clinical_evidence` | _tool not called by the agent in this run_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'TNF' -> ENSG00000232810 (TNF); 'Dermatitis, Seborrheic' -> MONDO_0002406 (dermatitis). Scores below describe THAT term, not the free-text phrase.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'TNF' and resolved to 'TNF receptor-associated factor 6' — confirm this is the intended target.\n- **`get_mr_result`** — No pQTL-based MR estimate for TNF in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 36 ClinVar records for this gene; it is a sample, not a rate.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets evidence for TNF associates it with the resolved ontology term dermatitis. However, no Mendelian randomization estimate is available for this target and disease pairing in EpiGraphDB. Although the GWAS catalog lists numerous associated SNPs for TNF, and PharmGKB documents multiple pharmacogenomic annotations with TNF-alpha inhibitors, the absence of disease-specific causal evidence prevents a definitive assessment. Furthermore, constraint metrics and ClinVar variant records indicate potential safety and genetic considerations, but do not establish a direct causal mechanism for seborrheic dermatitis.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P01375 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000232810/MONDO_0002406 — _Open Targets data release 26.06_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL3588728/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=TNF%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/TNF — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/TNF — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=TNF — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n\n## Provenance\n\n- Generated: 2026-08-21T15:45:32\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (9 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

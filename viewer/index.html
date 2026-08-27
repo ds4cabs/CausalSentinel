@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CausalSentinel Card Viewer</title>
+<style>
+  :root { --ink:#1a2330; --muted:#5b6b7d; --deep:#0e4c63; --good:#1e7a4f; --warn:#a35a00;
+          --bad:#a3282d; --pale:#eef3f6; --pale-g:#e9f4ee; --pale-y:#fdf6e3; --pale-r:#fdeeee;
+          --line:#d5dde4; --bg:#f7f9fa; }
+  * { box-sizing:border-box; }
+  body { font-family:-apple-system,"Segoe UI",Roboto,sans-serif; margin:0; background:var(--bg);
+         color:var(--ink); line-height:1.6; }
+  header { background:var(--deep); color:#fff; padding:1.1rem 1.4rem; }
+  header h1 { margin:0; font-size:1.25rem; }
+  header .sub { opacity:.85; font-size:.85rem; margin-top:.15rem; }
+  header a { color:#9fd8c6; }
+  .tabs { display:flex; gap:.4rem; padding:.7rem 1.4rem 0; background:var(--deep); }
+  .tab { background:rgba(255,255,255,.12); color:#fff; border:none; padding:.45rem 1rem;
+         border-radius:8px 8px 0 0; cursor:pointer; font-size:.9rem; }
+  .tab.active { background:var(--bg); color:var(--deep); font-weight:bold; }
+  main { max-width:1080px; margin:0 auto; padding:1.2rem 1.4rem 4rem; }
+  .picker { display:flex; flex-wrap:wrap; gap:.45rem; margin:.4rem 0 1.1rem; }
+  .chip { border:1px solid var(--line); background:#fff; border-radius:999px;
+          padding:.3rem .85rem; cursor:pointer; font-size:.85rem; }
+  .chip.active { background:var(--deep); color:#fff; border-color:var(--deep); }
+  .banner { border-radius:10px; padding:.9rem 1.1rem; margin:.6rem 0 1rem; color:#fff;
+            font-weight:600; }
+  .banner.GO { background:var(--good); }
+  .banner.NOGO { background:var(--bad); }
+  .banner.INSUFF { background:var(--warn); }
+  .vstrip { font-size:.85rem; margin:-.4rem 0 1rem; color:var(--muted); }
+  .vfail { color:var(--bad); font-weight:600; }
+  .failchip { display:inline-block; background:var(--pale-r); color:var(--bad);
+              border-radius:6px; padding:0 .5rem; margin:.1rem .2rem; font-size:.8rem;
+              font-family:Consolas,monospace; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:.8rem; }
+  .panel { background:#fff; border:1px solid var(--line); border-radius:10px;
+           padding:.8rem 1rem; }
+  .panel h3 { margin:.1rem 0 .5rem; font-size:.92rem; color:var(--deep); }
+  .panel h3 code { font-size:.75rem; color:var(--muted); font-weight:normal; }
+  .panel .body { font-size:.87rem; }
+  .kv { display:flex; justify-content:space-between; gap:.6rem; border-bottom:1px dashed var(--line);
+        padding:.15rem 0; }
+  .kv span:last-child { font-family:Consolas,monospace; text-align:right; }
+  .stage { display:inline-block; border-radius:6px; padding:0 .5rem; font-size:.78rem;
+           font-weight:700; margin-left:.3rem; }
+  .stage.APPROVAL { background:var(--pale-g); color:var(--good); }
+  .stage.other { background:var(--pale); color:var(--deep); }
+  .na { color:var(--muted); font-style:italic; }
+  .note { background:var(--pale-y); border-radius:8px; padding:.5rem .7rem; font-size:.8rem;
+          margin-top:.5rem; }
+  .covchip { display:inline-block; border-radius:6px; padding:0 .5rem; margin:.1rem .15rem;
+             font-size:.78rem; }
+  .cov-ok { background:var(--pale-g); color:var(--good); }
+  .cov-empty { background:var(--pale-y); color:var(--warn); }
+  .cov-no { background:var(--pale); color:var(--muted); }
+  details { margin-top:.5rem; }
+  summary { cursor:pointer; font-size:.78rem; color:var(--muted); }
+  pre { background:#101820; color:#dce6ee; border-radius:8px; padding:.7rem; font-size:.72rem;
+        overflow-x:auto; max-height:300px; }
+  .reasoning { background:#fff; border:1px solid var(--line); border-left:5px solid var(--deep);
+               border-radius:10px; padding:.9rem 1.1rem; margin-top:1rem; font-size:.92rem; }
+  .caveats { background:var(--pale-y); border-radius:10px; padding:.8rem 1.1rem; margin-top:1rem;
+             font-size:.85rem; }
+  .err { background:var(--pale-r); color:var(--bad); border-radius:10px; padding:1rem; }
+  /* timeline */
+  .tl-case { background:#fff; border:1px solid var(--line); border-radius:10px;
+             padding:1rem 1.2rem; margin:1rem 0; }
+  .tl-case h3 { margin:.1rem 0 .2rem; color:var(--deep); }
+  .tl-outcome { font-size:.85rem; font-weight:700; }
+  .tl-outcome.hit { color:var(--good); }
+  .tl-outcome.miss { color:var(--bad); }
+  .tl-axis { position:relative; height:4px; background:var(--line); border-radius:2px;
+             margin:2.4rem .5rem 3.2rem; }
+  .tl-dot { position:absolute; top:-6px; width:14px; height:14px; border-radius:50%;
+            background:var(--deep); transform:translateX(-50%); cursor:default; }
+  .tl-dot.launch { background:var(--good); }
+  .tl-dot.fail { background:var(--bad); }
+  .tl-lab { position:absolute; transform:translateX(-50%); font-size:.68rem; width:110px;
+            text-align:center; color:var(--muted); line-height:1.25; }
+  .tl-lab.up { bottom:14px; } .tl-lab.down { top:14px; }
+  .tl-lab b { color:var(--ink); }
+  footer { text-align:center; color:var(--muted); font-size:.78rem; padding:2rem 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>CausalSentinel — Card Viewer</h1>
+  <div class="sub">Every number below is fetched from the card's tool ledger — the model never
+  wrote any of it. Static page, no key, no server.
+  <a href="../dossiers/">Browse the 991 dossiers</a> · <a href="https://github.com/ds4cabs/CausalSentinel">repo</a></div>
+</header>
+<div class="tabs">
+  <button class="tab active" data-tab="cards">Evidence cards</button>
+  <button class="tab" data-tab="timeline">Genetics → clinic timelines</button>
+</div>
+<main>
+  <div id="view-cards">
+    <div class="picker" id="picker"></div>
+    <div id="card"></div>
+  </div>
+  <div id="view-timeline" style="display:none"></div>
+</main>
+<footer>CausalSentinel · CABS 2026 · every value traceable to a tool return</footer>
+
+<script src="cards_data.js"></script>
+<script>
+/* The 10 benchmark pairs (v0.4). Fetching a directory listing is impossible on a static
+   host, so the manifest is explicit; regenerate it when the card set changes. */
+const PAIRS = [
+  ["PCSK9","high cholesterol"],["IL6R","coronary heart disease"],["LPA","coronary heart disease"],
+  ["PNPLA3","MASLD"],["HMGCR","high cholesterol"],["SCN2A","epilepsy"],
+  ["TREM2","Alzheimer disease"],["OR51E2","epilepsy"],["VKORC1","venous thrombosis"],
+  ["IL6R","Alzheimer disease"],
+];
+const slug = d => d.replace(/[^A-Za-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const num = (x, d=3) => (x === null || x === undefined) ? "NA"
+  : (typeof x === "number" ? Number(x.toPrecision(d)).toString() : String(x));
+
+function kv(label, value){ return `<div class="kv"><span>${esc(label)}</span><span>${value}</span></div>`; }
+function naPanel(msg){ return `<div class="na">${esc(msg)}</div>`; }
+function raw(obj){ return `<details><summary>raw tool return</summary><pre>${esc(JSON.stringify(obj,null,1))}</pre></details>`; }
+
+const RENDER = {
+  get_mr_result(r){
+    if (!r.found) return naPanel("not available — no pQTL MR estimate (absence of an estimate is NOT evidence of no effect)") + raw(r);
+    const ms = r.matched_disease_estimates || [];
+    if (!ms.length) return naPanel(`protein has ${r.n_outcomes_available} outcomes in the resource — none match this disease`) + raw(r);
+    return ms.slice(0,3).map(m =>
+      kv("outcome", esc(m.outcome)) + kv("beta / se", `${num(m.beta)} / ${num(m.se)}`) +
+      kv("p", num(m.p_value,2)) + kv("method · n_snp", `${esc(m.method)} · ${esc(m.n_snp)}`) +
+      kv("instrument", `${esc(m.instrument_rsid)} (${esc(m.cis_or_trans)})`) +
+      kv("Steiger / coloc / LD", `${esc(m.steiger_direction_ok ?? "NA")} / ${num(m.coloc_prob)} / ${num(m.ld_check)}`)
+    ).join("<hr style='border:none;border-top:1px solid var(--line)'>") +
+    `<div class="note">Retrieved from published MR — never computed here.</div>` + raw(r);
+  },
+  get_clinical_evidence(r){
+    if (!r.found) return naPanel("no drug or clinical candidate on record — the clinic has not filed results against this target; NOT evidence the target is bad") + raw(r);
+    const stage = s => s ? `<span class="stage ${s==="APPROVAL"?"APPROVAL":"other"}">${esc(s)}</span>` : `<span class="na">none on record</span>`;
+    let h = kv("max stage, THIS disease", stage(r.max_stage_this_disease)) +
+            kv("max stage, any disease", stage(r.max_stage_any_disease)) +
+            kv("drug programmes", esc(r.n_drug_programmes));
+    for (const d of (r.drugs_for_this_disease||[]).slice(0,4))
+      h += kv(d.drug, `${esc(d.max_stage_this_disease ?? "—")} · ${d.n_reports_this_disease} trial(s)` +
+              (d.n_stop_this_disease ? ` · ${d.n_stop_this_disease} stopped` : ""));
+    return h + `<div class="note">Stages mean trials EXIST, not that they worked.</div>` + raw(r);
+  },
+  classify_evidence_concordance(r){
+    const cov = r.retrieval_coverage || {}, ec = r.estimate_concordance || {};
+    const cls = s => s==="pair_matched"||s==="present" ? "cov-ok" : (s==="queried_empty" ? "cov-empty" : "cov-no");
+    let h = "<div>" + [["EpiGraphDB",cov.epigraphdb],["Europe PMC",cov.europe_pmc],
+      ["Semantic Scholar",cov.semantic_scholar],["MR-KG",cov.mr_kg]].map(([n,s]) =>
+      `<span class="covchip ${cls(s)}">${n}: ${esc(s ?? "?")}</span>`).join("") + "</div>";
+    h += kv("estimates compared", esc(ec.n_estimates_compared)) +
+         kv("direction", esc(ec.label || ec.direction)) +
+         kv("validation depth (0–4)", esc(JSON.stringify(ec.validation_depth_per_estimate||[])));
+    return h + raw(r);
+  },
+  get_target_disease_evidence(r){
+    if (!r.found) return naPanel(r.note || "no association returned") + raw(r);
+    let h = kv("overall score", num(r.overall_score));
+    for (const [k,v] of Object.entries(r.datatype_scores||{}).slice(0,6)) h += kv(k, num(v));
+    return h + raw(r);
+  },
+  get_uniprot_dossier(r){
+    if (r.found === false) return naPanel(r.note || "no record") + raw(r);
+    return kv("accession", esc(r.accession)) + kv("protein", esc(r.protein_name)) +
+           kv("location", esc((r.subcellular_location||[]).join(", ") || "—")) + raw(r);
+  },
+  get_chembl_modulators(r){
+    if (!r.found) return naPanel(r.note || "no ChEMBL target") + raw(r);
+    const acts = [...new Set((r.modulators||[]).map(m=>m.action).filter(Boolean))];
+    return kv("target", `${esc(r.target_name||"")} ${esc(r.target_chembl_id||"")}`) +
+           kv("modulators", esc(r.n_modulators)) + kv("actions", esc(acts.join(", ")||"—")) + raw(r);
+  },
+  get_clinvar_variants(r){
+    if (r.found === false) return naPanel(r.note || "no records") + raw(r);
+    return kv("total records", esc(r.total_records)) +
+           kv("pathogenic in sample", `${esc(r.pathogenic_in_sample)} of ${esc(r.sample_size)} sampled`) +
+           `<div class="note">A sample, not a rate — the caveat travels with the number.</div>` + raw(r);
+  },
+  get_gnomad_constraint(r){
+    if (r.found === false) return naPanel(r.note || "no constraint data") + raw(r);
+    const intol = (r.pLI > 0.9) || (r.LOEUF < 0.35);
+    return kv("pLI", num(r.pLI,2)) + kv("LOEUF", num(r.LOEUF)) +
+           kv("reading", intol ? "LoF-INTOLERANT — a safety warning" : "LoF-tolerant") + raw(r);
+  },
+  get_gwas_catalog(r){
+    if (r.found === false) return naPanel(r.note || "no associations") + raw(r);
+    return kv("unique SNPs", esc(r.n_unique_snps)) +
+           kv("rows read", `${esc(r.n_association_rows)} / ${esc(r.total_association_rows_reported)}`) +
+           kv("sweep complete", esc(r.sweep_complete)) + raw(r);
+  },
+  get_pharmgkb_drug_gene(r){
+    if (!r.found) return naPanel(r.note || "no pharmacogenomic annotations") + raw(r);
+    return kv("clinical annotations", esc(r.n_clinical_annotations)) +
+           kv("drugs", esc((r.drugs||[]).slice(0,5).join(", "))) + raw(r);
+  },
+};
+const TITLES = {
+  get_mr_result:"Causal effect (MR) — retrieved, not computed",
+  get_clinical_evidence:"Clinical development record",
+  classify_evidence_concordance:"Evidence concordance (rule-based)",
+  get_target_disease_evidence:"Target–disease association",
+  get_uniprot_dossier:"Protein context",
+  get_chembl_modulators:"Druggability (ChEMBL)",
+  get_clinvar_variants:"Clinical variants",
+  get_gnomad_constraint:"Constraint / knock-out tolerance",
+  get_gwas_catalog:"GWAS signal at the locus",
+  get_pharmgkb_drug_gene:"Pharmacogenomics",
+};
+
+async function showCard(i){
+  document.querySelectorAll(".chip").forEach((c,j)=>c.classList.toggle("active", j===i));
+  const [prot, dis] = PAIRS[i];
+  const el = document.getElementById("card");
+  el.innerHTML = "<div class='na'>loading…</div>";
+  const fname = `${prot}_${slug(dis)}_evidence_card.json`;
+  let j;
+  try {
+    // Prefer the live file so the Pages copy always shows the current cards…
+    const resp = await fetch(`../cards/${fname}`);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    j = await resp.json();
+  } catch (e) {
+    // …but a double-clicked local copy cannot fetch (file:// CORS), so fall back to the
+    // bundle generated by viewer/build_data.py.
+    j = (window.CARD_DATA || {})[fname];
+    if (!j) {
+      el.innerHTML = `<div class="err">Could not load the card (${esc(e.message)}) and no
+        bundled copy exists. Run <code>python viewer/build_data.py</code> after
+        regenerating cards, or serve the repo:
+        <code>python -m http.server</code> → <code>http://localhost:8000/viewer/</code>.</div>`;
+      return;
+    }
+  }
+  const v = j.model_verdict || "";
+  const cls = /NO-GO/i.test(v) ? "NOGO" : (/INSUFFICIENT/i.test(v) ? "INSUFF" : "GO");
+  const val = j.validation || {};
+  const fails = (val.unsupported||[]).map(u=>`<span class="failchip">${esc(u.kind)}</span>`).join("");
+  const led = {};
+  for (const e of (j.tool_ledger||[])) led[e.tool] = e.result;
+  let panels = "";
+  for (const t of Object.keys(TITLES)){
+    const r = led[t];
+    let body;
+    if (r === undefined) body = `<div class="na">tool not called in this run</div>`;
+    else if (r && r.error) body = `<div class="na" style="color:var(--bad)">tool error: ${esc(String(r.error).slice(0,120))}</div>`;
+    else body = RENDER[t] ? RENDER[t](r) : raw(r);
+    panels += `<div class="panel"><h3>${esc(TITLES[t])} <code>${esc(t)}</code></h3><div class="body">${body}</div></div>`;
+  }
+  const notes = (j.tool_ledger||[]).filter(e=>e.result && e.result.note)
+    .map(e=>`<li><b><code>${esc(e.tool)}</code></b> — ${esc(e.result.note)}</li>`).join("");
+  el.innerHTML =
+    `<div class="banner ${cls}">${esc(v)}</div>` +
+    `<div class="vstrip">generated ${esc(j.generated_at)} · model ${esc(j.model)} · validation: ` +
+    (val.ok ? `<b style="color:var(--good)">PASS</b> (${val.checked} claim tokens checked)`
+            : `<span class="vfail">FAIL</span> ${fails}`) + `</div>` +
+    `<div class="grid">${panels}</div>` +
+    `<div class="reasoning"><b>Model reasoning</b> — the only text the model wrote, validated against the ledger:<br>${esc(j.model_reasoning)}</div>` +
+    (notes ? `<div class="caveats"><b>Caveats declared by the tools</b><ul>${notes}</ul></div>` : "");
+}
+
+/* ---------------- timelines: hand-verified genetics -> clinic case studies -------- */
+const CASES = [
+  { name:"PCSK9 → evolocumab / alirocumab", outcome:"Prediction CONFIRMED — 12 years from genetics to approval", hit:true,
+    span:[2002,2018], events:[
+      [2003,"GoF mutations cause dominant hypercholesterolemia (Abifadel, Nat Genet)","","up"],
+      [2006,"LOF carriers: 15-yr prospective CHD reduction (Cohen & Hobbs, NEJM)","","down"],
+      [2010,"R46L replication + meta (Benn, JACC)","","up"],
+      [2015,"FDA approvals: Praluent (Jul), Repatha (Aug)","launch","down"],
+      [2017,"FOURIER outcomes confirm (NEJM)","","up"]]},
+  { name:"ANGPTL3 → evinacumab", outcome:"Prediction CONFIRMED — ~11 years", hit:true,
+    span:[2008,2022], events:[
+      [2009,"First human LOF, Dallas Heart Study (Romeo, JCI)","","up"],
+      [2010,"Exome sequencing confirms familial hypolipidemia (Musunuru, NEJM)","","down"],
+      [2017,"LOF protects coronary disease (Stitziel JACC; Dewey NEJM)","","up"],
+      [2021,"FDA approves Evkeeza for HoFH","launch","down"]]},
+  { name:"IL6R pathway → ziltivekimab (anti-IL-6)", outcome:"Prediction NOT confirmed in ASCVD+CKD — target engaged, zero MACE benefit", hit:false,
+    span:[2011,2027], events:[
+      [2012,"Back-to-back Lancet MR: IL6R variant lowers CHD risk (OR 0.95/allele)","","up"],
+      [2017,"CANTOS: upstream IL-1β anti-inflammatory works (NEJM)","","down"],
+      [2021,"RESCUE phase 2: dose-dependent hsCRP lowering (Lancet)","","up"],
+      [2026,"ZEUS phase 3 MISSES primary endpoint (MACE HR 0.99) — press release","fail","down"]]},
+];
+function renderTimelines(){
+  const el = document.getElementById("view-timeline");
+  el.innerHTML = `<p style="max-width:760px">Three hand-verified evidence chains (every date checked
+    against PubMed / openFDA / EMA / ClinicalTrials.gov, 2026-08-21). The point: genetic
+    evidence precedes the clinic's verdict by a decade — and the verdict does not always
+    agree. <b>A stage means a trial exists, not that it worked.</b></p>` +
+    CASES.map(c => {
+      const [a,b] = c.span, W = b - a;
+      const dots = c.events.map(([y,txt,kind,side]) =>
+        `<div class="tl-dot ${kind}" style="left:${((y-a)/W*100).toFixed(1)}%" title="${esc(y+" — "+txt)}"></div>` +
+        `<div class="tl-lab ${side}" style="left:${((y-a)/W*100).toFixed(1)}%"><b>${y}</b><br>${esc(txt)}</div>`
+      ).join("");
+      return `<div class="tl-case"><h3>${esc(c.name)}</h3>
+        <div class="tl-outcome ${c.hit?"hit":"miss"}">${esc(c.outcome)}</div>
+        <div class="tl-axis">${dots}</div></div>`;
+    }).join("");
+}
+
+/* ---------------- boot ---------------- */
+const picker = document.getElementById("picker");
+PAIRS.forEach(([p,d],i)=>{
+  const b = document.createElement("button");
+  b.className = "chip"; b.textContent = `${p} × ${d}`;
+  b.onclick = ()=>showCard(i);
+  picker.appendChild(b);
+});
+document.querySelectorAll(".tab").forEach(t => t.onclick = () => {
+  document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active", x===t));
+  document.getElementById("view-cards").style.display = t.dataset.tab==="cards" ? "" : "none";
+  document.getElementById("view-timeline").style.display = t.dataset.tab==="timeline" ? "" : "none";
+});
+renderTimelines();
+showCard(0);
+</script>
+</body>
+</html>

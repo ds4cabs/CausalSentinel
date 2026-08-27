@@ -1,0 +1,412 @@
+{
+  "protein": "AGTR1",
+  "disease": "Pneumonia",
+  "generated_at": "2026-08-21T15:51:24",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_chembl_modulators",
+    "get_mr_result",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "AGTR1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "AGTR1",
+        "accession": "P30556",
+        "gene_names": [
+          "AGTR1"
+        ],
+        "protein_name": "Type-1 angiotensin II receptor",
+        "function": "Receptor for angiotensin II, a vasoconstricting peptide, which acts as a key regulator of blood pressure and sodium retention by the kidney (PubMed:15611106, PubMed:1567413, PubMed:25913193, PubMed:26420482, PubMed:30639100, PubMed:32079768, PubMed:8987975). The activated receptor in turn couples to G-alpha proteins G(q) (GNAQ, GNA11, GNA14 or GNA15) and thus activates phospholipase C and increases the cytosolic Ca(2+) concentrations, which in turn triggers cellular responses such as stimulation of protein kinase C (PubMed:15611106) (Microbial infection) During SARS coronavirus-2/SARS-CoV-2 infection, it is able to recognize and internalize the complex formed by secreted ACE2 and SARS-CoV-2 spike protein through DNM2/dynamin 2-dependent endocytosis",
+        "subcellular_location": [
+          "Cell membrane"
+        ],
+        "diseases": [
+          "Renal tubular dysgenesis"
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/P30556",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 4.686,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "AGTR1",
+        "disease": "Pneumonia"
+      },
+      "result": {
+        "found": true,
+        "ensembl_id": "ENSG00000144891",
+        "efo_id": "MONDO_0005249",
+        "resolved_target_name": "AGTR1",
+        "resolved_disease_name": "pneumonia",
+        "overall_score": 0.2891,
+        "datatype_scores": {
+          "literature": 0.2791,
+          "animal_model": 0.2517,
+          "clinical": 0.4559
+        },
+        "note": "Free-text inputs were resolved to ontology terms: 'AGTR1' -> ENSG00000144891 (AGTR1); 'Pneumonia' -> MONDO_0005249 (pneumonia). Scores below describe THAT term, not the free-text phrase.",
+        "url": "https://platform.opentargets.org/evidence/ENSG00000144891/MONDO_0005249",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.397,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "AGTR1"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL227",
+        "target_name": "Type-1 angiotensin II receptor",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 19,
+        "modulators": [
+          {
+            "drug": "CHEMBL2103795",
+            "action": "ANTAGONIST",
+            "moa": "Type-1 angiotensin II receptor antagonist"
+          },
+          {
+            "drug": "CHEMBL995",
+            "action": "ANTAGONIST",
+            "moa": "Type-1 angiotensin II receptor antagonist"
+          },
+          {
+            "drug": "CHEMBL1513",
+            "action": "ANTAGONIST",
+            "moa": "Type-1 angiotensin II receptor antagonist"
+          },
+          {
+            "drug": "CHEMBL1069",
+            "action": "ANTAGONIST",
+            "moa": "Type-1 angiotensin II receptor antagonist"
+          },
+          {
+            "drug": "CHEMBL1200670",
+            "action": "ANTAGONIST",
+            "moa": "Type-1 angiotensin II receptor antagonist"
+          },
+          {
+            "drug": "CHEMBL1200692",
+            "action": "ANTAGONIST",
+            "moa": "Type-1 angiotensin II receptor antagonist"
+          },
+          {
+            "drug": "CHEMBL1014",
+            "action": "ANTAGONIST",
+            "moa": "Type-1 angiotensin II receptor antagonist"
+          },
+          {
+            "drug": "CHEMBL1200987",
+            "action": "ANTAGONIST",
+            "moa": "Type-1 angiotensin II receptor antagonist"
+          },
+          {
+            "drug": "CHEMBL1017",
+            "action": "ANTAGONIST",
+            "moa": "Type-1 angiotensin II receptor antagonist"
+          },
+          {
+            "drug": "CHEMBL539423",
+            "action": "ANTAGONIST",
+            "moa": "Type-1 angiotensin II receptor antagonist"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'AGTR1' and resolved to 'Type-1 angiotensin II receptor' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL227/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 6.483,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "AGTR1",
+        "disease": "Pneumonia"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "AGTR1",
+        "disease": "Pneumonia",
+        "note": "No pQTL-based MR estimate for AGTR1 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.787,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "AGTR1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "AGTR1",
+        "total_records": 203,
+        "pathogenic_in_sample": 3,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "NM_000685.5(AGTR1):c.549T>C (p.His183=)",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "NM_000685.5(AGTR1):c.360G>A (p.Thr120=)",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "NM_000685.5(AGTR1):c.382C>T (p.Leu128=)",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "NM_000685.5(AGTR1):c.-47-10764C>T",
+            "significance": "Pathogenic"
+          },
+          {
+            "title": "GRCh37/hg19 3q24-25.1(chr3:146830206-149006806)x1",
+            "significance": "Uncertain significance"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 203 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=AGTR1%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.545,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "AGTR1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "AGTR1",
+        "pLI": 2.0569887366986022e-05,
+        "LOEUF": 1.2498532867213261,
+        "LOEUF_percentile": 57,
+        "oe_lof": 0.8229085812391175,
+        "oe_lof_lower": 0.557116328272879,
+        "obs_lof": 16,
+        "exp_lof": 19.44322901081862,
+        "plain_language": "gnomAD expected about 19 loss-of-function variants in this gene and observed 16. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 1.2095149482548342,
+        "lof_z": 0.6624395363977067,
+        "interpretation": "LoF-tolerant: no population-level depletion of loss-of-function variants, which is reassuring but is NOT positive evidence of efficacy.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/AGTR1",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.563,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "AGTR1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "AGTR1",
+        "n_unique_snps": 17,
+        "n_association_rows": 34,
+        "total_association_rows_reported": 34,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs2675511",
+          "rs79019069",
+          "rs12695894",
+          "rs9882482",
+          "rs1979703",
+          "rs6803439",
+          "rs11924272",
+          "rs2131127",
+          "rs9862062",
+          "rs11707568",
+          "rs12721304",
+          "rs9878159",
+          "rs73160745",
+          "rs2291671",
+          "rs116274860"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/AGTR1",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 1.657,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "AGTR1"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "AGTR1",
+        "n_clinical_annotations": 15,
+        "evidence_level_counts": {
+          "3": 15
+        },
+        "drugs": [
+          "Ace Inhibitors, Plain",
+          "Thiazides, plain",
+          "angiotensin II",
+          "atorvastatin",
+          "candesartan",
+          "captopril",
+          "irbesartan",
+          "losartan",
+          "nitrendipine",
+          "perindopril"
+        ],
+        "n_drugs": 10,
+        "examples": [
+          {
+            "drugs": [
+              "Ace Inhibitors, Plain"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs5186 (AGTR1); Ace Inhibitors, Plain; Coronary Artery Disease (level 3 Efficacy, Toxicity)"
+          },
+          {
+            "drugs": [
+              "perindopril"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs5182 (AGTR1); perindopril; Coronary Artery Disease (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "losartan"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs5186 (AGTR1); losartan (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "losartan"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs12721226 (AGTR1); losartan (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "irbesartan"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs5186 (AGTR1); irbesartan; Hypertension and Hypertrophy, Left Ventricular (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "Ace Inhibitors, Plain"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs5182 (AGTR1); Ace Inhibitors, Plain; Hypertension (level 3 Toxicity)"
+          },
+          {
+            "drugs": [
+              "angiotensin II"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs5186 (AGTR1); angiotensin II (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "captopril"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs5186 (AGTR1); captopril; Diabetes Mellitus, Type 2 (level 3 Efficacy)"
+          }
+        ],
+        "url": "https://www.pharmgkb.org/search?query=AGTR1",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.659,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "AGTR1",
+        "Pneumonia"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "AGTR1",
+          "disease": "Pneumonia",
+          "note": "No pQTL-based MR estimate for AGTR1 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "AGTR1",
+        "disease": "Pneumonia",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "INSUFFICIENT EVIDENCE — while AGTR1 has modulators and genetic associations, there is no causal Mendelian randomization estimate for pneumonia and overall genetic association is weak.",
+  "model_reasoning": "The target AGTR1 has multiple known modulators listed in ChEMBL and is tolerant to loss-of-function variants according to gnomAD. However, Open Targets shows only a modest association score for pneumonia, and no published Mendelian randomization estimate was available to establish a causal link with the disease. Although pharmacogenomic annotations and GWAS associations exist for the locus, they largely relate to cardiovascular and related traits rather than direct causal evidence for pneumonia. Therefore, additional mechanistic and clinical validation is required to support AGTR1 as a therapeutic target for this indication.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 0
+  },
+  "card_markdown": "# Target Evidence Card — AGTR1 × Pneumonia\n\n**Verdict:** INSUFFICIENT EVIDENCE — while AGTR1 has modulators and genetic associations, there is no causal Mendelian randomization estimate for pneumonia and overall genetic association is weak.\n\n> **You asked about \"Pneumonia\". This card scored MONDO_0005249 — pneumonia.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Type-1 angiotensin II receptor\" (CHEMBL227),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.289 (literature=0.279, animal_model=0.252, clinical=0.456) |\n| Protein context | `get_uniprot_dossier` | P30556 — Type-1 angiotensin II receptor; location: Cell membrane |\n| Known modulators / druggability | `get_chembl_modulators` | 19 known modulators (ANTAGONIST) |\n| Clinical variants | `get_clinvar_variants` | 203 ClinVar records; 3 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=2.1e-05, LOEUF=1.25 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 17 unique SNPs from 34/34 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 15 clinical annotation(s) over 10 drug(s): Ace Inhibitors, Plain, Thiazides, plain, angiotensin II, atorvastatin +6 more — ClinPGx evidence level 3 (scale 1A strongest to 4 weakest) — e.g. rs5186 (AGTR1); Ace Inhibitors, Plain; Coronary Artery Disease (level 3 Efficacy, Toxicity) |\n| Clinical development record | `get_clinical_evidence` | _tool not called by the agent in this run_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'AGTR1' -> ENSG00000144891 (AGTR1); 'Pneumonia' -> MONDO_0005249 (pneumonia). Scores below describe THAT term, not the free-text phrase.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'AGTR1' and resolved to 'Type-1 angiotensin II receptor' — confirm this is the intended target.\n- **`get_mr_result`** — No pQTL-based MR estimate for AGTR1 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 203 ClinVar records for this gene; it is a sample, not a rate.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nThe target AGTR1 has multiple known modulators listed in ChEMBL and is tolerant to loss-of-function variants according to gnomAD. However, Open Targets shows only a modest association score for pneumonia, and no published Mendelian randomization estimate was available to establish a causal link with the disease. Although pharmacogenomic annotations and GWAS associations exist for the locus, they largely relate to cardiovascular and related traits rather than direct causal evidence for pneumonia. Therefore, additional mechanistic and clinical validation is required to support AGTR1 as a therapeutic target for this indication.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P30556 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000144891/MONDO_0005249 — _Open Targets data release 26.06_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL227/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=AGTR1%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/AGTR1 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/AGTR1 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=AGTR1 — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n\n## Provenance\n\n- Generated: 2026-08-21T15:51:24\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (9 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

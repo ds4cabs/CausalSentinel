@@ -1,0 +1,278 @@
+{
+  "protein": "SCN9A",
+  "disease": "Neuralgia, Postherpetic",
+  "generated_at": "2026-08-21T15:47:19",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_mr_result",
+    "get_chembl_modulators",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "SCN9A"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "SCN9A",
+        "accession": "Q15858",
+        "gene_names": [
+          "SCN9A"
+        ],
+        "protein_name": "Sodium channel protein type 9 subunit alpha",
+        "function": "Pore-forming subunit of Nav1.7, a voltage-gated sodium (Nav) channel that directly mediates the depolarizing phase of action potentials in excitable membranes (PubMed:38381792, PubMed:40768348). Navs, also called VGSCs (voltage-gated sodium channels) or VDSCs (voltage-dependent sodium channels), operate by switching between closed and open conformations depending on the voltage difference across the membrane. In the open conformation they allow Na(+) ions to selectively pass through the pore, along their electrochemical gradient (PubMed:38381792, PubMed:40768348). The influx of Na(+) ions provokes membrane depolarization, initiating the propagation of electrical signals throughout cells and tissues (PubMed:15385606, PubMed:16988069, PubMed:17145499, PubMed:17167479, PubMed:19369487, PubMed:24311784, PubMed:25240195, PubMed:26680203, PubMed:7720699). Nav1.7 plays a crucial role in controlling the excitability and action potential propagation from nociceptor neurons, thereby contributing to the sensory perception of pain (PubMed:17145499, PubMed:17167479, PubMed:19369487, PubMed:24311784)",
+        "subcellular_location": [
+          "Cell membrane",
+          "Cell projection, neuron projection",
+          "Cell projection, axon"
+        ],
+        "diseases": [
+          "Primary erythermalgia",
+          "Indifference to pain, congenital, autosomal recessive",
+          "Paroxysmal extreme pain disorder"
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/Q15858",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 5.244,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "SCN9A",
+        "disease": "Neuralgia, Postherpetic"
+      },
+      "result": {
+        "found": false,
+        "note": "Could not resolve target 'SCN9A' or disease 'Neuralgia, Postherpetic'."
+      },
+      "seconds": 1.516,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "SCN9A",
+        "disease": "Neuralgia, Postherpetic"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "SCN9A",
+        "disease": "Neuralgia, Postherpetic",
+        "note": "No pQTL-based MR estimate for SCN9A in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.663,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "SCN9A"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL4523670",
+        "target_name": "SCN9A/SCN1B",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 0,
+        "modulators": [],
+        "note": "ChEMBL target matched by text search on 'SCN9A' and resolved to 'SCN9A/SCN1B' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4523670/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 7.726,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "SCN9A"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "SCN9A",
+        "total_records": 3117,
+        "pathogenic_in_sample": 5,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "NM_001365536.1(SCN9A):c.3175A>T (p.Ile1059Phe)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_001365536.1(SCN9A):c.4012A>T (p.Met1338Leu)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_001365536.1(SCN9A):c.4633G>T (p.Glu1545Ter)",
+            "significance": "Pathogenic"
+          },
+          {
+            "title": "NM_001365536.1(SCN9A):c.4841T>C (p.Leu1614Pro)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_001365536.1(SCN9A):c.183C>A (p.Phe61Leu)",
+            "significance": "Uncertain significance"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 3117 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=SCN9A%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.48,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "SCN9A"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "SCN9A",
+        "pLI": 2.7516704644909666e-30,
+        "LOEUF": 0.8098968817277862,
+        "LOEUF_percentile": 29,
+        "oe_lof": 0.7005420483124554,
+        "oe_lof_lower": 0.6079604470568496,
+        "obs_lof": 131,
+        "exp_lof": 186.99805431460905,
+        "plain_language": "gnomAD expected about 187 loss-of-function variants in this gene and observed 131. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 1.2597999742997992,
+        "lof_z": 3.473912897684369,
+        "interpretation": "LoF-tolerant: no population-level depletion of loss-of-function variants, which is reassuring but is NOT positive evidence of efficacy.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/SCN9A",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.507,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "SCN9A"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "SCN9A",
+        "n_unique_snps": 43,
+        "n_association_rows": 86,
+        "total_association_rows_reported": 86,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs144134844",
+          "rs79062501",
+          "rs7587026",
+          "rs16852104",
+          "rs17768583",
+          "rs114118902",
+          "rs535533",
+          "rs1528487",
+          "rs6752526",
+          "rs72877472",
+          "rs79718583",
+          "rs666833",
+          "rs12613742",
+          "rs6432877",
+          "rs189412190"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/SCN9A",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 1.876,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "SCN9A"
+      },
+      "result": {
+        "found": false,
+        "gene_symbol": "SCN9A",
+        "note": "No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.585,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "SCN9A",
+        "Neuralgia, Postherpetic"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "SCN9A",
+          "disease": "Neuralgia, Postherpetic",
+          "note": "No pQTL-based MR estimate for SCN9A in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "SCN9A",
+        "disease": "Neuralgia, Postherpetic",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "INSUFFICIENT EVIDENCE — there is no direct genetic or causal estimate available linking SCN9A to postherpetic neuralgia, despite its known role in pain sensory perception and channelopathy variants.",
+  "model_reasoning": "SCN9A encodes the voltage-gated sodium channel Nav1.7, which is a major contributor to the sensory perception of pain in nociceptor neurons, with multiple pathogenic variants recorded in ClinVar. However, query matching in Open Targets failed to link SCN9A directly to postherpetic neuralgia, and no Mendelian randomization estimates were available in EpiGraphDB to support a causal effect. Although the GWAS Catalog maps multiple trait-associated SNPs to the gene, and gnomAD indicates tolerance to loss-of-function variation, ChEMBL reports no modulators and PharmGKB lists no clinical annotations for this target. Therefore, current data are insufficient to establish SCN9A as a validated target for this specific neuralgia indication.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 0
+  },
+  "card_markdown": "# Target Evidence Card — SCN9A × Neuralgia, Postherpetic\n\n**Verdict:** INSUFFICIENT EVIDENCE — there is no direct genetic or causal estimate available linking SCN9A to postherpetic neuralgia, despite its known role in pain sensory perception and channelopathy variants.\n\n> **The druggability row is about ChEMBL target \"SCN9A/SCN1B\" (CHEMBL4523670),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | **not available** — Could not resolve target 'SCN9A' or disease 'Neuralgia, Postherpetic'. |\n| Protein context | `get_uniprot_dossier` | Q15858 — Sodium channel protein type 9 subunit alpha; location: Cell membrane, Cell projection, neuron projection, Cell proj |\n| Known modulators / druggability | `get_chembl_modulators` | target CHEMBL4523670 — **0 known modulators in ChEMBL** |\n| Clinical variants | `get_clinvar_variants` | 3117 ClinVar records; 5 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=2.8e-30, LOEUF=0.81 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 43 unique SNPs from 86/86 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n| Clinical development record | `get_clinical_evidence` | _tool not called by the agent in this run_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Could not resolve target 'SCN9A' or disease 'Neuralgia, Postherpetic'.\n- **`get_mr_result`** — No pQTL-based MR estimate for SCN9A in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'SCN9A' and resolved to 'SCN9A/SCN1B' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 3117 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nSCN9A encodes the voltage-gated sodium channel Nav1.7, which is a major contributor to the sensory perception of pain in nociceptor neurons, with multiple pathogenic variants recorded in ClinVar. However, query matching in Open Targets failed to link SCN9A directly to postherpetic neuralgia, and no Mendelian randomization estimates were available in EpiGraphDB to support a causal effect. Although the GWAS Catalog maps multiple trait-associated SNPs to the gene, and gnomAD indicates tolerance to loss-of-function variation, ChEMBL reports no modulators and PharmGKB lists no clinical annotations for this target. Therefore, current data are insufficient to establish SCN9A as a validated target for this specific neuralgia indication.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q15858 — _UniProt release 2026_02 (10-June-2026)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL4523670/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=SCN9A%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/SCN9A — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/SCN9A — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:47:19\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (9 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

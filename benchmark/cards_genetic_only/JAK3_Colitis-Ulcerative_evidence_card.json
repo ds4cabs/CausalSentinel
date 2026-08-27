@@ -1,0 +1,340 @@
+{
+  "protein": "JAK3",
+  "disease": "Colitis, Ulcerative",
+  "generated_at": "2026-08-21T15:47:40",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_chembl_modulators",
+    "get_mr_result",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "JAK3"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "JAK3",
+        "accession": "P52333",
+        "gene_names": [
+          "JAK3"
+        ],
+        "protein_name": "Tyrosine-protein kinase JAK3",
+        "function": "Non-receptor tyrosine kinase involved in various processes such as cell growth, development, or differentiation. Mediates essential signaling events in both innate and adaptive immunity and plays a crucial role in hematopoiesis during T-cells development. In the cytoplasm, plays a pivotal role in signal transduction via its association with type I receptors sharing the common subunit gamma such as IL2R, IL4R, IL7R, IL9R, IL15R and IL21R. Following ligand binding to cell surface receptors, phosphorylates specific tyrosine residues on the cytoplasmic tails of the receptor, creating docking sites for STATs proteins. Subsequently, phosphorylates the STATs proteins once they are recruited to the receptor. Phosphorylated STATs then form homodimer or heterodimers and translocate to the nucleus to activate gene transcription. For example, upon IL2R activation by IL2, JAK1 and JAK3 molecules bind to IL2R beta (IL2RB) and gamma chain (IL2RG) subunits inducing the tyrosine phosphorylation of both receptor subunits on their cytoplasmic domain. Then, STAT5A and STAT5B are recruited, phosphorylated and activated by JAK1 and JAK3. Once activated, dimerized STAT5 translocates to the nucleus and promotes the transcription of specific target genes in a cytokine-specific fashion",
+        "subcellular_location": [
+          "Endomembrane system",
+          "Cytoplasm"
+        ],
+        "diseases": [
+          "Severe combined immunodeficiency autosomal recessive T-cell-negative/B-cell-positive/NK-cell-negative"
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/P52333",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 0.722,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "JAK3",
+        "disease": "Colitis, Ulcerative"
+      },
+      "result": {
+        "found": true,
+        "ensembl_id": "ENSG00000105639",
+        "efo_id": "MONDO_0005265",
+        "resolved_target_name": "JAK3",
+        "resolved_disease_name": "inflammatory bowel disease",
+        "overall_score": 0.6669,
+        "datatype_scores": {
+          "rna_expression": 0.0258,
+          "clinical": 0.9671,
+          "literature": 0.1685,
+          "somatic_mutation": 0.4559,
+          "animal_model": 0.6104
+        },
+        "note": "Free-text inputs were resolved to ontology terms: 'JAK3' -> ENSG00000105639 (JAK3); 'Colitis, Ulcerative' -> MONDO_0005265 (inflammatory bowel disease). Scores below describe THAT term, not the free-text phrase.",
+        "url": "https://platform.opentargets.org/evidence/ENSG00000105639/MONDO_0005265",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.759,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "JAK3"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL2148",
+        "target_name": "Tyrosine-protein kinase JAK3",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 13,
+        "modulators": [
+          {
+            "drug": "CHEMBL4116008",
+            "action": "INHIBITOR",
+            "moa": "Tyrosine-protein kinase JAK3 inhibitor"
+          },
+          {
+            "drug": "CHEMBL5314384",
+            "action": "INHIBITOR",
+            "moa": "Tyrosine-protein kinase JAK3 inhibitor"
+          },
+          {
+            "drug": "CHEMBL2106468",
+            "action": "INHIBITOR",
+            "moa": "Tyrosine-protein kinase JAK3 inhibitor"
+          },
+          {
+            "drug": "CHEMBL405130",
+            "action": "INHIBITOR",
+            "moa": "Tyrosine-protein kinase JAK3 inhibitor"
+          },
+          {
+            "drug": "CHEMBL495727",
+            "action": "INHIBITOR",
+            "moa": "Tyrosine-protein kinase JAK3 inhibitor"
+          },
+          {
+            "drug": "CHEMBL3545159",
+            "action": "INHIBITOR",
+            "moa": "Tyrosine-protein kinase JAK3 inhibitor"
+          },
+          {
+            "drug": "CHEMBL3039513",
+            "action": "INHIBITOR",
+            "moa": "Tyrosine-protein kinase JAK3 inhibitor"
+          },
+          {
+            "drug": "CHEMBL4085457",
+            "action": "INHIBITOR",
+            "moa": "Tyrosine-protein kinase JAK3 inhibitor"
+          },
+          {
+            "drug": "CHEMBL5314649",
+            "action": "INHIBITOR",
+            "moa": "Tyrosine-protein kinase JAK3 inhibitor"
+          },
+          {
+            "drug": "CHEMBL3301607",
+            "action": "INHIBITOR",
+            "moa": "Tyrosine-protein kinase JAK3 inhibitor"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'JAK3' and resolved to 'Tyrosine-protein kinase JAK3' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL2148/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 6.321,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "JAK3",
+        "disease": "Colitis, Ulcerative"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "JAK3",
+        "disease": "Colitis, Ulcerative",
+        "note": "No pQTL-based MR estimate for JAK3 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.582,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "JAK3"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "JAK3",
+        "total_records": 1423,
+        "pathogenic_in_sample": 4,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "NM_000215.4(JAK3):c.105C>G (p.Pro35=)",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "NM_000215.4(JAK3):c.1928_1932dup (p.His645fs)",
+            "significance": "Likely pathogenic"
+          },
+          {
+            "title": "NM_000215.4(JAK3):c.1245C>A (p.Val415=)",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "NM_000215.4(JAK3):c.2076C>A (p.Ala692=)",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "NM_000215.4(JAK3):c.853G>T (p.Glu285Ter)",
+            "significance": "Pathogenic"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 1423 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=JAK3%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.517,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "JAK3"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "JAK3",
+        "pLI": 1.0028722955716938e-21,
+        "LOEUF": 0.8698544956433842,
+        "LOEUF_percentile": 33,
+        "oe_lof": 0.7285705613878288,
+        "oe_lof_lower": 0.6132530062682603,
+        "obs_lof": 88,
+        "exp_lof": 120.78445748943224,
+        "plain_language": "gnomAD expected about 121 loss-of-function variants in this gene and observed 88. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 2.7234530441495757,
+        "lof_z": 2.5306204104140453,
+        "interpretation": "LoF-tolerant: no population-level depletion of loss-of-function variants, which is reassuring but is NOT positive evidence of efficacy.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/JAK3",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 3.025,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "JAK3"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "JAK3",
+        "n_unique_snps": 44,
+        "n_association_rows": 88,
+        "total_association_rows_reported": 88,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs73015715",
+          "rs7253117",
+          "rs4808683",
+          "rs79237650",
+          "rs4808105",
+          "rs12982308",
+          "rs7251815",
+          "rs75226258",
+          "rs12983897",
+          "rs141057294",
+          "rs28403253",
+          "rs77447661",
+          "rs6512230",
+          "rs78990594",
+          "rs3212802"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/JAK3",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 1.886,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "JAK3"
+      },
+      "result": {
+        "found": false,
+        "gene_symbol": "JAK3",
+        "note": "No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.522,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "JAK3",
+        "Colitis, Ulcerative"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "JAK3",
+          "disease": "Colitis, Ulcerative",
+          "note": "No pQTL-based MR estimate for JAK3 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "JAK3",
+        "disease": "Colitis, Ulcerative",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "GO — JAK3 is an established therapeutic target supported by high clinical-trial association scores for inflammatory bowel disease and multiple known modulators.",
+  "model_reasoning": "Open Targets demonstrates a high overall association score between JAK3 and inflammatory bowel disease, driven heavily by clinical evidence. Multiple chemical modulators and inhibitors are known in ChEMBL, confirming the druggability of the kinase. Genetic constraint metrics from gnomAD show that the gene is relatively tolerant to loss-of-function variants. While no MR estimate was available, robust clinical-stage and target-disease association evidence supports pursuing JAK3 for colitis.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 0
+  },
+  "card_markdown": "# Target Evidence Card — JAK3 × Colitis, Ulcerative\n\n**Verdict:** GO — JAK3 is an established therapeutic target supported by high clinical-trial association scores for inflammatory bowel disease and multiple known modulators.\n\n> **You asked about \"Colitis, Ulcerative\". This card scored MONDO_0005265 — inflammatory bowel disease.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Tyrosine-protein kinase JAK3\" (CHEMBL2148),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.667 (rna_expression=0.0258, clinical=0.967, literature=0.169, somatic_mutation=0.456) |\n| Protein context | `get_uniprot_dossier` | P52333 — Tyrosine-protein kinase JAK3; location: Endomembrane system, Cytoplasm |\n| Known modulators / druggability | `get_chembl_modulators` | 13 known modulators (INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 1423 ClinVar records; 4 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1e-21, LOEUF=0.87 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 44 unique SNPs from 88/88 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n| Clinical development record | `get_clinical_evidence` | _tool not called by the agent in this run_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'JAK3' -> ENSG00000105639 (JAK3); 'Colitis, Ulcerative' -> MONDO_0005265 (inflammatory bowel disease). Scores below describe THAT term, not the free-text phrase.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'JAK3' and resolved to 'Tyrosine-protein kinase JAK3' — confirm this is the intended target.\n- **`get_mr_result`** — No pQTL-based MR estimate for JAK3 in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 1423 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets demonstrates a high overall association score between JAK3 and inflammatory bowel disease, driven heavily by clinical evidence. Multiple chemical modulators and inhibitors are known in ChEMBL, confirming the druggability of the kinase. Genetic constraint metrics from gnomAD show that the gene is relatively tolerant to loss-of-function variants. While no MR estimate was available, robust clinical-stage and target-disease association evidence supports pursuing JAK3 for colitis.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P52333 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000105639/MONDO_0005265 — _Open Targets data release 26.06_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL2148/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=JAK3%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/JAK3 — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/JAK3 — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:47:40\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (9 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

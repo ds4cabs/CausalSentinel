@@ -1,0 +1,761 @@
+{
+  "protein": "IL6R",
+  "disease": "Alzheimer disease",
+  "generated_at": "2026-08-21T15:35:13",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_mr_result",
+    "get_chembl_modulators",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "get_clinical_evidence",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "IL6R"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "IL6R",
+        "accession": "P08887",
+        "gene_names": [
+          "IL6R"
+        ],
+        "protein_name": "Interleukin-6 receptor subunit alpha",
+        "function": "Part of the receptor for interleukin 6. Binds to IL6 with low affinity, but does not transduce a signal (PubMed:28265003). Signal activation necessitate an association with IL6ST. Activation leads to the regulation of the immune response, acute-phase reactions and hematopoiesis (PubMed:30995492, PubMed:31235509). The interaction with membrane-bound IL6R and IL6ST stimulates 'classic signaling', the restricted expression of the IL6R limits classic IL6 signaling to only a few tissues such as the liver and some cells of the immune system. Whereas the binding of IL6 and soluble IL6R to IL6ST stimulates 'trans-signaling'. Alternatively, 'cluster signaling' occurs when membrane-bound IL6:IL6R complexes on transmitter cells activate IL6ST receptors on neighboring receiver cells (Probable) Signaling via the membrane-bound IL6R is mostly regenerative and anti-inflammatory (Probable). Drives naive CD4(+) T cells to the Th17 lineage, through 'cluster signaling' by dendritic cells (By similarity) Soluble form of IL6 receptor (sIL6R) that acts as an agonist of IL6 activity (PubMed:21990364). The IL6:sIL6R complex (hyper-IL6) binds to IL6ST/gp130 on cell surfaces and induces signaling also on cells that do not express membrane-bound IL6R in a process called IL6 'trans-signaling'. sIL6R is causative for the pro-inflammatory properties of IL6 and an important player in the development of chronic inflammatory diseases (PubMed:21990364). In complex with IL6, is required for induction of VEGF production (PubMed:12794819). Plays a protective role during liver injury, being required for maintenance of tissue regeneration (By similarity). 'Trans-signaling' in central nervous system regulates energy and glucose homeostasis (By similarity) Soluble form of IL6 receptor (sIL6R) that acts as an agonist of IL6 activity (PubMed:21990364). The IL6:sIL6R complex (hyper-IL6) binds to IL6ST/gp130 on cell surfaces and induces signaling also on cells that do not express membrane-bound IL6R in a process called IL6 'trans-signaling'. sIL6R is causative for the pro-inflammatory properties of IL6 and an important player in the development of chronic inflammatory diseases (PubMed:21990364). In complex with IL6, is required for induction of VEGF production (PubMed:12794819). Plays a protective role during liver injury, being required for maintenance of tissue regeneration (By similarity). 'Trans-signaling' in central nervous system regulates energy and glucose homeostasis (By similarity)",
+        "subcellular_location": [
+          "Cell membrane",
+          "Secreted",
+          "Secreted"
+        ],
+        "diseases": [
+          "Hyper-IgE syndrome 5, autosomal recessive, with recurrent infections"
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/P08887",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 0.819,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "IL6R",
+        "disease": "Alzheimer disease"
+      },
+      "result": {
+        "found": true,
+        "ensembl_id": "ENSG00000160712",
+        "efo_id": "MONDO_0004975",
+        "resolved_target_name": "IL6R",
+        "resolved_disease_name": "Alzheimer disease",
+        "overall_score": 0.3691,
+        "datatype_scores": {
+          "literature": 0.4824,
+          "genetic_association": 0.583
+        },
+        "note": "Free-text inputs were resolved to ontology terms: 'IL6R' -> ENSG00000160712 (IL6R); 'Alzheimer disease' -> MONDO_0004975 (Alzheimer disease). Scores below describe THAT term, not the free-text phrase.",
+        "url": "https://platform.opentargets.org/evidence/ENSG00000160712/MONDO_0004975",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.031,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "IL6R",
+        "disease": "Alzheimer disease"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "IL6R",
+        "disease": "Alzheimer disease",
+        "n_outcomes_available": 133,
+        "matched_disease_estimates": [],
+        "other_outcomes_for_this_protein": [
+          {
+            "outcome": "Small vessel disease",
+            "outcome_gwas_id": "1111",
+            "beta": -0.031664872622892,
+            "se": 0.0319339791890922,
+            "p_value": 0.321405849188784,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs4129267",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Coronary heart disease",
+            "outcome_gwas_id": "7",
+            "beta": -0.0441899892357374,
+            "se": 0.00853005023322569,
+            "p_value": 2.21283026387414e-07,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs4129267",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Crohn's disease",
+            "outcome_gwas_id": "12",
+            "beta": -0.0473484930032293,
+            "se": 0.0113813413001435,
+            "p_value": 3.17988978551373e-05,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs4129267",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Inflammatory bowel disease",
+            "outcome_gwas_id": "294",
+            "beta": -0.0331923214926444,
+            "se": 0.00939557114971295,
+            "p_value": 0.00041124172230895,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs4129267",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Parkinson's disease",
+            "outcome_gwas_id": "812",
+            "beta": 0.101916690695163,
+            "se": 0.0377470994028645,
+            "p_value": 0.00693421136611944,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs4129267",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Hirschsprung's disease",
+            "outcome_gwas_id": "983",
+            "beta": -0.222675816289917,
+            "se": 0.12113742375314,
+            "p_value": 0.0660317190381366,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs4129267",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Chronic kidney disease",
+            "outcome_gwas_id": "1102",
+            "beta": -0.0206315034086832,
+            "se": 0.0134553283100108,
+            "p_value": 0.125193745581814,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs4129267",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          },
+          {
+            "outcome": "Diagnoses - main ICD10: K57 Diverticular disease of intestine",
+            "outcome_gwas_id": "UKB-a:555",
+            "beta": -0.0178208432242005,
+            "se": 0.0156778000437131,
+            "p_value": 0.255666709078424,
+            "method": "Wald ratio",
+            "n_snp": 1,
+            "instrument_rsid": "rs4129267",
+            "cis_or_trans": "cis",
+            "steiger_direction_ok": "NA",
+            "steiger_p": null,
+            "coloc_prob": null,
+            "heterogeneity_q_p": null,
+            "ld_check": null
+          }
+        ],
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/",
+        "note": "IL6R HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Alzheimer disease'. The other outcomes are listed for context only — do not present them as evidence about 'Alzheimer disease'."
+      },
+      "seconds": 1.752,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "IL6R"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL2364155",
+        "target_name": "Interleukin-6 receptor subunit alpha",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 4,
+        "modulators": [
+          {
+            "drug": "CHEMBL1237022",
+            "action": "INHIBITOR",
+            "moa": "Interleukin-6 receptor alpha subunit inhibitor"
+          },
+          {
+            "drug": "CHEMBL2108730",
+            "action": "ANTAGONIST",
+            "moa": "Interleukin-6 receptor alpha subunit antagonist"
+          },
+          {
+            "drug": "CHEMBL3833343",
+            "action": "INHIBITOR",
+            "moa": "Interleukin-6 receptor alpha subunit inhibitor"
+          },
+          {
+            "drug": "CHEMBL4650406",
+            "action": "INHIBITOR",
+            "moa": "Interleukin-6 receptor alpha subunit inhibitor"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'IL6R' and resolved to 'Interleukin-6 receptor subunit alpha' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL2364155/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 5.756,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "IL6R"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "IL6R",
+        "total_records": 366,
+        "pathogenic_in_sample": 1,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "GRCh38/hg38 1q21.1-25.3(chr1:143550435-185515177)x3",
+            "significance": "Pathogenic"
+          },
+          {
+            "title": "NM_000565.4(IL6R):c.342C>G (p.Pro114=)",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "NM_000565.4(IL6R):c.367C>T (p.Arg123Trp)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_000565.4(IL6R):c.808-18C>G",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "NM_000565.4(IL6R):c.711C>G (p.Thr237=)",
+            "significance": "Likely benign"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 366 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=IL6R%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.64,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "IL6R"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "IL6R",
+        "pLI": 7.935281835363993e-11,
+        "LOEUF": 1.0306443947755963,
+        "LOEUF_percentile": 44,
+        "oe_lof": 0.7863018475560917,
+        "oe_lof_lower": 0.6068382233431184,
+        "obs_lof": 38,
+        "exp_lof": 48.32749677252822,
+        "plain_language": "gnomAD expected about 48 loss-of-function variants in this gene and observed 38. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 1.4455656815477496,
+        "lof_z": 1.2602666655789745,
+        "interpretation": "LoF-tolerant: no population-level depletion of loss-of-function variants, which is reassuring but is NOT positive evidence of efficacy.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/IL6R",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.529,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "IL6R"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "IL6R",
+        "n_unique_snps": 150,
+        "n_association_rows": 368,
+        "total_association_rows_reported": 368,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs534092643",
+          "rs12404927",
+          "rs538456803",
+          "rs6686750",
+          "rs4845373",
+          "rs12121180",
+          "rs4537545",
+          "rs41269917",
+          "rs532031638",
+          "rs574437162",
+          "rs79438587",
+          "rs7525477",
+          "rs35717427",
+          "rs78664422",
+          "rs76289529"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/IL6R",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 4.683,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "IL6R"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "IL6R",
+        "n_clinical_annotations": 3,
+        "evidence_level_counts": {
+          "3": 2,
+          "4": 1
+        },
+        "drugs": [
+          "tocilizumab"
+        ],
+        "n_drugs": 1,
+        "examples": [
+          {
+            "drugs": [
+              "tocilizumab"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs12083537 (IL6R); tocilizumab; Arthritis, Rheumatoid (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "tocilizumab"
+            ],
+            "level_of_evidence": "4",
+            "annotation": "rs4329505 (IL6R); tocilizumab; Arthritis, Rheumatoid (level 4 Efficacy)"
+          },
+          {
+            "drugs": [
+              "tocilizumab"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs11265618 (IL6R); tocilizumab; Arthritis, Rheumatoid (level 3 Efficacy)"
+          }
+        ],
+        "url": "https://www.pharmgkb.org/search?query=IL6R",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.543,
+      "exception": null
+    },
+    {
+      "tool": "get_clinical_evidence",
+      "args": [],
+      "kwargs": {
+        "protein": "IL6R",
+        "disease": "Alzheimer disease"
+      },
+      "result": {
+        "found": true,
+        "computed_here": false,
+        "protein": "IL6R",
+        "disease": "Alzheimer disease",
+        "ensembl_id": "ENSG00000160712",
+        "n_drug_programmes": 5,
+        "max_stage_any_disease": "APPROVAL",
+        "max_stage_this_disease": null,
+        "drugs_for_this_disease": [],
+        "drugs_other_diseases_context_only": [
+          {
+            "drug": "SATRALIZUMAB",
+            "chembl_id": "CHEMBL3833307",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "neuromyelitis optica",
+              "neuromyelitis optica",
+              "immune system disorder",
+              "Encephalopathy",
+              "rheumatoid arthritis",
+              "myasthenia gravis"
+            ],
+            "n_reports_this_disease": 0,
+            "max_stage_this_disease": null,
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 23,
+            "n_stop_any_disease": 2,
+            "stop_reason_categories_any_disease": {
+              "Study_Design": 1,
+              "Insufficient_Enrollment": 1
+            },
+            "example_why_stopped_any_disease": "Sponsor decided to halt development of satralizumab in generalized myasthenia gravis and discontinued further dosing with the study drug (while the OLE period w",
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "TOCILIZUMAB",
+            "chembl_id": "CHEMBL1237022",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "temporal arteritis",
+              "juvenile idiopathic arthritis",
+              "rheumatoid arthritis",
+              "systemic sclerosis",
+              "temporal arteritis",
+              "COVID-19"
+            ],
+            "n_reports_this_disease": 0,
+            "max_stage_this_disease": null,
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 427,
+            "n_stop_any_disease": 52,
+            "stop_reason_categories_any_disease": {
+              "Negative": 11,
+              "Study_Design": 3,
+              "Business_Administrative": 11,
+              "Logistics_Resources": 2,
+              "Safety_Sideeffects": 3,
+              "Regulatory": 1,
+              "Insufficient_Enrollment": 18,
+              "Study_Staff_Moved": 1,
+              "Covid19": 3,
+              "Another_Study": 3,
+              "Invalid_Reason": 1
+            },
+            "example_why_stopped_any_disease": "Clinical development program terminated due to failure to achieve efficacy",
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "LEVILIMAB",
+            "chembl_id": "CHEMBL4650406",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "immune system disorder",
+              "rheumatoid arthritis",
+              "COVID-19"
+            ],
+            "n_reports_this_disease": 0,
+            "max_stage_this_disease": null,
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 5,
+            "n_stop_any_disease": 0,
+            "stop_reason_categories_any_disease": null,
+            "example_why_stopped_any_disease": null,
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "SARILUMAB",
+            "chembl_id": "CHEMBL2108730",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "rheumatoid arthritis",
+              "immune system disorder",
+              "ankylosing spondylitis",
+              "COVID-19",
+              "temporal arteritis",
+              "polymyalgia rheumatica"
+            ],
+            "n_reports_this_disease": 0,
+            "max_stage_this_disease": null,
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 67,
+            "n_stop_any_disease": 11,
+            "stop_reason_categories_any_disease": {
+              "Insufficient_Enrollment": 4,
+              "Covid19": 3,
+              "Negative": 2,
+              "Business_Administrative": 2,
+              "Logistics_Resources": 1,
+              "Regulatory": 1
+            },
+            "example_why_stopped_any_disease": "Due to small number of participants entering randomization. Not a safety issue.",
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "VOBARILIZUMAB",
+            "chembl_id": "CHEMBL3833343",
+            "max_stage_any_disease": "PHASE_2",
+            "diseases": [
+              "rheumatoid arthritis",
+              "systemic lupus erythematosus"
+            ],
+            "n_reports_this_disease": 0,
+            "max_stage_this_disease": null,
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 10,
+            "n_stop_any_disease": 0,
+            "stop_reason_categories_any_disease": null,
+            "example_why_stopped_any_disease": null,
+            "latest_report_year_any_disease": null
+          }
+        ],
+        "note": "Phase and trial status mean trials EXIST, not that they worked — a COMPLETED phase-3 trial can be a failed one; only why-stopped fields carry failure information, and only approval carries a regulator's efficacy judgement. Registries lag press releases by a data release or more. All 5 drug programme(s) target OTHER diseases — their clinical stages are context about the drugs, not evidence about 'Alzheimer disease'.",
+        "url": "https://platform.opentargets.org/target/ENSG00000160712",
+        "source_release": "Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)"
+      },
+      "seconds": 1.632,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "IL6R",
+        "Alzheimer disease"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "IL6R",
+          "disease": "Alzheimer disease",
+          "n_outcomes_available": 133,
+          "matched_disease_estimates": [],
+          "other_outcomes_for_this_protein": [
+            {
+              "outcome": "Small vessel disease",
+              "outcome_gwas_id": "1111",
+              "beta": -0.031664872622892,
+              "se": 0.0319339791890922,
+              "p_value": 0.321405849188784,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Coronary heart disease",
+              "outcome_gwas_id": "7",
+              "beta": -0.0441899892357374,
+              "se": 0.00853005023322569,
+              "p_value": 2.21283026387414e-07,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Crohn's disease",
+              "outcome_gwas_id": "12",
+              "beta": -0.0473484930032293,
+              "se": 0.0113813413001435,
+              "p_value": 3.17988978551373e-05,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Inflammatory bowel disease",
+              "outcome_gwas_id": "294",
+              "beta": -0.0331923214926444,
+              "se": 0.00939557114971295,
+              "p_value": 0.00041124172230895,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Parkinson's disease",
+              "outcome_gwas_id": "812",
+              "beta": 0.101916690695163,
+              "se": 0.0377470994028645,
+              "p_value": 0.00693421136611944,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Hirschsprung's disease",
+              "outcome_gwas_id": "983",
+              "beta": -0.222675816289917,
+              "se": 0.12113742375314,
+              "p_value": 0.0660317190381366,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Chronic kidney disease",
+              "outcome_gwas_id": "1102",
+              "beta": -0.0206315034086832,
+              "se": 0.0134553283100108,
+              "p_value": 0.125193745581814,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            },
+            {
+              "outcome": "Diagnoses - main ICD10: K57 Diverticular disease of intestine",
+              "outcome_gwas_id": "UKB-a:555",
+              "beta": -0.0178208432242005,
+              "se": 0.0156778000437131,
+              "p_value": 0.255666709078424,
+              "method": "Wald ratio",
+              "n_snp": 1,
+              "instrument_rsid": "rs4129267",
+              "cis_or_trans": "cis",
+              "steiger_direction_ok": "NA",
+              "steiger_p": null,
+              "coloc_prob": null,
+              "heterogeneity_q_p": null,
+              "ld_check": null
+            }
+          ],
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/",
+          "note": "IL6R HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Alzheimer disease'. The other outcomes are listed for context only — do not present them as evidence about 'Alzheimer disease'."
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "IL6R",
+        "disease": "Alzheimer disease",
+        "retrieval_coverage": {
+          "epigraphdb": "instrument_exists_disease_unmatched",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "NO-GO — No causal estimate or clinical trial evidence supports IL6R as a target for Alzheimer disease.",
+  "model_reasoning": "Open Targets shows only modest genetic and literature association scores for IL6R in Alzheimer disease, and no Mendelian randomization estimates were available for this specific disease outcome. Although multiple modulators and approved drugs exist for IL6R in other immune-mediated and inflammatory indications, none have advanced in clinical development for Alzheimer disease. Furthermore, the gene displays high tolerance to loss-of-function variants in gnomAD, but the absence of causal or clinical evidence in this indication precludes pursuit.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 0
+  },
+  "card_markdown": "# Target Evidence Card — IL6R × Alzheimer disease\n\n**Verdict:** NO-GO — No causal estimate or clinical trial evidence supports IL6R as a target for Alzheimer disease.\n\n> **You asked about \"Alzheimer disease\". This card scored MONDO_0004975 — Alzheimer disease.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Interleukin-6 receptor subunit alpha\" (CHEMBL2364155),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — protein present, no estimate for THIS disease · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.369 (literature=0.482, genetic_association=0.583) |\n| Protein context | `get_uniprot_dossier` | P08887 — Interleukin-6 receptor subunit alpha; location: Cell membrane, Secreted, Secreted |\n| Known modulators / druggability | `get_chembl_modulators` | 4 known modulators (ANTAGONIST, INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 366 ClinVar records; 1 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=7.9e-11, LOEUF=1.03 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 150 unique SNPs from 368/368 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 3 clinical annotation(s) over 1 drug(s): tocilizumab — ClinPGx evidence level 3/4 (scale 1A strongest to 4 weakest) — e.g. rs12083537 (IL6R); tocilizumab; Arthritis, Rheumatoid (level 3 Efficacy) |\n| Clinical development record | `get_clinical_evidence` | **no programme for this disease on record** — 5 drug programme(s) against this target for other diseases (max stage APPROVAL); context, not evidence about this disease |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'IL6R' -> ENSG00000160712 (IL6R); 'Alzheimer disease' -> MONDO_0004975 (Alzheimer disease). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — IL6R HAS pQTL MR estimates in this resource, but NONE matched the requested disease 'Alzheimer disease'. The other outcomes are listed for context only — do not present them as evidence about 'Alzheimer disease'.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'IL6R' and resolved to 'Interleukin-6 receptor subunit alpha' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 366 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_clinical_evidence`** — Phase and trial status mean trials EXIST, not that they worked — a COMPLETED phase-3 trial can be a failed one; only why-stopped fields carry failure information, and only approval carries a regulator's efficacy judgement. Registries lag press releases by a data release or more. All 5 drug programme(s) target OTHER diseases — their clinical stages are context about the drugs, not evidence about 'Alzheimer disease'.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets shows only modest genetic and literature association scores for IL6R in Alzheimer disease, and no Mendelian randomization estimates were available for this specific disease outcome. Although multiple modulators and approved drugs exist for IL6R in other immune-mediated and inflammatory indications, none have advanced in clinical development for Alzheimer disease. Furthermore, the gene displays high tolerance to loss-of-function variants in gnomAD, but the absence of causal or clinical evidence in this indication precludes pursuit.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P08887 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000160712/MONDO_0004975 — _Open Targets data release 26.06_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL2364155/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=IL6R%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/IL6R — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/IL6R — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=IL6R — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n- `get_clinical_evidence`: https://platform.opentargets.org/target/ENSG00000160712 — _Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:35:13\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

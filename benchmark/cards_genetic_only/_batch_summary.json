@@ -1,0 +1,501 @@
+{
+  "cards": [
+    {
+      "protein": "TNF",
+      "disease": "Dermatitis, Seborrheic",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — although extensive genetic associations and pharmacogenomic data link TNF to various inflammatory conditions, no causal Mendelian randomization estimate is available for seborrheic dermatitis.",
+      "written": "cards/TNF_Dermatitis-Seborrheic_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 107,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_chembl_modulators",
+        "get_mr_result",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "PTPN11",
+      "disease": "Leishmaniasis",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — there is currently no direct evidence linking PTPN11 to leishmaniasis and no available causal estimate.",
+      "written": "cards/PTPN11_Leishmaniasis_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 83,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "VDR",
+      "disease": "Psoriasis",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "GO — VDR demonstrates substantial genetic, clinical, and pharmacological support as a therapeutic target for psoriasis.",
+      "written": "cards/VDR_Psoriasis_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 74,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "IFNAR1",
+      "disease": "Infections",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 1
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — while IFNAR1 has known roles in viral susceptibility and a ChEMBL modulator, there are no matching MR causal estimates or direct Open Targets genetic associations for infections.",
+      "written": "cards/IFNAR1_Infections_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 106,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "SCN9A",
+      "disease": "Neuralgia, Postherpetic",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — there is no direct genetic or causal estimate available linking SCN9A to postherpetic neuralgia, despite its known role in pain sensory perception and channelopathy variants.",
+      "written": "cards/SCN9A_Neuralgia-Postherpetic_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 132,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "JAK3",
+      "disease": "Colitis, Ulcerative",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "GO — JAK3 is an established therapeutic target supported by high clinical-trial association scores for inflammatory bowel disease and multiple known modulators.",
+      "written": "cards/JAK3_Colitis-Ulcerative_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 88,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_chembl_modulators",
+        "get_mr_result",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "ITGAV",
+      "disease": "Surgical Procedures, Operative",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — there is no direct genetic or causal evidence linking ITGAV to surgical procedures.",
+      "written": "cards/ITGAV_Surgical-Procedures-Operative_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 77,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_chembl_modulators",
+        "get_mr_result",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "NR3C1",
+      "disease": "Rhinitis, Allergic, Seasonal",
+      "validation": {
+        "ok": false,
+        "unsupported": [
+          {
+            "kind": "modality-not-in-chembl",
+            "token": "small-molecule",
+            "detail": "no ChEMBL action/moa in this run supports that modality"
+          }
+        ],
+        "checked": 0
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — no disease-specific genetic association or causal MR estimate was retrieved for NR3C1 in allergic seasonal rhinitis.",
+      "written": "cards/NR3C1_Rhinitis-Allergic-Seasonal_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 95,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "ROCK2",
+      "disease": "Graft vs Host Disease",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "GO — Strong clinical evidence linking ROCK2 to graft versus host disease supports its pursuit as a therapeutic target.",
+      "written": "cards/ROCK2_Graft-vs-Host-Disease_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 82,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "SLC5A2",
+      "disease": "Kidney Failure, Chronic",
+      "validation": {
+        "ok": false,
+        "unsupported": [
+          {
+            "kind": "clinical-status-not-retrievable",
+            "token": "approved",
+            "detail": "no clinical-evidence retrieval supports it — get_clinical_evidence was not called in this run"
+          }
+        ],
+        "checked": 2
+      },
+      "verdict": "GO — SLC5A2 is a well-established pharmacological target with multiple approved inhibitor modulators in ChEMBL and robust genetic and biological links to renal function.",
+      "written": "cards/SLC5A2_Kidney-Failure-Chronic_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 99,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_chembl_modulators",
+        "get_mr_result",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "FGA",
+      "disease": "Hearing Loss",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — there is no genetic or causal evidence linking FGA to hearing loss.",
+      "written": "cards/FGA_Hearing-Loss_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 79,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "TLR4",
+      "disease": "Reproductive Tract Infections",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — there is no direct genetic or causal evidence linking TLR4 to reproductive tract infections.",
+      "written": "cards/TLR4_Reproductive-Tract-Infections_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 99,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "HDAC2",
+      "disease": "Melanoma",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 1
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — HDAC2 is not among the top associated targets for melanoma in Open Targets and lacks causal Mendelian randomization evidence.",
+      "written": "cards/HDAC2_Melanoma_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 93,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_chembl_modulators",
+        "get_mr_result",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "ENG",
+      "disease": "Kidney Neoplasms",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — there is no direct genetic or causal association linking ENG to kidney neoplasms.",
+      "written": "cards/ENG_Kidney-Neoplasms_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 81,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_chembl_modulators",
+        "get_mr_result",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "AGTR1",
+      "disease": "Pneumonia",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — while AGTR1 has modulators and genetic associations, there is no causal Mendelian randomization estimate for pneumonia and overall genetic association is weak.",
+      "written": "cards/AGTR1_Pneumonia_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 114,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_chembl_modulators",
+        "get_mr_result",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "PRKCE",
+      "disease": "Graft vs Host Disease",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — PRKCE lacks direct genetic association or causal evidence for graft versus host disease despite general druggability.",
+      "written": "cards/PRKCE_Graft-vs-Host-Disease_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 96,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_chembl_modulators",
+        "get_mr_result",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "ANGPT1",
+      "disease": "Sarcoma",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 1
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — there is currently no direct genetic or Mendelian randomization evidence connecting ANGPT1 to sarcoma.",
+      "written": "cards/ANGPT1_Sarcoma_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 94,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "CDK1",
+      "disease": "Melanoma",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 1
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — there is no direct genetic association or causal estimate linking CDK1 to melanoma.",
+      "written": "cards/CDK1_Melanoma_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 109,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "OGFR",
+      "disease": "HIV Infections",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — There is no direct genetic or causal evidence linking OGFR to HIV infections, and no known modulators for this receptor.",
+      "written": "cards/OGFR_HIV-Infections_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 86,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_mr_result",
+        "get_chembl_modulators",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    },
+    {
+      "protein": "PDGFRB",
+      "disease": "Retinal Detachment",
+      "validation": {
+        "ok": true,
+        "unsupported": [],
+        "checked": 0
+      },
+      "verdict": "INSUFFICIENT EVIDENCE — there is no available causal estimate or direct genetic association linking PDGFRB to retinal detachment.",
+      "written": "cards/PDGFRB_Retinal-Detachment_evidence_card.md",
+      "n_tool_calls": 9,
+      "n_words": 72,
+      "tools_called": [
+        "get_uniprot_dossier",
+        "get_target_disease_evidence",
+        "get_chembl_modulators",
+        "get_mr_result",
+        "get_clinvar_variants",
+        "get_gnomad_constraint",
+        "get_gwas_catalog",
+        "get_pharmgkb_drug_gene",
+        "classify_evidence_concordance"
+      ]
+    }
+  ],
+  "passed": 18,
+  "total": 20,
+  "claim_tokens_checked": 6,
+  "reasoning_words": 1866,
+  "claim_density_per_100_words": 0.32
+}

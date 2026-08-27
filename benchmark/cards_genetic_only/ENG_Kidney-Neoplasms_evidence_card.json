@@ -1,0 +1,287 @@
+{
+  "protein": "ENG",
+  "disease": "Kidney Neoplasms",
+  "generated_at": "2026-08-21T15:51:02",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_chembl_modulators",
+    "get_mr_result",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ENG"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "ENG",
+        "accession": "P17813",
+        "gene_names": [
+          "ENG"
+        ],
+        "protein_name": "Endoglin",
+        "function": "Vascular endothelium glycoprotein that plays an important role in the regulation of angiogenesis (PubMed:21737454, PubMed:23300529). Required for normal structure and integrity of adult vasculature (PubMed:7894484). Regulates the migration of vascular endothelial cells (PubMed:17540773). Required for normal extraembryonic angiogenesis and for embryonic heart development (By similarity). May regulate endothelial cell shape changes in response to blood flow, which drive vascular remodeling and establishment of normal vascular morphology during angiogenesis (By similarity). May play a critical role in the binding of endothelial cells to integrins and/or other RGD receptors (PubMed:1692830). Acts as a TGF-beta coreceptor and is involved in the TGF-beta/BMP signaling cascade that ultimately leads to the activation of SMAD transcription factors (PubMed:21737454, PubMed:22347366, PubMed:23300529, PubMed:8370410). Required for GDF2/BMP9 signaling through SMAD1 in endothelial cells and modulates TGFB1 signaling through SMAD3 (PubMed:21737454, PubMed:22347366, PubMed:23300529)",
+        "subcellular_location": [
+          "Cell membrane"
+        ],
+        "diseases": [
+          "Telangiectasia, hereditary hemorrhagic, 1"
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/P17813",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 4.875,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ENG",
+        "disease": "Kidney Neoplasms"
+      },
+      "result": {
+        "found": false,
+        "resolved": {
+          "ensembl_id": "ENSG00000106991",
+          "efo_id": "MONDO_0021163",
+          "target_name": "ENG",
+          "disease_name": "kidney neoplasm"
+        },
+        "note": "ENG is not among the top 500 associated targets for MONDO_0021163 (kidney neoplasm). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'ENG' -> ENSG00000106991 (ENG); 'Kidney Neoplasms' -> MONDO_0021163 (kidney neoplasm). Scores below describe THAT term, not the free-text phrase.",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 3.498,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ENG"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL3712885",
+        "target_name": "Endoglin",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 1,
+        "modulators": [
+          {
+            "drug": "CHEMBL2109321",
+            "action": "INHIBITOR",
+            "moa": "Endoglin inhibitor"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'ENG' and resolved to 'Endoglin' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL3712885/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 5.45,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "ENG",
+        "disease": "Kidney Neoplasms"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "ENG",
+        "disease": "Kidney Neoplasms",
+        "note": "No pQTL-based MR estimate for ENG in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.428,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ENG"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "ENG",
+        "total_records": 2172,
+        "pathogenic_in_sample": 0,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "NM_001114753.3(ENG):c.681C>G (p.His227Gln)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_001114753.3(ENG):c.655C>A (p.His219Asn)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_001114753.3(ENG):c.645C>G (p.His215Gln)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_001114753.3(ENG):c.1940C>T (p.Thr647Ile)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_001114753.3(ENG):c.929T>C (p.Ile310Thr)",
+            "significance": "Uncertain significance"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 2172 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=ENG%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.31,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ENG"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "ENG",
+        "pLI": 0.999999105553393,
+        "LOEUF": 0.35905068806346785,
+        "LOEUF_percentile": 7,
+        "oe_lof": 0.23937435276459398,
+        "oe_lof_lower": 0.1638208301067674,
+        "obs_lof": 17,
+        "exp_lof": 71.01846878607824,
+        "plain_language": "gnomAD expected about 71 loss-of-function variants in this gene and observed 17. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 1.7261278995634022,
+        "lof_z": 5.437773936784221,
+        "interpretation": "LoF-INTOLERANT: this gene is depleted of loss-of-function variants in the population, so inhibiting it carries a safety warning.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/ENG",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.417,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ENG"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "ENG",
+        "n_unique_snps": 67,
+        "n_association_rows": 133,
+        "total_association_rows_reported": 133,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs4837205",
+          "rs1043060",
+          "rs8192462",
+          "rs12238366",
+          "rs1998923",
+          "rs41529745",
+          "rs1288949855",
+          "rs77630455",
+          "rs10987728",
+          "rs4837197",
+          "rs4837207",
+          "rs3217750",
+          "rs113835437",
+          "rs10760503",
+          "rs10819313"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/ENG",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 2.354,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "ENG"
+      },
+      "result": {
+        "found": false,
+        "gene_symbol": "ENG",
+        "note": "No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.446,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "ENG",
+        "Kidney Neoplasms"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "ENG",
+          "disease": "Kidney Neoplasms",
+          "note": "No pQTL-based MR estimate for ENG in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "ENG",
+        "disease": "Kidney Neoplasms",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "INSUFFICIENT EVIDENCE — there is no direct genetic or causal association linking ENG to kidney neoplasms.",
+  "model_reasoning": "Open Targets indicates that ENG is not among the top associated targets for kidney neoplasm, and no Mendelian randomization estimate is available in the EpiGraphDB resource for this protein-disease pair. While gnomAD constraint metrics show that ENG is loss-of-function intolerant, and ChEMBL lists an inhibitor against endoglin, the lack of disease-specific genetic association or causal evidence provides insufficient support to prioritize ENG for kidney neoplasms.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 0
+  },
+  "card_markdown": "# Target Evidence Card — ENG × Kidney Neoplasms\n\n**Verdict:** INSUFFICIENT EVIDENCE — there is no direct genetic or causal association linking ENG to kidney neoplasms.\n\n> **You asked about \"Kidney Neoplasms\". This card scored MONDO_0021163 — kidney neoplasm.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Endoglin\" (CHEMBL3712885),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | **not available** — ENG is not among the top 500 associated targets for MONDO_0021163 (kidney neoplasm). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'ENG' -> ENSG00000106991 (ENG); 'Kidney Neoplasms' -> MONDO_0021163 (kidney neoplasm). Scores below describe THAT term, not the free-text phrase. |\n| Protein context | `get_uniprot_dossier` | P17813 — Endoglin; location: Cell membrane |\n| Known modulators / druggability | `get_chembl_modulators` | 1 known modulators (INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 2172 ClinVar records; 0 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1, LOEUF=0.359 → LoF-INTOLERANT (handle with care) |\n| Extra genetic evidence | `get_gwas_catalog` | 67 unique SNPs from 133/133 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n| Clinical development record | `get_clinical_evidence` | _tool not called by the agent in this run_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — ENG is not among the top 500 associated targets for MONDO_0021163 (kidney neoplasm). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'ENG' -> ENSG00000106991 (ENG); 'Kidney Neoplasms' -> MONDO_0021163 (kidney neoplasm). Scores below describe THAT term, not the free-text phrase.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'ENG' and resolved to 'Endoglin' — confirm this is the intended target.\n- **`get_mr_result`** — No pQTL-based MR estimate for ENG in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 2172 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets indicates that ENG is not among the top associated targets for kidney neoplasm, and no Mendelian randomization estimate is available in the EpiGraphDB resource for this protein-disease pair. While gnomAD constraint metrics show that ENG is loss-of-function intolerant, and ChEMBL lists an inhibitor against endoglin, the lack of disease-specific genetic association or causal evidence provides insufficient support to prioritize ENG for kidney neoplasms.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P17813 — _UniProt release 2026_02 (10-June-2026)_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL3712885/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=ENG%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/ENG — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/ENG — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:51:02\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (9 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

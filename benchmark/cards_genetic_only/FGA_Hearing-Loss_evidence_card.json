@@ -1,0 +1,309 @@
+{
+  "protein": "FGA",
+  "disease": "Hearing Loss",
+  "generated_at": "2026-08-21T15:49:51",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_mr_result",
+    "get_chembl_modulators",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "FGA"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "FGA",
+        "accession": "P02671",
+        "gene_names": [
+          "FGA"
+        ],
+        "protein_name": "Fibrinogen alpha chain",
+        "function": "Cleaved by the protease thrombin to yield monomers which, together with fibrinogen beta (FGB) and fibrinogen gamma (FGG), polymerize to form an insoluble fibrin matrix. Fibrin has a major function in hemostasis as one of the primary components of blood clots. In addition, functions during the early stages of wound repair to stabilize the lesion and guide cell migration during re-epithelialization. Was originally thought to be essential for platelet aggregation, based on in vitro studies using anticoagulated blood. However, subsequent studies have shown that it is not absolutely required for thrombus formation in vivo. Enhances expression of SELP in activated platelets via an ITGB3-dependent pathway. Maternal fibrinogen is essential for successful pregnancy. Fibrin deposition is also associated with infection, where it protects against IFNG-mediated hemorrhage. May also facilitate the immune response via both innate and T-cell mediated pathways",
+        "subcellular_location": [
+          "Secreted"
+        ],
+        "diseases": [
+          "Congenital afibrinogenemia",
+          "Amyloidosis, hereditary systemic 2",
+          "Dysfibrinogenemia, congenital"
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/P02671",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 0.848,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "FGA",
+        "disease": "Hearing Loss"
+      },
+      "result": {
+        "found": false,
+        "resolved": {
+          "ensembl_id": "ENSG00000171560",
+          "efo_id": "MONDO_0005365",
+          "target_name": "FGA",
+          "disease_name": "hearing loss disorder"
+        },
+        "note": "FGA is not among the top 500 associated targets for MONDO_0005365 (hearing loss disorder). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'FGA' -> ENSG00000171560 (FGA); 'Hearing Loss' -> MONDO_0005365 (hearing loss disorder). Scores below describe THAT term, not the free-text phrase.",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.794,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "FGA",
+        "disease": "Hearing Loss"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "FGA",
+        "disease": "Hearing Loss",
+        "note": "No pQTL-based MR estimate for FGA in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.765,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "FGA"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL2364709",
+        "target_name": "Fibrinogen",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 5,
+        "modulators": [
+          {
+            "drug": "CHEMBL1201505",
+            "action": "INHIBITOR",
+            "moa": "Fibrinogen inhibitor"
+          },
+          {
+            "drug": "CHEMBL2108893",
+            "action": "HYDROLYTIC ENZYME",
+            "moa": "Fibrinogen hydrolytic enzyme"
+          },
+          {
+            "drug": "CHEMBL2109072",
+            "action": "EXOGENOUS PROTEIN",
+            "moa": "Fibrinogen exogenous protein"
+          },
+          {
+            "drug": "CHEMBL2108481",
+            "action": "HYDROLYTIC ENZYME",
+            "moa": "Fibrinogen hydrolytic enzyme"
+          },
+          {
+            "drug": "CHEMBL2108131",
+            "action": "HYDROLYTIC ENZYME",
+            "moa": "Fibrinogen hydrolytic enzyme"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'FGA' and resolved to 'Fibrinogen' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL2364709/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 9.37,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "FGA"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "FGA",
+        "total_records": 392,
+        "pathogenic_in_sample": 1,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "NM_021871.4(FGA):c.375T>C (p.Asn125=)",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "NM_021871.4(FGA):c.1371G>A (p.Thr457=)",
+            "significance": "Likely benign"
+          },
+          {
+            "title": "GRCh38/hg38 4q28.3-35.2(chr4:136063183-190214555)x3",
+            "significance": "Pathogenic"
+          },
+          {
+            "title": "NM_021871.4(FGA):c.1222C>A (p.Pro408Thr)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_021871.4(FGA):c.817G>A (p.Gly273Ser)",
+            "significance": "Uncertain significance"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 392 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=FGA%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.654,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "FGA"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "FGA",
+        "pLI": 1.633668921970505e-07,
+        "LOEUF": 1.433585420138699,
+        "LOEUF_percentile": 63,
+        "oe_lof": 0.9865697410836097,
+        "oe_lof_lower": 0.6941516906246616,
+        "obs_lof": 20,
+        "exp_lof": 20.272261723771074,
+        "plain_language": "gnomAD expected about 20 loss-of-function variants in this gene and observed 20. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 0.11716309589008497,
+        "lof_z": 0.051297951084930835,
+        "interpretation": "LoF-tolerant: no population-level depletion of loss-of-function variants, which is reassuring but is NOT positive evidence of efficacy.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/FGA",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 1.176,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "FGA"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "FGA",
+        "n_unique_snps": 62,
+        "n_association_rows": 124,
+        "total_association_rows_reported": 124,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs2066864",
+          "rs6825454",
+          "rs7659024",
+          "rs6811815",
+          "rs7681423",
+          "rs182759678",
+          "rs72679178",
+          "rs13109457",
+          "rs13123551",
+          "rs1800788",
+          "rs145051028",
+          "rs35147053",
+          "rs72679199",
+          "rs562316170",
+          "rs185054203"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/FGA",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 1.996,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "FGA"
+      },
+      "result": {
+        "found": false,
+        "gene_symbol": "FGA",
+        "note": "No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.743,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "FGA",
+        "Hearing Loss"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "FGA",
+          "disease": "Hearing Loss",
+          "note": "No pQTL-based MR estimate for FGA in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "FGA",
+        "disease": "Hearing Loss",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "INSUFFICIENT EVIDENCE — there is no genetic or causal evidence linking FGA to hearing loss.",
+  "model_reasoning": "Open Targets shows no strong association between FGA and hearing loss, and no Mendelian randomization estimate is available in the EpiGraphDB pQTL resource for this target-disease pair. Although FGA has known functional modulators in ChEMBL and is tolerant to loss-of-function variations in gnomAD, these factors do not establish a disease-specific rationale. Without genetic or causal support for hearing loss, the target cannot be prioritized.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 0
+  },
+  "card_markdown": "# Target Evidence Card — FGA × Hearing Loss\n\n**Verdict:** INSUFFICIENT EVIDENCE — there is no genetic or causal evidence linking FGA to hearing loss.\n\n> **You asked about \"Hearing Loss\". This card scored MONDO_0005365 — hearing loss disorder.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Fibrinogen\" (CHEMBL2364709),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | **not available** — FGA is not among the top 500 associated targets for MONDO_0005365 (hearing loss disorder). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'FGA' -> ENSG00000171560 (FGA); 'Hearing Loss' -> MONDO_0005365 (hearing loss disorder). Scores below describe THAT term, not the free-text phrase. |\n| Protein context | `get_uniprot_dossier` | P02671 — Fibrinogen alpha chain; location: Secreted |\n| Known modulators / druggability | `get_chembl_modulators` | 5 known modulators (EXOGENOUS PROTEIN, HYDROLYTIC ENZYME, INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 392 ClinVar records; 1 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1.6e-07, LOEUF=1.43 → LoF-tolerant |\n| Extra genetic evidence | `get_gwas_catalog` | 62 unique SNPs from 124/124 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | **not available** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene). |\n| Clinical development record | `get_clinical_evidence` | _tool not called by the agent in this run_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — FGA is not among the top 500 associated targets for MONDO_0005365 (hearing loss disorder). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'FGA' -> ENSG00000171560 (FGA); 'Hearing Loss' -> MONDO_0005365 (hearing loss disorder). Scores below describe THAT term, not the free-text phrase.\n- **`get_mr_result`** — No pQTL-based MR estimate for FGA in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'FGA' and resolved to 'Fibrinogen' — confirm this is the intended target.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 392 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_pharmgkb_drug_gene`** — No PharmGKB/ClinPGx clinical annotations (gene may not be a pharmacogene).\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets shows no strong association between FGA and hearing loss, and no Mendelian randomization estimate is available in the EpiGraphDB pQTL resource for this target-disease pair. Although FGA has known functional modulators in ChEMBL and is tolerant to loss-of-function variations in gnomAD, these factors do not establish a disease-specific rationale. Without genetic or causal support for hearing loss, the target cannot be prioritized.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P02671 — _UniProt release 2026_02 (10-June-2026)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL2364709/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=FGA%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/FGA — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/FGA — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:49:51\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (9 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_mr_result`, `get_chembl_modulators`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

@@ -1,0 +1,316 @@
+{
+  "protein": "PRKCE",
+  "disease": "Graft vs Host Disease",
+  "generated_at": "2026-08-21T15:51:44",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_chembl_modulators",
+    "get_mr_result",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PRKCE"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PRKCE",
+        "accession": "Q02156",
+        "gene_names": [
+          "PRKCE"
+        ],
+        "protein_name": "Protein kinase C epsilon type",
+        "function": "Calcium-independent, phospholipid- and diacylglycerol (DAG)-dependent serine/threonine-protein kinase that plays essential roles in the regulation of multiple cellular processes linked to cytoskeletal proteins, such as cell adhesion, motility, migration and cell cycle, functions in neuron growth and ion channel regulation, and is involved in immune response, cancer cell invasion and regulation of apoptosis. Mediates cell adhesion to the extracellular matrix via integrin-dependent signaling, by mediating angiotensin-2-induced activation of integrin beta-1 (ITGB1) in cardiac fibroblasts. Phosphorylates MARCKS, which phosphorylates and activates PTK2/FAK, leading to the spread of cardiomyocytes. Involved in the control of the directional transport of ITGB1 in mesenchymal cells by phosphorylating vimentin (VIM), an intermediate filament (IF) protein. In epithelial cells, associates with and phosphorylates keratin-8 (KRT8), which induces targeting of desmoplakin at desmosomes and regulates cell-cell contact. Phosphorylates IQGAP1, which binds to CDC42, mediating epithelial cell-cell detachment prior to migration. In HeLa cells, contributes to hepatocyte growth factor (HGF)-induced cell migration, and in human corneal epithelial cells, plays a critical role in wound healing after activation by HGF. During cytokinesis, forms a complex with YWHAB, which is crucial for daughter cell separation, and facilitates abscission by a mechanism which may implicate the regulation of RHOA. In cardiac myocytes, regulates myofilament function and excitation coupling at the Z-lines, where it is indirectly associated with F-actin via interaction with COPB1. During endothelin-induced cardiomyocyte hypertrophy, mediates activation of PTK2/FAK, which is critical for cardiomyocyte survival and regulation of sarcomere length. Plays a role in the pathogenesis of dilated cardiomyopathy via persistent phosphorylation of troponin I (TNNI3). Involved in nerve growth factor (NFG)-induced neurite outgrowth and neuron morphological change independently of its kinase activity, by inhibition of RHOA pathway, activation of CDC42 and cytoskeletal rearrangement. May be involved in presynaptic facilitation by mediating phorbol ester-induced synaptic potentiation. Phosphorylates gamma-aminobutyric acid receptor subunit gamma-2 (GABRG2), which reduces the response of GABA receptors to ethanol and benzodiazepines and may mediate acute tolerance to the intoxicating effects of ethanol. Upon PMA treatment, phosphorylates the capsaicin- and heat-activated cation channel TRPV1, which is required for bradykinin-induced sensitization of the heat response in nociceptive neurons. Is able to form a complex with PDLIM5 and N-type calcium channel, and may enhance channel activities and potentiates fast synaptic transmission by phosphorylating the pore-forming alpha subunit CACNA1B (CaV2.2). In prostate cancer cells, interacts with and phosphorylates STAT3, which increases DNA-binding and transcriptional activity of STAT3 and seems to be essential for prostate cancer cell invasion. Downstream of TLR4, plays an important role in the lipopolysaccharide (LPS)-induced immune response by phosphorylating and activating TICAM2/TRAM, which in turn activates the transcription factor IRF3 and subsequent cytokines production. In differentiating erythroid progenitors, is regulated by EPO and controls the protection against the TNFSF10/TRAIL-mediated apoptosis, via BCL2. May be involved in the regulation of the insulin-induced phosphorylation and activation of AKT1. Phosphorylates NLRP5/MATER and may thereby modulate AKT pathway activation in cumulus cells (PubMed:19542546). Phosphorylates and activates LRRK1, which phosphorylates RAB proteins involved in intracellular trafficking (PubMed:36040231)",
+        "subcellular_location": [
+          "Cytoplasm",
+          "Cytoplasm, cytoskeleton",
+          "Cell membrane",
+          "Cytoplasm, perinuclear region",
+          "Nucleus"
+        ],
+        "diseases": [
+          "None annotated."
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/Q02156",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 0.854,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PRKCE",
+        "disease": "Graft vs Host Disease"
+      },
+      "result": {
+        "found": false,
+        "resolved": {
+          "ensembl_id": "ENSG00000171132",
+          "efo_id": "MONDO_0013730",
+          "target_name": "PRKCE",
+          "disease_name": "graft versus host disease"
+        },
+        "note": "PRKCE is not among the top 500 associated targets for MONDO_0013730 (graft versus host disease). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'PRKCE' -> ENSG00000171132 (PRKCE); 'Graft vs Host Disease' -> MONDO_0013730 (graft versus host disease). Scores below describe THAT term, not the free-text phrase.",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.583,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PRKCE"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL3582",
+        "target_name": "Protein kinase C epsilon type",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 1,
+        "modulators": [
+          {
+            "drug": "CHEMBL4297775",
+            "action": "INHIBITOR",
+            "moa": "Protein kinase C epsilon inhibitor"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'PRKCE' and resolved to 'Protein kinase C epsilon type' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL3582/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 6.12,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "PRKCE",
+        "disease": "Graft vs Host Disease"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "PRKCE",
+        "disease": "Graft vs Host Disease",
+        "note": "No pQTL-based MR estimate for PRKCE in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.953,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PRKCE"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PRKCE",
+        "total_records": 104,
+        "pathogenic_in_sample": 0,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "GRCh38/hg38 2p21(chr2:45182849-45746997)x3",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_005400.3(PRKCE):c.1532T>G (p.Phe511Cys)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_005400.3(PRKCE):c.2075A>G (p.Lys692Arg)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_005400.3(PRKCE):c.455G>A (p.Arg152Gln)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_005400.3(PRKCE):c.1441C>T (p.Arg481Cys)",
+            "significance": "Uncertain significance"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 104 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=PRKCE%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.602,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PRKCE"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PRKCE",
+        "pLI": 0.999999999801499,
+        "LOEUF": 0.28449118398142403,
+        "LOEUF_percentile": 4,
+        "oe_lof": 0.1873101739799552,
+        "oe_lof_lower": 0.12681063091933426,
+        "obs_lof": 16,
+        "exp_lof": 85.41981281653298,
+        "plain_language": "gnomAD expected about 85 loss-of-function variants in this gene and observed 16. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 5.493077121032353,
+        "lof_z": 6.371895755628599,
+        "interpretation": "LoF-INTOLERANT: this gene is depleted of loss-of-function variants in the population, so inhibiting it carries a safety warning.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/PRKCE",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.521,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PRKCE"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PRKCE",
+        "n_unique_snps": 123,
+        "n_association_rows": 314,
+        "total_association_rows_reported": 314,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs1476333",
+          "rs534288",
+          "rs4953288",
+          "rs3768758",
+          "rs4245806",
+          "rs17745066",
+          "rs7593800",
+          "rs12622534",
+          "rs17034876",
+          "rs14138",
+          "rs281499",
+          "rs3754559",
+          "rs6544870",
+          "rs11125062",
+          "rs12712969"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/PRKCE",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 3.873,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "PRKCE"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "PRKCE",
+        "n_clinical_annotations": 2,
+        "evidence_level_counts": {
+          "3": 2
+        },
+        "drugs": [
+          "radiotherapy",
+          "sorafenib"
+        ],
+        "n_drugs": 2,
+        "examples": [
+          {
+            "drugs": [
+              "sorafenib"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs11125039 (PRKCE); sorafenib; Hypertension (level 3 Toxicity)"
+          },
+          {
+            "drugs": [
+              "radiotherapy"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs11125035 (PRKCE); radiotherapy (level 3 Toxicity)"
+          }
+        ],
+        "url": "https://www.pharmgkb.org/search?query=PRKCE",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.578,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "PRKCE",
+        "Graft vs Host Disease"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "PRKCE",
+          "disease": "Graft vs Host Disease",
+          "note": "No pQTL-based MR estimate for PRKCE in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "PRKCE",
+        "disease": "Graft vs Host Disease",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "INSUFFICIENT EVIDENCE — PRKCE lacks direct genetic association or causal evidence for graft versus host disease despite general druggability.",
+  "model_reasoning": "Open Targets shows no direct genetic association between PRKCE and graft versus host disease, and no Mendelian randomization estimates are available for this pair. Although PRKCE is loss-of-function intolerant in gnomAD, representing a potential safety warning, it has known chemical modulators in ChEMBL. Furthermore, GWAS catalog data links the locus to multiple traits and PharmGKB notes pharmacogenomic annotations with sorafenib and radiotherapy, but the absence of disease-specific genetic or causal evidence precludes target support for this indication.",
+  "validation": {
+    "ok": true,
+    "unsupported": [],
+    "checked": 0
+  },
+  "card_markdown": "# Target Evidence Card — PRKCE × Graft vs Host Disease\n\n**Verdict:** INSUFFICIENT EVIDENCE — PRKCE lacks direct genetic association or causal evidence for graft versus host disease despite general druggability.\n\n> **You asked about \"Graft vs Host Disease\". This card scored MONDO_0013730 — graft versus host disease.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"Protein kinase C epsilon type\" (CHEMBL3582),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | **not available** — PRKCE is not among the top 500 associated targets for MONDO_0013730 (graft versus host disease). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'PRKCE' -> ENSG00000171132 (PRKCE); 'Graft vs Host Disease' -> MONDO_0013730 (graft versus host disease). Scores below describe THAT term, not the free-text phrase. |\n| Protein context | `get_uniprot_dossier` | Q02156 — Protein kinase C epsilon type; location: Cytoplasm, Cytoplasm, cytoskeleton, Cell membrane, Cytoplasm |\n| Known modulators / druggability | `get_chembl_modulators` | 1 known modulators (INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 104 ClinVar records; 0 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1, LOEUF=0.284 → LoF-INTOLERANT (handle with care) |\n| Extra genetic evidence | `get_gwas_catalog` | 123 unique SNPs from 314/314 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 2 clinical annotation(s) over 2 drug(s): radiotherapy, sorafenib — ClinPGx evidence level 3 (scale 1A strongest to 4 weakest) — e.g. rs11125039 (PRKCE); sorafenib; Hypertension (level 3 Toxicity) |\n| Clinical development record | `get_clinical_evidence` | _tool not called by the agent in this run_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — PRKCE is not among the top 500 associated targets for MONDO_0013730 (graft versus host disease). This is a TRUNCATED LOOKUP, not proof of no association. Free-text inputs were resolved to ontology terms: 'PRKCE' -> ENSG00000171132 (PRKCE); 'Graft vs Host Disease' -> MONDO_0013730 (graft versus host disease). Scores below describe THAT term, not the free-text phrase.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'PRKCE' and resolved to 'Protein kinase C epsilon type' — confirm this is the intended target.\n- **`get_mr_result`** — No pQTL-based MR estimate for PRKCE in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 104 ClinVar records for this gene; it is a sample, not a rate.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nOpen Targets shows no direct genetic association between PRKCE and graft versus host disease, and no Mendelian randomization estimates are available for this pair. Although PRKCE is loss-of-function intolerant in gnomAD, representing a potential safety warning, it has known chemical modulators in ChEMBL. Furthermore, GWAS catalog data links the locus to multiple traits and PharmGKB notes pharmacogenomic annotations with sorafenib and radiotherapy, but the absence of disease-specific genetic or causal evidence precludes target support for this indication.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/Q02156 — _UniProt release 2026_02 (10-June-2026)_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL3582/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=PRKCE%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/PRKCE — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/PRKCE — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=PRKCE — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n\n## Provenance\n\n- Generated: 2026-08-21T15:51:44\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (9 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n"
+}

@@ -1,0 +1,700 @@
+{
+  "protein": "HMGCR",
+  "disease": "high cholesterol",
+  "generated_at": "2026-08-21T15:33:17",
+  "model": "gemini-flash-lite-latest",
+  "tools_called": [
+    "get_uniprot_dossier",
+    "get_target_disease_evidence",
+    "get_chembl_modulators",
+    "get_mr_result",
+    "get_clinvar_variants",
+    "get_gnomad_constraint",
+    "get_gwas_catalog",
+    "get_pharmgkb_drug_gene",
+    "get_clinical_evidence",
+    "classify_evidence_concordance"
+  ],
+  "tool_ledger": [
+    {
+      "tool": "get_uniprot_dossier",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "HMGCR"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "HMGCR",
+        "accession": "P04035",
+        "gene_names": [
+          "HMGCR"
+        ],
+        "protein_name": "3-hydroxy-3-methylglutaryl-coenzyme A reductase",
+        "function": "Catalyzes the conversion of (3S)-hydroxy-3-methylglutaryl-CoA (HMG-CoA) to mevalonic acid, the rate-limiting step in the synthesis of cholesterol and other isoprenoids, thus plays a critical role in cellular cholesterol homeostasis (PubMed:21357570, PubMed:2991281, PubMed:36745799, PubMed:6995544). HMGCR is the main target of statins, a class of cholesterol-lowering drugs (PubMed:11349148, PubMed:18540668, PubMed:36745799)",
+        "subcellular_location": [
+          "Endoplasmic reticulum membrane",
+          "Peroxisome membrane"
+        ],
+        "diseases": [
+          "Muscular dystrophy, limb-girdle, autosomal recessive 28"
+        ],
+        "url": "https://www.uniprot.org/uniprotkb/P04035",
+        "source_release": "UniProt release 2026_02 (10-June-2026)"
+      },
+      "seconds": 4.942,
+      "exception": null
+    },
+    {
+      "tool": "get_target_disease_evidence",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "HMGCR",
+        "disease": "high cholesterol"
+      },
+      "result": {
+        "found": true,
+        "ensembl_id": "ENSG00000113161",
+        "efo_id": "HP_0003124",
+        "resolved_target_name": "HMGCR",
+        "resolved_disease_name": "Hypercholesterolemia",
+        "overall_score": 0.74,
+        "datatype_scores": {
+          "literature": 0.2062,
+          "genetic_association": 0.857,
+          "clinical": 0.9984
+        },
+        "note": "Free-text inputs were resolved to ontology terms: 'HMGCR' -> ENSG00000113161 (HMGCR); 'high cholesterol' -> HP_0003124 (Hypercholesterolemia). Scores below describe THAT term, not the free-text phrase.",
+        "url": "https://platform.opentargets.org/evidence/ENSG00000113161/HP_0003124",
+        "source_release": "Open Targets data release 26.06"
+      },
+      "seconds": 2.121,
+      "exception": null
+    },
+    {
+      "tool": "get_chembl_modulators",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "HMGCR"
+      },
+      "result": {
+        "found": true,
+        "target_chembl_id": "CHEMBL402",
+        "target_name": "3-hydroxy-3-methylglutaryl-coenzyme A reductase",
+        "matched_target_organism": "Homo sapiens",
+        "n_modulators": 10,
+        "modulators": [
+          {
+            "drug": "CHEMBL503",
+            "action": "INHIBITOR",
+            "moa": "HMG-CoA reductase inhibitor"
+          },
+          {
+            "drug": "CHEMBL1200563",
+            "action": "INHIBITOR",
+            "moa": "HMG-CoA reductase inhibitor"
+          },
+          {
+            "drug": "CHEMBL1237061",
+            "action": "INHIBITOR",
+            "moa": "HMG-CoA reductase inhibitor"
+          },
+          {
+            "drug": "CHEMBL2218894",
+            "action": "INHIBITOR",
+            "moa": "HMG-CoA reductase inhibitor"
+          },
+          {
+            "drug": "CHEMBL1744447",
+            "action": "INHIBITOR",
+            "moa": "HMG-CoA reductase inhibitor"
+          },
+          {
+            "drug": "CHEMBL690",
+            "action": "INHIBITOR",
+            "moa": "HMG-CoA reductase inhibitor"
+          },
+          {
+            "drug": "CHEMBL393220",
+            "action": "INHIBITOR",
+            "moa": "HMG-CoA reductase inhibitor"
+          },
+          {
+            "drug": "CHEMBL1064",
+            "action": "INHIBITOR",
+            "moa": "HMG-CoA reductase inhibitor"
+          },
+          {
+            "drug": "CHEMBL3989923",
+            "action": "INHIBITOR",
+            "moa": "HMG-CoA reductase inhibitor"
+          },
+          {
+            "drug": "CHEMBL3989920",
+            "action": "INHIBITOR",
+            "moa": "HMG-CoA reductase inhibitor"
+          }
+        ],
+        "note": "ChEMBL target matched by text search on 'HMGCR' and resolved to '3-hydroxy-3-methylglutaryl-coenzyme A reductase' — confirm this is the intended target.",
+        "url": "https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL402/",
+        "source_release": "ChEMBL_37 (released 2026-05-01)"
+      },
+      "seconds": 5.438,
+      "exception": null
+    },
+    {
+      "tool": "get_mr_result",
+      "args": [],
+      "kwargs": {
+        "protein": "HMGCR",
+        "disease": "high cholesterol"
+      },
+      "result": {
+        "found": false,
+        "computed_here": false,
+        "protein": "HMGCR",
+        "disease": "high cholesterol",
+        "note": "No pQTL-based MR estimate for HMGCR in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+        "url": "https://epigraphdb.org/pqtl/"
+      },
+      "seconds": 1.544,
+      "exception": null
+    },
+    {
+      "tool": "get_clinvar_variants",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "HMGCR"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "HMGCR",
+        "total_records": 112,
+        "pathogenic_in_sample": 1,
+        "sample_size": 30,
+        "examples": [
+          {
+            "title": "GRCh38/hg38 5q13.3(chr5:75261815-75400102)x3",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_000859.3(HMGCR):c.2518C>T (p.Arg840Ter)",
+            "significance": "Likely pathogenic"
+          },
+          {
+            "title": "NM_000859.3(HMGCR):c.595A>G (p.Met199Val)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_000859.3(HMGCR):c.1502A>G (p.Lys501Arg)",
+            "significance": "Uncertain significance"
+          },
+          {
+            "title": "NM_000859.3(HMGCR):c.2195A>G (p.Asn732Ser)",
+            "significance": "Uncertain significance"
+          }
+        ],
+        "note": "Pathogenic count is over the 30 record(s) retrieved, NOT over all 112 ClinVar records for this gene; it is a sample, not a rate.",
+        "url": "https://www.ncbi.nlm.nih.gov/clinvar/?term=HMGCR%5Bgene%5D",
+        "source_release": "ClinVar build Build260818-0035.1"
+      },
+      "seconds": 1.442,
+      "exception": null
+    },
+    {
+      "tool": "get_gnomad_constraint",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "HMGCR"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "HMGCR",
+        "pLI": 0.9999335526421149,
+        "LOEUF": 0.433003626760854,
+        "LOEUF_percentile": 10,
+        "oe_lof": 0.3223667998670253,
+        "oe_lof_lower": 0.243313282832251,
+        "obs_lof": 32,
+        "exp_lof": 99.26580532858793,
+        "plain_language": "gnomAD expected about 99 loss-of-function variants in this gene and observed 32. LOEUF is the upper bound of the confidence interval on that ratio, so it is deliberately conservative: it asks how tolerant the gene could plausibly be, not how tolerant it looks.",
+        "mis_z": 5.011752898284163,
+        "lof_z": 5.727420141384931,
+        "interpretation": "LoF-INTOLERANT: this gene is depleted of loss-of-function variants in the population, so inhibiting it carries a safety warning.",
+        "thresholds_used": "LoF-intolerant if pLI > 0.9 or LOEUF < 0.35",
+        "url": "https://gnomad.broadinstitute.org/gene/HMGCR",
+        "source_release": "gnomAD constraint via GraphQL API (reference genome GRCh38)"
+      },
+      "seconds": 0.407,
+      "exception": null
+    },
+    {
+      "tool": "get_gwas_catalog",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "HMGCR"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "HMGCR",
+        "n_unique_snps": 92,
+        "n_association_rows": 177,
+        "total_association_rows_reported": 177,
+        "sweep_complete": true,
+        "note": null,
+        "example_rsids": [
+          "rs142563098",
+          "rs6895057",
+          "rs4512110",
+          "rs11443896",
+          "rs11749783",
+          "rs4704210",
+          "rs76475757",
+          "rs17647994",
+          "rs10462518",
+          "rs200174418",
+          "rs17671845",
+          "rs17244834",
+          "rs9791146",
+          "rs1423527",
+          "rs17671591"
+        ],
+        "url": "https://www.ebi.ac.uk/gwas/genes/HMGCR",
+        "source_release": "GWAS Catalog REST (live; release not exposed by this endpoint)"
+      },
+      "seconds": 2.21,
+      "exception": null
+    },
+    {
+      "tool": "get_pharmgkb_drug_gene",
+      "args": [],
+      "kwargs": {
+        "gene_symbol": "HMGCR"
+      },
+      "result": {
+        "found": true,
+        "gene_symbol": "HMGCR",
+        "n_clinical_annotations": 10,
+        "evidence_level_counts": {
+          "3": 10
+        },
+        "drugs": [
+          "HMG-CoA reductase inhibitors",
+          "atorvastatin",
+          "fluvastatin",
+          "lovastatin",
+          "pravastatin",
+          "simvastatin"
+        ],
+        "n_drugs": 6,
+        "examples": [
+          {
+            "drugs": [
+              "pravastatin"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs17238540 (HMGCR); pravastatin (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "simvastatin"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs17238540 (HMGCR); simvastatin (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "atorvastatin",
+              "fluvastatin",
+              "HMG-CoA reductase inhibitors",
+              "lovastatin",
+              "pravastatin",
+              "simvastatin"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs17238540 (HMGCR); atorvastatin, fluvastatin, hmg coa reductase inhibitors, lovastatin, pravastatin or simvastatin (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "pravastatin"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs17244841 (HMGCR); pravastatin (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "atorvastatin"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs17671591 (HMGCR); atorvastatin; Hypercholesterolemia (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "simvastatin"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs17244841 (HMGCR); simvastatin (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "pravastatin",
+              "simvastatin"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs17244841 (HMGCR); pravastatin or simvastatin (level 3 Efficacy)"
+          },
+          {
+            "drugs": [
+              "HMG-CoA reductase inhibitors"
+            ],
+            "level_of_evidence": "3",
+            "annotation": "rs12654264 (HMGCR); hmg coa reductase inhibitors; Colonic Neoplasms (level 3)"
+          }
+        ],
+        "url": "https://www.pharmgkb.org/search?query=HMGCR",
+        "source_release": "ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data"
+      },
+      "seconds": 0.573,
+      "exception": null
+    },
+    {
+      "tool": "get_clinical_evidence",
+      "args": [],
+      "kwargs": {
+        "protein": "HMGCR",
+        "disease": "high cholesterol"
+      },
+      "result": {
+        "found": true,
+        "computed_here": false,
+        "protein": "HMGCR",
+        "disease": "high cholesterol",
+        "ensembl_id": "ENSG00000113161",
+        "n_drug_programmes": 16,
+        "max_stage_any_disease": "APPROVAL",
+        "max_stage_this_disease": "APPROVAL",
+        "drugs_for_this_disease": [
+          {
+            "drug": "SIMVASTATIN",
+            "chembl_id": "CHEMBL1064",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "Hypercholesterolemia",
+              "hyperlipidemia",
+              "coronary artery disorder",
+              "stroke disorder",
+              "myocardial infarction",
+              "type 2 diabetes mellitus"
+            ],
+            "n_reports_this_disease": 188,
+            "max_stage_this_disease": "APPROVAL",
+            "n_stop_this_disease": 2,
+            "stop_reason_categories_this_disease": {
+              "Negative": 1,
+              "Business_Administrative": 1
+            },
+            "example_why_stopped_this_disease": "Overall profile of the compound does not offer significant clinical advantage to patients over currently available lipid lowering agents",
+            "n_reports_any_disease": 489,
+            "n_stop_any_disease": 31,
+            "stop_reason_categories_any_disease": {
+              "Negative": 3,
+              "Insufficient_Enrollment": 15,
+              "Uncategorised": 2,
+              "Business_Administrative": 7,
+              "Another_Study": 1,
+              "Regulatory": 1,
+              "Study_Staff_Moved": 2
+            },
+            "example_why_stopped_any_disease": "Overall profile of the compound does not offer significant clinical advantage to patients over currently available lipid lowering agents",
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "ATORVASTATIN",
+            "chembl_id": "CHEMBL1487",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "angina pectoris",
+              "Hypercholesterolemia",
+              "cardiovascular disorder",
+              "hyperlipidemia",
+              "Hypertension",
+              "atherosclerosis"
+            ],
+            "n_reports_this_disease": 93,
+            "max_stage_this_disease": "APPROVAL",
+            "n_stop_this_disease": 3,
+            "stop_reason_categories_this_disease": {
+              "Negative": 1,
+              "Insufficient_Enrollment": 1,
+              "Business_Administrative": 1
+            },
+            "example_why_stopped_this_disease": "Overall profile of the compound does not offer significant clinical advantage to patients over currently available lipid lowering agents",
+            "n_reports_any_disease": 512,
+            "n_stop_any_disease": 52,
+            "stop_reason_categories_any_disease": {
+              "Negative": 6,
+              "Insufficient_Enrollment": 26,
+              "Business_Administrative": 10,
+              "Invalid_Reason": 3,
+              "Logistics_Resources": 1,
+              "Study_Design": 2,
+              "Study_Staff_Moved": 1,
+              "Another_Study": 2,
+              "No_Context": 1,
+              "Uncategorised": 1
+            },
+            "example_why_stopped_any_disease": "Overall profile of the compound does not offer significant clinical advantage to patients over currently available lipid lowering agents",
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "ATORVASTATIN CALCIUM",
+            "chembl_id": "CHEMBL393220",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "angina pectoris",
+              "hyperlipidemia",
+              "Hypercholesterolemia",
+              "Abnormal circulating lipid concentration",
+              "congestive heart failure",
+              "stroke disorder"
+            ],
+            "n_reports_this_disease": 78,
+            "max_stage_this_disease": "APPROVAL",
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 89,
+            "n_stop_any_disease": 0,
+            "stop_reason_categories_any_disease": null,
+            "example_why_stopped_any_disease": null,
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "PRAVASTATIN SODIUM",
+            "chembl_id": "CHEMBL690",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "Hypercholesterolemia",
+              "coronary atherosclerosis",
+              "familial hypercholesterolemia",
+              "atherosclerosis",
+              "cardiovascular disorder",
+              "coronary artery disorder"
+            ],
+            "n_reports_this_disease": 75,
+            "max_stage_this_disease": "APPROVAL",
+            "n_stop_this_disease": 1,
+            "stop_reason_categories_this_disease": {
+              "Study_Design": 1
+            },
+            "example_why_stopped_this_disease": "On 05/08/12, team working on revising protocol and re-open study under version 2.0",
+            "n_reports_any_disease": 80,
+            "n_stop_any_disease": 1,
+            "stop_reason_categories_any_disease": {
+              "Study_Design": 1
+            },
+            "example_why_stopped_any_disease": "On 05/08/12, team working on revising protocol and re-open study under version 2.0",
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "ROSUVASTATIN",
+            "chembl_id": "CHEMBL1496",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "Hypercholesterolemia",
+              "cardiovascular disorder",
+              "atherosclerosis",
+              "hyperlipoproteinemia type 3",
+              "acute coronary syndrome",
+              "metabolic syndrome"
+            ],
+            "n_reports_this_disease": 64,
+            "max_stage_this_disease": "APPROVAL",
+            "n_stop_this_disease": 2,
+            "stop_reason_categories_this_disease": {
+              "Negative": 1,
+              "Invalid_Reason": 1
+            },
+            "example_why_stopped_this_disease": "Overall profile of the compound does not offer significant clinical advantage to patients over currently available lipid lowering agents",
+            "n_reports_any_disease": 294,
+            "n_stop_any_disease": 16,
+            "stop_reason_categories_any_disease": {
+              "Negative": 2,
+              "Insufficient_Enrollment": 7,
+              "Business_Administrative": 4,
+              "Covid19": 3,
+              "Invalid_Reason": 1
+            },
+            "example_why_stopped_any_disease": "Overall profile of the compound does not offer significant clinical advantage to patients over currently available lipid lowering agents",
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "ROSUVASTATIN CALCIUM",
+            "chembl_id": "CHEMBL1744447",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "hyperlipoproteinemia type 3",
+              "Hypercholesterolemia",
+              "familial hypercholesterolemia",
+              "hyperlipidemia",
+              "atherosclerosis",
+              "coronary artery disorder"
+            ],
+            "n_reports_this_disease": 25,
+            "max_stage_this_disease": "APPROVAL",
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 31,
+            "n_stop_any_disease": 0,
+            "stop_reason_categories_any_disease": null,
+            "example_why_stopped_any_disease": null,
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "PITAVASTATIN",
+            "chembl_id": "CHEMBL1201753",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "Hypercholesterolemia",
+              "cardiovascular disorder",
+              "Hypercholesterolemia",
+              "type 2 diabetes mellitus",
+              "type 2 diabetes mellitus",
+              "Disorder of lipid metabolism"
+            ],
+            "n_reports_this_disease": 13,
+            "max_stage_this_disease": "APPROVAL",
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 44,
+            "n_stop_any_disease": 0,
+            "stop_reason_categories_any_disease": null,
+            "example_why_stopped_any_disease": null,
+            "latest_report_year_any_disease": null
+          },
+          {
+            "drug": "LOVASTATIN",
+            "chembl_id": "CHEMBL503",
+            "max_stage_any_disease": "APPROVAL",
+            "diseases": [
+              "Hypercholesterolemia",
+              "coronary artery disorder",
+              "atherosclerosis",
+              "coronary atherosclerosis",
+              "cardiovascular disorder",
+              "peripheral arterial disease"
+            ],
+            "n_reports_this_disease": 9,
+            "max_stage_this_disease": "APPROVAL",
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 75,
+            "n_stop_any_disease": 11,
+            "stop_reason_categories_any_disease": {
+              "Insufficient_Enrollment": 6,
+              "Regulatory": 1,
+              "Negative": 1,
+              "Study_Staff_Moved": 1,
+              "Invalid_Reason": 1,
+              "Business_Administrative": 1,
+              "Safety_Sideeffects": 1
+            },
+            "example_why_stopped_any_disease": "Slow enrollment &Study Drug Expiration (Target: 40 randomized participants /arm)",
+            "latest_report_year_any_disease": null
+          }
+        ],
+        "drugs_other_diseases_context_only": [
+          {
+            "drug": "CERIVASTATIN SODIUM",
+            "chembl_id": "CHEMBL1200563",
+            "max_stage_any_disease": "UNKNOWN",
+            "diseases": [],
+            "n_reports_this_disease": 0,
+            "max_stage_this_disease": null,
+            "n_stop_this_disease": 0,
+            "stop_reason_categories_this_disease": null,
+            "example_why_stopped_this_disease": null,
+            "n_reports_any_disease": 3,
+            "n_stop_any_disease": 0,
+            "stop_reason_categories_any_disease": null,
+            "example_why_stopped_any_disease": null,
+            "latest_report_year_any_disease": 2001
+          }
+        ],
+        "note": "Phase and trial status mean trials EXIST, not that they worked — a COMPLETED phase-3 trial can be a failed one; only why-stopped fields carry failure information, and only approval carries a regulator's efficacy judgement. Registries lag press releases by a data release or more.",
+        "url": "https://platform.opentargets.org/target/ENSG00000113161",
+        "source_release": "Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)"
+      },
+      "seconds": 1.774,
+      "exception": null
+    },
+    {
+      "tool": "classify_evidence_concordance",
+      "args": [
+        "HMGCR",
+        "high cholesterol"
+      ],
+      "kwargs": {
+        "mr_result": {
+          "found": false,
+          "computed_here": false,
+          "protein": "HMGCR",
+          "disease": "high cholesterol",
+          "note": "No pQTL-based MR estimate for HMGCR in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.",
+          "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0",
+          "url": "https://epigraphdb.org/pqtl/"
+        }
+      },
+      "result": {
+        "found": false,
+        "computed_here": true,
+        "classifier": "rule-based; no LLM anywhere in this path",
+        "protein": "HMGCR",
+        "disease": "high cholesterol",
+        "retrieval_coverage": {
+          "epigraphdb": "no_instrument",
+          "europe_pmc": "not_checked",
+          "semantic_scholar": "not_checked",
+          "mr_kg": "not_checked",
+          "literature_direction": null
+        },
+        "estimate_concordance": {
+          "n_estimates_compared": 0,
+          "direction": "no_estimate",
+          "independence": "not_assessable",
+          "label": "no_estimate",
+          "cross_platform": false,
+          "validation_depth_per_estimate": [],
+          "best_validation_depth": 0,
+          "validation_signals": []
+        },
+        "note": "Nothing to compare: fewer than two matched estimates.",
+        "url": "https://epigraphdb.org/pqtl/",
+        "source_release": "EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0"
+      },
+      "seconds": 0.0,
+      "exception": null
+    }
+  ],
+  "model_verdict": "GO — HMGCR is the clinically validated, primary pharmacological target of statins for hypercholesterolemia, backed by extensive genetic and clinical trial evidence.",
+  "model_reasoning": "HMGCR encodes 3-hydroxy-3-methylglutaryl-coenzyme A reductase, the rate-limiting enzyme in cholesterol biosynthesis and the well-established target of multiple FDA-approved statin drugs such as simvastatin, atorvastatin, and rosuvastatin. Open Targets demonstrates strong genetic and clinical association scores for hypercholesterolemia, and numerous ChEMBL modulators target this protein. While gnomAD constraint metrics indicate that the gene is LoF-intolerant, its successful inhibition by approved therapeutics underscores its exceptional target validation for lowering cholesterol.",
+  "validation": {
+    "ok": false,
+    "unsupported": [
+      {
+        "kind": "efficacy-claim-not-retrievable",
+        "token": "clinically validated",
+        "detail": "stages and statuses say trials EXIST, not that they worked — no tool in this panel returns efficacy; report the stage or the approval, never 'proven'"
+      },
+      {
+        "kind": "qualitative-claim",
+        "token": "FDA-approved"
+      }
+    ],
+    "checked": 1
+  },
+  "card_markdown": "# Target Evidence Card — HMGCR × high cholesterol\n\n**Verdict:** GO — HMGCR is the clinically validated, primary pharmacological target of statins for hypercholesterolemia, backed by extensive genetic and clinical trial evidence.\n\n> **You asked about \"high cholesterol\". This card scored HP_0003124 — Hypercholesterolemia.** If those are not the same thing, every number below answers a different question.\n> **The druggability row is about ChEMBL target \"3-hydroxy-3-methylglutaryl-coenzyme A reductase\" (CHEMBL402),** matched by text search. If that is not the molecular target you meant, that row is about something else.\n\n## Evidence concordance — classified by rule, not written by the model\n\n- Sources: EpiGraphDB — no pQTL instrument · Europe PMC — NOT checked in this run · Semantic Scholar — NOT checked in this run · MR-KG — NOT checked in this run\n\n## Evidence\n\n| Evidence | Tool | Result |\n|---|---|---|\n| Causal effect (MR) — retrieved, not computed | `get_mr_result` | **not available** — no pQTL MR estimate for this protein in the resource (absence of an estimate is not evidence of no effect) |\n| Target–disease association | `get_target_disease_evidence` | overall score=0.74 (literature=0.206, genetic_association=0.857, clinical=0.998) |\n| Protein context | `get_uniprot_dossier` | P04035 — 3-hydroxy-3-methylglutaryl-coenzyme A reductase; location: Endoplasmic reticulum membrane, Peroxisome membrane |\n| Known modulators / druggability | `get_chembl_modulators` | 10 known modulators (INHIBITOR) |\n| Clinical variants | `get_clinvar_variants` | 112 ClinVar records; 1 pathogenic in a sample of 30 |\n| Population constraint / LoF tolerance | `get_gnomad_constraint` | pLI=1, LOEUF=0.433 → LoF-INTOLERANT (handle with care) |\n| Extra genetic evidence | `get_gwas_catalog` | 92 unique SNPs from 177/177 association rows |\n| Pharmacogenomics | `get_pharmgkb_drug_gene` | 10 clinical annotation(s) over 6 drug(s): HMG-CoA reductase inhibitors, atorvastatin, fluvastatin, lovastatin +2 more — ClinPGx evidence level 3 (scale 1A strongest to 4 weakest) — e.g. rs17238540 (HMGCR); pravastatin (level 3 Efficacy) |\n| Clinical development record | `get_clinical_evidence` | max stage for THIS disease: **APPROVAL** — e.g. SIMVASTATIN (APPROVAL, 188 trial report(s) for this disease, 2 of them with a stop reason); +7 more drug(s) for this disease  \n_stages mean trials exist, not that they worked_ |\n\n## Caveats declared by the tools\n\n- **`get_target_disease_evidence`** — Free-text inputs were resolved to ontology terms: 'HMGCR' -> ENSG00000113161 (HMGCR); 'high cholesterol' -> HP_0003124 (Hypercholesterolemia). Scores below describe THAT term, not the free-text phrase.\n- **`get_chembl_modulators`** — ChEMBL target matched by text search on 'HMGCR' and resolved to '3-hydroxy-3-methylglutaryl-coenzyme A reductase' — confirm this is the intended target.\n- **`get_mr_result`** — No pQTL-based MR estimate for HMGCR in the EpiGraphDB pQTL resource. This resource only covers proteins with usable plasma pQTL instruments. ABSENCE OF AN ESTIMATE IS NOT EVIDENCE OF NO EFFECT.\n- **`get_clinvar_variants`** — Pathogenic count is over the 30 record(s) retrieved, NOT over all 112 ClinVar records for this gene; it is a sample, not a rate.\n- **`get_clinical_evidence`** — Phase and trial status mean trials EXIST, not that they worked — a COMPLETED phase-3 trial can be a failed one; only why-stopped fields carry failure information, and only approval carries a regulator's efficacy judgement. Registries lag press releases by a data release or more.\n- **`classify_evidence_concordance`** — Nothing to compare: fewer than two matched estimates.\n\n## Reasoning\n\nHMGCR encodes 3-hydroxy-3-methylglutaryl-coenzyme A reductase, the rate-limiting enzyme in cholesterol biosynthesis and the well-established target of multiple FDA-approved statin drugs such as simvastatin, atorvastatin, and rosuvastatin. Open Targets demonstrates strong genetic and clinical association scores for hypercholesterolemia, and numerous ChEMBL modulators target this protein. While gnomAD constraint metrics indicate that the gene is LoF-intolerant, its successful inhibition by approved therapeutics underscores its exceptional target validation for lowering cholesterol.\n\n## Sources\n\n- `get_uniprot_dossier`: https://www.uniprot.org/uniprotkb/P04035 — _UniProt release 2026_02 (10-June-2026)_\n- `get_target_disease_evidence`: https://platform.opentargets.org/evidence/ENSG00000113161/HP_0003124 — _Open Targets data release 26.06_\n- `get_chembl_modulators`: https://www.ebi.ac.uk/chembl/target_report_card/CHEMBL402/ — _ChEMBL_37 (released 2026-05-01)_\n- `get_mr_result`: https://epigraphdb.org/pqtl/ — _EpiGraphDB pQTL MR (Zheng et al., Nat Genet 2020) — pre-computed two-sample MR; retrieved, not computed by this agent; EpiGraphDB build 1.0, pQTL dataset v3.0_\n- `get_clinvar_variants`: https://www.ncbi.nlm.nih.gov/clinvar/?term=HMGCR%5Bgene%5D — _ClinVar build Build260818-0035.1_\n- `get_gnomad_constraint`: https://gnomad.broadinstitute.org/gene/HMGCR — _gnomAD constraint via GraphQL API (reference genome GRCh38)_\n- `get_gwas_catalog`: https://www.ebi.ac.uk/gwas/genes/HMGCR — _GWAS Catalog REST (live; release not exposed by this endpoint)_\n- `get_pharmgkb_drug_gene`: https://www.pharmgkb.org/search?query=HMGCR — _ClinPGx clinicalAnnotation via https://api.clinpgx.org/v1/data_\n- `get_clinical_evidence`: https://platform.opentargets.org/target/ENSG00000113161 — _Open Targets data release 26.06; drugAndClinicalCandidates (ChEMBL + trial registries via Open Targets)_\n\n## Provenance\n\n- Generated: 2026-08-21T15:33:17\n- Model (reasoning text only): `gemini-flash-lite-latest`\n- Tools invoked (10 calls): `get_uniprot_dossier`, `get_target_disease_evidence`, `get_chembl_modulators`, `get_mr_result`, `get_clinvar_variants`, `get_gnomad_constraint`, `get_gwas_catalog`, `get_pharmgkb_drug_gene`, `get_clinical_evidence`, `classify_evidence_concordance`\n- Evidence table, caveats, sources and this block are rendered mechanically from tool return values. The model wrote only the Verdict sentence and the Reasoning paragraph, both checked against tool output by `validate_card.py`.\n- No Mendelian randomization or colocalization is computed by this agent; MR estimates, where present, are retrieved from published work.\n\n> **VALIDATION FAILED** — the model wrote claim tokens with no support in tool output:\n> - [efficacy-claim-not-retrievable] `clinically validated`\n> - [qualitative-claim] `FDA-approved`\n"
+}
