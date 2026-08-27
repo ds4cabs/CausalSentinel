@@ -237,6 +237,8 @@ pip install -r requirements.txt
 streamlit run natalie_app.py
 ```
 
+![OpenSentinel comparing two drugs — autonomous tool calls and the side-by-side table](nathdrug/natalie-drug-agent/natalie_screenshots/natalie_02_toolcalls.png)
+
 Details, examples and screenshots: [her README](nathdrug/natalie-drug-agent/README.md).
 Original scope: [`MVP_Natalie.md`](MVP_Natalie.md) · merged in
 [#20](https://github.com/ds4cabs/CausalSentinel/pull/20).
