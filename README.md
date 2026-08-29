@@ -266,6 +266,8 @@ pharmacy down.
 This project is the cohort's causal evidence reference implementation with strong
 variant-level rigor. Built in rounds (each ships); Round 1 = a 3-tool card end to end.
 
+**License:** [MIT](LICENSE) — Copyright (c) 2026 Chinese American Biopharmaceutical Society (CABS) / ds4cabs.
+
 ## Found a problem?
 
 That is exactly the feedback this project wants — a card that reads wrong, a dossier
