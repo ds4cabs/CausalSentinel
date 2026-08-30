@@ -7,7 +7,9 @@
 ![type: Dossier Generator](https://img.shields.io/badge/type-Dossier_Generator-1f6feb)
 ![domain: Causal Inference](https://img.shields.io/badge/domain-Causal_Inference-0aa)
 
-**Interns:** Shucheng Cao (CausalSentinel core), Natalie Huang (OpenSentinel sub-project)
+**Interns:** Shucheng Cao (OpenCausal — causal evidence for drug-target prioritization,
+also maintained as a [standalone repo](https://github.com/shuchengcaoxin/OpenCausal)),
+Natalie Huang (OpenSentinel — drug-safety comparison)
 **Project Type:** Dossier Generator
 
 ## Overview
